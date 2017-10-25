@@ -34,7 +34,6 @@
 	<!-- Donc, ne pas utiliser l'attribut transaction-type 				-->
 	<persistence-unit name="persistence_unit_${nombase}">
 
-	
 
 		<!-- ========================================================== -->
 		<!-- 				CHOIX DE L'ORM							    -->
@@ -51,8 +50,9 @@
 			<!-- Paramétrages Hibernate -->
 			<!-- ================================================== -->
 
-		
+
 		<properties>
+
 		
 					<!-- ************************* -->
 					<!-- DRIVER DE BASE DE DONNEES -->
@@ -73,7 +73,6 @@
 <!-- 		<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" /> -->
 
 
-		
 						<!-- **************************** -->
 						<!--          DIALECT             -->
 						<!-- **************************** -->
