@@ -6,24 +6,23 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
-import levy.daniel.application.model.dao.daoexceptions.AbstractDaoRunTimeException;
 import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
 
 
 
 
 /**
- * class AbstractDaoGenericHibernate :<br/>
- * .<br/>
+ * class AbstractDaoGeneric :<br/>
+ * DAO abstrait générique pour SPRING.<br/>
+ * Les transactions sont gérées par le conteneur SPRING.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -46,30 +45,18 @@ import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
  * @since 8 sept. 2017
  *
  */
-public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable> 
-											implements IDaoGenericHibernate<T, ID> {
+@Repository
+public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable> 
+											implements IDaoGenericJPASpring<T, ID> {
 
 	// ************************ATTRIBUTS************************************/
 
-	/**
-	 * session : Session :<br/>
-	 * org.hibernate.session.<br/>
-	 */
-	protected transient Session session;
-
-	
-	/**
-	 * entityManagerFactory : 
-	 * javax.persistence.EntityManagerFactory :<br/>
-	 * JPA EntityManagerFactory.<br/>
-	 */
-	protected transient EntityManagerFactory entityManagerFactory;
-	
 	
 	/**
 	 * entityManager : javax.persistence.EntityManager :<br/>
-	 * JPA EntityManager.<br/>
+	 * JPA EntityManager fourni par SPRING.<br/>
 	 */
+	@PersistenceContext
 	protected transient EntityManager entityManager;
 
 		
@@ -94,7 +81,7 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG = LogFactory.getLog(AbstractDaoGenericHibernate.class);
+	private static final Log LOG = LogFactory.getLog(AbstractDaoGenericJPASpring.class);
 
 
 
@@ -102,34 +89,26 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 
 	
 	 /**
-	 * method CONSTRUCTEUR AbstractDaoGenericHibernate() :<br/>
+	 * method CONSTRUCTEUR AbstractDaoGeneric() :<br/>
 	 * <ul>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <li>renseigne this.classObjetMetier (.class de l'objet métier 
 	 * concerné par le présent DAO).</li>
 	 * <li>Lance la persistence.</li>
 	 * <ul>
-	 * <li>Récupère la session Hibernate auprès de HibernateUtil.</li>
+	 * <li>Récupère la session Hibernate auprès de HibernateUtilNG.</li>
 	 * <li>Récupère la Factory auprès de la Session.</li>
 	 * <li>Récupère l'EntityManager auprès de la Factory.</li>
 	 * </ul>
 	 * </ul>
 	 */
-	public AbstractDaoGenericHibernate() {
+	public AbstractDaoGenericJPASpring() {
 		
 		super();
 		
 		/* renseigne this.classObjetMetier. */
 		this.renseignerClassObjetMetier();
-		
-		/* Lance la persistence. */
-		try {
-			this.buildEntityManager();
-		}
-		catch (AbstractDaoException e) {
-			e.printStackTrace();
-		}
-		
+				
 	} // Fin de  CONSTRUCTEUR D'ARITE NULLE._______________________________
 	
 
@@ -144,66 +123,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 	protected abstract void renseignerClassObjetMetier();
 	
 	
-	
-	/**
-	 * method buildEntityManager() :<br/>
-	 * <ul>
-	 * <li>Récupère la session Hibernate auprès de HibernateUtil.</li>
-	 * <li>Récupère la Factory auprès de la Session.</li>
-	 * <li>Récupère l'EntityManager auprès de la Factory.</li>
-	 * </ul>
-	 * 
-	 * @throws AbstractDaoException
-	 */
-	private void buildEntityManager() 
-			throws AbstractDaoException {
-		
-		try {
-			
-			/* Récupère la session Hibernate auprès de HibernateUtil. */
-			this.session = HibernateUtil.currentSession();
-			
-			/* Récupère la Factory auprès de la Session. */
-			if (this.session != null) {
-				this.entityManagerFactory 
-					= this.session.getEntityManagerFactory();
-				
-				if (this.entityManagerFactory != null) {
-					
-					/* Récupère l'EntityManager auprès de la Factory. */
-					this.entityManager 
-						= this.entityManagerFactory.createEntityManager();
-					
-				}
-			}		
-		}
-		catch (AbstractDaoRunTimeException exc) {
-			
-			System.out.println("MESSAGE TECHNIQUE : \n" + exc.getMessageTechnique());
-			System.out.println("MESSAGE UTILISATEUR : " + exc.getMessageUtilisateur());
-			
-			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(exc);
-			
-			HibernateUtil.closeSession();
-			
-		}
-		
-		catch (Exception pCause) {
-						
-			/* LOG. */
-			if (LOG.isFatalEnabled()) {
-				LOG.fatal(pCause.getMessage(), pCause);
-			}
-			
-			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(pCause);
-			
-			HibernateUtil.closeSession();
-			
-		}
-		
-	} // Fin de buildEntityManager().______________________________________
 	
 
 	
@@ -221,44 +140,17 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return null;
 		}
 		
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-		
-		/* https://docs.jboss.org/hibernate/orm/5.0/quickstart/html/ */
-		
 		T persistentObject = null;
-		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction 
-		 * auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
 		
 		try {
 			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
-			
-
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
 			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */			
-			transaction.commit();
-						
 			persistentObject = pObject;
-									
+												
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -269,14 +161,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			this.gestionnaireException.gererException(e);
 						
 		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
-        }
 		
 		/* retourne l'Objet persistant. */
 		return persistentObject;
@@ -297,42 +181,17 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return null;
 		}
 		
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-
-		/* https://docs.jboss.org/hibernate/orm/5.0/quickstart/html/ */
-		
 		S persistentObject = null;
-		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
+				
 		try {
 			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
-
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
-			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-						
+									
 			persistentObject = pObject;
 			
 		} 
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -343,14 +202,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			this.gestionnaireException.gererException(e);
 			
 		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
-        }
 		
 		/* retourne l'Objet persistant. */
 		return persistentObject;
@@ -371,39 +222,14 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return;
 		}
 		
-		/* retourne si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return;
-		}
-
-		/* http://cristal.univ-lille.fr/~dumoulin/
-		 * enseign/ipint/6.orm/Cours-JPA-v1.2.pdf */
-		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
 		
 		try {
 			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
-
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
 			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -414,14 +240,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			this.gestionnaireException.gererException(e);
 			
 		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
-        }
 
 	} // Fin de persist(...).______________________________________________
 	
@@ -439,36 +257,13 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return;
 		}
 
-		/* retourne si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return;
-		}
-
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
 			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -479,14 +274,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			this.gestionnaireException.gererException(e);
 			
 		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
-        }
 		
 	} // Fin de persistSousClasse(...).____________________________________
 
@@ -517,28 +304,11 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return null;
 		}
 
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-
-		/*
-		 * Récupération d'une TransactionJPA
-		 * javax.persistence.EntityTransaction auprès du entityManager.
-		 */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-
 		List<S> resultat = new ArrayList<S>();
 
 		final Iterator<S> iteS = pObjects.iterator();
 
 		try {
-
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 
 			while (iteS.hasNext()) {
 
@@ -555,16 +325,8 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 
 			}
 
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-
 		}
 		catch (Exception e) {
-
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -575,14 +337,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
-
-		}
-		finally {
-
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
 
 		}
 
@@ -654,30 +408,13 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 	@Override
 	public final List<T> findAll() throws AbstractDaoException {
 		
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-
 		/* Création de la requête HQL sous forme de String. */
 		final String requeteString 
 			= "from " + this.classObjetMetier.getName();
 		
-		/* https://docs.jboss.org/hibernate/orm/5.0/quickstart/html/ */
-		
 		List<T> resultat = null;
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			/* Crée la requête javax.persistence.Query. */
 			final Query query 
@@ -686,16 +423,8 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Exécute la javax.persistence.Query. */
 			resultat = query.getResultList();
 
-			/* Commit de la Transaction. */
-			transaction.commit();
-			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -707,13 +436,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 			
-		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}			
 		}
 		
 		/* Retourne la liste résultat. */
@@ -730,30 +452,14 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 	public final List<T> findAllMax(
 			final Long pMax) throws AbstractDaoException {
 		
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-
+		
 		/* Création de la requête HQL sous forme de String. */
 		final String requeteString 
 			= "from " + this.classObjetMetier.getName();
 		
-		/* https://docs.jboss.org/hibernate/orm/5.0/quickstart/html/ */
-		
 		List<T> resultat = null;
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			/* Crée la requête javax.persistence.Query. */
 			final Query query 
@@ -763,16 +469,8 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Exécute la javax.persistence.Query. */
 			resultat = query.getResultList();
 
-			/* Commit de la Transaction. */
-			transaction.commit();
-			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -785,17 +483,10 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			this.gestionnaireException.gererException(e);
 			
 		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}			
-		}
 		
 		/* Retourne la liste résultat. */
 		return resultat;
-		
+				
 	} // Fin de findAllMax(...).___________________________________________
 	
 
@@ -847,40 +538,17 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return null;
 		}
 
-		/* retourne null si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return null;
-		}
-
 		T persistentObject = null;
-		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
 		
 		try {
 			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
-
 			/* MODIFIE en base. */
 			this.entityManager.merge(pObject);
 			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-
 			persistentObject = pObject;
 			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -890,14 +558,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 						
-		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
 		}
 				
 		/* retourne l'Objet persistant modifié. */
@@ -922,36 +582,20 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			return false;
 		}
 
-		/* retourne false si this.entityManager (BD éteinte, ...).  */
-		if (this.entityManager == null) {
-			return false;
-		}
-
 		boolean resultat = false;
 		
 		/* Vérifie qu'il existe une instance persistante. */
 		final T persistanceInstance = this.retrieve(pObject);
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction 
-		 * auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
 								
 			if (persistanceInstance != null) {
-								
-				/* Début de la Transaction. */
-				if (!transaction.isActive()) {
-					transaction.begin();
-				}
+				
+				/* merge avant de pouvoir détruire. */
+				this.entityManager.merge(persistanceInstance);
 				
 				/* DESTRUCTION. */
 				this.entityManager.remove(persistanceInstance);
-				
-				/* Commit de la Transaction (Réalise le SQL INSERT). */
-				transaction.commit();
 				
 				resultat = true;
 				
@@ -962,11 +606,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			
 		} catch (Exception e) {
 			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
-			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
 				LOG.debug(e.getMessage(), e);
@@ -975,14 +614,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 									
-		}
-		finally {
-
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}
-					
 		}
 				
 		return resultat;
@@ -1018,17 +649,7 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 		final String requeteString 
 			= "delete from " + this.classObjetMetier.getName();
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			/* Crée la requête javax.persistence.Query. */
 			final Query query 
@@ -1037,16 +658,8 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* EXECUTION DE LA REQUETE. */
 			query.executeUpdate();
 			
-			/* Commit de la Transaction. */
-			transaction.commit();
-			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -1055,14 +668,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
-			
-		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}			
 			
 		}
 		
@@ -1082,17 +687,7 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 		final String requeteString 
 			= "delete from " + this.classObjetMetier.getName();
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			/* Crée la requête javax.persistence.Query. */
 			final Query query 
@@ -1101,18 +696,10 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* EXECUTION DE LA REQUETE. */
 			query.executeUpdate();
 			
-			/* Commit de la Transaction. */
-			transaction.commit();
-			
 			resultat = true;
 			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -1121,14 +708,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
-			
-		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}			
 			
 		}
 		
@@ -1169,17 +748,7 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 		/* Itération uniquement sur la l iste des Objets persistants. */
 		final Iterator<? extends T> ite = listePersistants.iterator();
 		
-		/* Récupération d'une TransactionJPA 
-		 * javax.persistence.EntityTransaction auprès du entityManager. */
-		final EntityTransaction transaction 
-			= this.entityManager.getTransaction();
-		
 		try {
-			
-			/* Début de la Transaction. */
-			if (!transaction.isActive()) {
-				transaction.begin();
-			}
 			
 			while (ite.hasNext()) {
 				
@@ -1190,16 +759,8 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 				
 			}
 			
-			/* Commit de la Transaction (Réalise le SQL INSERT). */
-			transaction.commit();
-			
 		}
 		catch (Exception e) {
-			
-			/* Rollback de la transaction. */
-			if (transaction != null) {
-				transaction.rollback();
-			}
 			
 			/* LOG. */
 			if (LOG.isDebugEnabled()) {
@@ -1209,14 +770,6 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 			
-		}
-		finally {
-			
-			/* Clôture de la Session. */
-			if (this.session != null) {
-				this.session.close();
-			}			
-
 		}
 				
 	} // Fin de delete(...)._______________________________________________
@@ -1291,4 +844,4 @@ public abstract class AbstractDaoGenericHibernate<T, ID extends Serializable>
 
 	
 	
-} // FIN DE LA CLASSE AbstractDaoGenericHibernate.------------------------------------
+} // FIN DE LA CLASSE AbstractDaoGeneric.------------------------------------

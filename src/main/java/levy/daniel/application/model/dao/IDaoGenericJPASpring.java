@@ -7,7 +7,8 @@ import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 
 /**
  * class IDaoGeneric :<br/>
- * .<br/>
+ * Interface pour les DAO génériques pour SPRING.<br/>
+ * Les transactions sont gérées par le conteneur SPRING.<br/>
  * <br/>
  * - Exemple d'utilisation :<br/>
  * <br/>
@@ -24,7 +25,7 @@ import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
  * 
  * @since 8 sept. 2017
  */
-public interface IDaoGenericJPA<T, ID extends Serializable> {
+public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	
 	
 
