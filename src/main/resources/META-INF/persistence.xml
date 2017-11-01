@@ -32,7 +32,7 @@
 	<!-- 						AVEC SPRING 5.0.0 						-->
 	<!-- transaction manager géré par SPRING.							-->
 	<!-- Donc, ne pas utiliser l'attribut transaction-type 				-->
-	<persistence-unit name="persistence_unit_${nombase}">
+	<persistence-unit name="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate">
 
 
 		<!-- ========================================================== -->
@@ -65,7 +65,7 @@
 		 <!-- ========================================================= -->
 		 <!--         mySql 5.7.19.0 - port : 3306 - [root, root]       -->
 		 <!-- ========================================================= -->   	
-<!-- 		 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		 <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" /> -->
 				
 		<!-- ========================================================= -->
 		<!--                     hsqldb 2.4.0                          -->
@@ -152,10 +152,18 @@
 	    	<!-- Comportement pour la conservation des tables 	-->
 	    	<!-- PASSER EN update pour la PROD.					-->
 			<!-- ******************************************** 	-->		
-			<!-- Recrée le schéma à chaque démarrage. Drop à la fermeture -->
+			<!-- SUPPRIME et RECREE le schéma à chaque démarrage. 				-->
+			<!-- Drop (SUPPRESSION DU SCHEMA) à chaque fermeture. 				-->
+			<!-- SUPPRIME le schéma après la fermeture de l'application.		-->
+			<!-- Le schéma de la BD est INVISIBLE dans le manager de BD 		-->
+			<!-- après la fermeture de l'application.							-->
 <!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
 
-			<!-- Supprime et re-créée le schéma de base de données au démarrage -->
+
+			<!-- SUPPRIME et RECREE le schéma de base de données au démarrage.   -->
+			<!-- Ne SUPPRIME PAS le schéma après fermeture de l'application.	 -->
+			<!-- Le schéma de la BD est visible dans le manager de BD			 -->
+			<!-- après la fermeture de l'application.							 -->
 <!-- 			<property name="hbm2ddl.auto"  value="create" /> -->
 		
 			<!-- Met à jour le schéma (sans destruction de données) si modification d'une Entity -->
