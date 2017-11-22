@@ -47,7 +47,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	<!-- Nom de l'application générée par le projet Maven -->		
 	<name>squelette_Web_Spring_JPA_Hibernate</name>
 	<!-- Description de l'application générée par le projet Maven -->	
-	<description>Application WEB avec Maven 3.5.0, Spring 5.0.0, JPA 2.1, Hibernate 5.2.10</description>
+	<description>Application WEB avec Maven 3.5.0, Spring 5.0.1, JPA 2.1, Hibernate 5.2.11</description>
 	<!-- URL éventuelle permettant de se connecter à l'application -->
 	<url></url>
 	
