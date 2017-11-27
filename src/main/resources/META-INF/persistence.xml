@@ -22,11 +22,11 @@
 	<!-- ============================================================== -->
 	
 	<!-- 							STANDALONE 							-->
-	<!-- <persistence-unit name="persistence_unit_base-tutoriel-web-spring-pouiller" 
+	<!-- <persistence-unit name="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate" 
 		transaction-type="JTA"> -->
 		
 	<!-- 						WEB SANS SPRING							 -->
-		<!-- <persistence-unit name="persistence_unit_base-tutoriel-web-spring-pouiller" 
+		<!-- <persistence-unit name="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate" 
 		transaction-type="RESOURCE_LOCAL"> -->
 
 	<!-- 						AVEC SPRING 5.0.0 						-->
