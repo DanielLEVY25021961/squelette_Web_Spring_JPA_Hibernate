@@ -168,7 +168,7 @@
 <!--        <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
 <!--        <property name="url" value="jdbc:mysql://localhost:3306/base-squelette_Web_Spring_JPA_Hibernate" /> -->
 <!--        <property name="username" value="root" /> -->
-<!--        <property name="password" value="" /> -->
+<!--        <property name="password" value="root" /> -->
 <!--     </bean> -->
 
     
