@@ -6,6 +6,17 @@ import levy.daniel.application.model.metier.IExportateurJTable;
 /**
  * INTERFACE IUserSimple :<br/>
  * <ul>
+ * HERITE de :
+ * <li><b>IExportateurCsv</b> pour l'export d'un Objet 
+ * métier en csv.</li>
+ * <li><b>IExportateurJTable</b> pour l'affichage dans 
+ * une JTable (Swing).</li>
+ * <li><b>Comparable</b> pour l'affichage des Collections 
+ * sous forme triée.</li>
+ * <li><b>Cloneable</b> pour garantir que tout objet métier 
+ * implémentant cette interface saura se cloner.</li>
+ * </ul>
+ * <ul>
  * Garantit que tout UserSimple sait :<br/>
  * <li>se comparer à un autre IUserSimple.</li>
  * <li>se cloner.</li>
@@ -22,6 +33,11 @@ import levy.daniel.application.model.metier.IExportateurJTable;
  * <li><b>login</b>.</li>
  * <li><b>mot de passe</b>.</li>
  * <li><b>profil</b> (Adminstrateur, Utilisateur, ...).</li>
+ * <br/>
+ * <li>
+ * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple.png" 
+ * alt="implémentation du UserSimple" border="1" align="center" />
+ * </li>
  * </ul>
  * <br/>
  *
@@ -286,7 +302,8 @@ public interface IUserSimple
 
 	/**
 	 * method getProfil() :<br/>
-	 * Getter du Profil du UserSimple (administrateur, modérateur, ...).<br/>
+	 * Getter du Profil du UserSimple 
+	 * (administrateur, modérateur, ...).<br/>
 	 * <br/>
 	 *
 	 * @return profil : String.<br/>
@@ -298,7 +315,8 @@ public interface IUserSimple
 	/**
 	* method setProfil(
 	* String pProfil) :<br/>
-	* Setter du Profil du UserSimple (administrateur, modérateur, ...).<br/>
+	* Setter du Profil du UserSimple 
+	* (administrateur, modérateur, ...).<br/>
 	* <br/>
 	*
 	* @param pProfil : String : valeur à passer à profil.<br/>
@@ -307,4 +325,4 @@ public interface IUserSimple
 	
 	
 
-}
+} // FIN DE L'INTERFACE IUserSimple.-----------------------------------------
