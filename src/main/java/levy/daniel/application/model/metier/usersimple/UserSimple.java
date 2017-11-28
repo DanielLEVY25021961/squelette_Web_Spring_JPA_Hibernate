@@ -49,11 +49,25 @@ public class UserSimple
 	
 	
 	/**
+	 * VIRGULE_ESPACE : String :<br/>
+	 * ", ".<br/>
+	 */
+	public static final String VIRGULE_ESPACE = ", ";
+	
+	
+	/**
 	 * id : Long :<br/>
 	 * ID en base.<br/>
 	 */
 	private Long id;
 
+	
+	/**
+	 * civilite : String :<br/>
+	 * Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
+	 */
+	private String civilite;
+	
 	
 	/**
 	 * prenom : String :<br/>
@@ -67,6 +81,13 @@ public class UserSimple
 	 * Nom du User.<br/>
 	 */
 	private String nom;
+	
+
+	/**
+	 * email : String :<br/>
+	 * E-mail du UserSimple.<br/>
+	 */
+	private String email;
 	
 	
 	/**
@@ -107,36 +128,60 @@ public class UserSimple
 	 * <br/>
 	 */
 	public UserSimple() {
-		this(null, null, null, null);
+		this(null, null, null, null, null, null, null, null);
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
 	
 	
 	 /**
 	 * method CONSTRUCTEUR UserSimple() :<br/>
-	 * CONSTRUCTEUR COMPLET.<br/>
-	 * SANS ID en Base.<br/>
-	 * <br/>
+	 * <ul>
+	 * <li>CONSTRUCTEUR COMPLET.</li>
+	 * <li>SANS ID en Base.</li>
+	 * </ul>>
 	 *
-	 *@param pLogin : String : Login.<br/>
+	 * @param pCivilite : String : Civilité du UserSimple 
+	 * (M., Mme, Mlle, ...).<br/>
+	 * @param pPrenom : String : Prénom du User.<br/>
+	 * @param pNom : String : Nom du User.<br/>
+	 * @param pEmail : String : E-mail du UserSimple.<br/>
+	 * @param pLogin : String : Login.<br/>
 	 * @param pMdp : String : Mot de passe.<br/>
 	 * @param pProfil : String : Profil du UserSimple 
 	 * (administrateur, modérateur, ...).<br/>
 	 */
-	public UserSimple(final String pLogin, final String pMdp
+	public UserSimple(
+			final String pCivilite
+			, final String pPrenom, final String pNom
+			, final String pEmail
+			, final String pLogin, final String pMdp
 				, final String pProfil) {
-		this(null, pLogin, pMdp, pProfil);
+		
+		this(null
+				, pCivilite
+				, pPrenom, pNom
+				, pEmail
+				, pLogin, pMdp
+				, pProfil);
+		
 	} // Fin de CONSTRUCTEUR COMPLET.______________________________________
 	
 	
 	
 	 /**
-	 * method CONSTRUCTEUR UserSimple(CONSTRUCTEUR COMPLET BASE) :<br/>
-	 * CONSTRUCTEUR COMPLET BASE.<br/>
-	 * AVEC ID EN BASE.<br/>
-	 * <br/>
+	 * method CONSTRUCTEUR UserSimple(
+	 * CONSTRUCTEUR COMPLET BASE) :<br/>
+	 * <ul>
+	 * <li>CONSTRUCTEUR COMPLET BASE.</li>
+	 * <li>AVEC ID EN BASE.</li>
+	 * </ul>
 	 *
 	 * @param pId : Long : ID en base.<br/>
+	 * @param pCivilite : String : Civilité du UserSimple 
+	 * (M., Mme, Mlle, ...).<br/>
+	 * @param pPrenom : String : Prénom du User.<br/>
+	 * @param pNom : String : Nom du User.<br/>
+	 * @param pEmail : String : E-mail du UserSimple.<br/>
 	 * @param pLogin : String : Login.<br/>
 	 * @param pMdp : String : Mot de passe.<br/>
 	 * @param pProfil : String : Profil du UserSimple 
@@ -144,12 +189,19 @@ public class UserSimple
 	 */
 	public UserSimple(
 			final Long pId
+			, final String pCivilite
+			, final String pPrenom, final String pNom
+			, final String pEmail
 			, final String pLogin, final String pMdp
 				, final String pProfil) {
 		
 		super();
 		
 		this.id = pId;
+		this.civilite = pCivilite;
+		this.prenom = pPrenom;
+		this.nom = pNom;
+		this.email = pEmail;
 		this.login = pLogin;
 		this.mdp = pMdp;
 		this.profil = pProfil;
@@ -157,8 +209,7 @@ public class UserSimple
 	} // Fin de CONSTRUCTEUR COMPLET BASE._________________________________
 
 
-	
-	
+		
 	/**
 	 * {@inheritDoc}
 	 */
@@ -293,6 +344,10 @@ public class UserSimple
 		final UserSimple userClone = (UserSimple) super.clone();
 		
 		userClone.setId(this.getId());
+		userClone.setCivilite(this.getCivilite());
+		userClone.setPrenom(this.getPrenom());
+		userClone.setNom(this.getNom());
+		userClone.setEmail(this.getEmail());
 		userClone.setLogin(this.getLogin());
 		userClone.setMdp(this.getMdp());
 		userClone.setProfil(this.getProfil());
@@ -313,24 +368,80 @@ public class UserSimple
 		
 		builder.append("UserSimple [");
 		
-		if (this.id != null) {
-			builder.append("id=");
+		/* id. */
+		builder.append("id=");
+		if (this.id != null) {			
 			builder.append(this.id);
-			builder.append(", ");
+		} else {
+			builder.append("null");
 		}
-		if (this.login != null) {
-			builder.append("login=");
+		
+		builder.append(VIRGULE_ESPACE);
+		
+		/* civilite. */
+		builder.append("civilité =");
+		if (this.civilite != null) {
+			builder.append(this.civilite);
+		} else {
+			builder.append("null");
+		}
+		
+		builder.append(VIRGULE_ESPACE);
+		
+		/* prenom. */
+		builder.append("prénom =");
+		if (this.prenom != null) {
+			builder.append(this.prenom);
+		} else {
+			builder.append("null");
+		}
+		
+		builder.append(VIRGULE_ESPACE);
+		
+		/* nom. */
+		builder.append("nom =");
+		if (this.nom != null) {
+			builder.append(this.nom);
+		} else {
+			builder.append("null");
+		}
+		
+		builder.append(VIRGULE_ESPACE);
+
+		/* email. */
+		builder.append("e-mail =");
+		if (this.email != null) {
+			builder.append(this.email);
+		} else {
+			builder.append("null");
+		}
+		
+		builder.append(VIRGULE_ESPACE);
+		
+		/* login. */
+		builder.append("login=");
+		if (this.login != null) {			
 			builder.append(this.login);
-			builder.append(", ");
+		} else {
+			builder.append("null");
 		}
-		if (this.mdp != null) {
-			builder.append("mdp=");
+		
+		builder.append(VIRGULE_ESPACE);
+		
+		/* mdp. */
+		builder.append("mdp=");
+		if (this.mdp != null) {			
 			builder.append(this.mdp);
-			builder.append(", ");
+		} else {
+			builder.append("null");
 		}
-		if (this.profil != null) {
-			builder.append("profil=");
+		
+		/* profil. */
+		builder.append("profil=");
+		if (this.profil != null) {			
 			builder.append(this.profil);
+		} else {
+			builder.append("null");
 		}
 		
 		builder.append(']');
@@ -344,18 +455,21 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * "id;login;mdp;profil;".<br/>
+	 * en-tête csv pour un UserSimple :<br/>
+	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
 	 */
 	@Override
 	public final String getEnTeteCsv() {
-		return "id;login;mdp;profil;";
+		return "id;civilité;prénom;nom;e-mail;login;mdp;profil;";
 	} // Fin de getEnTeteCsv().____________________________________________
 
 
 
 	/**
 	 * {@inheritDoc}
-	 * "id;login;mdp;profil;".<br/>
+	 * <br/>
+	 * ligne csv pour un UserSimple :<br/>
+	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
 	 */
 	@Override
 	public final String toStringCsv() {
@@ -379,7 +493,9 @@ public class UserSimple
 
 	/**
 	 * {@inheritDoc}
-	 * "id;login;mdp;profil;".<br/>
+	 * <br/>
+	 * en-tête Jtable pour un UserSimple :<br/>
+	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
 	 */
 	@Override
 	public final String getEnTeteColonne(
@@ -392,16 +508,32 @@ public class UserSimple
 		case 0:
 			entete = "id";
 			break;
-
+			
 		case 1:
+			entete = "civilité";
+			break;
+			
+		case 2:
+			entete = "prénom";
+			break;
+			
+		case 3:
+			entete = "nom";
+			break;
+			
+		case 4:
+			entete = "e-mail";
+			break;
+
+		case 5:
 			entete = "login";
 			break;
 
-		case 2:
+		case 6:
 			entete = "mdp";
 			break;
 
-		case 3:
+		case 7:
 			entete = "profil";
 			break;
 
@@ -419,7 +551,10 @@ public class UserSimple
 
 	/**
 	 * {@inheritDoc}
-	 * "id;login;mdp;profil;".<br/>
+	 * <br/>
+	 * ligne Jtable pour un UserSimple :<br/>
+	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
+	 * <br/>
 	 */
 	@Override
 	public final Object getValeurColonne(
@@ -430,18 +565,37 @@ public class UserSimple
 		switch (pI) {
 
 		case 0:
-			valeur = this.getId();
+			if (this.getId() != null) {
+				valeur = String.valueOf(this.getId());
+			}
+			
 			break;
 
 		case 1:
+			valeur = this.getCivilite();
+			break;
+			
+		case 2:
+			valeur = this.getPrenom();
+			break;
+			
+		case 3:
+			valeur = this.getNom();
+			break;
+			
+		case 4:
+			valeur = this.getEmail();
+			break;
+			
+		case 5:
 			valeur = this.getLogin();
 			break;
 
-		case 2:
+		case 6:
 			valeur = this.getMdp();
 			break;
 
-		case 3:
+		case 7:
 			valeur = this.getProfil();
 			break;
 
@@ -484,7 +638,119 @@ public class UserSimple
 	} // Fin de setId(...).________________________________________________
 
 
+		
+	/**
+	 * method getCivilite() :<br/>
+	 * Getter de la Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
+	 * <br/>
+	 *
+	 * @return civilite : String.<br/>
+	 */
+	public String getCivilite() {
+		return this.civilite;
+	} // Fin de getCivilite()._____________________________________________
+
+
 	
+	/**
+	* method setCivilite(
+	* String pCivilite) :<br/>
+	* Setter de la Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
+	* <br/>
+	*
+	* @param pCivilite : String : valeur à passer à civilite.<br/>
+	*/
+	public void setCivilite(
+			final String pCivilite) {
+		this.civilite = pCivilite;
+	} // Fin de setCivilite(...).__________________________________________
+
+
+
+	/**
+	 * method getPrenom() :<br/>
+	 * Getter du Prénom du User.<br/>
+	 * <br/>
+	 *
+	 * @return prenom : String.<br/>
+	 */
+	public String getPrenom() {
+		return this.prenom;
+	} // Fin de getPrenom()._______________________________________________
+
+
+	
+	/**
+	* method setPrenom(
+	* String pPrenom) :<br/>
+	* Setter du Prénom du User.<br/>
+	* <br/>
+	*
+	* @param pPrenom : String : valeur à passer à prenom.<br/>
+	*/
+	public void setPrenom(
+			final String pPrenom) {
+		this.prenom = pPrenom;
+	} // Fin de setPrenom(...).____________________________________________
+
+
+		
+	/**
+	 * method getNom() :<br/>
+	 * Getter du Nom du User.<br/>
+	 * <br/>
+	 *
+	 * @return nom : String.<br/>
+	 */
+	public String getNom() {
+		return this.nom;
+	} // Fin de getNom().__________________________________________________
+
+
+	
+	/**
+	* method setNom(
+	* String pNom) :<br/>
+	* Setter du Nom du User.<br/>
+	* <br/>
+	*
+	* @param pNom : String : valeur à passer à nom.<br/>
+	*/
+	public void setNom(
+			final String pNom) {
+		this.nom = pNom;
+	} // Fin de setNom(...)._______________________________________________
+
+
+	
+	/**
+	 * method getEmail() :<br/>
+	 * Getter de l'E-mail du UserSimple.<br/>
+	 * <br/>
+	 *
+	 * @return email : String.<br/>
+	 */
+	public final String getEmail() {
+		return this.email;
+	} // Fin de getEmail().________________________________________________
+
+
+	
+	/**
+	* method setEmail(
+	* String pEmail) :<br/>
+	* Setter de l'E-mail du UserSimple.<br/>
+	* <br/>
+	*
+	* @param pEmail : String : valeur à passer à email.<br/>
+	*/
+	public final void setEmail(
+			final String pEmail) {
+		this.email = pEmail;
+	} // Fin de setEmail(...)._____________________________________________
+
+
+
 	/**
 	 * method getLogin() :<br/>
 	 * Getter du Login.<br/>

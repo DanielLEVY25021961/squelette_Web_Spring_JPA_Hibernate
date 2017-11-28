@@ -7,9 +7,26 @@ import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 
 /**
  * class IDaoGeneric :<br/>
- * Interface pour les DAO génériques pour SPRING.<br/>
- * Les transactions sont gérées par le conteneur SPRING.<br/>
+ * <ul>
+ * <li>INTERFACE <b>GENERIQUE</b> pour les <b>DAO</b> sous SPRING.</li>
+ * <li>
+ * Comporte les définitions des méthodes <b>CRUD</b> valables 
+ * pour <b>tous les objets métier</b>.
+ * </li>
+ * <li>Les transactions sont gérées par le conteneur SPRING.</li>
+ * <li>
+ * Certaines méthodes (getOne(ID), ...) sont 
+ * <b>compatibles SPRING DATA</b>.
+ * </li>
  * <br/>
+ * <li>
+ * <img src="../../../../../../../../javadoc/images/implementation_DAOs.png" 
+ * alt="implémentation des DAOs" border="1" align="center" />
+ * </li>
+ * </ul>
+ * <br/>
+ * 
+ * 
  * - Exemple d'utilisation :<br/>
  * <br/>
  * - Mots-clé :<br/>
