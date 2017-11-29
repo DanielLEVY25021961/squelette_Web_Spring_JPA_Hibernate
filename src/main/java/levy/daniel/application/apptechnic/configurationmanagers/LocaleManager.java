@@ -12,8 +12,8 @@ import org.apache.commons.logging.LogFactory;
  * class LocaleManager :<br/>
  * <ul>
  * <li>Classe de CONFIGURATION (finale avec des méthodes statiques)
- * chargée de fournir une Locale unique à toute l'application.</li>>
- * </ul<
+ * chargée de fournir une Locale unique à toute l'application.</li>
+ * </ul>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
