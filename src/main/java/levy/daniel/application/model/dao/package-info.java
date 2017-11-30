@@ -10,7 +10,15 @@
  * du stockage durable des données de l'application.
  * </li>
  * <li>
+ * La COUCHE <b>DAO</b> fait partie intégrante de la 
+ * <b>logique métier (MODEL)</b>.
  * </li>
+ * <br/>
+ * <li>
+ * <img src="../../../../../../../../javadoc/images/architecture_applicative.png" 
+ * alt="architecture applicative" border="1" align="center" />
+ * </li>
+ * <br/>
  * </ul>
  * <br/>
  *
