@@ -1,7 +1,10 @@
 /**
  * class package-info :<br/>
- * .<br/>
- * <br/>
+ * <ul>
+ * <li>Ce package contient toutes les classes relatives aux 
+ * <b>DAOs</b> (Data Access Objects) dédiés aux <b>Objets métier 
+ * (ou Objets du Domaine)</b>.</li>
+ * </ul>
  *
  * - Exemple d'utilisation :<br/>
  *<br/>
