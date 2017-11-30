@@ -1,5 +1,7 @@
 package levy.daniel.application.model.dao.metier.usersimple;
 
+import java.util.List;
+
 import levy.daniel.application.model.dao.IDaoGenericJPASpring;
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 import levy.daniel.application.model.metier.usersimple.IUserSimple;
@@ -21,7 +23,7 @@ import levy.daniel.application.model.metier.usersimple.IUserSimple;
  * </li>
  * <br/>
  * <li>
- * <img src="../../../../../../../../../../javadoc/images/implementation_DAOs.png" 
+ * <img src="../../../../../../../../../../javadoc/images/implementation_dao_usersimple.png" 
  * alt="implémentation des DAOs" border="1" align="center" />
  * </li>
  * </ul>
@@ -67,6 +69,34 @@ public interface IDaoUserSimple
 	IUserSimple 
 		retrieveByIdMetier(IUserSimple pObjet) 
 				throws AbstractDaoException;
+	
+
+	
+	/**
+	 * method retrieveByNomPrenom(
+	 * String pNom
+	 * , String pPrenom) :<br/>
+	 * <ul>
+	 * <li>Recherche en base une liste de IUserSimple ayant 
+	 * pour nom pNom et pour prénom pPrenom.</li>
+	 * </ul>
+	 * Retourne null si pNom est blank.<br/>
+	 * Retourne null si pPrenom est blank.<br/>
+	 * <br/>
+	 * 
+	 *
+	 * @param pNom : String : Nom du UserSimple.<br/>
+	 * @param pPrenom : String : Prénom du UserSimple.<br/>
+	 * 
+	 * @return List&lt;IUserSimple&gt; : Liste des UserSimple 
+	 * [pNom, pPrenom].<br/>
+	 * 
+	 * @throws AbstractDaoException
+	 */
+	List<IUserSimple> retrieveByNomPrenom(
+			String pNom
+				, String pPrenom) throws AbstractDaoException;
+	
 	
 
 } // FIN DE L'INTERFACE IDaoUserSimple.--------------------------------------

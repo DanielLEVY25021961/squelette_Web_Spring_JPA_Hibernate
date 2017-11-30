@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +31,7 @@ import levy.daniel.application.model.metier.usersimple.IUserSimple;
  * </li>
  * <br/>
  * <li>
- * <img src="../../../../../../../../../../javadoc/images/implementation_DAOs.png" 
+ * <img src="../../../../../../../../../../javadoc/images/implementation_dao_usersimple.png" 
  * alt="implémentation des DAOs" border="1" align="center" />
  * </li>
  * </ul>
@@ -144,7 +145,7 @@ public abstract class AbstractDaoUserSimple
 		final String requeteString 
 			= SELECT_OBJET
 				+ "where iusersimple.login = :pLogin "
-				+ "and iusersimple.mdp = :pMdp ";
+				+ "and iusersimple.mdp = :pMdp";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -193,6 +194,69 @@ public abstract class AbstractDaoUserSimple
 		return this.retrieve(pObjet);
 	} // Fin de retrieveByIdMetier(...).___________________________________
 
+
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public final List<IUserSimple> retrieveByNomPrenom(
+			final String pNom
+				, final String pPrenom) throws AbstractDaoException {
+		
+		/* Retourne null si pNom est blank. */
+		if (StringUtils.isBlank(pNom)) {
+			return null;
+		}
+		
+		/* Retourne null si pPrenom est blank. */
+		if (StringUtils.isBlank(pPrenom)) {
+			return null;
+		}
+		
+		List<IUserSimple> objetResultat = null;
+		
+		/* REQUETE HQL PARMETREE. */
+		final String requeteString 
+			= SELECT_OBJET
+				+ "where iusersimple.nom = :pNom "
+				+ "and iusersimple.prenom = :pPrenom";
+		
+		/* Construction de la requête HQL. */
+		final Query requete 
+			= this.entityManager.createQuery(requeteString);
+		
+		/* Passage des paramètres de la requête HQL. */
+		requete.setParameter("pNom", pNom);
+		requete.setParameter("pPrenom", pPrenom);
+		
+		try {
+			
+			/* Execution de la requete HQL. */
+			objetResultat = requete.getResultList();
+			
+		}
+		catch (NoResultException noResultExc) {
+			
+			/* retourne null si l'Objet métier n'existe pas en base. */
+			return null;
+			
+		}
+		catch (Exception e) {
+			
+			/* LOG. */
+			if (LOG.isDebugEnabled()) {
+				LOG.debug(e.getMessage(), e);
+			}
+			
+			/* Gestion de la DAO Exception. */
+			this.gestionnaireException.gererException(e);
+		}
+
+		return objetResultat;
+		
+	} // Fin de retrieveByNomPrenom(...).__________________________________
+	
 	
 	
 	/**
@@ -347,7 +411,7 @@ public abstract class AbstractDaoUserSimple
 		final String requeteString 
 			= SELECT_OBJET
 				+ "where iusersimple.login = :pLogin "
-				+ "and iusersimple.mdp = :pMdp ";
+				+ "and iusersimple.mdp = :pMdp";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 

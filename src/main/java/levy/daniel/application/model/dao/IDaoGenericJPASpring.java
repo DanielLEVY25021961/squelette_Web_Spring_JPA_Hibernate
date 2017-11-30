@@ -20,7 +20,7 @@ import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
  * </li>
  * <br/>
  * <li>
- * <img src="../../../../../../../../javadoc/images/implementation_DAOs.png" 
+ * <img src="../../../../../../../../javadoc/images/implementation_dao_usersimple.png" 
  * alt="implémentation des DAOs" border="1" align="center" />
  * </li>
  * </ul>

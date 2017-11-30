@@ -11,7 +11,6 @@ import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.stereotype.Repository;
 
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
@@ -20,9 +19,26 @@ import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
 
 
 /**
- * class AbstractDaoGeneric :<br/>
- * DAO abstrait générique pour SPRING.<br/>
- * Les transactions sont gérées par le conteneur SPRING.<br/>
+ * class AbstractDaoGenericJPASpring :<br/>
+ * <ul>
+ * <li><b>DAO ABSTRAIT GENERIQUE</b> pour SPRING utilisant JPA.</li>
+ * <li>
+ * Comporte l'implémentation des méthodes <b>CRUD</b> valables 
+ * pour <b>tous les objets métier</b>.
+ * </li>
+ * <li>l'attribut JPA <b>EntityManager</b> est injecté par SPRING. 
+ * Il comporte l'annotation SPRING <b>"PersistenceContext"</b>.</li>
+ * <li>Les transactions sont gérées par le conteneur SPRING.</li>
+ * <li>
+ * Certaines méthodes (getOne(ID), ...) sont 
+ * <b>compatibles SPRING DATA</b>.
+ * </li>
+ * <br/>
+ * <li>
+ * <img src="../../../../../../../../javadoc/images/implementation_dao_usersimple.png" 
+ * alt="implémentation des DAOs" border="1" align="center" />
+ * </li>
+ * </ul>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -45,7 +61,6 @@ import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
  * @since 8 sept. 2017
  *
  */
-@Repository
 public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable> 
 											implements IDaoGenericJPASpring<T, ID> {
 
