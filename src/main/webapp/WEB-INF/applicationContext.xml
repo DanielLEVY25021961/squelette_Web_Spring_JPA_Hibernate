@@ -30,15 +30,15 @@
         http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 
-	<!-- ===================================================================-->
-    <!--    ACTIVATION CONFIGURATION ANNOTATIONS VALIDATION FORMULAIRE   	-->
 	<!-- ================================================================== -->
-    <!-- active la config par annotations des validations de formulaire	 	-->
-    <!-- par Spring.													 	-->
-	<!-- Informe Spring que l'on utilise les annotations					-->
-	<mvc:annotation-driven />
-
-
+	<!--           ACTIVATION CONFIGURATION ANNOTATION SPRING               -->
+	<!-- ================================================================== -->		
+	<!-- active la configuration par annotations de Spring (plus de XML)    -->
+	<!-- Activates various annotations to be detected in bean classes 		-->
+	<!-- http://yannart.developpez.com/java/spring/tutoriel/ 				-->
+	<!-- ANNOTATIONS POUR L'INJECTION DE DEPENDANCES 						-->
+    <context:annotation-config/>
+    
 	<!-- ================================================================== -->
 	<!--           ACTIVATION CONFIGURATION ANNOTATION SPRING               -->
 	<!-- ================================================================== -->		
@@ -46,6 +46,22 @@
 	<!-- VA RECHERCHER TOUS LES OBJETS ANNOTES SPRING DANS LE PACKAGE 		-->
 	<!-- (SERVICES, BEANS, DAO) 											-->
 	<context:component-scan base-package="levy.daniel.application" />
+
+
+
+	<!-- ===================================================================-->
+    <!--    ACTIVATION SPRING WEB MVC ANNOTATIONS VALIDATION FORMULAIRE   	-->
+	<!-- ================================================================== -->
+	<!-- ACTIVE SPRING WEB MVC ET SON PILOTAGE PAR ANNOTATIONS 				-->
+	<!-- à RETIRER pour les applications STANDALONE 						-->
+    <!-- active la config par annotations des validations de formulaire	 	-->
+    <!-- par Spring.													 	-->
+	<!-- Informe Spring Web MVCque l'on utilise les annotations				-->	
+	<!-- https://stackoverflow.com/questions/27676817/entitymanagerfactory-and-applicationcontext-usage -->
+	<!-- Configures the annotation-driven Spring MVC Controller programming model.
+    Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
+	<mvc:annotation-driven />
+
 
 
 	<!-- ================================================================== -->
@@ -108,12 +124,13 @@
     	<!-- qui connait la référence de la DataSource déclarée 			-->
     	<!-- dans le context.xml de TOMCAT (éventuellement surchargé). 		-->
         <property name="dataSource" ref="dataSource" />
+               
+        <!-- Fait le lien avec le persistence unit défini dans persistence.xml -->
+        <property name="persistenceUnitName" value="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate" />
         
-        <!-- Il serait possible d'encapsuler dans le EntityManager			-->
-        <!-- plusieurs DataSources.										    -->
-<!--         <property name="dataSource" ref="dataSource2" /> -->
-<!--         <property name="dataSource" ref="dataSource3" /> -->
-        
+        <!-- Localisation du fichier paramétrant l'ORM (classpath:META-INF/persistence.xml) -->
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+                                
     </bean>
 
 
@@ -135,11 +152,11 @@
 	<!-- ================================================================== -->
 	<!-- bean messageSource de classe ReloadableResourceBundleMessageSource -->
 	<!-- SPRING utilise les messages.properties sous le classpath.		    -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:messages" />
-		<property name="defaultEncoding" value="UTF-8" />
-	</bean>
+<!-- 	<bean id="messageSource" -->
+<!-- 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
+<!-- 		<property name="basename" value="classpath:messages" /> -->
+<!-- 		<property name="defaultEncoding" value="UTF-8" /> -->
+<!-- 	</bean> -->
 
  
     <!-- ============================================================== -->

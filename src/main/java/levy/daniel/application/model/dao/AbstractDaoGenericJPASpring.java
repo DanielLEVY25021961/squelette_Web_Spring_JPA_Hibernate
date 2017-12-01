@@ -90,6 +90,14 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 */
 	protected transient GestionnaireDaoException gestionnaireException 
 		= new GestionnaireDaoException();
+
+	
+	/**
+	 * MESSAGE_ENTITYMANAGER_NULL : String :<br/>
+	 * "this.entityManager est NULL dans AbstractDaoGenericJPASpring".<br/>
+	 */
+	public static final String MESSAGE_ENTITYMANAGER_NULL 
+	= "this.entityManager est NULL dans AbstractDaoGenericJPASpring";
 	
 	
 	/**
@@ -160,6 +168,16 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		}
 		
 		T persistentObject = null;
+		
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+		
 		
 		try {
 			

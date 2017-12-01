@@ -2,6 +2,16 @@ package levy.daniel.application.model.metier.usersimple.impl;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -47,6 +57,12 @@ import levy.daniel.application.model.metier.usersimple.IUserSimple;
  * @since 25 sept. 2017
  *
  */
+@Entity(name="UserSimple")
+@Table(name="USERSIMPLES", schema="PUBLIC"
+, uniqueConstraints=@UniqueConstraint(name="UNICITE_LOGIN_MDP"
+, columnNames={"LOGIN", "MDP"})
+, indexes={@Index(name = "INDEX_NOM_PRENOM", columnList="NOM, PRENOM")
+, @Index(name = "INDEX_LOGIN_MDP", columnList="LOGIN, MDP")})
 public class UserSimple 
 	implements Serializable, IUserSimple {
 
@@ -483,6 +499,7 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Transient
 	@Override
 	public final String getEnTeteCsv() {
 		return "id;civilité;prénom;nom;e-mail;login;mdp;profil;";
@@ -532,6 +549,7 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Transient
 	@Override
 	public final String getEnTeteColonne(
 			final int pI) {
@@ -645,6 +663,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_USERSIMPLE")
 	@Override
 	public Long getId() {	
 		return this.id;
@@ -666,6 +687,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "CIVILITE"
+	, unique = false, nullable = true
+	, updatable = true, insertable = true)
 	@Override
 	public String getCivilite() {
 		return this.civilite;
@@ -687,6 +711,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "PRENOM"
+	, unique = false, nullable = false
+	, updatable = true, insertable = true)
 	@Override
 	public String getPrenom() {
 		return this.prenom;
@@ -708,6 +735,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "NOM"
+	, unique = false, nullable = false
+	, updatable = true, insertable = true)
 	@Override
 	public String getNom() {
 		return this.nom;
@@ -729,6 +759,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "E-MAIL"
+	, unique = false, nullable = true
+	, updatable = true, insertable = true)
 	@Override
 	public String getEmail() {
 		return this.email;
@@ -750,6 +783,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "LOGIN"
+	, unique = false, nullable = false
+	, updatable = true, insertable = true)
 	@Override
 	public String getLogin() {	
 		return this.login;
@@ -771,6 +807,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "MDP"
+	, unique = false, nullable = false
+	, updatable = true, insertable = true)
 	@Override
 	public String getMdp() {	
 		return this.mdp;
@@ -792,6 +831,9 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
+	@Column(name = "PROFIL"
+	, unique = false, nullable = false
+	, updatable = true, insertable = true)
 	@Override
 	public String getProfil() {	
 		return this.profil;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- INDIQUE L'UTILISATION DE LA VERSION JPA 2.1 -->
+<!-- http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/index.html#2.1 -->
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
@@ -45,6 +46,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
+		
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 			<!-- ================================================== -->
 			<!-- Paramétrages Hibernate -->
@@ -73,6 +76,7 @@
 <!-- 		<property name="javax.persistence.jdbc.driver" value="org.hsqldb.JDBCDriver" /> -->
 
 
+		
 						<!-- **************************** -->
 						<!--          DIALECT             -->
 						<!-- **************************** -->
@@ -157,7 +161,7 @@
 			<!-- SUPPRIME le schéma après la fermeture de l'application.		-->
 			<!-- Le schéma de la BD est INVISIBLE dans le manager de BD 		-->
 			<!-- après la fermeture de l'application.							-->
-<!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
+			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
 
 			<!-- SUPPRIME et RECREE le schéma de base de données au démarrage.   -->
@@ -170,7 +174,7 @@
 <!--  			<property name="hibernate.hbm2ddl.auto" value="update" /> -->
 		
 			<!-- VALIDE LE SCHEMA ET CONSERVE LES DONNEES. POUR LA PROD. -->
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="validate" /> -->
 
 
 					<!-- ***************** -->

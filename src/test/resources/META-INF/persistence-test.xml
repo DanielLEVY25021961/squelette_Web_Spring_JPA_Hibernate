@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- INDIQUE L'UTILISATION DE LA VERSION JPA 2.1 -->
+<!-- http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/index.html#2.1 -->
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
@@ -34,7 +35,6 @@
 	<!-- Donc, ne pas utiliser l'attribut transaction-type 				-->
 	<persistence-unit name="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate">
 
-	
 
 		<!-- ========================================================== -->
 		<!-- 				CHOIX DE L'ORM							    -->
@@ -51,8 +51,9 @@
 			<!-- Paramétrages Hibernate -->
 			<!-- ================================================== -->
 
-		
+
 		<properties>
+
 		
 					<!-- ************************* -->
 					<!-- DRIVER DE BASE DE DONNEES -->
@@ -65,12 +66,12 @@
 		 <!-- ========================================================= -->
 		 <!--         mySql 5.7.19.0 - port : 3306 - [root, root]       -->
 		 <!-- ========================================================= -->   	
-<!-- 		 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		 <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" /> -->
 				
 		<!-- ========================================================= -->
 		<!--                     hsqldb 2.4.0                          -->
 		<!-- ========================================================= -->
-<!-- 		<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" /> -->
+<!-- 		<property name="javax.persistence.jdbc.driver" value="org.hsqldb.JDBCDriver" /> -->
 
 
 		
@@ -153,10 +154,18 @@
 	    	<!-- Comportement pour la conservation des tables 	-->
 	    	<!-- PASSER EN update pour la PROD.					-->
 			<!-- ******************************************** 	-->		
-			<!-- Recrée le schéma à chaque démarrage. Drop à la fermeture -->
+			<!-- SUPPRIME et RECREE le schéma à chaque démarrage. 				-->
+			<!-- Drop (SUPPRESSION DU SCHEMA) à chaque fermeture. 				-->
+			<!-- SUPPRIME le schéma après la fermeture de l'application.		-->
+			<!-- Le schéma de la BD est INVISIBLE dans le manager de BD 		-->
+			<!-- après la fermeture de l'application.							-->
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 
-			<!-- Supprime et re-créée le schéma de base de données au démarrage -->
+
+			<!-- SUPPRIME et RECREE le schéma de base de données au démarrage.   -->
+			<!-- Ne SUPPRIME PAS le schéma après fermeture de l'application.	 -->
+			<!-- Le schéma de la BD est visible dans le manager de BD			 -->
+			<!-- après la fermeture de l'application.							 -->
 <!-- 			<property name="hbm2ddl.auto"  value="create" /> -->
 		
 			<!-- Met à jour le schéma (sans destruction de données) si modification d'une Entity -->
