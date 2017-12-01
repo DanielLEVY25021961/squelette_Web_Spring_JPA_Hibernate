@@ -2,6 +2,7 @@ package levy.daniel.application.model.metier.usersimple;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.logging.Log;
@@ -12,7 +13,7 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 /**
  * class UserSimpleTest :<br/>
- * Test JUnit de la classe UserSimple.<br/>
+ * Test JUnit de la classe <b>UserSimple</b>.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -40,6 +41,113 @@ public class UserSimpleTest {
 	 */
 	public static final Boolean AFFICHAGE_GENERAL = true;
 
+	
+	/**
+	 * CIVILITE_M : String :<br/>
+	 * "M.".<br/>
+	 */
+	public static final String CIVILITE_M = "M.";
+
+	
+	/**
+	 * CIVILITE_MME : String :<br/>
+	 * "Mme".<br/>
+	 */
+	public static final String CIVILITE_MME = "Mme";
+	
+	
+	/**
+	 * PRENOM_WALLACE1 : String :<br/>
+	 * "Wallace1".<br/>
+	 */
+	public static final String PRENOM_WALLACE1 = "Wallace1";
+
+		
+	/**
+	 * PRENOM_AMANDINE : String :<br/>
+	 * "Amandine".<br/>
+	 */
+	public static final String PRENOM_AMANDINE = "Amandine";
+	
+	
+	/**
+	 * PRENOM_GERALDINE : String :<br/>
+	 * "Géraldine".<br/>
+	 */
+	public static final String PRENOM_GERALDINE = "Géraldine";
+	
+	
+	/**
+	 * NOM_WATSON : String :<br/>
+	 * "Watson".<br/>
+	 */
+	public static final String NOM_WATSON = "Watson";
+	
+	
+	/**
+	 * NOM_ROURKE_1 : String :<br/>
+	 * "Rourke1".<br/>
+	 */
+	public static final String NOM_ROURKE_1 = "Rourke1";
+	
+	
+	/**
+	 * EMAIL_YAHOO : String :<br/>
+	 * "email@yahoo.fr".<br/>
+	 */
+	public static final String EMAIL_YAHOO = "email@yahoo.fr";
+	
+	
+	/**
+	 * LOGIN : String :<br/>
+	 * "login".<br/>
+	 */
+	public static final String LOGIN = "login";
+
+	
+	/**
+	 * LOGIN_AMANDINE_WATSON : String :<br/>
+	 * "Amandine.Watson".<br/>
+	 */
+	public static final String LOGIN_AMANDINE_WATSON = "Amandine.Watson";
+
+	
+	/**
+	 * LOGIN_GERALDINE_WATSON : String :<br/>
+	 * "Geraldine.Watson".<br/>
+	 */
+	public static final String LOGIN_GERALDINE_WATSON = "Geraldine.Watson";
+			
+			
+	/**
+	 * MDP : String :<br/>
+	 * "mdp".<br/>
+	 */
+	public static final String MDP = "mdp";
+	
+	
+	/**
+	 * MDP_ZOZO93 : String :<br/>
+	 * "zozo93".<br/>
+	 */
+	public static final String MDP_ZOZO93 = "zozo93";
+	
+	
+	/**
+	 * ADMINISTRATEUR : String :<br/>
+	 * "ADMINISTRATEUR".<br/>
+	 */
+	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
+	
+	
+	/**
+	 * UTILISATEUR : String :<br/>
+	 * "UTILISATEUR".<br/>
+	 */
+	public static final String UTILISATEUR = "UTILISATEUR";
+
+
+	
 	
 	/**
 	 * TIRETS : String :<br/>
@@ -101,18 +209,34 @@ public class UserSimpleTest {
 		// **********************************
 
 		final IUserSimple objet1 
-		= new UserSimple(2L, "M", "Wallace1", "Rourke1", "email@yahoo.fr", "login", "mdp", "ADMINISTRATEUR");
+		= new UserSimple(2L
+				, CIVILITE_M
+				, PRENOM_WALLACE1, NOM_ROURKE_1
+				, EMAIL_YAHOO
+				, LOGIN, MDP
+				, ADMINISTRATEUR);
 		
 		final IUserSimple objet2 
-		= new UserSimple(3L, "Mme", "June", "Rourke2", "email@yahoo.fr", "login", "mdp", "UTILISATEUR");
+		= new UserSimple(3L
+				, CIVILITE_MME
+				, "June", "Rourke2"
+				, EMAIL_YAHOO
+				, LOGIN, MDP
+				, UTILISATEUR);
 		
 		final IUserSimple objet3 
-		= new UserSimple(4L, "M", "Wallace3", "Rourke3", "email@yahoo.fr", "login", "mdp", "CONSULTANT");
+		= new UserSimple(4L
+				, CIVILITE_M
+				, "Wallace3", "Rourke3"
+				, EMAIL_YAHOO
+				, LOGIN, MDP
+				, UTILISATEUR);
 
 		
 		/* garantit le contrat Java reflexif x.equals(x). */
-		assertTrue("x.equals(x) : "
-				, objet1.equals(objet1));
+		assertEquals("x.equals(x) : "
+				, objet1
+					, objet1);
 				
 		/* garantit le contrat Java symétrique 
 		 * x.equals(y) ----> y.equals(x). */
@@ -155,10 +279,20 @@ public class UserSimpleTest {
 		}
 		
 		final IUserSimple objet1AvecNull 
-			= new UserSimple(2L, null, "Wallace1", "Rourke1", "email@yahoo.fr", null, null, "ADMINISTRATEUR");
+			= new UserSimple(2L
+					, null
+					, PRENOM_WALLACE1, NOM_ROURKE_1
+					, EMAIL_YAHOO
+					, null, null
+					, ADMINISTRATEUR);
 		
 		final IUserSimple objet2AvecNull 
-			= new UserSimple(3L, "Mme", "June1", "Rourke1", "email@yahoo.fr", null, null, "ADMINISTRATEUR");
+			= new UserSimple(3L
+					, CIVILITE_MME
+					, "June1", NOM_ROURKE_1
+					, EMAIL_YAHOO
+					, null, null
+					, ADMINISTRATEUR);
 
 		assertEquals("objet1AvecNull.equals(objet2AvecNull) : "
 				, objet1AvecNull
@@ -199,10 +333,20 @@ public class UserSimpleTest {
 		/* garantit le bon fonctionnement de equals() 
 		 * en cas d'inégalité métier. */
 		final IUserSimple objetDiff1 
-			= new UserSimple(2L, "M", "Wallace1", "Rourke1", "email@yahoo.fr", "login1", "mdp1", "ADMINISTRATEUR");
+			= new UserSimple(2L
+					, CIVILITE_M
+					, PRENOM_WALLACE1, NOM_ROURKE_1
+					, EMAIL_YAHOO
+					, "login1", "mdp1"
+					, ADMINISTRATEUR);
 		
 		final IUserSimple objetDiff2 
-			= new UserSimple(3L, "M", "Wallace1", "Rourke1", "email@yahoo.fr", "login1", "mdp2", "ADMINISTRATEUR");
+			= new UserSimple(3L
+					, CIVILITE_M
+					, PRENOM_WALLACE1, NOM_ROURKE_1
+					, EMAIL_YAHOO
+					, "login1", "mdp2"
+					, ADMINISTRATEUR);
 		
 		assertFalse("objetDiff1 PAS equals(objetDiff2) : "
 				, objetDiff1.equals(objetDiff2));
@@ -245,15 +389,30 @@ public class UserSimpleTest {
 		// **********************************
 
 		final IUserSimple objet1 
-			= new UserSimple(2L, "M", "Wallace1", "Rourke1", "email@yahoo.fr", "login", "mdp", "ADMINISTRATEUR");
+			= new UserSimple(2L
+					, CIVILITE_M
+					, PRENOM_WALLACE1, NOM_ROURKE_1
+					, EMAIL_YAHOO
+					, LOGIN, MDP
+					, ADMINISTRATEUR);
 		
 		final IUserSimple objet1MemeInstance = objet1;
 		
 		final IUserSimple objetEquals1 
-			= new UserSimple(10L, "Mme", "Géraldine", "Watson", "email@yahoo.fr", "Geraldine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(10L
+					, CIVILITE_MME
+					, PRENOM_GERALDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 		
 		final IUserSimple objetEquals2 
-			= new UserSimple(11L, "Mme", "Géraldine", "Watson", "email@yahoo.fr", "Geraldine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(11L
+					, CIVILITE_MME
+					, PRENOM_GERALDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 
 		final IUserSimple objetNull1 
 		= new UserSimple();
@@ -262,10 +421,20 @@ public class UserSimpleTest {
 			= new UserSimple();
 				
 		final IUserSimple objetCompAvant1 
-			= new UserSimple(3L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(3L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 
 		final IUserSimple objetCompApres2 
-			= new UserSimple(3L, "Mme", "Géraldine", "Watson", "email@yahoo.fr", "Geraldine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(3L
+					, CIVILITE_MME
+					, PRENOM_GERALDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 
 	
 		/* garantit que compareTo(memeInstance) retourne 0. */		
@@ -366,7 +535,12 @@ public class UserSimpleTest {
 			= (IUserSimple) objetNull1.clone();
 		
 		final IUserSimple objet1 
-			= new UserSimple(23L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(23L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 		
 		final IUserSimple objetClone1 
 		= (IUserSimple) objet1.clone();
@@ -391,8 +565,9 @@ public class UserSimpleTest {
 					, objetClone1);
 		
 		/* garantit que x et son clone ne sont pas la même instance. */
-		assertFalse("x != clonex : "
-				, objet1 == objetClone1);
+		assertNotSame("x != clonex : "
+				, objet1
+					, objetClone1);
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -426,7 +601,12 @@ public class UserSimpleTest {
 			= new UserSimple();
 		
 		final IUserSimple objet1 
-			= new UserSimple(2L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(2L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 
 		
 		/* garantit que les null sont bien gérés dans toString(). */
@@ -469,7 +649,12 @@ public class UserSimpleTest {
 		// **********************************
 
 		final IUserSimple objet1 
-			= new UserSimple(2L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(2L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 
 		/* garantit que getEnTeteCsv() retourne le bon en-tête csv. */
 		final String entete = objet1.getEnTeteCsv();
@@ -507,7 +692,12 @@ public class UserSimpleTest {
 		= new UserSimple();
 	
 		final IUserSimple objet1 
-			= new UserSimple(27L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(27L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 		
 		/* garantit que les null sont gérés dans toStringCsv(). */
 		final String ligneCsvNull = objetNull.toStringCsv();
@@ -559,7 +749,12 @@ public class UserSimpleTest {
 		= new UserSimple();
 	
 		final IUserSimple objet1 
-			= new UserSimple(27L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(27L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 		
 		/* garantit que les null sont gérés 
 		 * dans getEnTeteColonne(int pI). */
@@ -596,6 +791,7 @@ public class UserSimpleTest {
 
 	} // Fin de testGetEnTeteColonne().____________________________________
 	
+
 	
 	/**
 	 * method testGetValeurColonne() :<br/>
@@ -619,7 +815,12 @@ public class UserSimpleTest {
 		= new UserSimple();
 	
 		final IUserSimple objet1 
-			= new UserSimple(27L, "Mme", "Amandine", "Watson", "email@yahoo.fr", "Amandine.Watson", "zozo93", "UTILISATEUR");
+			= new UserSimple(27L
+					, CIVILITE_MME
+					, PRENOM_AMANDINE, NOM_WATSON
+					, EMAIL_YAHOO
+					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
+					, UTILISATEUR);
 		
 		/* garantit que les null sont gérés 
 		 * dans getValeurColonne(int pI). */
@@ -691,4 +892,4 @@ public class UserSimpleTest {
 	
 
 
-}
+} // FIN DE LA CLASSE UserSimpleTest.----------------------------------------

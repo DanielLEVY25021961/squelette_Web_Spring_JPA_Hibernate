@@ -90,6 +90,13 @@ public class UserSimple
 	
 	
 	/**
+	 * NULL : String :<br/>
+	 * "null".<br/>
+	 */
+	public static final String NULL = "null";
+	
+	
+	/**
 	 * id : Long :<br/>
 	 * ID en base.<br/>
 	 */
@@ -381,9 +388,9 @@ public class UserSimple
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final IUserSimple clone() throws CloneNotSupportedException {
+	public final UserSimple clone() throws CloneNotSupportedException {
 		
-		final IUserSimple userClone = (IUserSimple) super.clone();
+		final UserSimple userClone = (UserSimple) super.clone();
 		
 		userClone.setId(this.getId());
 		userClone.setCivilite(this.getCivilite());
@@ -415,7 +422,7 @@ public class UserSimple
 		if (this.id != null) {			
 			builder.append(this.id);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -425,7 +432,7 @@ public class UserSimple
 		if (this.civilite != null) {
 			builder.append(this.civilite);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -435,7 +442,7 @@ public class UserSimple
 		if (this.prenom != null) {
 			builder.append(this.prenom);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -445,7 +452,7 @@ public class UserSimple
 		if (this.nom != null) {
 			builder.append(this.nom);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -455,7 +462,7 @@ public class UserSimple
 		if (this.email != null) {
 			builder.append(this.email);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -465,7 +472,7 @@ public class UserSimple
 		if (this.login != null) {			
 			builder.append(this.login);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -475,7 +482,7 @@ public class UserSimple
 		if (this.mdp != null) {			
 			builder.append(this.mdp);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
@@ -485,7 +492,7 @@ public class UserSimple
 		if (this.profil != null) {			
 			builder.append(this.profil);
 		} else {
-			builder.append("null");
+			builder.append(NULL);
 		}
 		
 		builder.append(']');

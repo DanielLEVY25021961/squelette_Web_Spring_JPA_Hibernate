@@ -121,9 +121,10 @@ public class LocaleManagerTest {
 		= LocaleManager.getLocaleApplication();
 		
 		/* garantit que getLocaleApplication() retourne un singleton. */
-		assertTrue(
-				"getLocaleApplication() doit retourner un singleton : "
-					, localeInitiale1 == localeInitiale2); // NOPMD by dan on 02/10/17 19:52
+		assertSame("getLocaleApplication() doit "
+				+ "retourner un singleton : "
+				, localeInitiale1
+					, localeInitiale2);
 		
 		/* Change la Locale. */
 		/* garantit que setLocaleApplication(Locale pLocale) 
@@ -146,9 +147,10 @@ public class LocaleManagerTest {
 		= LocaleManager.getLocaleApplication();
 		
 		/* garantit que getLocaleApplication() retourne un singleton. */
-		assertTrue(
-				"getLocaleApplication() doit retourner un singleton : "
-					, locale1 == locale2); // NOPMD by dan on 02/10/17 19:52
+		assertSame("getLocaleApplication() doit "
+				+ "retourner un singleton : "
+					, locale1
+						, locale2);
 		
 	} // Fin de testLocaleManager()._______________________________________
 	

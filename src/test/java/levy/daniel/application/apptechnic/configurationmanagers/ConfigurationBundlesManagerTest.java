@@ -2,6 +2,7 @@ package levy.daniel.application.apptechnic.configurationmanagers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.util.MissingResourceException;
@@ -230,10 +231,10 @@ public class ConfigurationBundlesManagerTest {
 			= ConfigurationBundlesManager.getBundleApplication();
 			
 			/* garantit que getBundleApplication() retourne un Singleton. */
-			assertTrue(
-					"bundleApplication1 doit être la même "
-					+ "instance que bundleApplication2"
-					, bundleApplication1 == bundleApplication2);   // NOPMD by dan on 02/10/17 23:15
+			assertSame("bundleApplication1 doit être la même "
+					+ "instance que bundleApplication2 : "
+						, bundleApplication1
+							, bundleApplication2);
 		}
 		catch (BundleManquantRunTimeException e) {
 			
@@ -326,10 +327,10 @@ public class ConfigurationBundlesManagerTest {
 			= ConfigurationBundlesManager.getBundleRessourcesExternes();
 			
 			/* garantit que getBundleRessourcesExternes() retourne un Singleton. */
-			assertTrue(
-					"bundleRessourcesExternes1 doit être la même "
-					+ "instance que bundleRessourcesExternes2"
-					, bundleRessourcesExternes1 == bundleRessourcesExternes2);   // NOPMD by dan on 02/10/17 23:15
+			assertSame("bundleRessourcesExternes1 doit être la même "
+					+ "instance que bundleRessourcesExternes2 : "
+						, bundleRessourcesExternes1
+							, bundleRessourcesExternes2);
 		}
 		catch (BundleManquantRunTimeException e) {
 			
