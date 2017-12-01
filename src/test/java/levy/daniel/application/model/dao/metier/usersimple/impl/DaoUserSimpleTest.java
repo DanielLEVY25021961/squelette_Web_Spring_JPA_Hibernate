@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,8 +37,7 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:applicationContext-test.xml"
-		, "classpath*:META-INF/context-test.xml"})
+@ContextConfiguration(locations={"classpath*:applicationContext-test.xml"})
 public class DaoUserSimpleTest {
 
 	// ************************ATTRIBUTS************************************/
@@ -97,6 +97,7 @@ public class DaoUserSimpleTest {
 	 * Teste la méthode <b>create(IUserSimple pObject)</b>.<br/>
 	 * </ul>
 	 */
+	@Commit
 	@Transactional
 	@Test
 	public void testCreate() {
@@ -115,11 +116,27 @@ public class DaoUserSimpleTest {
 				, "jfbornelogin", "jfbornemdp"
 				, "UTILISATEUR");
 		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("objet1 non persistant : " 
+					+ objet1.toString());
+			System.out.println(TIRETS);
+			System.out.println();
+			
+		}
+		
 		if (this.daoUserSimple == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println();
+				System.out.println(TIRETS);
 				System.out.println("this.daoUserSimple est NULL");
+				System.out.println(TIRETS);
+				System.out.println();
 			}
 			
 			return;
@@ -127,23 +144,45 @@ public class DaoUserSimpleTest {
 		
 		
 		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
 			objet1Persistant = this.daoUserSimple.create(objet1);
+			/* *********************************************** */
+			
 		}
 		catch (AbstractDaoException e) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("MESSAGE UTILISATEUR : " + e.getMessageUtilisateur());
+			
+			System.out.println("MESSAGE TECHNIQUE : " + e.getMessageTechnique());
+			System.out.println(TIRETS);
+			System.out.println();
 			e.printStackTrace();
 		}
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
-			
-			System.out.println("objet1 non persistant : " 
-					+ objet1.toString());
-			
+						
 			if (objet1Persistant != null) {
+				
+				System.out.println();
+				System.out.println(TIRETS);
 				System.out.println("objet1 persistant : " 
 						+ objet1Persistant.toString());
+				System.out.println(TIRETS);
+				System.out.println();
+				
 			} else {
+				
+				System.out.println();
+				System.out.println(TIRETS);
 				System.out.println("objet1Persistant est NULL");
+				System.out.println(TIRETS);
+				System.out.println();
+				
 			}
 			
 		}

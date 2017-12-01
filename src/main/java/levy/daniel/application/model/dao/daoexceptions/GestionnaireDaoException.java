@@ -6,6 +6,7 @@ import javax.persistence.PersistenceException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.exception.SQLGrammarException;
 import org.postgresql.util.PSQLException;
 
 import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoDoublonException;
@@ -94,6 +95,10 @@ public class GestionnaireDaoException {
 		if (pE instanceof EntityExistsException) {
 			System.out.println("PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
 		}
+		
+		if (pE instanceof IllegalArgumentException) {
+			System.out.println("PROBLEME DE DEFINITION DES ENTITES IllegalArgumentException : " + pE);
+		}
 
 	} // Fin de gererException(...)._______________________________________
 	
@@ -123,6 +128,31 @@ public class GestionnaireDaoException {
 		if (pCauseGrandMere != null) {
 			
 			if (pCauseGrandMere instanceof PSQLException) {
+				
+				if (pCauseMere instanceof SQLGrammarException) {
+					
+					final String messageUtilisateur 
+					= "PROBLEME DE CREATION DE TABLE - " 
+							+ this.getDetailpostgresqlException(
+									pCauseGrandMere.getMessage());
+				
+					final String messageTechnique 
+						= "PROBLEME DE CREATION DE TABLE - "
+							+ pCauseGrandMere.getMessage() 
+							+ TIRET_AERE 
+							+ pCauseGrandMere.getClass().getName();
+					
+					
+					final DaoDoublonException daoDoublonExc 
+					= new DaoDoublonException(
+							pCauseGrandMere.getMessage(), pCauseGrandMere);
+					
+					daoDoublonExc.setMessageUtilisateur(messageUtilisateur);
+					daoDoublonExc.setMessageTechnique(messageTechnique);
+					
+					throw daoDoublonExc;
+					
+				}
 				
 				final String messageUtilisateur 
 					= "TENTATIVE DE CREATION DE DOUBLON - " 

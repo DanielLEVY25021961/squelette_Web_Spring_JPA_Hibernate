@@ -46,6 +46,9 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
+		<class>levy.daniel.application.model.metier.usersimple.impl.UserSimple</class>
+		
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 			<!-- ================================================== -->
 			<!-- Paramétrages Hibernate -->
@@ -159,14 +162,14 @@
 			<!-- SUPPRIME le schéma après la fermeture de l'application.		-->
 			<!-- Le schéma de la BD est INVISIBLE dans le manager de BD 		-->
 			<!-- après la fermeture de l'application.							-->
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="create-drop" /> -->
 
 
 			<!-- SUPPRIME et RECREE le schéma de base de données au démarrage.   -->
 			<!-- Ne SUPPRIME PAS le schéma après fermeture de l'application.	 -->
 			<!-- Le schéma de la BD est visible dans le manager de BD			 -->
 			<!-- après la fermeture de l'application.							 -->
-<!-- 			<property name="hbm2ddl.auto"  value="create" /> -->
+			<property name="hibernate.hbm2ddl.auto"  value="create" />
 		
 			<!-- Met à jour le schéma (sans destruction de données) si modification d'une Entity -->
 <!--  			<property name="hibernate.hbm2ddl.auto" value="update" /> -->

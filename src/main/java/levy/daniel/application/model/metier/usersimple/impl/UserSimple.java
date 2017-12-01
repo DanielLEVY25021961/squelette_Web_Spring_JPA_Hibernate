@@ -759,7 +759,7 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
-	@Column(name = "E-MAIL"
+	@Column(name = "EMAIL"
 	, unique = false, nullable = true
 	, updatable = true, insertable = true)
 	@Override

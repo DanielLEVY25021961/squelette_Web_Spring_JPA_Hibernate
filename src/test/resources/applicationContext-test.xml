@@ -56,11 +56,11 @@
 	<!-- à RETIRER pour les applications STANDALONE 						-->
     <!-- active la config par annotations des validations de formulaire	 	-->
     <!-- par Spring.													 	-->
-	<!-- Informe Spring Web MVCque l'on utilise les annotations				-->	
+	<!-- Informe Spring Web MVC que l'on utilise les annotations			-->	
 	<!-- https://stackoverflow.com/questions/27676817/entitymanagerfactory-and-applicationcontext-usage -->
 	<!-- Configures the annotation-driven Spring MVC Controller programming model.
     Note that, with Spring 3.0, this tag works in Servlet MVC only!  -->
-	<mvc:annotation-driven />
+<!-- 	<mvc:annotation-driven /> -->
 
 
 
@@ -72,15 +72,15 @@
 	<!-- contrôlées par l'appli sous le contexte webapp.					-->
 	<!-- ici dans le dossier « /WEB-INF/vues/web/ 							-->
 	<!--avec l'extension « .jsp » 											-->
-	<bean
-        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix">
-            <value>/WEB-INF/vues/web/</value>
-        </property>
-        <property name="suffix">
-            <value>.jsp</value>
-        </property>
-    </bean>
+<!-- 	<bean -->
+<!--         class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!--         <property name="prefix"> -->
+<!--             <value>/WEB-INF/vues/web/</value> -->
+<!--         </property> -->
+<!--         <property name="suffix"> -->
+<!--             <value>.jsp</value> -->
+<!--         </property> -->
+<!--     </bean> -->
 
 
 	<!-- ===================================================================-->
@@ -92,12 +92,12 @@
 	<!--Spring.  															-->
 	<!-- ** précise que toutes les ressources statiques sous static 		-->
 	<!-- (y compris dans les sous-répertoires) sont accessibles				-->
-	<mvc:resources location="/static/" mapping="/static/**" />
+<!-- 	<mvc:resources location="/static/" mapping="/static/**" /> -->
 	
 	<!-- 					REDIRECTION SPRING 					-->
 	<!-- Equivalent Spring du Welcome File 						-->
 	<!-- Redirige vers WEB-INF/vues/web/accueil/accueil.jsp 	-->
-	<mvc:view-controller path="/" view-name="accueil/accueil"/>
+<!-- 	<mvc:view-controller path="/" view-name="accueil/accueil"/> -->
 	
 	    
  	<!-- ================================================================== -->
@@ -186,12 +186,12 @@
     <!-- ============================================================== -->
     <!--                             POSTGRESQL                         -->
     <!-- ============================================================== -->
-<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!--        <property name="driverClassName" value="org.postgresql.Driver" /> -->
-<!--        <property name="url" value="jdbc:postgresql//localhost:5432/base-squelette_Web_Spring_JPA_Hibernate" /> -->
-<!--        <property name="username" value="postgres" /> -->
-<!--        <property name="password" value="postgres" /> -->
-<!--     </bean> -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+       <property name="driverClassName" value="org.postgresql.Driver" />
+       <property name="url" value="jdbc:postgresql://localhost:5433/base-squelette_Web_Spring_JPA_Hibernate" />
+       <property name="username" value="postgres" />
+       <property name="password" value="postgres" />
+    </bean>
 
 
     <!-- ============================================================== -->
@@ -234,9 +234,9 @@
 	<!-- précise qu'il s'agit d'une ressource jdbc.						-->
 	<!-- Le nom JNDI suit par convention le sous-contexte /jdbc		    -->
 	<!-- (DataSource = jdbc/ds_squelette_Web_Spring_JPA_Hibernate). 				--> 
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-    	<property name="jndiName" value="java:comp/env/jdbc/ds_squelette_Web_Spring_JPA_Hibernate" />
-    </bean>
+<!--     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
+<!--     	<property name="jndiName" value="java:comp/env/jdbc/ds_squelette_Web_Spring_JPA_Hibernate" /> -->
+<!--     </bean> -->
 	
 </beans>
 
