@@ -11,6 +11,7 @@ import javax.persistence.Index;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,14 +31,31 @@ import levy.daniel.application.model.metier.usersimple.IUserSimple;
  * <li><b>civilite</b> (M., Mme, ...).</li>
  * <li><b>prenom</b>.</li>
  * <li><b>nom</b>.</li>
- * <li><b>e-mail</b>.</li>
+ * <li><b>email</b>.</li>
  * <li><b>login</b>.</li>
- * <li><b>mot de passe</b>.</li>
+ * <li><b>mot de passe (mdp)</b>.</li>
  * <li><b>profil</b> (Adminstrateur, Utilisateur, ...).</li>
+ * </ul>
+ * <br/>
+ * <li>
+ * L'<b>égalité metier</b> d'un UserSimple est vérifiée sur :
+ * <ul>
+ * <li><b>login</b></li>
+ * <li><b>mdp</b></li>
+ * </ul>
+ * </li>
  * <br/>
  * <li>
  * <img src="../../../../../../../../../../javadoc/images/implementation_UserSimple.png" 
  * alt="implémentation du UserSimple" border="1" align="center" />
+ * </li>
+ * <br/>
+ * <li>L'<b>Entity JPA</b> est définie avec les 
+ * javax.persistence annotations suivantes : </li>
+ * <br/>
+ * <li>
+ * <img src="../../../../../../../../../../javadoc/images/UserSimple_Entity.png" 
+ * alt="implémentation de l'Entity UserSimple" border="1" align="center" />
  * </li>
  * </ul>
  * <br/>
@@ -697,6 +715,7 @@ public class UserSimple
 	@Column(name = "CIVILITE"
 	, unique = false, nullable = true
 	, updatable = true, insertable = true)
+	@Size(min = 0, max = 10)
 	@Override
 	public String getCivilite() {
 		return this.civilite;
@@ -721,6 +740,7 @@ public class UserSimple
 	@Column(name = "PRENOM"
 	, unique = false, nullable = false
 	, updatable = true, insertable = true)
+	@Size(min = 1, max = 30)
 	@Override
 	public String getPrenom() {
 		return this.prenom;
@@ -745,6 +765,7 @@ public class UserSimple
 	@Column(name = "NOM"
 	, unique = false, nullable = false
 	, updatable = true, insertable = true)
+	@Size(min = 1, max = 50)
 	@Override
 	public String getNom() {
 		return this.nom;
@@ -793,6 +814,7 @@ public class UserSimple
 	@Column(name = "LOGIN"
 	, unique = false, nullable = false
 	, updatable = true, insertable = true)
+	@Size(min = 1, max = 100)
 	@Override
 	public String getLogin() {	
 		return this.login;
@@ -817,6 +839,7 @@ public class UserSimple
 	@Column(name = "MDP"
 	, unique = false, nullable = false
 	, updatable = true, insertable = true)
+	@Size(min = 3, max = 20)
 	@Override
 	public String getMdp() {	
 		return this.mdp;
@@ -841,6 +864,7 @@ public class UserSimple
 	@Column(name = "PROFIL"
 	, unique = false, nullable = false
 	, updatable = true, insertable = true)
+	@Size(min = 1, max = 30)
 	@Override
 	public String getProfil() {	
 		return this.profil;

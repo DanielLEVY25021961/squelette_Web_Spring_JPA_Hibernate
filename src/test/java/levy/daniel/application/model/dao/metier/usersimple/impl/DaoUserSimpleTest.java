@@ -60,15 +60,172 @@ public class DaoUserSimpleTest {
 	public static final String TIRETS 
 	= "--------------------------------------------------------";
 
-
+	
+	/**
+	 * NBRE_OBJETS_FINAL_DOIT : String :<br/>
+	 * "nombreObjetsFinal doit valoir ".<br/>
+	 */
+	public static final String NBRE_OBJETS_FINAL_DOIT 
+		= "nombreObjetsFinal doit valoir ";
+	
+	
+	/**
+	 * NBRE_INITIAL_PLUS_ZERO : String :<br/>
+	 * "nombreObjetsinitial + 0 : ".<br/>
+	 */
+	public static final String NBRE_INITIAL_PLUS_ZERO 
+		= "nombreObjetsinitial + 0 : ";
+	
+	
 	/**
 	 * daoUserSimple : IDaoUserSimple :<br/>
 	 * DAO pour les UserSimple.<br/>
+	 * INJECTE PAR SPRING.<b/>
 	 */
 	@Autowired
 	private transient IDaoUserSimple daoUserSimple;
 	
 	
+	/**
+	 * CIVILITE_M : String :<br/>
+	 * "M.".<br/>
+	 */
+	public static final String CIVILITE_M = "M.";
+
+	
+	/**
+	 * CIVILITE_MME : String :<br/>
+	 * "Mme".<br/>
+	 */
+	public static final String CIVILITE_MME = "Mme";
+	
+	
+	/**
+	 * PRENOM_WALLACE1 : String :<br/>
+	 * "Wallace1".<br/>
+	 */
+	public static final String PRENOM_WALLACE1 = "Wallace1";
+
+		
+	/**
+	 * PRENOM_AMANDINE : String :<br/>
+	 * "Amandine".<br/>
+	 */
+	public static final String PRENOM_AMANDINE = "Amandine";
+	
+	
+	/**
+	 * PRENOM_GERALDINE : String :<br/>
+	 * "Géraldine".<br/>
+	 */
+	public static final String PRENOM_GERALDINE = "Géraldine";
+	
+
+	/**
+	 * PRENOM_JEAN_FREDERIC : String :<br/>
+	 * "Jean-Frédéric".<br/>
+	 */
+	public static final String PRENOM_JEAN_FREDERIC = "Jean-Frédéric";
+	
+	
+	/**
+	 * NOM_WATSON : String :<br/>
+	 * "Watson".<br/>
+	 */
+	public static final String NOM_WATSON = "Watson";
+	
+	
+	/**
+	 * NOM_ROURKE_1 : String :<br/>
+	 * "Rourke1".<br/>
+	 */
+	public static final String NOM_ROURKE_1 = "Rourke1";
+
+	
+	/**
+	 * NOM_BORNE : String :<br/>
+	 * "Bôrne".<br/>
+	 */
+	public static final String NOM_BORNE = "Bôrne";
+	
+	
+	/**
+	 * EMAIL_YAHOO : String :<br/>
+	 * "email@yahoo.fr".<br/>
+	 */
+	public static final String EMAIL_YAHOO = "email@yahoo.fr";
+
+	
+	/**
+	 * EMAIL_BORNE : String :<br/>
+	 * "jean-frederic.borne@free.fr".<br/>
+	 */
+	public static final String EMAIL_BORNE = "jean-frederic.borne@free.fr";
+	
+	
+	/**
+	 * LOGIN : String :<br/>
+	 * "login".<br/>
+	 */
+	public static final String LOGIN = "login";
+
+	
+	/**
+	 * LOGIN_AMANDINE_WATSON : String :<br/>
+	 * "Amandine.Watson".<br/>
+	 */
+	public static final String LOGIN_AMANDINE_WATSON = "Amandine.Watson";
+
+	
+	/**
+	 * LOGIN_GERALDINE_WATSON : String :<br/>
+	 * "Geraldine.Watson".<br/>
+	 */
+	public static final String LOGIN_GERALDINE_WATSON = "Geraldine.Watson";
+			
+
+	/**
+	 * LOGIN_BORNE : String :<br/>
+	 * "jfbornelogin".<br/>
+	 */
+	public static final String LOGIN_BORNE = "jfbornelogin";
+	
+		
+	/**
+	* MDP : String :<br/>
+	* "mdp".<br/>
+	*/
+	public static final String MDP = "mdp";
+	
+	
+	/**
+	* MDP_ZOZO93 : String :<br/>
+	* "zozo93".<br/>
+	*/
+	public static final String MDP_ZOZO93 = "zozo93";
+
+	
+	/**
+	 * MDP_BORNE : String :<br/>
+	 * "jfbornemdp".<br/>
+	 */
+	public static final String MDP_BORNE = "jfbornemdp";
+	
+	
+	/**
+	 * ADMINISTRATEUR : String :<br/>
+	 * "ADMINISTRATEUR".<br/>
+	 */
+	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
+	
+	
+	/**
+	 * UTILISATEUR : String :<br/>
+	 * "UTILISATEUR".<br/>
+	 */
+	public static final String UTILISATEUR = "UTILISATEUR";
+
+
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
@@ -101,6 +258,8 @@ public class DaoUserSimpleTest {
 	 *
 	 * @throws AbstractDaoException
 	 */
+	@Commit
+	@Transactional
 	@Test
 	public void testCreateNull() throws AbstractDaoException {
 				
@@ -143,8 +302,8 @@ public class DaoUserSimpleTest {
 			nombreObjetsFinal = this.daoUserSimple.count();
 			
 			/* garantit que create(null) ne fait rien et retourne null. */
-			assertTrue("nombreObjetsFinal doit valoir "
-					+ "nombreObjetsinitial + 0 : "
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_ZERO
 					, nombreObjetsFinal == nombreObjetsinitial + 0);
 			
 		}
@@ -155,28 +314,8 @@ public class DaoUserSimpleTest {
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
-						
-			if (objet1Persistant != null) {
-				
-				System.out.println();
-				System.out.println(TIRETS);
-				System.out.println("objet1 persistant : " 
-						+ objet1Persistant.toString());
-				System.out.println("nombre d'objets finalement en base = " 
-						+ nombreObjetsFinal);
-				System.out.println(TIRETS);
-				System.out.println();
-				
-			} else {
-				
-				System.out.println();
-				System.out.println(TIRETS);
-				System.out.println("objet1Persistant est NULL");
-				System.out.println(TIRETS);
-				System.out.println();
-				
-			}
-			
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);						
 		}
 				
 	} // Fin de testCreateNull().__________________________________________
@@ -209,11 +348,11 @@ public class DaoUserSimpleTest {
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet1 
-		= new UserSimple("M."
-				, "Jean-Frédéric", "Borne"
-				, "jean-frederic.borne@free.fr"
-				, "jfbornelogin", "jfbornemdp"
-				, "UTILISATEUR");
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
 		
 		
 		/* daoUserSimple NON INJECTE. */
@@ -257,28 +396,8 @@ public class DaoUserSimpleTest {
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
-						
-			if (objet1Persistant != null) {
-				
-				System.out.println();
-				System.out.println(TIRETS);
-				System.out.println("objet1 persistant : " 
-						+ objet1Persistant.toString());
-				System.out.println("nombre d'objets finalement en base = " 
-						+ nombreObjetsFinal);
-				System.out.println(TIRETS);
-				System.out.println();
-				
-			} else {
-				
-				System.out.println();
-				System.out.println(TIRETS);
-				System.out.println("objet1Persistant est NULL");
-				System.out.println(TIRETS);
-				System.out.println();
-				
-			}
-			
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
 		}
 		
 	} // Fin de testCreate().______________________________________________
@@ -328,6 +447,52 @@ public class DaoUserSimpleTest {
 		System.out.println();
 
 	} // Fin de afficherNbreObjetsInitial(...).____________________________
+	
+
+	
+	/**
+	 * method afficherObjetPersistant(
+	 * IUserSimple pObjetPersistant
+	 * , Long pNbreObjetsFinal) :<br/>
+	 * <ul>
+	 * Affiche à la console :
+	 * <li>l'objet pObjetPersistant persisté en base.</li>
+	 * <li>Le nombre d'objets pNbreObjetsFinal finalement 
+	 * en base après le test.</li>
+	 * </ul>
+	 * <br/>
+	 *
+	 * @param pObjetPersistant : IUserSimple : 
+	 * Objet persistant en base.<br/>
+	 * @param pNbreObjetsFinal : Long : 
+	 * Nombre d'objets finalement en base.<br/>
+	 */
+	private void afficherObjetPersistant(
+			final IUserSimple pObjetPersistant
+				, final Long pNbreObjetsFinal) {
+		
+		if (pObjetPersistant != null) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("objet1 persistant : " 
+					+ pObjetPersistant.toString());
+			System.out.println("nombre d'objets finalement en base = " 
+					+ pNbreObjetsFinal);
+			System.out.println(TIRETS);
+			System.out.println();
+			
+		} else {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("objet1Persistant est NULL");
+			System.out.println(TIRETS);
+			System.out.println();
+			
+		}
+		
+	} // Fin de afficherObjetPersistant(...).______________________________
 	
 	
 	
