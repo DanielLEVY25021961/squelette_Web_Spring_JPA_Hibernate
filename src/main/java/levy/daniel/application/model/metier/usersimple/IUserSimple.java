@@ -18,10 +18,10 @@ import levy.daniel.application.model.metier.IExportateurJTable;
  * </ul>
  * <ul>
  * Garantit que tout UserSimple sait :<br/>
- * <li>se comparer à un autre IUserSimple.</li>
- * <li>se cloner.</li>
- * <li>s'exporter sous forme csv.</li>
- * <li>s'exporter sous forme JTable.</li>
+ * <li>se <b>comparer</b> à un autre IUserSimple.</li>
+ * <li>se <b>cloner</b>.</li>
+ * <li>s'exporter sous forme <b>csv</b>.</li>
+ * <li>s'exporter sous forme <b>JTable</b>.</li>
  * </ul>
  * Garantit que tout UserSimple possède :<br/>
  * <ul>
@@ -33,6 +33,15 @@ import levy.daniel.application.model.metier.IExportateurJTable;
  * <li><b>login</b>.</li>
  * <li><b>mot de passe</b>.</li>
  * <li><b>profil</b> (Adminstrateur, Utilisateur, ...).</li>
+ * </ul>
+ * <br/>
+ * <li>
+ * L'<b>égalité metier</b> d'un UserSimple est vérifiée sur :
+ * <ul>
+ * <li><b>login</b></li>
+ * <li><b>mdp</b></li>
+ * </ul>
+ * </li>
  * <br/>
  * <li>
  * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple.png" 

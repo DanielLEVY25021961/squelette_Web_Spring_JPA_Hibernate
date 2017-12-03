@@ -22,6 +22,14 @@
  * </ul>
  * <br/>
  * <li>
+ * L'<b>égalité metier</b> d'un UserSimple est vérifiée sur :
+ * <ul>
+ * <li><b>login</b></li>
+ * <li><b>mdp</b></li>
+ * </ul>
+ * </li>
+ * <br/>
+ * <li>
  * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple.png" 
  * alt="implémentation du UserSimple" border="1" align="center" />
  * </li>
