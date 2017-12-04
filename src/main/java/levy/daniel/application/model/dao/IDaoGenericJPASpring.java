@@ -59,6 +59,8 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * <li>Nécessite un cast si on veut récupérer la visibilité 
 	 * de la sous-classe S.</li>
 	 * <li>retourne l'Objet métier de type paramétré T créé en base.</li>
+	 * <li>retourne <b>null si pObject est un doublon</b> sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
 	 * </ul>
 	 * retourne null si pObject == null.<br/>
 	 * jette une AbstractDaoException si l'objet n'a pu être créé 
@@ -88,6 +90,8 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * <li>Utile par rapport à create() pour éviter de caster. 
 	 * create() retourne en effet toujours un T</li>
 	 * <li>Retourne l'instance sauvegardée en base.</li>
+	 * <li>retourne <b>null si pObject est un doublon</b> sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
 	 * </ul>
 	 * retourne null si pObject == null.<br/>
 	 * jette une AbstractDaoException si l'objet n'a pu être créé 
@@ -115,6 +119,8 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * sous-classe de T pObject en base 
 	 * (strategy=InheritanceType.JOINED).</li>
 	 * <li>Ne retourne rien.</li>
+	 * <li>ne fait <b>rien si pObject est un doublon</b> sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
 	 * </ul>
 	 * ne fait rien si pObject == null.<br/>
 	 * jette une AbstractDaoException si l'objet n'a pu être créé 
@@ -136,6 +142,8 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * (S pouvant être un T ou n'importe quelle sous-classe de T) 
 	 * en base.</li>
 	 * <li>Ne retourne rien.</li>
+	 * <li>ne fait <b>rien si pObject est un doublon</b> sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
 	 * </ul>
 	 * ne fait rien si pObject == null.<br/>
 	 * jette une AbstractDaoException si l'objet n'a pu être créé 
@@ -161,6 +169,8 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * sous-classe de T pObject en base 
 	 * (strategy=InheritanceType.JOINED).</li>
 	 * <li>retourne l'ID de l'Objet métier de type paramétré T créé.</li>
+	 * <li>retourne <b>null si pObject est un doublon</b> sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
 	 * </ul>
 	 * retourne null si pObject == null.<br/>
 	 * jette une AbstractDaoException si pObject n'est pas créé en base 
@@ -188,6 +198,11 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * <li>Retourne la Collection itérable (List&lt;S&gt;) 
 	 * d'objets de type S 
 	 * (sous-classes de T) sauvegardés en base.</li>
+	 * <li>ne <b>sauvegarde pas et n'ajoute pas à la Collection 
+	 * retournée un doublon</b> présent dans le lot pObjects sans lever 
+	 * d'Exception (test de l'existence avant la mise en base).</li>
+	 * <li>Ne fait rien et continue si un objet est null 
+	 * dans le lot pObjects.</li>
 	 * </ul>
 	 * retourne null si pObjects == null.<br/>
 	 * jette une AbstractDaoException si pObjects n'a pu être enregistrée 
@@ -254,6 +269,7 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * avec la visibilité (Typé) T.</li>
 	 * <li>ID est de type paramétré ID (Long, Integer, String, ...).</li>
 	 * </ul>
+	 * retourne null si pId == null.<br/>
 	 * retourne null si pId n'existe pas en base.<br/>
 	 * <br/>
 	 *

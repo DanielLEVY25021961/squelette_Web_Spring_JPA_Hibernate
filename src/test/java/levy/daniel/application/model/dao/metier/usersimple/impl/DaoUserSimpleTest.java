@@ -1,6 +1,12 @@
 package levy.daniel.application.model.dao.metier.usersimple.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,8 +26,13 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 /**
  * class DaoUserSimpleTest :<br/>
- * Test JUnit de la classe DaoUserSimple.<br/>
- * Test JUnit sous SPRINGr/>
+ * <ul>
+ * <li>Test JUnit de la classe <b>DaoUserSimple</b>.</li>
+ * <li>Test JUnit sous <b>SPRING</b>.</li>
+ * <li>Le <b>fichier de configuration SPRING</b> utilisé pour ce test est 
+ * <b>classpath*:applicationContext-test.xml</b> grâce à l'annotation 
+ * <b>ContextConfiguration</b>.</li>
+ * </ul>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -75,6 +86,30 @@ public class DaoUserSimpleTest {
 	 */
 	public static final String NBRE_INITIAL_PLUS_ZERO 
 		= "nombreObjetsinitial + 0 : ";
+	
+	
+	/**
+	 * NBRE_INITIAL_PLUS_UN : String :<br/>
+	 * "nombreObjetsinitial + 1 : ".<br/>
+	 */
+	public static final String NBRE_INITIAL_PLUS_UN 
+		= "nombreObjetsinitial + 1 : ";
+
+	
+	/**
+	 * NBRE_INITIAL_PLUS_DEUX : String :<br/>
+	 * "nombreObjetsinitial + 2 : ".<br/>
+	 */
+	public static final String NBRE_INITIAL_PLUS_DEUX 
+		= "nombreObjetsinitial + 2 : ";
+
+	
+	/**
+	 * NBRE_INITIAL_PLUS_TROIS : String :<br/>
+	 * "nombreObjetsinitial + 3 : ".<br/>
+	 */
+	public static final String NBRE_INITIAL_PLUS_TROIS 
+	= "nombreObjetsinitial + 3 : ";
 	
 	
 	/**
@@ -265,15 +300,9 @@ public class DaoUserSimpleTest {
 				
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = true;
+		final boolean affichage = false;
 		// **********************************
-		
-		Long nombreObjetsinitial = 0L;
-		Long nombreObjetsFinal = 0L;
-		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
-				
+
 		/* daoUserSimple NON INJECTE. */
 		if (this.daoUserSimple == null) {
 			
@@ -283,7 +312,13 @@ public class DaoUserSimpleTest {
 			}			
 			return;
 		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
 		
+		final IUserSimple objet1 = null;
+		IUserSimple objet1Persistant = null;
+						
 		/* Compte du nombre d'Objets initialement en base. */
 		nombreObjetsinitial = this.daoUserSimple.count();
 		
@@ -317,7 +352,10 @@ public class DaoUserSimpleTest {
 			this.afficherObjetPersistant(
 					objet1Persistant, nombreObjetsFinal);						
 		}
-				
+
+		/* Vide la table. */
+		this.viderTable();
+
 	} // Fin de testCreateNull().__________________________________________
 	
 	
@@ -329,6 +367,7 @@ public class DaoUserSimpleTest {
 	 * <li>garantit que create(IUserSimple pObject) insère 
 	 * un objet en base.</li>
 	 * </ul>
+	 * 
 	 * @throws AbstractDaoException 
 	 */
 	@Commit
@@ -338,8 +377,18 @@ public class DaoUserSimpleTest {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = true;
+		final boolean affichage = false;
 		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
 
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
@@ -354,17 +403,7 @@ public class DaoUserSimpleTest {
 				, LOGIN_BORNE, MDP_BORNE
 				, UTILISATEUR);
 		
-		
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
-			
-			/* AFFICHAGE A LA CONSOLE. */
-			if (AFFICHAGE_GENERAL && affichage) {
-				this.afficherDAONonInstancie();
-			}			
-			return;
-		}
-		
+				
 		/* Compte du nombre d'Objets initialement en base. */
 		nombreObjetsinitial = this.daoUserSimple.count();
 		
@@ -384,8 +423,8 @@ public class DaoUserSimpleTest {
 			
 			/* garantit que create(IUserSimple pObject) 
 			 * insère un objet en base.*/
-			assertTrue("nombreObjetsFinal doit valoir "
-					+ "nombreObjetsinitial + 1 : "
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
 					, nombreObjetsFinal == nombreObjetsinitial + 1);
 			
 		}
@@ -400,10 +439,1647 @@ public class DaoUserSimpleTest {
 					objet1Persistant, nombreObjetsFinal);
 		}
 		
+		/* Vide la table. */
+		this.viderTable();
+		
 	} // Fin de testCreate().______________________________________________
 	
 
+	
+	/**
+	 * method testCreateDoublon() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>create(IUserSimple pDoublon)</b>.<br/>
+	 * <li>garantit que create(IUserSimple pDoublon) retourne 
+	 * null sans lever d'Exception.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testCreateDoublon() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
 
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		IUserSimple objet2PersistantEquals1 = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet2Equals1 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_BORNE, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			objet1Persistant = this.daoUserSimple.create(objet1);
+			objet2PersistantEquals1 = this.daoUserSimple.create(objet2Equals1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que create(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+			this.afficherObjetPersistant(
+					objet2PersistantEquals1, nombreObjetsFinal);
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testCreateDoublon()._______________________________________
+
+
+	
+	/**
+	 * method testSaveNull() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>save(null)</b>.<br/>
+	 * <li>garantit que save(null) ne fait rien 
+	 * et retourne null.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testSaveNull() throws AbstractDaoException {
+				
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		final IUserSimple objet1 = null;
+		IUserSimple objet1Persistant = null;
+				
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherNbreObjetsInitial(nombreObjetsinitial);			
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			objet1Persistant = this.daoUserSimple.save(objet1);
+			/* *********************************************** */
+			
+			/* Calcul du nombre d'objets en base après le traitement. */
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(null) ne fait rien et retourne null. */
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_ZERO
+					, nombreObjetsFinal == nombreObjetsinitial + 0);
+			
+		}
+		catch (AbstractDaoException e) {			
+			this.afficherAbstractDaoException(e);			
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);						
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testSaveNull().____________________________________________
+	
+	
+	
+	/**
+	 * method testSave() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>save(IUserSimple pObject)</b>.<br/>
+	 * <li>garantit que save(IUserSimple pObject) insère 
+	 * un objet en base.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testSave() throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+				
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			objet1Persistant = this.daoUserSimple.save(objet1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+		}
+		
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testSave().________________________________________________
+	
+
+	
+	/**
+	 * method testSaveDoublon() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>save(IUserSimple pDoublon)</b>.<br/>
+	 * <li>garantit que save(IUserSimple pDoublon) retourne 
+	 * null sans lever d'Exception.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testSaveDoublon() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		IUserSimple objet2PersistantEquals1 = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet2Equals1 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_BORNE, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			objet1Persistant = this.daoUserSimple.save(objet1);
+			objet2PersistantEquals1 = this.daoUserSimple.save(objet2Equals1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+			this.afficherObjetPersistant(
+					objet2PersistantEquals1, nombreObjetsFinal);
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testSaveDoublon()._________________________________________
+
+	
+
+	/**
+	 * method testPersistNull() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>persist(null)</b>.<br/>
+	 * <li>garantit que persist(null) ne fait rien.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersistNull() throws AbstractDaoException {
+				
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		final IUserSimple objet1 = null;
+		IUserSimple objet1Persistant = null;
+				
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherNbreObjetsInitial(nombreObjetsinitial);			
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			/* *********************************************** */
+			
+			/* Calcul du nombre d'objets 
+			 * en base après le traitement. */
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persist(null) 
+			 * ne fait rien et retourne null. */
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_ZERO
+					, nombreObjetsFinal == nombreObjetsinitial + 0);
+			
+		}
+		catch (AbstractDaoException e) {			
+			this.afficherAbstractDaoException(e);			
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);						
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testPersistNull()._________________________________________
+	
+	
+	
+	/**
+	 * method testPersist() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>persist(IUserSimple pObject)</b>.<br/>
+	 * <li>garantit que persist(IUserSimple pObject) insère 
+	 * un objet en base.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersist() throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+				
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persist(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+		}
+		
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testPersist()._____________________________________________
+	
+
+	
+	/**
+	 * method testPersistDoublon() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>persist(IUserSimple pDoublon)</b>.<br/>
+	 * <li>garantit que persist(IUserSimple pDoublon) retourne 
+	 * null sans lever d'Exception.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersistDoublon() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		IUserSimple objet2PersistantEquals1 = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet2Equals1 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_BORNE, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			this.daoUserSimple.persistSousClasse(objet2Equals1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			objet2PersistantEquals1 = this.daoUserSimple.retrieve(objet2Equals1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persist(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+			this.afficherObjetPersistant(
+					objet2PersistantEquals1, nombreObjetsFinal);
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testPersistDoublon().______________________________________
+
+
+	
+
+	/**
+	 * method testPersistSousClasseNull() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>persistSousClasse(null)</b>.<br/>
+	 * <li>garantit que persistSousClasse(null) ne fait rien.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersistSousClasseNull() throws AbstractDaoException {
+				
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		final IUserSimple objet1 = null;
+		IUserSimple objet1Persistant = null;
+				
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherNbreObjetsInitial(nombreObjetsinitial);			
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			/* *********************************************** */
+			
+			/* Calcul du nombre d'objets en base après le traitement. */
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persistSousClasse(null) ne fait 
+			 * rien et retourne null. */
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_ZERO
+					, nombreObjetsFinal == nombreObjetsinitial + 0);
+			
+		}
+		catch (AbstractDaoException e) {			
+			this.afficherAbstractDaoException(e);			
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);						
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testPersistSousClasseNull()._______________________________
+	
+	
+	
+	/**
+	 * method testPersistSousClasse() :<br/>
+	 * <ul>
+	 * Teste la méthode 
+	 * <b>persistSousClasse(IUserSimple pObject)</b>.<br/>
+	 * <li>garantit que persistSousClasse(IUserSimple pObject) insère 
+	 * un objet en base.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersistSousClasse() throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+				
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persistSousClasse(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+		}
+		
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testPersistSousClasse().___________________________________
+	
+
+	
+	/**
+	 * method testPersistSousClasseDoublon() :<br/>
+	 * <ul>
+	 * Teste la méthode 
+	 * <b>persistSousClasse(IUserSimple pDoublon)</b>.<br/>
+	 * <li>garantit que persistSousClasse(IUserSimple pDoublon) retourne 
+	 * null sans lever d'Exception.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testPersistSousClasseDoublon() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		IUserSimple objet2PersistantEquals1 = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet2Equals1 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_BORNE, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			this.daoUserSimple.persistSousClasse(objet1);
+			this.daoUserSimple.persistSousClasse(objet2Equals1);
+			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			objet2PersistantEquals1 = this.daoUserSimple.retrieve(objet2Equals1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que persistSousClasse(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+			this.afficherObjetPersistant(
+					objet2PersistantEquals1, nombreObjetsFinal);
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testPersistSousClasseDoublon().____________________________
+
+
+
+	/**
+	 * method testCreateReturnIdNull() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>createReturnId(null)</b>.<br/>
+	 * <li>garantit que createReturnId(null) ne fait rien 
+	 * et retourne null.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testCreateReturnIdNull() throws AbstractDaoException {
+				
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		final IUserSimple objet1 = null;
+		IUserSimple objet1Persistant = null;
+		Long idObjetPersistant = null;
+				
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherNbreObjetsInitial(nombreObjetsinitial);			
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			idObjetPersistant = this.daoUserSimple.createReturnId(objet1);
+			objet1Persistant = this.daoUserSimple.findById(idObjetPersistant);
+			/* *********************************************** */
+			
+			/* Calcul du nombre d'objets en base après le traitement. */
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que create(null) ne fait rien et retourne null. */
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_ZERO
+					, nombreObjetsFinal == nombreObjetsinitial + 0);
+			
+		}
+		catch (AbstractDaoException e) {			
+			this.afficherAbstractDaoException(e);			
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);						
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testCreateReturnId().______________________________________
+	
+
+	
+	/**
+	 * method testCreateReturnId() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>createReturnId(IUserSimple pObject)</b>.<br/>
+	 * <li>garantit que createReturnId(IUserSimple pObject) insère 
+	 * un objet en base et retourne son ID.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testCreateReturnId() throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		Long idObjetPersistant = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+				
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			idObjetPersistant = this.daoUserSimple.createReturnId(objet1);
+			objet1Persistant = this.daoUserSimple.findById(idObjetPersistant);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que create(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+		}
+		
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testCreateReturnId().______________________________________
+	
+
+	
+	/**
+	 * method testCreateReturnIdDoublon() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>createReturnId(IUserSimple pDoublon)</b>.<br/>
+	 * <li>garantit que createReturnId(IUserSimple pDoublon) retourne 
+	 * null sans lever d'Exception.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testCreateReturnIdDoublon() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = true;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objet1Persistant = null;
+		IUserSimple objet2PersistantEquals1 = null;
+		
+		Long idObjet1Persistant = null;
+		Long idObjet2PersistantEquals1 = null;
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		/* Instanciation d'un IUserSimple. */
+		final IUserSimple objet2Equals1 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_BORNE, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+		}
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			idObjet1Persistant = this.daoUserSimple.createReturnId(objet1);
+			idObjet2PersistantEquals1 = this.daoUserSimple.createReturnId(objet2Equals1);
+			objet1Persistant = this.daoUserSimple.findById(idObjet1Persistant);
+			objet2PersistantEquals1 = this.daoUserSimple.findById(idObjet2PersistantEquals1);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que create(IUserSimple pObject) 
+			 * insère un objet en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_UN
+					, nombreObjetsFinal == nombreObjetsinitial + 1);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objet1Persistant, nombreObjetsFinal);
+			this.afficherObjetPersistant(
+					objet2PersistantEquals1, nombreObjetsFinal);
+		}
+
+		/* Vide la table. */
+		this.viderTable();
+
+	} // Fin de testCreateReturnIdDoublon()._______________________________
+
+
+
+	/**
+	 * method testSaveLot() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>save(Iterable&lt;S&gt; pObjects)</b>.<br/>
+	 * <li>garantit que save(Iterable&lt;S&gt; pObjects) insère 
+	 * un lot d'objets en base.</li>
+	 * <li>garantit que save(Iterable&lt;S&gt; pObjects) 
+	 * saute les null.</li>
+	 * <li>garantit que save(Iterable&lt;S&gt; pObjects) 
+	 * saute les doublons.</li>
+	 * </ul>
+	 * 
+	 * @throws AbstractDaoException 
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testSaveLot() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		List<IUserSimple> lotPersistant = null;
+		
+		/* Instanciation de IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet2Null = null;
+		
+		final IUserSimple objet3Equals1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet4 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_AMANDINE_WATSON, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		/* Constitution d'un lot d'objets. */
+		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		
+		lot.add(objet1);
+		lot.add(objet2Null);
+		lot.add(objet3Equals1);
+		lot.add(objet4);
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Null, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet3Equals1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet4, nombreObjetsinitial);
+		}
+
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(Lot pObjects) 
+			 * insère des objets en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_DEUX
+					, nombreObjetsFinal == nombreObjetsinitial + 2);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
+			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(TIRETS);
+			System.out.println();
+
+		}
+				
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testSaveLot()._____________________________________________
+	
+
+	
+	/**
+	 * method testRetrieve() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>retrieve(IUserSimple pObject)</b>.<br/>
+	 * <li>garantit que retrieve(IUserSimple pObject) retrouve 
+	 * objet existant en base.</li>
+	 * <li>garantit que retrieve(objetInexistant) retourne null.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testRetrieve() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = false;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objetpersistantInexistant = null;
+		IUserSimple objetpersistant = null;
+		
+		List<IUserSimple> lotPersistant = null;
+		
+		/* Instanciation de IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet2Null = null;
+		
+		final IUserSimple objet3Equals1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet4 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_AMANDINE_WATSON, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		final IUserSimple objet5 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_WALLACE1, NOM_ROURKE_1
+				, EMAIL_YAHOO
+				, LOGIN, MDP_ZOZO93
+				, UTILISATEUR);
+		
+		final IUserSimple objetInexistant 
+		= new UserSimple(
+				CIVILITE_M
+				, "prenomInexistant", "nomInexistant"
+				, "emailInexistant"
+				, "loginInexistant", "mdpInexistant"
+				, UTILISATEUR);
+		
+		/* Constitution d'un lot d'objets. */
+		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		
+		lot.add(objet1);
+		lot.add(objet2Null);
+		lot.add(objet3Equals1);
+		lot.add(objet4);
+		lot.add(objet5);
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Null, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet3Equals1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet4, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet5, nombreObjetsinitial);
+		}
+
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(Lot pObjects) 
+			 * insère des objets en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_TROIS
+					, nombreObjetsFinal == nombreObjetsinitial + 3);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
+			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(TIRETS);
+			System.out.println();
+
+		}
+		
+		/* *********************************************** */
+		/* ********************* RETRIEVE **************** */
+		objetpersistantInexistant = this.daoUserSimple.retrieve(objetInexistant);
+		
+		/* garantit que retrieve(objetInexistant) retourne null. */
+		assertNull("Un objet non persistant ne peut être trouvé en base : "
+				, objetpersistantInexistant);
+
+		/* *********************************************** */
+		/* ********************* RETRIEVE **************** */
+		objetpersistant = this.daoUserSimple.retrieve(objet5);
+		
+		/* garantit que retrieve(IUserSimple pObject) retrouve 
+		 * objet existant en base.*/
+		assertEquals("Un objet persistant doit être trouvé en base : "
+				, objet5
+					, objetpersistant);
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetPersistant(
+					objetpersistant, nombreObjetsFinal);
+		}
+		
+		/* Vide la table. */
+		this.viderTable();
+		
+	} // Fin de testRetrieve().____________________________________________
+	
+
+	
+	/**
+	 * method testFindById() :<br/>
+	 * <ul>
+	 * Teste la méthode <b>findById(Long pId)</b>.<br/>
+	 * <li>garantit que findById(Long pId) retrouve 
+	 * objet existant en base.</li>
+	 * <li>garantit que findById(Long pIdInexistant) retourne null.</li>
+	 * </ul>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	@Commit
+	@Transactional
+	@Test
+	public void testFindById() 
+							throws AbstractDaoException {
+		
+		// **********************************
+		// AFFICHAGE DANS LE TEST ou NON
+		final boolean affichage = true;
+		// **********************************
+
+		/* daoUserSimple NON INJECTE. */
+		if (this.daoUserSimple == null) {
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherDAONonInstancie();
+			}			
+			return;
+		}
+
+		Long nombreObjetsinitial = 0L;
+		Long nombreObjetsFinal = 0L;
+		
+		IUserSimple objetpersistantInexistant = null;
+		IUserSimple objetpersistant = null;
+		
+		List<IUserSimple> lotPersistant = null;
+		
+		/* Instanciation de IUserSimple. */
+		final IUserSimple objet1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet2Null = null;
+		
+		final IUserSimple objet3Equals1 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_JEAN_FREDERIC, NOM_BORNE
+				, EMAIL_BORNE
+				, LOGIN_BORNE, MDP_BORNE
+				, UTILISATEUR);
+		
+		final IUserSimple objet4 
+		= new UserSimple(CIVILITE_MME
+				, PRENOM_AMANDINE, NOM_WATSON
+				, EMAIL_YAHOO
+				, LOGIN_AMANDINE_WATSON, MDP_BORNE
+				, ADMINISTRATEUR);
+		
+		final IUserSimple objet5 
+		= new UserSimple(CIVILITE_M
+				, PRENOM_WALLACE1, NOM_ROURKE_1
+				, EMAIL_YAHOO
+				, LOGIN, MDP_ZOZO93
+				, UTILISATEUR);
+		
+		
+		/* Constitution d'un lot d'objets. */
+		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		
+		lot.add(objet1);
+		lot.add(objet2Null);
+		lot.add(objet3Equals1);
+		lot.add(objet4);
+		lot.add(objet5);
+		
+		/* Compte du nombre d'Objets initialement en base. */
+		nombreObjetsinitial = this.daoUserSimple.count();
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet2Null, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet3Equals1, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet4, nombreObjetsinitial);
+			this.afficherObjetNonPersistant(objet5, nombreObjetsinitial);
+		}
+
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			/* *********************************************** */
+			
+			nombreObjetsFinal = this.daoUserSimple.count();
+			
+			/* garantit que save(Lot pObjects) 
+			 * insère des objets en base.*/
+			assertTrue(NBRE_OBJETS_FINAL_DOIT
+					+ NBRE_INITIAL_PLUS_TROIS
+					, nombreObjetsFinal == nombreObjetsinitial + 3);
+			
+		}
+		catch (AbstractDaoException e) {
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
+			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(TIRETS);
+			System.out.println();
+
+		}
+		
+		/* *********************************************** */
+		/* ********************* FINDBYID **************** */
+		objetpersistantInexistant = this.daoUserSimple.findById(100L);
+		
+		/* garantit que retrieve(objetInexistant) retourne null. */
+		assertNull("Un objet non persistant ne peut être trouvé en base : "
+				, objetpersistantInexistant);
+
+		/* *********************************************** */
+		/* ********************* FINDBYID **************** */
+		objetpersistant = this.daoUserSimple.findById(3L);
+		
+		if (objetpersistant != null) {
+			
+			/* garantit que retrieve(IUserSimple pObject) retrouve 
+			 * objet existant en base.*/
+			assertNotNull("Un objet persistant doit être trouvé en base : "
+					, objetpersistant.getId());
+			
+			/* AFFICHAGE A LA CONSOLE. */
+			if (AFFICHAGE_GENERAL && affichage) {
+				this.afficherObjetPersistant(
+						objetpersistant, nombreObjetsFinal);
+			}
+			
+		}
+				
+		/* Vide la table. */
+		this.viderTable();
+				
+	} // Fin de testFindById().____________________________________________
+	
+
+	
+	/**
+	 * method viderTable() :<br/>
+	 * Vide la table.<br/>
+	 * <br/>
+	 *
+	 * @throws AbstractDaoException
+	 */
+	private void viderTable() throws AbstractDaoException {
+		this.daoUserSimple.deleteAll();
+	} // Fin de viderTable().______________________________________________
+	
+	
+	
 	/**
 	 * method afficherDAONonInstancie() :<br/>
 	 * Affiche à la console de
@@ -475,7 +2151,7 @@ public class DaoUserSimpleTest {
 			
 			System.out.println();
 			System.out.println(TIRETS);
-			System.out.println("objet1 persistant : " 
+			System.out.println("objet persistant : " 
 					+ pObjetPersistant.toString());
 			System.out.println("nombre d'objets finalement en base = " 
 					+ pNbreObjetsFinal);
@@ -486,7 +2162,7 @@ public class DaoUserSimpleTest {
 			
 			System.out.println();
 			System.out.println(TIRETS);
-			System.out.println("objet1Persistant est NULL");
+			System.out.println("objetPersistant est NULL");
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -517,16 +2193,31 @@ public class DaoUserSimpleTest {
 			final IUserSimple pObjetNonPersistant
 				, final Long pNbreObjetsInitial) {
 		
-		System.out.println();
-		System.out.println(TIRETS);
-		System.out.println("objet1 non persistant : " 
-				+ pObjetNonPersistant.toString());
-		System.out.println("nombre d'objets initialement en base = " 
-				+ pNbreObjetsInitial);
-		System.out.println(TIRETS);
-		System.out.println();
+		if (pObjetNonPersistant != null) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("objet non persistant : " 
+					+ pObjetNonPersistant.toString());
+			System.out.println("nombre d'objets initialement en base = " 
+					+ pNbreObjetsInitial);
+			System.out.println(TIRETS);
+			System.out.println();
+
+		}
+		else {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("objet non persistant est NULL");
+			System.out.println("nombre d'objets initialement en base = " 
+					+ pNbreObjetsInitial);
+			System.out.println(TIRETS);
+			System.out.println();
+			
+		}
 		
-	} // Fin de afficherObjetNonPersistant(...).___________________________
+	} // Fin de afficherObjetNonPersistSousClasseant(...).___________________________
 	
 	
 

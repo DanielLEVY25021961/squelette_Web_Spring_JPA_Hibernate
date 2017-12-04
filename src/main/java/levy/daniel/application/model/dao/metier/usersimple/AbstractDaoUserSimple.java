@@ -67,12 +67,12 @@ public abstract class AbstractDaoUserSimple
 	
 	/**
 	 * SELECT_OBJET : String :<br/>
-	 * "select iusersimple from 
-	 * IUserSimple as iusersimple ".<br/>
+	 * "select usersimple from 
+	 * UserSimple as usersimple ".<br/>
 	 */
 	public static final String SELECT_OBJET 
-		= "select iusersimple from "
-				+ "IUserSimple as iusersimple ";
+		= "select usersimple from "
+				+ "UserSimple as usersimple ";
 
 	
 	/**
@@ -110,6 +110,21 @@ public abstract class AbstractDaoUserSimple
 			return null;
 		}
 		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+		
+		/* retourne null si pObject est un doublon. */
+		if (this.exists(pObject)) {
+			return null;
+		}
+
 		/* Crée l'Objet en base ou jette une AbstractDaoException. */
 		final IUserSimple objetPersistant 
 			= this.create(pObject);
@@ -144,8 +159,8 @@ public abstract class AbstractDaoUserSimple
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where iusersimple.login = :pLogin "
-				+ "and iusersimple.mdp = :pMdp";
+				+ "where usersimple.login = :pLogin "
+				+ "and usersimple.mdp = :pMdp";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -219,8 +234,8 @@ public abstract class AbstractDaoUserSimple
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where iusersimple.nom = :pNom "
-				+ "and iusersimple.prenom = :pPrenom";
+				+ "where usersimple.nom = :pNom "
+				+ "and usersimple.prenom = :pPrenom";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -276,7 +291,7 @@ public abstract class AbstractDaoUserSimple
 		/* REQUETE HQL PARAMETREE. */
 		final String requeteString 
 		= SELECT_OBJET 
-		+ "where iusersimple.id = :pId";
+		+ "where usersimple.id = :pId";
 
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -342,7 +357,7 @@ public abstract class AbstractDaoUserSimple
 		/* REQUETE HQL PARAMETREE. */
 		final String requeteString 
 		= SELECT_OBJET 
-		+ "where iusersimple.id = :pId";
+		+ "where usersimple.id = :pId";
 
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -410,8 +425,8 @@ public abstract class AbstractDaoUserSimple
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where iusersimple.login = :pLogin "
-				+ "and iusersimple.mdp = :pMdp";
+				+ "where usersimple.login = :pLogin "
+				+ "and usersimple.mdp = :pMdp";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -510,7 +525,6 @@ public abstract class AbstractDaoUserSimple
 	 * this.<b>classObjetMetier</b> dans AbstractDaoUserSimple : 
 	 * <b>IUserSimple.class</b><br/>
 	 * <br/>
-	 * 
 	 */
 	@Override
 	protected void renseignerClassObjetMetier() {

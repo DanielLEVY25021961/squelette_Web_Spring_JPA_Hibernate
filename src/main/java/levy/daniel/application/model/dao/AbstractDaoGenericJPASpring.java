@@ -169,6 +169,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		
 		T persistentObject = null;
 		
+		/* Cas où this.entityManager == null. */
 		if (this.entityManager == null) {
 						
 			/* LOG. */
@@ -178,9 +179,14 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			return null;
 		}
 		
+		/* retourne null si pObject est un doublon. */
+		if (this.exists(pObject)) {
+			return null;
+		}
 		
 		try {
 			
+			/* ***************** */
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
 			
@@ -219,7 +225,22 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		}
 		
 		S persistentObject = null;
-				
+
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+		
+		/* retourne null si pObject est un doublon. */
+		if (this.exists(pObject)) {
+			return null;
+		}
+		
 		try {
 			
 			/* PERSISTE en base. */
@@ -259,6 +280,21 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			return;
 		}
 		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return;
+		}
+		
+		/* ne fait rien si pObject est un doublon. */
+		if (this.exists(pObject)) {
+			return;
+		}
+		
 		
 		try {
 			
@@ -291,6 +327,21 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		
 		/* ne fait rien si pObject == null. */
 		if (pObject == null) {
+			return;
+		}
+
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return;
+		}
+		
+		/* ne fait rien si pObject est un doublon. */
+		if (this.exists(pObject)) {
 			return;
 		}
 
@@ -332,12 +383,23 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final <S extends T> Iterable<S> save(
+	public <S extends T> Iterable<S> save(
 			final Iterable<S> pObjects) 
 			throws AbstractDaoException {
 
 		/* retourne null si pObjects == null. */
 		if (pObjects == null) {
+			return null;
+		}
+
+		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
 			return null;
 		}
 
@@ -350,17 +412,26 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			while (iteS.hasNext()) {
 
 				final S objet = iteS.next();
-
+				
+				/* passe un null dans le lot. */
 				if (objet != null) {
+					
+					S objetPersistant = null;
 
 					/* PERSISTE en base. */
-					this.entityManager.persist(objet);
-
-					/* Ajoute à l'iterable resultat. */
-					resultat.add(objet);
+					objetPersistant = this.save(objet);
+					
+					/* ne sauvegarde pas un doublon présent dans le lot. */
+					if (objetPersistant != null) {
+						
+						/* Ajoute à l'iterable resultat. */
+						resultat.add(objetPersistant);
+							
+					}
+					
 				}
 
-			}
+			} // Next._____________________________________
 
 		}
 		catch (Exception e) {
@@ -400,11 +471,26 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final T findById(
+	public T findById(
 			final ID pId) throws AbstractDaoException {
 		
 		T objetTrouve = null;
 		
+		/* retourne null si pId == null. */
+		if (pId == null) {
+			return null;
+		}
+
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+
 		try {
 			
 			objetTrouve 
