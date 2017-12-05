@@ -19,8 +19,9 @@ import org.apache.commons.logging.LogFactory;
 
 /**
  * class GestionnaireRG :<br/>
- * Classe utilitaire chargée de gérer en un point unique 
- * l'implémentation des règles de gestion (RG) 
+ * Classe <b>utilitaire</b> (dotée de méthodes statiques) 
+ * chargée de gérer en un <b>point unique</b> 
+ * l'implémentation des <b>règles de gestion (RG)</b> 
  * de toute l'application.<br/>
  * <ul>
  * <li>La méthode <b>afficherListeRGImplementeesCsv()</b> 
@@ -144,7 +145,8 @@ static {
 
 	/**
 	 * method getBundleExterneRG() :<br/>
-	 * Fournit le ResourceBundle associé au fichier externe rg.properties 
+	 * Fournit le ResourceBundle associé au fichier <i>externe</i> 
+	 * (hors classpath) <b>rg.properties</b> 
 	 * avec la Locale Locale_fr_FR.<br/>
 	 * <br/>
 	 *

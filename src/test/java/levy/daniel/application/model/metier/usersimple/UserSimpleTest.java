@@ -2,6 +2,7 @@ package levy.daniel.application.model.metier.usersimple;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
@@ -312,8 +313,8 @@ public class UserSimpleTest {
 
 		
 		/* garantit que x.equals(null) retourne false (avec x non null). */
-		assertFalse("objet1 pas equals(null) : "
-				, objet1.equals(null));
+		assertNotNull("objet1 pas equals(null) : "
+				, objet1);
 				
 		/* garantit le bon fonctionnement de equals() 
 		 * en cas d'égalité métier. */
