@@ -1,6 +1,9 @@
 /**
  * class package-info :<br/>
- * .<br/>
+ * <ul>
+ * <li>Ce package contient toutes les classes nécessaires 
+ * au Gestionnaire de RG pour le <b>UserSimple</b>.</li>
+ * </ul>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>

@@ -307,18 +307,20 @@ static {
 	
 	/**
 	 * method getEnTeteCsv() :<br/>
-	 * "id;Actif;activité des contrôles sur l'attribut;activité de la RG;
+	 * <ul>
+	 * <li>Retourne l'<b>en-tête csv</b> d'une <b>LigneRG</b>.</li>
+	 * <li>"id;Actif;activité des contrôles sur l'attribut;activité de la RG;
 	 * RG implémentée;clé du type de contrôle;type de contrôle;Message d'erreur;
 	 * Objet Métier concerné;Attribut concerné;Classe implémentant la RG;
-	 * Méthode implémentant la RG;properties;clé;".<br/>
-	 * <br/>
+	 * Méthode implémentant la RG;properties;clé;"</li>
+	 * </ul>
 	 *
 	 * @return : String : "id;Actif;
 	 * activité des contrôles sur l'attribut;activité de la RG;
 	 * RG implémentée;clé du type de contrôle;type de contrôle
 	 * ;Message d'erreur;
 	 * Objet Métier concerné;Attribut concerné;Classe implémentant la RG;
-	 * Méthode implémentant la RG;properties;clé;".<br/>
+	 * Méthode implémentant la RG;properties;clé;"<br/>
 	 */
 	public static String getEnTeteCsv() {
 		

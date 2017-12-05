@@ -1,6 +1,8 @@
 package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg;
 
+import java.net.MalformedURLException;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * INTERFACE IGestionnaireRG :<br/>
@@ -44,6 +46,25 @@ public interface IGestionnaireRG {
 	 */
 	Map<String, LigneRG> getMapRG();
 	
+
+		
+	/**
+	 * method getBundleExterneRG() :<br/>
+	 * <ul>
+	 * <li>
+	 * Fournit le ResourceBundle associé au fichier <i>externe</i> 
+	 * (hors classpath) <b>rg-objet.properties</b> 
+	 * avec la Locale Locale_fr_FR.
+	 * </li>
+	 * </ul>
+	 * <br/>
+	 *
+	 * @return : ResourceBundle : rg-objet.properties.<br/>
+	 * 
+	 * @throws MalformedURLException 
+	 */
+	ResourceBundle getBundleExterneRG() 
+			throws MalformedURLException;
 
 
 } // FIN DE L'INTERFACE IGestionnaireRG.-----------------------------------
