@@ -339,10 +339,12 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * <li>Retourne la liste des pMax premiers Objets métier 
 	 * de Type paramétré T présents en base 
 	 * et retournés par listAll().</li>
+	 * <li>Le champ de tri des Objets métier semble être l'ID.</li>
 	 * <li>Inclut dans la liste les sous-classes S de T 
 	 * (strategy=InheritanceType.JOINED) avec la visibilité (Typé) T.</li>
 	 * </ul>
 	 * retourne null si pMax == null.<br/>
+	 * retourne null si pMax < 1L.<br/>
 	 * <br/>
 	 * 
 	 * @param pMax : Long : Nombre maximal d'objets métier 
@@ -391,12 +393,25 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * method update(
 	 * T pObject) :<br/>
 	 * <ul>
-	 * <li>Modifie un objet métier de Type paramétré T pObject 
+	 * <li><b>Modifie</b> un objet métier <b>persistant</b> 
+	 * de Type paramétré T pObject 
 	 * (ou un sous-type S de T) existant en base.</li>
 	 * <li>Retourne l'objet métier de Type paramétré T 
 	 * pObject modifié en base avec la visibilité (Typé) T.</li>
 	 * </ul>
 	 * retourne null si pObject == null.<br/>
+	 * ne fait rien et retourne l'instance détachée 
+	 * si pObject n'est pas déjà persistant en base.<br/>
+	 * <br/>
+	 * <code>Exemple de code : </code><br/>
+	 * <code>// Récupération de l'objet persistant à modifier.</code><br/>
+	 * <code>objet1Persistant = this.daoUserSimple.retrieve(objet1);</code><br/>
+	 * <code>// Modifications.</code><br/>
+	 * <code>objet1Persistant.setPrenom("Jean-Frédéric modifié");</code><br/>
+	 * <code>objet1Persistant.setNom("Bôrne modifié");</code><br/>
+	 * <code>// Application des modifications en base.</code><br/>
+	 * <code>objet1ModifiePersistant = 
+	 * this.daoUserSimple.<b>update(objet1Persistant)</b>;</code><br/>
 	 * <br/>
 	 *
 	 * @param pObject : T : objet métier de Type paramétré T.<br/>
@@ -424,6 +439,7 @@ public interface IDaoGenericJPASpring<T, ID extends Serializable> {
 	 * <li>Détruit un Objet métier de Type paramétré S 
 	 * sous-classe de T existant en base 
 	 * (strategy=InheritanceType.JOINED).</li>
+	 * <li>Vérifie que pObject est déjà persistant en base.</li>
 	 * <li>Retourne un boolean (true si OK) précisant 
 	 * si l'opération de destruction a eu lieu.</li>
 	 * </ul>

@@ -403,7 +403,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			return null;
 		}
 
-		List<S> resultat = new ArrayList<S>();
+		final List<S> resultat = new ArrayList<S>();
 
 		final Iterator<S> iteS = pObjects.iterator();
 
@@ -440,8 +440,6 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			if (LOG.isDebugEnabled()) {
 				LOG.debug(e.getMessage(), e);
 			}
-
-			resultat = null;
 
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
@@ -499,8 +497,6 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		}
 		catch (Exception e) {
 			
-			objetTrouve = null;
-			
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 			
@@ -531,6 +527,16 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	@Override
 	public final List<T> findAll() throws AbstractDaoException {
 		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+		
 		/* Création de la requête HQL sous forme de String. */
 		final String requeteString 
 			= "from " + this.classObjetMetier.getName();
@@ -554,8 +560,6 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 				LOG.debug(e.getMessage(), e);
 			}
 			
-			resultat = null;
-			
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 			
@@ -575,6 +579,26 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	public final List<T> findAllMax(
 			final Long pMax) throws AbstractDaoException {
 		
+		/* retourne null si pMax == null. */
+		if (pMax == null) {
+			return null;
+		}
+		
+		/* retourne null si pMax < 1L. */
+		if (pMax < 1L) {
+			return null;
+		}
+		
+		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
 		
 		/* Création de la requête HQL sous forme de String. */
 		final String requeteString 
@@ -599,9 +623,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			if (LOG.isDebugEnabled()) {
 				LOG.debug(e.getMessage(), e);
 			}
-			
-			resultat = null;
-			
+						
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException.gererException(e);
 			
@@ -626,6 +648,16 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			return null;
 		}
 		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return null;
+		}
+
 		final List<T> resultat = new ArrayList<T>();		
 		
 		final Iterator<ID> iteratorID = pIds.iterator();
@@ -658,6 +690,16 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		
 		/* retourne null si pObject == null. */
 		if (pObject == null) {
+			return null;
+		}
+
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
 			return null;
 		}
 
@@ -702,6 +744,16 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		
 		/* retourne false si pObject == null. */
 		if (pObject == null) {
+			return false;
+		}
+
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
 			return false;
 		}
 
@@ -768,6 +820,17 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	@Override
 	public final void deleteAll() throws AbstractDaoException {
 		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return;
+		}
+
+		
 		/* Création de la requête HQL sous forme de String. */
 		final String requeteString 
 			= "delete from " + this.classObjetMetier.getName();
@@ -803,6 +866,17 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 */
 	@Override
 	public final boolean deleteAllBoolean() throws AbstractDaoException {
+		
+		/* Cas où this.entityManager == null. */
+		if (this.entityManager == null) {
+						
+			/* LOG. */
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
+			}
+			return false;
+		}
+
 		
 		boolean resultat = false;
 		
