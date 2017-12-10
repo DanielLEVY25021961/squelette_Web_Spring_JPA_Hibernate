@@ -66,6 +66,21 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 
 	// ************************ATTRIBUTS************************************/
 
+	/**
+	 * CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING : String :<br/>
+	 * "Classe AbstractDaoGenericJPASpring".<br/>
+	 */
+	public static final String CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING 
+		= "Classe AbstractDaoGenericJPASpring";
+
+	
+	/**
+	 * METHODE_CREATE : String :<br/>
+	 * "Méthode create(T pObject)".<br/>
+	 */
+	public static final String  METHODE_CREATE 
+		= "Méthode create(T pObject)";
+	
 	
 	/**
 	 * entityManager : javax.persistence.EntityManager :<br/>
@@ -135,21 +150,6 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	} // Fin de  CONSTRUCTEUR D'ARITE NULLE._______________________________
 	
 
-		
-	/**
-	 * method renseignerClassObjetMetier() :<br/>
-	 * <ul>
-	 * <li>Impose aux DAO <i>descendants</i> de <b>renseigner le .class</b> 
-	 * de l'<b>objet métier</b> concerné par le présent DAO 
-	 * (this.classObjetMetier).</li>
-	 * <li><b>automatiquement appelé</b> dans le constructeur 
-	 * AbstractDaoGenericJPASpring().</li>
-	 * <li>Par exemple : Book.class ou IUserSimple.class.</li>
-	 * </ul>
-	 */
-	protected abstract void renseignerClassObjetMetier();
-	
-	
 	
 
 	
@@ -189,7 +189,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			/* ***************** */
 			/* PERSISTE en base. */
 			this.entityManager.persist(pObject);
-			
+					
 			persistentObject = pObject;
 												
 		}
@@ -201,7 +201,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+							, METHODE_CREATE, e);
 						
 		}
 		
@@ -257,7 +260,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+							, "Méthode save(S pObject)", e);
 			
 		}
 		
@@ -310,7 +316,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+							, "Méthode persist(T Object)", e);
 			
 		}
 
@@ -359,7 +368,9 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode persistSousClasse(S pObject)", e);
 			
 		}
 		
@@ -413,24 +424,45 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 
 				final S objet = iteS.next();
 				
-				/* passe un null dans le lot. */
-				if (objet != null) {
+				/* Passe les doublons existants en base. */
+				if (!this.exists(objet)) {
 					
-					S objetPersistant = null;
-
-					/* PERSISTE en base. */
-					objetPersistant = this.save(objet);
-					
-					/* ne sauvegarde pas un doublon présent dans le lot. */
-					if (objetPersistant != null) {
+					/* passe un null dans le lot. */
+					if (objet != null) {
 						
-						/* Ajoute à l'iterable resultat. */
-						resultat.add(objetPersistant);
-							
-					}
-					
-				}
+						S objetPersistant = null;
 
+						try {
+							
+							/* PERSISTE en base. */
+							this.entityManager.persist(objet);
+							
+							objetPersistant = objet;
+							
+						} catch (Exception e) {
+							
+							/* LOG. */
+							if (LOG.isDebugEnabled()) {
+								LOG.debug(e.getMessage(), e);
+							}
+							
+							/* Gestion de la DAO Exception. */
+							this.gestionnaireException
+								.gererException(
+										CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+											, "Méthode save(Iterable)", e);
+						}
+						
+						
+						/* ne sauvegarde pas un doublon 
+						 * présent dans le lot. */
+						if (objetPersistant != null) {
+							
+							/* Ajoute à l'iterable resultat. */
+							resultat.add(objetPersistant);								
+						}						
+					}					
+				}				
 			} // Next._____________________________________
 
 		}
@@ -442,7 +474,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+							, "Méthode save(Iterable)", e);
 
 		}
 
@@ -498,7 +533,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		catch (Exception e) {
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode findById(ID)", e);
 			
 		}
 		
@@ -561,7 +599,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode findall()", e);
 			
 		}
 		
@@ -625,7 +666,9 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 						
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode findAllMax()", e);
 			
 		}
 		
@@ -721,7 +764,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode update(T Object)", e);
 						
 		}
 				
@@ -787,7 +833,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode delete(T pObject)", e);
 									
 		}
 				
@@ -853,7 +902,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode deleteAll()", e);
 			
 		}
 		
@@ -904,7 +956,10 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+						, "Méthode deleteAllBoolean()", e);
 			
 		}
 		
@@ -965,7 +1020,9 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 			}
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException.gererException(
+					CLASSE_ABSTRACTDAOGENERIC_JPA_SPRING
+					, "Méthode delete(Iterable)", e);
 			
 		}
 				
@@ -1039,6 +1096,21 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	@Override
 	public abstract String afficherListe(List<T> pListe);
 
-	
+
+		
+	/**
+	 * method renseignerClassObjetMetier() :<br/>
+	 * <ul>
+	 * <li>Impose aux DAO <i>descendants</i> de <b>renseigner le .class</b> 
+	 * de l'<b>objet métier</b> concerné par le présent DAO 
+	 * (this.classObjetMetier).</li>
+	 * <li><b>automatiquement appelé</b> dans le constructeur 
+	 * AbstractDaoGenericJPASpring().</li>
+	 * <li>Par exemple : Book.class ou IUserSimple.class.</li>
+	 * </ul>
+	 */
+	protected abstract void renseignerClassObjetMetier();
+
+
 	
 } // FIN DE LA CLASSE AbstractDaoGeneric.------------------------------------

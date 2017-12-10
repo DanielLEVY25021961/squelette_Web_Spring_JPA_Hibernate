@@ -2,6 +2,7 @@ package levy.daniel.application.model.metier.usersimple;
 
 import levy.daniel.application.model.metier.IExportateurCsv;
 import levy.daniel.application.model.metier.IExportateurJTable;
+import levy.daniel.application.model.metier.usersimple.impl.Civilite;
 
 /**
  * INTERFACE IUserSimple :<br/>
@@ -106,8 +107,9 @@ public interface IUserSimple
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * en-tête csv pour un UserSimple :<br/>
+	 * <b>en-tête csv pour un UserSimple</b> :<br/>
 	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
+	 * <br/>
 	 */
 	@Override
 	String getEnTeteCsv();
@@ -117,8 +119,9 @@ public interface IUserSimple
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * ligne csv pour un UserSimple :<br/>
+	 * <b>ligne csv pour un UserSimple</b> :<br/>
 	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
+	 * <br/>
 	 */
 	@Override
 	String toStringCsv();
@@ -128,8 +131,9 @@ public interface IUserSimple
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * en-tête Jtable pour un UserSimple :<br/>
+	 * <b>en-tête Jtable pour un UserSimple</b> :<br/>
 	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
+	 * <br/>
 	 */
 	@Override
 	String getEnTeteColonne(int pI);
@@ -139,7 +143,7 @@ public interface IUserSimple
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * ligne Jtable pour un UserSimple :<br/>
+	 * <b>ligne Jtable pour un UserSimple</b> :<br/>
 	 * "id;civilité;prénom;nom;e-mail;login;mdp;profil;".<br/>
 	 * <br/>
 	 */
@@ -176,9 +180,9 @@ public interface IUserSimple
 	 * Getter de la Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
 	 * <br/>
 	 *
-	 * @return civilite : String.<br/>
+	 * @return civilite : Civilite.<br/>
 	 */
-	String getCivilite();
+	Civilite getCivilite();
 	
 	
 
@@ -188,9 +192,9 @@ public interface IUserSimple
 	* Setter de la Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
 	* <br/>
 	*
-	* @param pCivilite : String : valeur à passer à civilite.<br/>
+	* @param pCivilite : Civilite : valeur à passer à civilite.<br/>
 	*/
-	void setCivilite(String pCivilite);
+	void setCivilite(Civilite pCivilite);
 	
 	
 

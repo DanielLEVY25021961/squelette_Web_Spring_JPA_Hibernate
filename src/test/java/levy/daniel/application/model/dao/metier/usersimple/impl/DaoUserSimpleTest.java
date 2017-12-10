@@ -23,6 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 import levy.daniel.application.model.dao.metier.usersimple.IDaoUserSimple;
 import levy.daniel.application.model.metier.usersimple.IUserSimple;
+import levy.daniel.application.model.metier.usersimple.impl.Civilite;
+import levy.daniel.application.model.metier.usersimple.impl.CivilitesEnum;
 import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 
@@ -140,18 +142,28 @@ public class DaoUserSimpleTest {
 	
 	
 	/**
-	 * CIVILITE_M : String :<br/>
+	 * CIVILITE_M : Civilite :<br/>
 	 * "M.".<br/>
 	 */
-	public static final String CIVILITE_M = "M.";
+	public static final Civilite CIVILITE_M 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 	
 	/**
-	 * CIVILITE_MME : String :<br/>
+	 * CIVILITE_MME : Civilite :<br/>
 	 * "Mme".<br/>
 	 */
-	public static final String CIVILITE_MME = "Mme";
+	public static final Civilite CIVILITE_MME 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 	
+	
+	/**
+	 * CIVILITE_MLLE : Civilite :<br/>
+	 * "Mlle".<br/>
+	 */
+	public static final Civilite CIVILITE_MLLE 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
+
 	
 	/**
 	 * PRENOM_WALLACE1 : String :<br/>
@@ -318,7 +330,7 @@ public class DaoUserSimpleTest {
 				
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = false;
+		final boolean affichage = true;
 		// **********************************
 
 		/* daoUserSimple NON INJECTE. */
@@ -326,10 +338,16 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testCreateNull()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		}
+		} // Fin de daoUserSimple NON INJECTE._______________
+
+		
+		/* Vide la table. */
+		this.viderTable();
+
 
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
@@ -361,7 +379,8 @@ public class DaoUserSimpleTest {
 					, nombreObjetsFinal == nombreObjetsinitial + 0);
 			
 		}
-		catch (AbstractDaoException e) {			
+		catch (AbstractDaoException e) {
+			System.out.println("testCreateNull()");
 			this.afficherAbstractDaoException(e);			
 			e.printStackTrace();
 		}
@@ -372,9 +391,6 @@ public class DaoUserSimpleTest {
 			this.afficherObjetPersistant(
 					objet1Persistant, nombreObjetsFinal);						
 		}
-
-		/* Vide la table. */
-		this.viderTable();
 
 	} // Fin de testCreateNull().__________________________________________
 	
@@ -397,7 +413,7 @@ public class DaoUserSimpleTest {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = false;
+		final boolean affichage = true;
 		// **********************************
 
 		/* daoUserSimple NON INJECTE. */
@@ -408,12 +424,18 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		}
+		} // Fin de daoUserSimple NON INJECTE._______________
+
+		
+		/* Vide la table. */
+		this.viderTable();
 
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
 		IUserSimple objet1Persistant = null;
+		IUserSimple objet2Persistant = null;
+		IUserSimple objet3Persistant = null;
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet1 
@@ -423,14 +445,27 @@ public class DaoUserSimpleTest {
 				, LOGIN_BORNE, MDP_BORNE
 				, UTILISATEUR);
 		
+		final IUserSimple objet2 
+		= new UserSimple(CIVILITE_MLLE
+				, "Francine", "Bourgeât"
+				, "francine.bourgeat@tele2.fr"
+				, "francine.bourgeat", "1234VB56"
+				, ADMINISTRATEUR);
+		
 				
 		/* Compte du nombre d'Objets initialement en base. */
 		nombreObjetsinitial = this.daoUserSimple.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
 			System.out.println("testCreate()");
-			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
+			System.out.println("NOMBRE D'OBJETS INITIALEMENT En BASE : " + nombreObjetsinitial);
+			System.out.println("OBJET1 NON PERSISTANT : " + objet1.toString());
+			System.out.println("OBJET2 NON PERSISTANT : " + objet2.toString());
+			System.out.println(TIRETS);
+			System.out.println();
 		}
 		
 		try {
@@ -438,6 +473,7 @@ public class DaoUserSimpleTest {
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
 			objet1Persistant = this.daoUserSimple.create(objet1);
+			objet2Persistant = this.daoUserSimple.create(objet2);
 			/* *********************************************** */
 			
 			nombreObjetsFinal = this.daoUserSimple.count();
@@ -445,24 +481,84 @@ public class DaoUserSimpleTest {
 			/* garantit que create(IUserSimple pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
-					+ NBRE_INITIAL_PLUS_UN
-					, nombreObjetsFinal == nombreObjetsinitial + 1);
+					+ NBRE_INITIAL_PLUS_DEUX
+					, nombreObjetsFinal == nombreObjetsinitial + 2);
 			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testCreate()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
 			System.out.println("testCreate()");
-			this.afficherObjetPersistant(
-					objet1Persistant, nombreObjetsFinal);
+			System.out.println("NOMBRE D'OBJETS PERSISTES APRES CREATE : " + nombreObjetsFinal);
+			if (objet1Persistant != null) {
+				System.out.println(
+						"OBJET1 PERSISTANT APRES Create(T Object) : " 
+				+ objet1Persistant.toString());
+			} else {
+				System.out.println(
+						"OBJET1 PERSISTANT APRES Create(T Object) : null");
+			}
+			
+			if (objet2Persistant != null) {
+				System.out.println(
+						"OBJET2 PERSISTANT APRES Create(T Object) : " 
+								+ objet2Persistant.toString());
+			} else {
+				System.out.println(
+						"OBJET2 PERSISTANT APRES Create(T Object) : null");
+			}
+			
+			System.out.println(TIRETS);
+			System.out.println();
 		}
 		
-		/* Vide la table. */
-		this.viderTable();
+		
+		final IUserSimple objet3 
+		= new UserSimple(CIVILITE_M
+				, "Robert", "Badinter"
+				, "robert.badinter@free.fr"
+				, "robert.badinter", "cerbere"
+				, UTILISATEUR);
+		
+		try {
+			
+			/* *********************************************** */
+			/* ********************* CREATION **************** */
+			objet3Persistant = this.daoUserSimple.create(objet3);
+			
+		}
+		catch (AbstractDaoException e) {
+			System.out.println("testCreate()");
+			this.afficherAbstractDaoException(e);
+			e.printStackTrace();
+		}
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("testCreate()");
+			if (objet3Persistant != null) {
+				System.out.println(
+						"OBJET3 PERSISTANT APRES Create(T Object) : " 
+								+ objet3Persistant.toString());
+			} else {
+				System.out.println(
+						"OBJET3 PERSISTANT APRES Create(T Object) : null");
+			}
+			
+			System.out.println(TIRETS);
+			System.out.println();
+		}
 		
 	} // Fin de testCreate().______________________________________________
 	
@@ -486,7 +582,7 @@ public class DaoUserSimpleTest {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = false;
+		final boolean affichage = true;
 		// **********************************
 
 		/* daoUserSimple NON INJECTE. */
@@ -494,10 +590,16 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testCreateDoublon()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		}
+		} // Fin de daoUserSimple NON INJECTE._______________
+
+		
+		/* Vide la table. */
+		this.viderTable();
+
 
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
@@ -527,9 +629,14 @@ public class DaoUserSimpleTest {
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
 			System.out.println("testCreateDoublon()");
-			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
-			this.afficherObjetNonPersistant(objet2Equals1, nombreObjetsinitial);
+			System.out.println("NOMBRE D'OBJETS INITIALEMENT En BASE : " + nombreObjetsinitial);
+			System.out.println("OBJET1 NON PERSISTANT : " + objet1.toString());
+			System.out.println("OBJET2 NON PERSISTANT (DOUBLON DE OBJET1) : " + objet2Equals1.toString());
+			System.out.println(TIRETS);
+			System.out.println();
 		}
 		
 		try {
@@ -550,21 +657,37 @@ public class DaoUserSimpleTest {
 			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testCreateDoublon()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println();
+			System.out.println(TIRETS);
 			System.out.println("testCreateDoublon()");
-			this.afficherObjetPersistant(
-					objet1Persistant, nombreObjetsFinal);
-			this.afficherObjetPersistant(
-					objet2PersistantEquals1, nombreObjetsFinal);
+			System.out.println("NOMBRE D'OBJETS PERSISTES APRES CREATE : " + nombreObjetsFinal);
+			if (objet1Persistant != null) {
+				System.out.println(
+						"OBJET1 PERSISTANT APRES Create(T Object) : " 
+				+ objet1Persistant.toString());
+			} else {
+				System.out.println(
+						"OBJET1 PERSISTANT APRES Create(T Object) : null");
+			}
+			
+			if (objet2PersistantEquals1 != null) {
+				System.out.println(
+						"OBJET2 PERSISTANT (DOUBLON DE OBJET1) APRES Create(T Object) : " 
+								+ objet2PersistantEquals1.toString());
+			} else {
+				System.out.println(
+						"OBJET2 PERSISTANT (DOUBLON DE OBJET1)  APRES Create(T Object) : null");
+			}
+			System.out.println(TIRETS);
+			System.out.println();
 		}
-
-		/* Vide la table. */
-		this.viderTable();
 
 	} // Fin de testCreateDoublon()._______________________________________
 
@@ -582,7 +705,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testSaveNull() throws AbstractDaoException {
 				
 		// **********************************
@@ -595,6 +718,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testSaveNull()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -631,7 +755,8 @@ public class DaoUserSimpleTest {
 					, nombreObjetsFinal == nombreObjetsinitial + 0);
 			
 		}
-		catch (AbstractDaoException e) {			
+		catch (AbstractDaoException e) {
+			System.out.println("testSaveNull()");
 			this.afficherAbstractDaoException(e);			
 			e.printStackTrace();
 		}
@@ -662,7 +787,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testSave() throws AbstractDaoException {
 		
 		// **********************************
@@ -675,6 +800,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testSave()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -717,9 +843,10 @@ public class DaoUserSimpleTest {
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
 					, nombreObjetsFinal == nombreObjetsinitial + 1);
-			
+						
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testSave()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
@@ -750,7 +877,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testSaveDoublon() 
 							throws AbstractDaoException {
 		
@@ -764,6 +891,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testSaveDoublon()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -820,6 +948,7 @@ public class DaoUserSimpleTest {
 			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testSaveDoublon()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
@@ -851,7 +980,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersistNull() throws AbstractDaoException {
 				
 		// **********************************
@@ -864,6 +993,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testPersistNull()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -888,7 +1018,7 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
+			this.daoUserSimple.persist(objet1);
 			objet1Persistant = this.daoUserSimple.retrieve(objet1);
 			/* *********************************************** */
 			
@@ -903,7 +1033,8 @@ public class DaoUserSimpleTest {
 					, nombreObjetsFinal == nombreObjetsinitial + 0);
 			
 		}
-		catch (AbstractDaoException e) {			
+		catch (AbstractDaoException e) {
+			System.out.println("testPersistNull()");
 			this.afficherAbstractDaoException(e);			
 			e.printStackTrace();
 		}
@@ -934,19 +1065,21 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersist() throws AbstractDaoException {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
 		final boolean affichage = false;
 		// **********************************
-
+		
+		
 		/* daoUserSimple NON INJECTE. */
 		if (this.daoUserSimple == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testPersist()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -979,7 +1112,7 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
+			this.daoUserSimple.persist(objet1);
 			objet1Persistant = this.daoUserSimple.retrieve(objet1);
 			/* *********************************************** */
 			
@@ -993,6 +1126,7 @@ public class DaoUserSimpleTest {
 			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testPersist()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
@@ -1023,7 +1157,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersistDoublon() 
 							throws AbstractDaoException {
 		
@@ -1037,6 +1171,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testPersistDoublon()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -1079,8 +1214,8 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
-			this.daoUserSimple.persistSousClasse(objet2Equals1);
+			this.daoUserSimple.persist(objet1);
+			this.daoUserSimple.persist(objet2Equals1);
 			objet1Persistant = this.daoUserSimple.retrieve(objet1);
 			objet2PersistantEquals1 = this.daoUserSimple.retrieve(objet2Equals1);
 			/* *********************************************** */
@@ -1095,6 +1230,7 @@ public class DaoUserSimpleTest {
 			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testPersistDoublon()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
@@ -1127,7 +1263,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersistSousClasseNull() throws AbstractDaoException {
 				
 		// **********************************
@@ -1210,7 +1346,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersistSousClasse() throws AbstractDaoException {
 		
 		// **********************************
@@ -1300,7 +1436,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testPersistSousClasseDoublon() 
 							throws AbstractDaoException {
 		
@@ -1404,7 +1540,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testCreateReturnIdNull() throws AbstractDaoException {
 				
 		// **********************************
@@ -1486,7 +1622,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testCreateReturnId() throws AbstractDaoException {
 		
 		// **********************************
@@ -1576,7 +1712,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testCreateReturnIdDoublon() 
 							throws AbstractDaoException {
 		
@@ -1687,7 +1823,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testSaveLot() 
 							throws AbstractDaoException {
 		
@@ -1701,6 +1837,7 @@ public class DaoUserSimpleTest {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
+				System.out.println("testSaveLot()");
 				this.afficherDAONonInstancie();
 			}			
 			return;
@@ -1762,6 +1899,11 @@ public class DaoUserSimpleTest {
 			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
 			/* *********************************************** */
 			
+			assertEquals("2 Objets dans le lot : "
+					, 2
+						, lotPersistant.size());
+			
+			
 			nombreObjetsFinal = this.daoUserSimple.count();
 			
 			/* garantit que save(Lot pObjects) 
@@ -1770,8 +1912,11 @@ public class DaoUserSimpleTest {
 					+ NBRE_INITIAL_PLUS_DEUX
 					, nombreObjetsFinal == nombreObjetsinitial + 2);
 			
+			
+			
 		}
 		catch (AbstractDaoException e) {
+			System.out.println("testSaveLot()");
 			this.afficherAbstractDaoException(e);
 			e.printStackTrace();
 		}
@@ -1808,7 +1953,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testRetrieve() 
 							throws AbstractDaoException {
 		
@@ -1974,7 +2119,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testFindById() 
 							throws AbstractDaoException {
 		
@@ -2050,13 +2195,13 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testFindAll() 
 							throws AbstractDaoException {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = false;
+		final boolean affichage = true;
 		// **********************************
 
 		/* daoUserSimple NON INJECTE. */
@@ -2119,7 +2264,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testFindAllMax() 
 							throws AbstractDaoException {
 		
@@ -2192,7 +2337,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testFindAllIterable() 
 							throws AbstractDaoException {
 		
@@ -2276,7 +2421,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testUpdateInexistant() 
 			throws AbstractDaoException {
 				
@@ -2339,7 +2484,7 @@ public class DaoUserSimpleTest {
 		/* Vide la table. */
 		this.viderTable();
 		
-	}
+	} // Fin de testUpdateInexistant().____________________________________
 	
 
 	
@@ -2355,7 +2500,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testUpdate() 
 			throws AbstractDaoException {
 		
@@ -2449,7 +2594,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteInexistant() 
 			throws AbstractDaoException {
 		
@@ -2566,7 +2711,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDelete() 
 			throws AbstractDaoException {
 		
@@ -2673,7 +2818,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteByIdInexistant() 
 			throws AbstractDaoException {
 		
@@ -2777,7 +2922,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteById() 
 			throws AbstractDaoException {
 		
@@ -2889,13 +3034,13 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteByIdBooleanInexistant() 
 			throws AbstractDaoException {
 		
 		// **********************************
 		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = true;
+		final boolean affichage = false;
 		// **********************************
 
 		/* daoUserSimple NON INJECTE. */
@@ -2997,7 +3142,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteByIdBoolean() 
 			throws AbstractDaoException {
 		
@@ -3112,7 +3257,7 @@ public class DaoUserSimpleTest {
 	 */
 	@Commit
 	@Transactional
-	@Test
+//	@Test
 	public void testDeleteIterable() throws AbstractDaoException {
 		
 		// **********************************
@@ -3288,11 +3433,17 @@ public class DaoUserSimpleTest {
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && pAffichage) {
-			this.afficherObjetNonPersistant(objet1, nombreObjetsinitial);
-			this.afficherObjetNonPersistant(objet2Null, nombreObjetsinitial);
-			this.afficherObjetNonPersistant(objet3Equals1, nombreObjetsinitial);
-			this.afficherObjetNonPersistant(objet4, nombreObjetsinitial);
-			this.afficherObjetNonPersistant(objet5, nombreObjetsinitial);
+			System.out.println();
+			System.out.println(TIRETS);
+			System.out.println("remplirTable(boolean)");
+			System.out.println("NOMBRE D'OBJETS INITIALEMENT En BASE : " + nombreObjetsinitial);
+			System.out.println("OBJET1 NON PERSISTANT : " + objet1.toString());
+			System.out.println("OBJET2 NON PERSISTANT : null");
+			System.out.println("OBJET3 NON PERSISTANT (DOUBLON) : " + objet3Equals1.toString());
+			System.out.println("OBJET4 NON PERSISTANT : " + objet4.toString());
+			System.out.println("OBJET5 NON PERSISTANT : " + objet5.toString());
+			System.out.println(TIRETS);
+			System.out.println();
 		}
 
 		try {
@@ -3320,7 +3471,8 @@ public class DaoUserSimpleTest {
 		if (AFFICHAGE_GENERAL && pAffichage) {
 			System.out.println();
 			System.out.println(TIRETS);
-			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
+			System.out.println("remplirTable(boolean)");
+			System.out.println("LOT D'ENREGISTREMENTS EN BASE APRES remplirTable(boolean) : ");
 			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();

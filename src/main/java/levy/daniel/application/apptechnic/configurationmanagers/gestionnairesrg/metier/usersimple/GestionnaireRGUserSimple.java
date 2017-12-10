@@ -74,11 +74,11 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	/**
 	 * RG_USERSIMPLE_NOM_RENSEIGNE_04 : String :<br/>
 	 * "RG_USERSIMPLE_NOM_RENSEIGNE_04
-	 *  : le prénom du UserSimple doit être renseigné".<br/>
+	 *  : le nom du UserSimple doit être renseigné".<br/>
 	 */
 	public static final String RG_USERSIMPLE_NOM_RENSEIGNE_04 
 	= "RG_USERSIMPLE_NOM_RENSEIGNE_04"
-			+ " : le prénom du UserSimple doit être renseigné";
+			+ " : le nom du UserSimple doit être renseigné";
 	
 	/**
 	 * RG_USERSIMPLE_NOM_LITTERAL_05 : String :<br/>
