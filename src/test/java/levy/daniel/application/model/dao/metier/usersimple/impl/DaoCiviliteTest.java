@@ -21,23 +21,22 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
-import levy.daniel.application.model.dao.metier.usersimple.IDaoUserSimple;
-import levy.daniel.application.model.metier.usersimple.IUserSimple;
+import levy.daniel.application.model.dao.metier.usersimple.IDaoCivilite;
 import levy.daniel.application.model.metier.usersimple.impl.Civilite;
 import levy.daniel.application.model.metier.usersimple.impl.CivilitesEnum;
-import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 
 /**
- * class DaoUserSimpleTest :<br/>
+ * class DaoCiviliteTest :<br/>
  * <ul>
- * <li>Test JUnit de la classe <b>DaoUserSimple</b>.</li>
+ * <li>Test JUnit de la classe <b>DaoCivilite</b>.</li>
  * <li>Test JUnit sous <b>SPRING</b>.</li>
  * <li>Le <b>fichier de configuration SPRING</b> utilisé pour ce test est 
  * <b>classpath*:applicationContext-test.xml</b> grâce à l'annotation 
  * <b>ContextConfiguration</b>.</li>
  * </ul>
  * <br/>
+ *
  *
  * - Exemple d'utilisation :<br/>
  *<br/>
@@ -53,12 +52,12 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
  *
  * @author dan Lévy
  * @version 1.0
- * @since 30 nov. 2017
+ * @since 10 déc. 2017
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath*:applicationContext-test.xml"})
-public class DaoUserSimpleTest {
+public class DaoCiviliteTest {
 
 	// ************************ATTRIBUTS************************************/
 	
@@ -131,7 +130,7 @@ public class DaoUserSimpleTest {
 	 */
 	public static final String LOT_OBJETS_APRES_DELETE 
 		= "LOT D'OBJETS EN BASE APRES DELETE : ";
-	
+
 	
 	/**
 	 * CIVILITE_M : Civilite :<br/>
@@ -156,172 +155,36 @@ public class DaoUserSimpleTest {
 	public static final Civilite CIVILITE_MLLE 
 		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 
-	
-	/**
-	 * PRENOM_WALLACE1 : String :<br/>
-	 * "Wallace1".<br/>
-	 */
-	public static final String PRENOM_WALLACE1 = "Wallace1";
-
 		
 	/**
-	 * PRENOM_AMANDINE : String :<br/>
-	 * "Amandine".<br/>
-	 */
-	public static final String PRENOM_AMANDINE = "Amandine";
-	
-	
-	/**
-	 * PRENOM_GERALDINE : String :<br/>
-	 * "Géraldine".<br/>
-	 */
-	public static final String PRENOM_GERALDINE = "Géraldine";
-	
-
-	/**
-	 * PRENOM_JEAN_FREDERIC : String :<br/>
-	 * "Jean-Frédéric".<br/>
-	 */
-	public static final String PRENOM_JEAN_FREDERIC = "Jean-Frédéric";
-	
-	
-	/**
-	 * NOM_WATSON : String :<br/>
-	 * "Watson".<br/>
-	 */
-	public static final String NOM_WATSON = "Watson";
-	
-	
-	/**
-	 * NOM_ROURKE_1 : String :<br/>
-	 * "Rourke1".<br/>
-	 */
-	public static final String NOM_ROURKE_1 = "Rourke1";
-
-	
-	/**
-	 * NOM_BORNE : String :<br/>
-	 * "Bôrne".<br/>
-	 */
-	public static final String NOM_BORNE = "Bôrne";
-	
-	
-	/**
-	 * EMAIL_YAHOO : String :<br/>
-	 * "email@yahoo.fr".<br/>
-	 */
-	public static final String EMAIL_YAHOO = "email@yahoo.fr";
-
-	
-	/**
-	 * EMAIL_BORNE : String :<br/>
-	 * "jean-frederic.borne@free.fr".<br/>
-	 */
-	public static final String EMAIL_BORNE = "jean-frederic.borne@free.fr";
-	
-	
-	/**
-	 * LOGIN : String :<br/>
-	 * "login".<br/>
-	 */
-	public static final String LOGIN = "login";
-
-	
-	/**
-	 * LOGIN_AMANDINE_WATSON : String :<br/>
-	 * "Amandine.Watson".<br/>
-	 */
-	public static final String LOGIN_AMANDINE_WATSON = "Amandine.Watson";
-
-	
-	/**
-	 * LOGIN_GERALDINE_WATSON : String :<br/>
-	 * "Geraldine.Watson".<br/>
-	 */
-	public static final String LOGIN_GERALDINE_WATSON = "Geraldine.Watson";
-			
-
-	/**
-	 * LOGIN_BORNE : String :<br/>
-	 * "jfbornelogin".<br/>
-	 */
-	public static final String LOGIN_BORNE = "jfbornelogin";
-	
-		
-	/**
-	* MDP : String :<br/>
-	* "mdp".<br/>
-	*/
-	public static final String MDP = "mdp";
-	
-	
-	/**
-	* MDP_ZOZO93 : String :<br/>
-	* "zozo93".<br/>
-	*/
-	public static final String MDP_ZOZO93 = "zozo93";
-
-	
-	/**
-	 * MDP_BORNE : String :<br/>
-	 * "jfbornemdp".<br/>
-	 */
-	public static final String MDP_BORNE = "jfbornemdp";
-	
-	
-	/**
-	 * ADMINISTRATEUR : String :<br/>
-	 * "ADMINISTRATEUR".<br/>
-	 */
-	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
-	
-	
-	/**
-	 * UTILISATEUR : String :<br/>
-	 * "UTILISATEUR".<br/>
-	 */
-	public static final String UTILISATEUR = "UTILISATEUR";
-
-	
-	/**
-	 * daoUserSimple : IDaoUserSimple :<br/>
-	 * DAO pour les UserSimple.<br/>
-	 * INJECTE PAR SPRING (Autowired).<b/>
-	 */
-	@Autowired
-	private transient IDaoUserSimple daoUserSimple;
-	
-
-	/**
-	 * daoCivilite : DaoCivilite :<br/>
+	 * daoCivilite : IDaoCivilite :<br/>
 	 * DAO pour les Civilite.<br/>
 	 * INJECTE PAR SPRING (Autowired).<b/>
 	 */
 	@Autowired
-	private transient DaoCivilite daoCivilite;
+	private transient IDaoCivilite daoCivilite;
 	
 	
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG 
-			= LogFactory.getLog(DaoUserSimpleTest.class);
+	private static final Log LOG = LogFactory.getLog(DaoCiviliteTest.class);
 	
 
 	// *************************METHODES************************************/
-	
+
 		
 	 /**
-	 * method CONSTRUCTEUR DaoUserSimpleTest() :<br/>
+	 * method CONSTRUCTEUR DaoCiviliteTest() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	public DaoUserSimpleTest() {
+	public DaoCiviliteTest() {
 		super();
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
-	
-	
+
+
 
 	/**
 	 * method testCreateNull() :<br/>
@@ -343,8 +206,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -352,7 +215,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -362,11 +225,11 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		final Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 						
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testCreateNull()");
@@ -377,11 +240,11 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.create(objet1);
+			objet1Persistant = this.daoCivilite.create(objet1);
 			/* *********************************************** */
 			
 			/* Calcul du nombre d'objets en base après le traitement. */
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que create(null) ne fait rien et retourne null. */
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
@@ -404,13 +267,13 @@ public class DaoUserSimpleTest {
 
 	} // Fin de testCreateNull().__________________________________________
 	
-
+	
 	
 	/**
 	 * method testCreate() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>create(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que create(IUserSimple pObject) insère 
+	 * Teste la méthode <b>create(Civilite pObject)</b>.<br/>
+	 * <li>garantit que create(Civilite pObject) insère 
 	 * un objet en base.</li>
 	 * </ul>
 	 * 
@@ -426,15 +289,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -443,36 +306,20 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2Persistant = null;
-		IUserSimple objet3Persistant = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2Persistant = null;
+		Civilite objet3Persistant = null;
 		
-//		Civilite civiliteM 
-//			= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
-//		Civilite civiliteMlle 
-//			= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-//		civiliteM = this.daoCivilite.create(civiliteM);
-//		civiliteMlle = this.daoCivilite.create(civiliteMlle);
-		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
-		
-		final IUserSimple objet2 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MLLE)
-				, "Francine", "Bourgeât"
-				, "francine.bourgeat@tele2.fr"
-				, "francine.bourgeat", "1234VB56"
-				, ADMINISTRATEUR);
+		final Civilite objet2 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -490,13 +337,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.create(objet1);
-			objet2Persistant = this.daoUserSimple.create(objet2);
+			objet1Persistant = this.daoCivilite.create(objet1);
+			objet2Persistant = this.daoCivilite.create(objet2);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que create(IUserSimple pObject) 
+			/* garantit que create(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_DEUX
@@ -539,18 +386,14 @@ public class DaoUserSimpleTest {
 		}
 		
 		
-		final IUserSimple objet3 
-		= new UserSimple(CIVILITE_M
-				, "Robert", "Badinter"
-				, "robert.badinter@free.fr"
-				, "robert.badinter", "cerbere"
-				, UTILISATEUR);
+		final Civilite objet3 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 		try {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet3Persistant = this.daoUserSimple.create(objet3);
+			objet3Persistant = this.daoCivilite.create(objet3);
 			
 		}
 		catch (AbstractDaoException e) {
@@ -585,8 +428,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testCreateDoublon() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>create(IUserSimple pDoublon)</b>.<br/>
-	 * <li>garantit que create(IUserSimple pDoublon) retourne 
+	 * Teste la méthode <b>create(Civilite pDoublon)</b>.<br/>
+	 * <li>garantit que create(Civilite pDoublon) retourne 
 	 * null sans lever d'Exception.</li>
 	 * </ul>
 	 * 
@@ -603,8 +446,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -612,7 +455,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -622,28 +465,20 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2PersistantEquals1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2PersistantEquals1 = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet2Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet2Equals1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -661,13 +496,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.create(objet1);
-			objet2PersistantEquals1 = this.daoUserSimple.create(objet2Equals1);
+			objet1Persistant = this.daoCivilite.create(objet1);
+			objet2PersistantEquals1 = this.daoCivilite.create(objet2Equals1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que create(IUserSimple pObject) 
+			/* garantit que create(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -709,7 +544,7 @@ public class DaoUserSimpleTest {
 
 	} // Fin de testCreateDoublon()._______________________________________
 
-
+	
 	
 	/**
 	 * method testSaveNull() :<br/>
@@ -731,8 +566,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -740,7 +575,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -750,12 +585,12 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		final Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 				
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testSaveNull()");
@@ -766,11 +601,11 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.save(objet1);
+			objet1Persistant = this.daoCivilite.save(objet1);
 			/* *********************************************** */
 			
 			/* Calcul du nombre d'objets en base après le traitement. */
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que save(null) ne fait rien et retourne null. */
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
@@ -798,8 +633,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testSave() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>save(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que save(IUserSimple pObject) insère 
+	 * Teste la méthode <b>save(Civilite pObject)</b>.<br/>
+	 * <li>garantit que save(Civilite pObject) insère 
 	 * un objet en base.</li>
 	 * </ul>
 	 * 
@@ -815,8 +650,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -824,7 +659,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -834,19 +669,15 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
+		Civilite objet1Persistant = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, "Christopher", "Columbus"
-				, "Christopher.columbus@yahoo.com"
-				, "Christopher.columbus", MDP_ZOZO93
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -863,12 +694,12 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.save(objet1);
+			objet1Persistant = this.daoCivilite.save(objet1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que save(IUserSimple pObject) 
+			/* garantit que save(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -906,8 +737,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testSaveDoublon() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>save(IUserSimple pDoublon)</b>.<br/>
-	 * <li>garantit que save(IUserSimple pDoublon) retourne 
+	 * Teste la méthode <b>save(Civilite pDoublon)</b>.<br/>
+	 * <li>garantit que save(Civilite pDoublon) retourne 
 	 * null sans lever d'Exception.</li>
 	 * </ul>
 	 * 
@@ -924,8 +755,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -933,7 +764,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -943,28 +774,20 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2PersistantEquals1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2PersistantEquals1 = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet2Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet2Equals1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -982,13 +805,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			objet1Persistant = this.daoUserSimple.save(objet1);
-			objet2PersistantEquals1 = this.daoUserSimple.save(objet2Equals1);
+			objet1Persistant = this.daoCivilite.save(objet1);
+			objet2PersistantEquals1 = this.daoCivilite.save(objet2Equals1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que save(IUserSimple pObject) 
+			/* garantit que save(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1051,8 +874,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -1060,7 +883,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1070,12 +893,12 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		final Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 				
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testPersistNull()");
@@ -1086,13 +909,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persist(objet1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			this.daoCivilite.persist(objet1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
 			/* *********************************************** */
 			
 			/* Calcul du nombre d'objets 
 			 * en base après le traitement. */
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que persist(null) 
 			 * ne fait rien et retourne null. */
@@ -1121,8 +944,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testPersist() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>persist(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que persist(IUserSimple pObject) insère 
+	 * Teste la méthode <b>persist(Civilite pObject)</b>.<br/>
+	 * <li>garantit que persist(Civilite pObject) insère 
 	 * un objet en base.</li>
 	 * </ul>
 	 * 
@@ -1139,8 +962,8 @@ public class DaoUserSimpleTest {
 		// **********************************
 		
 		
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -1148,7 +971,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1158,19 +981,15 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
+		Civilite objet1Persistant = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1187,13 +1006,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persist(objet1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			this.daoCivilite.persist(objet1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que persist(IUserSimple pObject) 
+			/* garantit que persist(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1231,9 +1050,9 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testPersistDoublon() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>persist(IUserSimple pDoublon)</b>.<br/>
-	 * <li>garantit que persist(IUserSimple pDoublon) ne 
-	 * fait rien (n'insère pas de doublon) sans lever d'Exception.</li>
+	 * Teste la méthode <b>persist(Civilite pDoublon)</b>.<br/>
+	 * <li>garantit que persist(Civilite pDoublon) ne fait 
+	 * rien (n'insère pas de doublon) sans lever d'Exception.</li>
 	 * </ul>
 	 * 
 	 * @throws AbstractDaoException 
@@ -1249,8 +1068,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -1258,7 +1077,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1268,28 +1087,20 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2PersistantEquals1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2PersistantEquals1 = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet2Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet2Equals1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1307,15 +1118,15 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persist(objet1);
-			this.daoUserSimple.persist(objet2Equals1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
-			objet2PersistantEquals1 = this.daoUserSimple.retrieve(objet2Equals1);
+			this.daoCivilite.persist(objet1);
+			this.daoCivilite.persist(objet2Equals1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
+			objet2PersistantEquals1 = this.daoCivilite.retrieve(objet2Equals1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que persist(IUserSimple pObject) 
+			/* garantit que persist(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1383,15 +1194,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1401,12 +1212,12 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		final Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 				
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testPersistSousClasseNull()");
@@ -1417,12 +1228,12 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			this.daoCivilite.persistSousClasse(objet1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
 			/* *********************************************** */
 			
 			/* Calcul du nombre d'objets en base après le traitement. */
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que persistSousClasse(null) ne fait 
 			 * rien et retourne null. */
@@ -1445,14 +1256,14 @@ public class DaoUserSimpleTest {
 
 	} // Fin de testPersistSousClasseNull()._______________________________
 	
-	
+
 	
 	/**
 	 * method testPersistSousClasse() :<br/>
 	 * <ul>
 	 * Teste la méthode 
-	 * <b>persistSousClasse(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que persistSousClasse(IUserSimple pObject) insère 
+	 * <b>persistSousClasse(Civilite pObject)</b>.<br/>
+	 * <li>garantit que persistSousClasse(Civilite pObject) insère 
 	 * un objet en base.</li>
 	 * </ul>
 	 * 
@@ -1468,15 +1279,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1486,19 +1297,15 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
+		Civilite objet1Persistant = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1515,13 +1322,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
+			this.daoCivilite.persistSousClasse(objet1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que persistSousClasse(IUserSimple pObject) 
+			/* garantit que persistSousClasse(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1559,8 +1366,8 @@ public class DaoUserSimpleTest {
 	 * method testPersistSousClasseDoublon() :<br/>
 	 * <ul>
 	 * Teste la méthode 
-	 * <b>persistSousClasse(IUserSimple pDoublon)</b>.<br/>
-	 * <li>garantit que persistSousClasse(IUserSimple pDoublon)  
+	 * <b>persistSousClasse(Civilite pDoublon)</b>.<br/>
+	 * <li>garantit que persistSousClasse(Civilite pDoublon) 
 	 * ne fait rien (n'insère pas de doublon) sans lever d'Exception.</li>
 	 * </ul>
 	 * 
@@ -1577,15 +1384,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1595,28 +1402,20 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2PersistantEquals1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2PersistantEquals1 = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet2Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet2Equals1 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1634,15 +1433,15 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			this.daoUserSimple.persistSousClasse(objet1);
-			this.daoUserSimple.persistSousClasse(objet2Equals1);
-			objet1Persistant = this.daoUserSimple.retrieve(objet1);
-			objet2PersistantEquals1 = this.daoUserSimple.retrieve(objet2Equals1);
+			this.daoCivilite.persistSousClasse(objet1);
+			this.daoCivilite.persistSousClasse(objet2Equals1);
+			objet1Persistant = this.daoCivilite.retrieve(objet1);
+			objet2PersistantEquals1 = this.daoCivilite.retrieve(objet2Equals1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que persistSousClasse(IUserSimple pObject) 
+			/* garantit que persistSousClasse(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1653,7 +1452,6 @@ public class DaoUserSimpleTest {
 			assertSame("Instance unique : "
 					, objet1Persistant, objet2PersistantEquals1);
 
-			
 		}
 		catch (AbstractDaoException e) {
 			this.afficherAbstractDaoException(e);
@@ -1711,15 +1509,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1729,13 +1527,13 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		final IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		final Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 		Long idObjetPersistant = null;
 				
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testCreateReturnIdNull()");
@@ -1746,12 +1544,12 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			idObjetPersistant = this.daoUserSimple.createReturnId(objet1);
-			objet1Persistant = this.daoUserSimple.findById(idObjetPersistant);
+			idObjetPersistant = this.daoCivilite.createReturnId(objet1);
+			objet1Persistant = this.daoCivilite.findById(idObjetPersistant);
 			/* *********************************************** */
 			
 			/* Calcul du nombre d'objets en base après le traitement. */
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que create(null) ne fait rien et retourne null. */
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
@@ -1778,8 +1576,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testCreateReturnId() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>createReturnId(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que createReturnId(IUserSimple pObject) insère 
+	 * Teste la méthode <b>createReturnId(Civilite pObject)</b>.<br/>
+	 * <li>garantit que createReturnId(Civilite pObject) insère 
 	 * un objet en base et retourne son ID.</li>
 	 * </ul>
 	 * 
@@ -1795,15 +1593,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1813,20 +1611,16 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
+		Civilite objet1Persistant = null;
 		Long idObjetPersistant = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, "David", "Copperfield"
-				, "david.copperfield@tele1.com"
-				, "david.copperfield", "dcopperfield"
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1843,13 +1637,13 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			idObjetPersistant = this.daoUserSimple.createReturnId(objet1);
-			objet1Persistant = this.daoUserSimple.findById(idObjetPersistant);
+			idObjetPersistant = this.daoCivilite.createReturnId(objet1);
+			objet1Persistant = this.daoCivilite.findById(idObjetPersistant);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que create(IUserSimple pObject) 
+			/* garantit que create(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -1886,8 +1680,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testCreateReturnIdDoublon() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>createReturnId(IUserSimple pDoublon)</b>.<br/>
-	 * <li>garantit que createReturnId(IUserSimple pDoublon) retourne 
+	 * Teste la méthode <b>createReturnId(Civilite pDoublon)</b>.<br/>
+	 * <li>garantit que createReturnId(Civilite pDoublon) retourne 
 	 * null sans lever d'Exception.</li>
 	 * </ul>
 	 * 
@@ -1904,15 +1698,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -1922,31 +1716,23 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet2PersistantEquals1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet2PersistantEquals1 = null;
 		
 		Long idObjet1Persistant = null;
 		Long idObjet2PersistantEquals1 = null;
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		/* Instanciation d'un IUserSimple. */
-		final IUserSimple objet2Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+		/* Instanciation d'un Civilite. */
+		final Civilite objet2Equals1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -1964,15 +1750,15 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			idObjet1Persistant = this.daoUserSimple.createReturnId(objet1);
-			idObjet2PersistantEquals1 = this.daoUserSimple.createReturnId(objet2Equals1);
-			objet1Persistant = this.daoUserSimple.findById(idObjet1Persistant);
-			objet2PersistantEquals1 = this.daoUserSimple.findById(idObjet2PersistantEquals1);
+			idObjet1Persistant = this.daoCivilite.createReturnId(objet1);
+			idObjet2PersistantEquals1 = this.daoCivilite.createReturnId(objet2Equals1);
+			objet1Persistant = this.daoCivilite.findById(idObjet1Persistant);
+			objet2PersistantEquals1 = this.daoCivilite.findById(idObjet2PersistantEquals1);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
-			/* garantit que create(IUserSimple pObject) 
+			/* garantit que create(Civilite pObject) 
 			 * insère un objet en base.*/
 			assertTrue(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_UN
@@ -2040,8 +1826,8 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
@@ -2049,7 +1835,7 @@ public class DaoUserSimpleTest {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -2059,34 +1845,22 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		List<IUserSimple> lotPersistant = null;
+		List<Civilite> lotPersistant = null;
 		
-		/* Instanciation de IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, "Zorro", "Halliday"
-				, EMAIL_BORNE
-				, "Zorro.Halliday", MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation de Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		final IUserSimple objet2Null = null;
+		final Civilite objet2Null = null;
 		
-		final IUserSimple objet3Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, "Zorro", "Halliday"
-				, EMAIL_BORNE
-				, "Zorro.Halliday", MDP_BORNE
-				, UTILISATEUR);
+		final Civilite objet3Equals1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		final IUserSimple objet4 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, "Calamity", "Jane"
-				, EMAIL_YAHOO
-				, "Calamity.Jane", MDP_BORNE
-				, ADMINISTRATEUR);
+		final Civilite objet4 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
 		/* Constitution d'un lot d'objets. */
-		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		final List<Civilite> lot = new ArrayList<Civilite>();
 		
 		lot.add(objet1);
 		lot.add(objet2Null);
@@ -2094,7 +1868,7 @@ public class DaoUserSimpleTest {
 		lot.add(objet4);
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2114,7 +1888,7 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			lotPersistant = (List<Civilite>) this.daoCivilite.save(lot);
 			/* *********************************************** */
 			
 			assertEquals("2 Objets dans le lot : "
@@ -2122,7 +1896,7 @@ public class DaoUserSimpleTest {
 						, lotPersistant.size());
 			
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que save(Lot pObjects) 
 			 * insère des objets en base.*/
@@ -2144,7 +1918,7 @@ public class DaoUserSimpleTest {
 			System.out.println("testSaveLot()");
 			System.out.println("NOMBRE D'OBJETS PERSISTES APRES save(Lot) : " + nombreObjetsFinal);
 			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 
@@ -2157,8 +1931,8 @@ public class DaoUserSimpleTest {
 	/**
 	 * method testRetrieve() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>retrieve(IUserSimple pObject)</b>.<br/>
-	 * <li>garantit que retrieve(IUserSimple pObject) retrouve 
+	 * Teste la méthode <b>retrieve(Civilite pObject)</b>.<br/>
+	 * <li>garantit que retrieve(Civilite pObject) retrouve 
 	 * un objet existant en base.</li>
 	 * <li>garantit que retrieve(objetInexistant) retourne null.</li>
 	 * </ul>
@@ -2176,15 +1950,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -2194,52 +1968,31 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objetpersistantInexistant = null;
-		IUserSimple objetpersistant = null;
+		Civilite objetpersistantInexistant = null;
+		Civilite objetpersistant = null;
 		
-		List<IUserSimple> lotPersistant = null;
+		List<Civilite> lotPersistant = null;
 		
-		/* Instanciation de IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		/* Instanciation de Civilite. */
+		final Civilite objet1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		final IUserSimple objet2Null = null;
+		final Civilite objet2Null = null;
 		
-		final IUserSimple objet3Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		final Civilite objet3Equals1 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		final IUserSimple objet4 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
+		final Civilite objet4 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
 		
-		final IUserSimple objet5 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_WALLACE1, NOM_ROURKE_1
-				, EMAIL_YAHOO
-				, LOGIN, MDP_ZOZO93
-				, UTILISATEUR);
+		final Civilite objet5 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
-		final IUserSimple objetInexistant 
-		= new UserSimple(
-				fournirCivilitePersistante(CIVILITE_M)
-				, "prenomInexistant1", "nomInexistant1"
-				, "emailInexistant1"
-				, "loginInexistant1", "mdpInexistant1"
-				, UTILISATEUR);
+		final Civilite objetInexistant 
+		= new Civilite("Pouetr* Pouet");
 		
 		/* Constitution d'un lot d'objets. */
-		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		final List<Civilite> lot = new ArrayList<Civilite>();
 		
 		lot.add(objet1);
 		lot.add(objet2Null);
@@ -2248,7 +2001,7 @@ public class DaoUserSimpleTest {
 		lot.add(objet5);
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2269,10 +2022,10 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			lotPersistant = (List<Civilite>) this.daoCivilite.save(lot);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que save(Lot pObjects) 
 			 * insère des objets en base.*/
@@ -2292,7 +2045,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testRetrieve()");
 			System.out.println("LOT D'ENREGISTREMENTS EN BASE : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 
@@ -2300,7 +2053,7 @@ public class DaoUserSimpleTest {
 		
 		/* *********************************************** */
 		/* ********************* RETRIEVE **************** */
-		objetpersistantInexistant = this.daoUserSimple.retrieve(objetInexistant);
+		objetpersistantInexistant = this.daoCivilite.retrieve(objetInexistant);
 		
 		/* garantit que retrieve(objetInexistant) retourne null. */
 		assertNull("Un objet non persistant ne peut être trouvé en base : "
@@ -2308,9 +2061,9 @@ public class DaoUserSimpleTest {
 
 		/* *********************************************** */
 		/* ********************* RETRIEVE **************** */
-		objetpersistant = this.daoUserSimple.retrieve(objet5);
+		objetpersistant = this.daoCivilite.retrieve(objet5);
 		
-		/* garantit que retrieve(IUserSimple pObject) retrouve 
+		/* garantit que retrieve(Civilite pObject) retrouve 
 		 * objet existant en base.*/
 		assertEquals("Un objet persistant doit être trouvé en base : "
 				, objet5
@@ -2349,15 +2102,15 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
@@ -2366,17 +2119,17 @@ public class DaoUserSimpleTest {
 
 		Long nombreObjetsFinal = 0L;
 		
-		IUserSimple objetpersistantInexistant = null;
-		IUserSimple objetpersistant = null;
+		Civilite objetpersistantInexistant = null;
+		Civilite objetpersistant = null;
 		
 		/* remplit de la table. */
 		this.remplirTable(affichage);
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDBYID **************** */
-		objetpersistantInexistant = this.daoUserSimple.findById(100L);
+		objetpersistantInexistant = this.daoCivilite.findById(100L);
 		
 		/* garantit que findById(Long pIdInexistant) retourne null. */
 		assertNull("Un objet non persistant ne peut être trouvé en base : "
@@ -2384,7 +2137,7 @@ public class DaoUserSimpleTest {
 
 		/* *********************************************** */
 		/* ********************* FINDBYID **************** */
-		objetpersistant = this.daoUserSimple.findById(3L);
+		objetpersistant = this.daoCivilite.findById(3L);
 		
 		if (objetpersistant != null) {
 			
@@ -2427,22 +2180,22 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 				
 
-		List<IUserSimple> lotPersistant = null;
+		List<Civilite> lotPersistant = null;
 				
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -2450,7 +2203,7 @@ public class DaoUserSimpleTest {
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2459,7 +2212,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testFindAll()");
 			System.out.println("LOT D'OBJETS TROUVES EN BASE PAR findAll() : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -2497,22 +2250,22 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 				
 
-		List<IUserSimple> lotPersistant = null;
+		List<Civilite> lotPersistant = null;
 				
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -2520,7 +2273,7 @@ public class DaoUserSimpleTest {
 		
 		/* *********************************************** */
 		/* ********************* FINDALLMax ************** */
-		lotPersistant = this.daoUserSimple.findAllMax(2L);
+		lotPersistant = this.daoCivilite.findAllMax(2L);
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2529,7 +2282,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testFindAllMax()");
 			System.out.println("LOT D'OBJETS TROUVES EN BASE PAR findAllMax(2) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -2570,24 +2323,24 @@ public class DaoUserSimpleTest {
 		// AFFICHAGE DANS LE TEST ou NON
 		final boolean affichage = false;
 		// **********************************
-
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+	
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
-
+		} // Fin de daoCivilite NON INJECTE._______________
+	
 		
 		/* Vide la table. */
 		this.viderTable();
 				
-
-		List<IUserSimple> lotPersistant = null;
-		Iterable<IUserSimple> lotPersistantIterable = null;
+	
+		List<Civilite> lotPersistant = null;
+		Iterable<Civilite> lotPersistantIterable = null;
 				
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -2598,7 +2351,7 @@ public class DaoUserSimpleTest {
 		
 		/* *********************************************** */
 		/* ***************** FINDALL(Ite) **************** */
-		lotPersistantIterable = this.daoUserSimple.findAll(listIds);
+		lotPersistantIterable = this.daoCivilite.findAll(listIds);
 		
 		lotPersistant = this.fabriquerList(lotPersistantIterable);
 		
@@ -2609,16 +2362,16 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testFindAllIterable()");
 			System.out.println("LOT D'OBJETS TROUVES EN BASE PAR findAll(listIds) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
 		}
-
+	
 		if (lotPersistant != null) {
 			
-			final boolean exists1 = this.daoUserSimple.exists(1L);
-			final boolean exists2 = this.daoUserSimple.exists(2L);
+			final boolean exists1 = this.daoCivilite.exists(1L);
+			final boolean exists2 = this.daoCivilite.exists(2L);
 			
 			if (exists1 && exists2) {
 				
@@ -2657,35 +2410,38 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 		
 
-		IUserSimple objetpersistantInexistant = null;
+		Civilite objetpersistantInexistant = null;
 		
-		final IUserSimple objetInexistant 
-		= new UserSimple(
-				CIVILITE_M
-				, "prenomInexistant", "nomInexistant"
-				, "emailInexistant"
-				, "loginInexistant", "mdpInexistant"
-				, UTILISATEUR);
+		
+		final Civilite objetInexistant 
+		= new Civilite("civiliteInexistant");
+		
+		/* AFFICHAGE A LA CONSOLE. */
+		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println("testUpdateInexistant()");
+			this.afficherObjetNonPersistant(
+					objetInexistant, 0L);
+		}
 		
 		/* ************************************************ */
 		/* ***************** UPDATE(Objet) **************** */
 		objetpersistantInexistant 
-			= this.daoUserSimple.update(objetInexistant);
+			= this.daoCivilite.update(objetInexistant);
 		
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -2696,11 +2452,7 @@ public class DaoUserSimpleTest {
 		}
 		
 		if (objetpersistantInexistant != null) {
-			
-			assertEquals("Le nom doit être nomInexistant : "
-					, "nomInexistant"
-						, objetpersistantInexistant.getNom());
-			
+						
 			assertSame("L'objet à modifer et l'objet modifié "
 					+ "sont la même instance : "
 					, objetInexistant
@@ -2738,38 +2490,36 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 		
 
-		IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
-		IUserSimple objet1ModifiePersistant = null;
+		Civilite objet1 = null;
+		Civilite objet1Persistant = null;
+		Civilite objet1ModifiePersistant = null;
+
 		
 		/* remplit de la table. */
 		this.remplirTable(affichage);
+
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 				
 		/* Récupération de l'objet persistant. */
-		objet1Persistant = this.daoUserSimple.retrieve(objet1);
+		objet1Persistant = this.daoCivilite.retrieve(objet1);
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2780,12 +2530,12 @@ public class DaoUserSimpleTest {
 		
 		/* ************** */
 		/* Modifications. */
-		objet1Persistant.setPrenom("Jean-Frédéric modifié");
-		objet1Persistant.setNom("Bôrne modifié");
+		objet1Persistant.setCiviliteString("Mr modifié");
+
 		
 		/* ************************************************ */
 		/* ***************** UPDATE(Objet) **************** */
-		objet1ModifiePersistant = this.daoUserSimple.update(objet1Persistant);
+		objet1ModifiePersistant = this.daoCivilite.update(objet1Persistant);
 
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -2799,9 +2549,9 @@ public class DaoUserSimpleTest {
 			
 			/* garantit que update(T pObject) modifie 
 			 * l'objet existant en base.*/
-			assertEquals("Le nom doit être Bôrne modifié : "
-					, "Bôrne modifié"
-						, objet1ModifiePersistant.getNom());
+			assertEquals("Le civilite doit être Mr modifié : "
+					, "Mr modifié"
+						, objet1ModifiePersistant.getCiviliteString());
 			
 			assertSame("L'objet à modifer et l'objet modifié sont la même instance : "
 					, objet1Persistant
@@ -2833,56 +2583,47 @@ public class DaoUserSimpleTest {
 		// AFFICHAGE DANS LE TEST ou NON
 		final boolean affichage = false;
 		// **********************************
-
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+	
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
-
+		} // Fin de daoCivilite NON INJECTE._______________
+	
 		
 		/* Vide la table. */
 		this.viderTable();
-
-
-		IUserSimple objet1 = null;
+	
+	
+		Civilite objet1 = null;
 		boolean resultat = false;
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy1", "Gonzales1"
-				, "papy.gonzales1@free.fr"
-				, "papy.gonzales1", "ppg1"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 		
-		final IUserSimple objetInexistant 
-		= new UserSimple(
-				CIVILITE_M
-				, "prenomInexistant2", "nomInexistant2"
-				, "emailInexistant2"
-				, "loginInexistant2", "mdpInexistant2"
-				, UTILISATEUR);
-
-
+		final Civilite objetInexistant 
+		= new Civilite("Civilite inexistante");
+	
+	
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2891,21 +2632,21 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteInexistant()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
 		}
-
+	
 		
 		/* ************************************************ */
 		/* ***************** DELETE(Objet) **************** */
-		resultat = this.daoUserSimple.delete(objetInexistant);
-
+		resultat = this.daoCivilite.delete(objetInexistant);
+	
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -2914,12 +2655,12 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteInexistant()");
 			System.out.println("LOT D'OBJETS EN BASE APRES DELETE (INEXISTANT) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
 		}
-
+	
 		/* garantit que delete(T pObject) retourne false. */
 		assertFalse("Le résultat de delete() doit être false : "
 				, resultat);
@@ -2930,7 +2671,7 @@ public class DaoUserSimpleTest {
 		
 	} // Fin de testDeleteInexistant().____________________________________
 	
-
+	
 	
 	/**
 	 * method testDelete() :<br/>
@@ -2953,46 +2694,42 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 
 
-		IUserSimple objet1 = null;
+		Civilite objet1 = null;
 		boolean resultat = false;
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy3", "Gonzales3"
-				, "papy.gonzales3@free.fr"
-				, "papy.gonzales3", "ppg3"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3001,7 +2738,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDelete()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3010,12 +2747,12 @@ public class DaoUserSimpleTest {
 		
 		/* ************************************************ */
 		/* ***************** DELETE(Objet) **************** */
-		resultat = this.daoUserSimple.delete(objet1);
+		resultat = this.daoCivilite.delete(objet1);
 
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3024,7 +2761,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDelete()");
 			System.out.println(LOT_OBJETS_APRES_DELETE);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3062,46 +2799,42 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 
 
-		IUserSimple objet1 = null;
+		Civilite objet1 = null;
 
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy4", "Gonzales4"
-				, "papy.gonzales4@free.fr"
-				, "papy.gonzales4", "ppg4"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3110,7 +2843,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdInexistant()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3119,12 +2852,12 @@ public class DaoUserSimpleTest {
 		
 		/* **************************************************** */
 		/* ***************** DELETEBYID(Objet) **************** */
-		this.daoUserSimple.deleteById(100L);
+		this.daoCivilite.deleteById(100L);
 
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3133,7 +2866,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdInexistant()");
 			System.out.println("LOT D'OBJETS EN BASE APRES DELETEBYID(inexistant) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3168,48 +2901,44 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 
 
-		IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 		Long idExistant = 0L;
 		
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy7", "Gonzales7"
-				, "papy.gonzales7@free.fr"
-				, "papy.gonzales7", "ppg7"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3218,13 +2947,13 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteById()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
 		}
 
-		objet1Persistant = this.daoUserSimple.retrieve(objet1);
+		objet1Persistant = this.daoCivilite.retrieve(objet1);
 		
 		if (objet1Persistant != null) {
 			idExistant = objet1Persistant.getId();
@@ -3233,12 +2962,12 @@ public class DaoUserSimpleTest {
 		
 		/* ************************************************ */
 		/* ***************** DELETEBYID(Objet) **************** */
-		this.daoUserSimple.deleteById(idExistant);
+		this.daoCivilite.deleteById(idExistant);
 
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3247,7 +2976,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteById()");
 			System.out.println(LOT_OBJETS_APRES_DELETE);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3282,46 +3011,42 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 		
 
-		IUserSimple objet1 = null;
+		Civilite objet1 = null;
 		boolean resultat = false;
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy8", "Gonzales8"
-				, "papy.gonzales8@free.fr"
-				, "papy.gonzales8", "ppg8"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3330,7 +3055,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdBooleanInexistant()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3339,11 +3064,11 @@ public class DaoUserSimpleTest {
 		
 		/* *************************************************** */
 		/* ********* DELETEBYIDBOOLEAN(Objet) **************** */
-		resultat = this.daoUserSimple.deleteByIdBoolean(100L);
+		resultat = this.daoCivilite.deleteByIdBoolean(100L);
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3352,7 +3077,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdBooleanInexistant()");
 			System.out.println("LOT D'OBJETS EN BASE APRES DELETEBYIDBOOLEAN(inexistant) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3392,49 +3117,45 @@ public class DaoUserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
+		/* daoCivilite NON INJECTE. */
+		if (this.daoCivilite == null) {
 			
 			/* AFFICHAGE A LA CONSOLE. */
 			if (AFFICHAGE_GENERAL && affichage) {
 				this.afficherDAONonInstancie();
 			}			
 			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
+		} // Fin de daoCivilite NON INJECTE._______________
 
 		
 		/* Vide la table. */
 		this.viderTable();
 				
 
-		IUserSimple objet1 = null;
-		IUserSimple objet1Persistant = null;
+		Civilite objet1 = null;
+		Civilite objet1Persistant = null;
 		Long idExistant = 0L;
 		boolean resultat = false;
 		
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
+		List<Civilite> lotPersistant = null;
+		List<Civilite> lotPersistantApresDelete = null;
 		
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		/* Instanciation de IUserSimple. */
+		/* Instanciation de Civilite. */
 		objet1 
-		= new UserSimple(CIVILITE_M
-				, "Papy", "Gonzales"
-				, "papy.gonzales@free.fr"
-				, "papy.gonzales", "ppg"
-				, UTILISATEUR);
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
-		this.daoUserSimple.create(objet1);
+		this.daoCivilite.create(objet1);
 		
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 		
 		/* *********************************************** */
 		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
+		lotPersistant = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3443,13 +3164,13 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdBoolean()");
 			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 			
 		}
 
-		objet1Persistant = this.daoUserSimple.retrieve(objet1);
+		objet1Persistant = this.daoCivilite.retrieve(objet1);
 		
 		if (objet1Persistant != null) {
 			idExistant = objet1Persistant.getId();
@@ -3457,11 +3178,11 @@ public class DaoUserSimpleTest {
 		
 		/* ************************************************ */
 		/* ***************** DELETE(Objet) **************** */
-		resultat = this.daoUserSimple.deleteByIdBoolean(idExistant);
+		resultat = this.daoCivilite.deleteByIdBoolean(idExistant);
 		
-		nombreObjetsFinal = this.daoUserSimple.count();
+		nombreObjetsFinal = this.daoCivilite.count();
 		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
+		lotPersistantApresDelete = this.daoCivilite.findAll();
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -3470,7 +3191,7 @@ public class DaoUserSimpleTest {
 			System.out.println(TIRETS);
 			System.out.println("testDeleteByIdBoolean()");
 			System.out.println("LOT D'OBJETS EN BASE APRES DELETEBYIDBOOLEAN : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistantApresDelete));
 			System.out.println(TIRETS);
 			System.out.println();
 			
@@ -3489,170 +3210,9 @@ public class DaoUserSimpleTest {
 
 	
 	/**
-	 * method testDeleteIterable() :<br/>
-	 * <ul>
-	 * Teste la méthode <b>delete(Iterable)</b>.<br/>
-	 * <li>garantit que delete(Iterable) détruit 
-	 * les objets existants en base.</li>
-	 * </ul>
-	 *
-	 * @throws AbstractDaoException
-	 */
-	@Commit
-	@Transactional
-	@Test
-	public void testDeleteIterable() throws AbstractDaoException {
-		
-		// **********************************
-		// AFFICHAGE DANS LE TEST ou NON
-		final boolean affichage = false;
-		// **********************************
-
-		/* daoUserSimple NON INJECTE. */
-		if (this.daoUserSimple == null) {
-			
-			/* AFFICHAGE A LA CONSOLE. */
-			if (AFFICHAGE_GENERAL && affichage) {
-				this.afficherDAONonInstancie();
-			}			
-			return;
-		} // Fin de daoUserSimple NON INJECTE._______________
-
-		
-		/* Vide la table. */
-		this.viderTable();
-				
-
-		List<IUserSimple> lotPersistant = null;
-		List<IUserSimple> lotPersistantApresDelete = null;
-		
-		Long nombreObjetsinitial = 0L;
-		Long nombreObjetsFinal = 0L;
-
-		/* remplit de la table. */
-		this.remplirTable(affichage);
-		
-		/* *********************************************** */
-		/* ********************* FINDALL ***************** */
-		lotPersistant = this.daoUserSimple.findAll();
-		
-		/* AFFICHAGE A LA CONSOLE. */
-		if (AFFICHAGE_GENERAL && affichage) {
-			
-			System.out.println();
-			System.out.println(TIRETS);
-			System.out.println("testDeleteIterable()");
-			System.out.println(LOT_OBJET_INITIAL);
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
-			System.out.println(TIRETS);
-			System.out.println();
-			
-		}
-
-		nombreObjetsinitial = this.daoUserSimple.count();
-
-		/* Instanciation de IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(CIVILITE_M
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
-		
-		final IUserSimple objet4 
-		= new UserSimple(CIVILITE_MME
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
-		
-		final IUserSimple objetInexistant 
-		= new UserSimple(
-				CIVILITE_M
-				, "prenomInexistant4", "nomInexistant4"
-				, "emailInexistant4"
-				, "loginInexistant4", "mdpInexistant4"
-				, UTILISATEUR);
-		
-		/* Constitution du lot d'iterables. */
-		final List<IUserSimple> lotPersistantIterable 
-			= new ArrayList<IUserSimple>();
-		lotPersistantIterable.add(objet1);
-		lotPersistantIterable.add(objet4);
-		lotPersistantIterable.add(objetInexistant);
-		
-		
-		/* *************************************************** */
-		/* ********************* DELETE(ITE) ***************** */
-		this.daoUserSimple.delete(lotPersistantIterable);
-		
-		nombreObjetsFinal = this.daoUserSimple.count();
-		
-		lotPersistantApresDelete = this.daoUserSimple.findAll();
-		
-		/* AFFICHAGE A LA CONSOLE. */
-		if (AFFICHAGE_GENERAL && affichage) {
-						
-			System.out.println();
-			System.out.println(TIRETS);
-			System.out.println("testDeleteIterable()");
-			System.out.println("LOT D'OBJETS EN BASE APRES DELETE(Iterable) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistantApresDelete));
-			System.out.println(TIRETS);
-			System.out.println();
-			
-		}
-		
-		/* garantit que delete(Iterable) détruit 
-		 * les objets existants en base.*/
-		assertTrue("NbreObjetsFinal = NbreObjetsInitial - 2 : "
-				, nombreObjetsFinal == nombreObjetsinitial - 2);
-		
-		/* Vide la table. */
-		final boolean resultatVidage = this.daoUserSimple.deleteAllBoolean();
-		
-		assertTrue("La table doit être vide : ", resultatVidage); 
-
-	} // Fin de testDeleteIterable().______________________________________
-	
-	
-	
-	/**
-	 * method fournirCivilitePersistante(
-	 * Civilite pCivilite) :<br/>
-	 * <ul>
-	 * <li>Fournit une instance persistante managée 
-	 * par la session d'une Civilite.</li>
-	 * <li>Recherche en base l'instance si elle a déjà été persistée.</li>
-	 * </ul>
-	 *
-	 * @param pCivilite : Civilite.<br/>
-	 * 
-	 * @return Civilite persistante.<br/>
-	 * 
-	 * @throws AbstractDaoException
-	 */
-	private Civilite fournirCivilitePersistante(
-			final Civilite pCivilite) 
-					throws AbstractDaoException {
-		
-		Civilite civilitePersistante = null;
-		if (this.daoCivilite.exists(pCivilite)) {
-			civilitePersistante = this.daoCivilite.retrieve(pCivilite);
-		} else {
-			civilitePersistante = this.daoCivilite.create(pCivilite);
-		}
-		
-		return civilitePersistante;
-		
-	} // Fin de fournirCivilitePersistante(...).___________________________
-
-	
-	
-	/**
 	 * method remplirTable(
 	 * boolean pAffichage) :<br/>
-	 * Remplit la table USERSIMPLES avec 3 enregistrements.<br/>
+	 * Remplit la table CIVILITES avec 3 enregistrements.<br/>
 	 * <br/>
 	 * 
 	 * @param pAffichage : boolean.<br/>
@@ -3665,51 +3225,24 @@ public class DaoUserSimpleTest {
 		Long nombreObjetsinitial = 0L;
 		Long nombreObjetsFinal = 0L;
 		
-		List<IUserSimple> lotPersistant = null;
+		List<Civilite> lotPersistant = null;
 		
-		/* Instanciation de IUserSimple. */
-		final IUserSimple objet1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
-		
-		final IUserSimple objet2Null = null;
-		
-		final IUserSimple objet3Equals1 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_JEAN_FREDERIC, NOM_BORNE
-				, EMAIL_BORNE
-				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
-		
-		final IUserSimple objet4 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
-				, PRENOM_AMANDINE, NOM_WATSON
-				, EMAIL_YAHOO
-				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
-		
-		final IUserSimple objet5 
-		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
-				, PRENOM_WALLACE1, NOM_ROURKE_1
-				, EMAIL_YAHOO
-				, LOGIN, MDP_ZOZO93
-				, UTILISATEUR);
-		
+		final Civilite objet1 
+			= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
+		final Civilite objet2 
+			= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
+		final Civilite objet3 
+			= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 		
 		/* Constitution d'un lot d'objets. */
-		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
+		final List<Civilite> lot = new ArrayList<Civilite>();
 		
 		lot.add(objet1);
-		lot.add(objet2Null);
-		lot.add(objet3Equals1);
-		lot.add(objet4);
-		lot.add(objet5);
+		lot.add(objet2);
+		lot.add(objet3);
 		
 		/* Compte du nombre d'Objets initialement en base. */
-		nombreObjetsinitial = this.daoUserSimple.count();
+		nombreObjetsinitial = this.daoCivilite.count();
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && pAffichage) {
@@ -3718,10 +3251,8 @@ public class DaoUserSimpleTest {
 			System.out.println("remplirTable(boolean)");
 			System.out.println("NOMBRE D'OBJETS INITIALEMENT En BASE : " + nombreObjetsinitial);
 			System.out.println("OBJET1 NON PERSISTANT : " + objet1.toString());
-			System.out.println("OBJET2 NON PERSISTANT : null");
-			System.out.println("OBJET3 NON PERSISTANT (DOUBLON) : " + objet3Equals1.toString());
-			System.out.println("OBJET4 NON PERSISTANT : " + objet4.toString());
-			System.out.println("OBJET5 NON PERSISTANT : " + objet5.toString());
+			System.out.println("OBJET2 NON PERSISTANT : " + objet2.toString());
+			System.out.println("OBJET3 NON PERSISTANT : " + objet3.toString());
 			System.out.println(TIRETS);
 			System.out.println();
 		}
@@ -3730,16 +3261,17 @@ public class DaoUserSimpleTest {
 			
 			/* *********************************************** */
 			/* ********************* CREATION **************** */
-			lotPersistant = (List<IUserSimple>) this.daoUserSimple.save(lot);
+			lotPersistant = (List<Civilite>) this.daoCivilite.save(lot);
 			/* *********************************************** */
 			
-			nombreObjetsFinal = this.daoUserSimple.count();
+			nombreObjetsFinal = this.daoCivilite.count();
 			
 			/* garantit que save(Lot pObjects) 
 			 * insère des objets en base.*/
-			assertTrue(NBRE_OBJETS_FINAL_DOIT
+			assertEquals(NBRE_OBJETS_FINAL_DOIT
 					+ NBRE_INITIAL_PLUS_TROIS
-					, nombreObjetsFinal == nombreObjetsinitial + 3);
+					, Long.valueOf(nombreObjetsinitial + 3)
+						, nombreObjetsFinal);
 			
 		}
 		catch (AbstractDaoException e) {
@@ -3752,14 +3284,15 @@ public class DaoUserSimpleTest {
 			System.out.println();
 			System.out.println(TIRETS);
 			System.out.println("remplirTable(boolean)");
+			System.out.println("NOMBRE D'OBJETS PERSISTES APRES save(Lot) : " + nombreObjetsFinal);
 			System.out.println("LOT D'ENREGISTREMENTS EN BASE APRES remplirTable(boolean) : ");
-			System.out.println(this.daoUserSimple.afficherListe(lotPersistant));
+			System.out.println(this.daoCivilite.afficherListe(lotPersistant));
 			System.out.println(TIRETS);
 			System.out.println();
 
 		}
 
-		final Long nbeObjetsFinal = this.daoUserSimple.count();
+		final Long nbeObjetsFinal = this.daoCivilite.count();
 		
 		assertEquals("La table doit être contenir 3 enregistements : "
 				, Long.valueOf(3L), nbeObjetsFinal);
@@ -3777,12 +3310,12 @@ public class DaoUserSimpleTest {
 	 */
 	private void viderTable() throws AbstractDaoException {
 		
-		this.daoUserSimple.deleteAll();
+		this.daoCivilite.deleteAll();
 		
-		final Long nbeObjetsFinal = this.daoUserSimple.count();
+		final Long nbreObjetsFinal = this.daoCivilite.count();
 		
 		assertEquals("La table doit être vide : "
-				, Long.valueOf(0L), nbeObjetsFinal);
+				, Long.valueOf(0L), nbreObjetsFinal);
 		
 	} // Fin de viderTable().______________________________________________
 	
@@ -3791,7 +3324,7 @@ public class DaoUserSimpleTest {
 	/**
 	 * method afficherDAONonInstancie() :<br/>
 	 * Affiche à la console de
-	 * <b>"DAO NON INSTANCIE - this.daoUserSimple est NULL"</b>.<br/>
+	 * <b>"DAO NON INSTANCIE - this.daoCivilite est NULL"</b>.<br/>
 	 * <br/>
 	 */
 	private void afficherDAONonInstancie() {
@@ -3799,7 +3332,7 @@ public class DaoUserSimpleTest {
 		System.out.println();
 		System.out.println(TIRETS);
 		System.out.println("DAO NON INSTANCIE "
-				+ "- this.daoUserSimple est NULL");
+				+ "- this.daoCivilite est NULL");
 		System.out.println(TIRETS);
 		System.out.println();
 		
@@ -3836,7 +3369,7 @@ public class DaoUserSimpleTest {
 	
 	/**
 	 * method afficherObjetPersistant(
-	 * IUserSimple pObjetPersistant
+	 * Civilite pObjetPersistant
 	 * , Long pNbreObjetsFinal) :<br/>
 	 * <ul>
 	 * Affiche à la console :
@@ -3846,13 +3379,13 @@ public class DaoUserSimpleTest {
 	 * </ul>
 	 * <br/>
 	 *
-	 * @param pObjetPersistant : IUserSimple : 
+	 * @param pObjetPersistant : Civilite : 
 	 * Objet persistant en base.<br/>
 	 * @param pNbreObjetsFinal : Long : 
 	 * Nombre d'objets finalement en base.<br/>
 	 */
 	private void afficherObjetPersistant(
-			final IUserSimple pObjetPersistant
+			final Civilite pObjetPersistant
 				, final Long pNbreObjetsFinal) {
 		
 		if (pObjetPersistant != null) {
@@ -3882,7 +3415,7 @@ public class DaoUserSimpleTest {
 	
 	/**
 	 * method afficherObjetNonPersistant(
-	 * IUserSimple pObjetNonPersistant
+	 * Civilite pObjetNonPersistant
 	 * , Long pNbreObjetsInitial) :<br/>
 	 * <ul>
 	 * Affiche à la console :
@@ -3892,13 +3425,13 @@ public class DaoUserSimpleTest {
 	 * </ul>
 	 * <br/>
 	 *
-	 * @param pObjetNonPersistant : IUserSimple : 
+	 * @param pObjetNonPersistant : Civilite : 
 	 * Objet non persistant en base.<br/>
 	 * @param pNbreObjetsInitial : Long : 
 	 * Nombre d'objets initialement en base.<br/>
 	 */
 	private void afficherObjetNonPersistant(
-			final IUserSimple pObjetNonPersistant
+			final Civilite pObjetNonPersistant
 				, final Long pNbreObjetsInitial) {
 		
 		if (pObjetNonPersistant != null) {
@@ -3960,20 +3493,20 @@ public class DaoUserSimpleTest {
 	
 	/**
 	 * method fabriquerList(
-	 * Iterable<IUserSimple> pIterable) :<br/>
+	 * Iterable<Civilite> pIterable) :<br/>
 	 * fabrique une liste à partir d'un Iterable.<br/>
 	 * <br/>
 	 *
-	 * @param pIterable : Iterable<IUserSimple>.<br/>
+	 * @param pIterable : Iterable<Civilite>.<br/>
 	 * 
-	 * @return : List<IUserSimple>.<br/>
+	 * @return : List<Civilite>.<br/>
 	 */
-	public final List<IUserSimple> fabriquerList(
-			final Iterable<IUserSimple> pIterable) {
+	public final List<Civilite> fabriquerList(
+			final Iterable<Civilite> pIterable) {
 		
-		final List<IUserSimple> list = new ArrayList<IUserSimple>();
+		final List<Civilite> list = new ArrayList<Civilite>();
 		
-	    for (final IUserSimple item : pIterable) {
+	    for (final Civilite item : pIterable) {
 	        list.add(item);
 	    }
 	    
@@ -3982,5 +3515,6 @@ public class DaoUserSimpleTest {
 	} // Fin de fabriquerList(...).________________________________________
 	
 	
-	
-} // FIN DE LA CLASSE DaoUserSimpleTest.-------------------------------------
+
+
+} // FIN DE LA CLASSE DaoCiviliteTest.---------------------------------------

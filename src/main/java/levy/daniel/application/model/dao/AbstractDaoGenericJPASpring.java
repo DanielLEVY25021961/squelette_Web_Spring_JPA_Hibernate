@@ -744,6 +744,13 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 				LOG.fatal(MESSAGE_ENTITYMANAGER_NULL);
 			}
 			return null;
+		} // Fin de this.entityManager == null.____________
+
+		
+		/* retourne pObject si l'objet n'est pas 
+		 * déjà persistant en base. */
+		if (!this.exists(pObject)) {
+			return pObject;
 		}
 
 		T persistentObject = null;

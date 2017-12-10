@@ -150,7 +150,7 @@ public class DaoCivilite
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "and civilite.civiliteString = :pCiviliteString";
+				+ "where civilite.civiliteString = :pCiviliteString";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -220,7 +220,7 @@ public class DaoCivilite
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "and civilite.civiliteString = :pCiviliteString";
+				+ "where civilite.civiliteString = :pCiviliteString";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
