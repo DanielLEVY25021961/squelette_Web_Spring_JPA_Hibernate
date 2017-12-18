@@ -1,4 +1,4 @@
-package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg;
+package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.generationcode;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -14,6 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.TypesValidation;
 
 /**
  * class CreateurGestionnaireRG :<br/>
@@ -55,97 +57,6 @@ public final class CreateurGestionnaireRG {
 	 */
 	public static final char UNDERSCORE = '_';
 	
-	
-	/**
-	 * nomCompletClasse : String :<br/>
-	 * Nom complet de la classe comme 
-	 * "levy.daniel.application.model.metier.usersimple.impl.UserSimple".<br/>
-	 */
-	public static transient String nomCompletClasse;
-	
-	
-	/**
-	 * nomSimpleClasse : String :<br/>
-	 * Nom simple de la classe comme "UserSimple".<br/>
-	 */
-	public static transient String nomSimpleClasse;
-	
-	
-	/**
-	 * nomSimpleClasseMaj : String :<br/>
-	 * Nom simple de la classe en majuscules comme "USERSIMPLE".<br/>
-	 */
-	public static transient String nomSimpleClasseMaj;
-	
-	
-	/**
-	 * nomSimpleClasseMin : String :<br/>
-	 * Nom simple de la classe en minuscules comme usersimple.<br/>
-	 */
-	public static transient String nomSimpleClasseMin;
-	
-	
-	/**
-	 * attributs : Field[] :<br/>
-	 * Tableau des attributs de la classe.<br/>
-	 */
-	public static transient Field[] attributs;
-	
-	
-	/**
-	 * attributsPrivate : List<Field> :<br/>
-	 * Liste des attributs private de la classe.<br/>
-	 */
-	public static transient List<Field> attributsPrivate;
-	
-	
-	/**
-	 * nomsAttributsPrivate : List<String> :<br/>
-	 * Liste des noms des attributs private de la classe.<br/>
-	 */
-	public static transient List<String> nomsAttributsPrivate;
-
-	
-	/**
-	 * mapRgsParAttribut : Map&lt;String,List&lt;String&gt;&gt; :<br/>
-	 * <ul>
-	 * Map contenant les Types de RG à vérifier par attribut avec :
-	 * <li>String : nom de l'attribut</li>
-	 * <li>List&lt;String&gt; : liste des types de RG à appliquer pour l'attribut.</li>
-	 * </ul>
-	 */
-	public static transient Map<String, List<String>> mapRgsParAttribut 
-		= new ConcurrentHashMap<String, List<String>>();
-	
-	
-	/**
-	 * listIdsRgs : List&lt;String&gt; :<br/>
-	 * <ul>
-	 * Liste des identifiants des RG comme :
-	 * <li>RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.</li>
-	 * <li>RG_USERSIMPLE_PRENOM_RENSEIGNE_02.</li>
-	 * <li>RG_USERSIMPLE_PRENOM_LITTERAL_03.</li>
-	 * </ul>
-	 * Toujours :<br/>
-	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
-	 */
-	public static transient List<String> listIdsRgs 
-		= new ArrayList<String>();
-
-	
-	/**
-	 * listLignesCodeRgs : List&lt;String&gt; :<br/>
-	 * <ul>
-	 * Liste des lignes de code des RG comme :
-	 * <li>public static final String RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.</li>
-	 * <li>public static final String RG_USERSIMPLE_PRENOM_RENSEIGNE_02.</li>
-	 * <li>public static final String RG_USERSIMPLE_PRENOM_LITTERAL_03.</li>
-	 * </ul>
-	 * Toujours :<br/>
-	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
-	 */
-	public static transient List<String> listLignesCodeRgs 
-		= new ArrayList<String>();
 	
 	
 	/**
@@ -210,6 +121,132 @@ public final class CreateurGestionnaireRG {
 	 */
 	public static final char POINT_VIRGULE = ';';
 	
+		
+	/**
+	 * TIRETS : String :<br/>
+	 * "--------------------------------------------------------".<br/>
+	 */
+	public static final String TIRETS 
+	= "--------------------------------------------------------";
+
+
+	/**
+	 * nomCompletClasse : String :<br/>
+	 * <b>Nom complet</b> (qualifié) de la classe comme 
+	 * "levy.daniel.application.model.metier.usersimple
+	 * .impl.UserSimple".<br/>
+	 */
+	public static transient String nomCompletClasse;
+	
+	
+	/**
+	 * nomSimpleClasse : String :<br/>
+	 * <b>Nom simple</b> (court) de la classe comme "UserSimple" 
+	 * pour 
+	 * "levy.daniel.application.model.metier.usersimple
+	 * .impl.UserSimple".<br/>
+	 */
+	public static transient String nomSimpleClasse;
+	
+	
+	/**
+	 * nomSimpleClasseMaj : String :<br/>
+	 * <b>Nom simple</b> de la classe en <i>majuscules</i> 
+	 * comme "USERSIMPLE" pour 
+	 * "levy.daniel.application.model.metier.usersimple
+	 * .impl.UserSimple".<br/>
+	 */
+	public static transient String nomSimpleClasseMaj;
+	
+	
+	/**
+	 * nomSimpleClasseMin : String :<br/>
+	 * <b>Nom simple</b> de la classe en <i>minuscules</i> 
+	 * comme "usersimple" pour 
+	 * "levy.daniel.application.model.metier.usersimple
+	 * .impl.UserSimple".<br/>
+	 */
+	public static transient String nomSimpleClasseMin;
+	
+	
+	/**
+	 * attributs : Field[] :<br/>
+	 * <b>Tableau des attributs</b> <i>déclarés dans la classe</i> 
+	 * de l'objet métier pour lequel on veut construire un 
+	 * GestionnaireRG.<br/>
+	 */
+	public static transient Field[] attributs;
+	
+	
+	/**
+	 * attributsPrivate : List<Field> :<br/>
+	 * <b>Liste des attributs</b> private 
+	 * <i>déclarés dans la classe</i>.<br/>
+	 * <ul>
+	 * <li>Sans les attributs PRIVATE STATIC.</li>
+	 * <li>Sans les attributs commençant par "id".</li>
+	 * </ul>
+	 */
+	public static transient List<Field> attributsPrivate;
+	
+	
+	/**
+	 * nomsAttributsPrivate : List<String> :<br/>
+	 * <b>Liste des noms des attributs</b> private 
+	 * <i>déclarés dans la classe</i>.<br/>
+	 * <ul>
+	 * <li>Sans les attributs PRIVATE STATIC.</li>
+	 * <li>Sans les attributs commençant par "id".</li>
+	 * </ul>
+	 */
+	public static transient List<String> nomsAttributsPrivate;
+
+	
+	/**
+	 * mapRgsParAttribut : Map&lt;String,List&lt;String&gt;&gt; :<br/>
+	 * <ul>
+	 * Map contenant les Types de RG à vérifier par attribut avec :
+	 * <li>String : nom de l'attribut</li>
+	 * <li>List&lt;String&gt; : 
+	 * liste des types de RG à appliquer pour l'attribut.</li>
+	 * </ul>
+	 */
+	public static transient Map<String, List<String>> mapRgsParAttribut 
+		= new ConcurrentHashMap<String, List<String>>();
+	
+	
+	/**
+	 * listIdsRgs : List&lt;String&gt; :<br/>
+	 * <ul>
+	 * <b>Liste des identifiants des RG</b> comme :
+	 * <li>RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.</li>
+	 * <li>RG_USERSIMPLE_PRENOM_RENSEIGNE_02.</li>
+	 * <li>RG_USERSIMPLE_PRENOM_LITTERAL_03.</li>
+	 * </ul>
+	 * Toujours :<br/>
+	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
+	 */
+	public static transient List<String> listIdsRgs 
+		= new ArrayList<String>();
+
+	
+	/**
+	 * listLignesCodeRgs : List&lt;String&gt; :<br/>
+	 * <ul>
+	 * <b>Liste des lignes de code des RG</b> à incorporer 
+	 * dans une classe GestionnaireRGxxx comme :
+	 * <li>public static final String RG_USERSIMPLE
+	 * _CIVILITE_NOMENCLATURE_01.</li>
+	 * <li>public static final String RG_USERSIMPLE
+	 * _PRENOM_RENSEIGNE_02.</li>
+	 * <li>public static final String RG_USERSIMPLE
+	 * _PRENOM_LITTERAL_03.</li>
+	 * </ul>
+	 * Toujours :<br/>
+	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
+	 */
+	public static transient List<String> listLignesCodeRgs 
+		= new ArrayList<String>();
 	
 	/**
 	 * LOG : Log : 
@@ -268,7 +305,12 @@ public final class CreateurGestionnaireRG {
 		nomsAttributsPrivate = recupererNomsAttributsPrivate(classe);
 		
 		/* AFFICHAGE DES ATTRIBUTS PRIVATE. */
+		System.out.println();
+		System.out.println(TIRETS);
+		System.out.println("LISTE DES ATTRIBUTS SIMPLEMENT PRIVATE DE LA CLASSE (sans id) : ");
 		System.out.println(afficherListString(nomsAttributsPrivate));
+		System.out.println(TIRETS);
+		System.out.println();
 		
 		/* CREE LA MAP DES REGLES PAR ATTRIBUT. */
 		affecterRgAuxAttributs();
@@ -277,8 +319,19 @@ public final class CreateurGestionnaireRG {
 		/* Crée la liste des lignes de code des RG listLignesCodeRgs. */
 		creerListesRG();
 		
+		System.out.println();
+		System.out.println(TIRETS);
+		System.out.println("LISTE DES IDENTIFIANTS DES RG : ");
 		System.out.println(afficherListString(listIdsRgs));
+		System.out.println(TIRETS);
+		System.out.println();
+		
+		System.out.println();
+		System.out.println(TIRETS);
+		System.out.println("LISTE DES LIGNES DE CODE RG : ");
 		System.out.println(afficherListString(listLignesCodeRgs));
+		System.out.println(TIRETS);
+		System.out.println();
 		
 	} // Fin de creerGestionnaireRG(...).__________________________________
 	
@@ -347,9 +400,14 @@ public final class CreateurGestionnaireRG {
 	 * (RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01
 	 * , RG_USERSIMPLE_PRENOM_RENSEIGNE_02, ...).</li>
 	 * <li>crée la liste des <b>lignes de code des RG 
-	 * "listLignesCodeRgs"</b> 
-	 * (public static final String 
-	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 = ...).</li>
+	 * "listLignesCodeRgs"</b> à intégrer 
+	 * dans la classe GestionnaireRGxxx
+	 * comme :<br/>
+	 * public static final String 
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 = 
+	 * "RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+	 * civilite du UserSimple doit respecter 
+	 * un ensemble fini de valeurs (nomenclature)";.</li>
 	 * </ul>
 	 *
 	 */
@@ -412,10 +470,10 @@ public final class CreateurGestionnaireRG {
 	 * method recupererNomCompletClass(
 	 * Class<?> pClasse) :<br/>
 	 * <ul>
-	 * <li>fournit le nom complet de pClasse.</li>
+	 * <li>fournit le <b>nom complet</b> de pClasse.</li>
 	 * <li>Par exemple : 
-	 * "levy.daniel.application.model.metier.usersimple.
-	 * impl.UserSimple"</li>
+	 * <b>"levy.daniel.application.model.metier.usersimple.
+	 * impl.UserSimple"</b>.</li>
 	 * </ul>
 	 * retourne null si pClasse == null.<br/>
 	 * <br/>
@@ -442,9 +500,11 @@ public final class CreateurGestionnaireRG {
 	 * method recupererNomSimpleClass(
 	 * Class<?> pClasse) :<br/>
 	 * <ul>
-	 * <li>fournit le nom court (simple) de pClasse.</li>
+	 * <li>fournit le <b>nom court</b> (simple) de pClasse.</li>
 	 * <li>Par exemple : 
-	 * "UserSimple"</li>
+	 * <b>"UserSimple"</b> pour 
+	 * "levy.daniel.application.model.metier.usersimpleimpl
+	 * .UserSimple".</li>
 	 * </ul>
 	 * retourne null si pClasse == null.<br/>
 	 * <br/>
@@ -514,8 +574,8 @@ public final class CreateurGestionnaireRG {
 	 *
 	 * @param pClasse : Class.<br/>
 	 * 
-	 * @return : List&lt;Field&gt; : liste des attributs 
-	 * PRIVATE déclarés DANS la classe.<br/>
+	 * @return : List&lt;Field&gt; : liste des <b>attributs</b> 
+	 * simplement PRIVATE déclarés DANS la classe (sans l'id).<br/>
 	 */
 	public static List<Field> recupererAttributsPrivate(
 			final Class<?> pClasse) {
@@ -560,7 +620,7 @@ public final class CreateurGestionnaireRG {
 	 * method recupererNomsAttributsPrivate(
 	 * Class<?> pClasse) :<br/>
 	 * <ul>
-	 * <li>Fournit la <b>liste des noms des 
+	 * <li>Fournit la <b>liste des <i>noms</i> des 
 	 * attributs simplement PRIVATE</b> 
 	 * <i>déclarés dans la classe</i> pClasse.</li>
 	 * <li>Elimine les attributs PRIVATE STATIC.</li>
@@ -574,7 +634,7 @@ public final class CreateurGestionnaireRG {
 	 * @param pClasse : Class.<br/>
 	 * 
 	 * @return : List&lt;String&gt; : liste des <b>noms</b> des attributs 
-	 * PRIVATE déclarés DANS la classe.<br/>
+	 * simplement PRIVATE déclarés DANS la classe (sans l'id).<br/>
 	 */
 	public static List<String> recupererNomsAttributsPrivate(
 			final Class<?> pClasse) {
@@ -813,9 +873,18 @@ public final class CreateurGestionnaireRG {
 		
 		final StringBuilder stb = new StringBuilder();
 		
+		int compteur = 0;
+		final int tailleListe = pList.size();
+		
 		for (final String chaine : pList) {
+			
+			compteur++;
+			
 			stb.append(chaine);
-			stb.append(SAUT_LIGNE);
+			
+			if (compteur < tailleListe) {
+				stb.append(SAUT_LIGNE);
+			}			
 		}
 		
 		return stb.toString();
@@ -954,6 +1023,7 @@ public final class CreateurGestionnaireRG {
 		
 		String resultat = null;
 		
+		/* Si le nombre < 10, rajoute un zéro à gauche. */
 		if (pNumero < 10) {
 			
 			resultat 

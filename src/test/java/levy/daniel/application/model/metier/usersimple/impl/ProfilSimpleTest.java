@@ -12,8 +12,8 @@ import org.junit.Test;
 
 
 /**
- * class CiviliteTest :<br/>
- * Test JUnit de la classe Civilite.<br/>
+ * class ProfilSimpleTest :<br/>
+ * Test JUnit de la classe ProfilSimple.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -28,10 +28,10 @@ import org.junit.Test;
  *
  * @author dan Lévy
  * @version 1.0
- * @since 9 déc. 2017
+ * @since 10 déc. 2017
  *
  */
-public class CiviliteTest {
+public class ProfilSimpleTest {
 
 	// ************************ATTRIBUTS************************************/
 	
@@ -41,57 +41,58 @@ public class CiviliteTest {
 	 */
 	public static final Boolean AFFICHAGE_GENERAL = true;
 
-	
-	/**
-	 * CIVILITE_M : String :<br/>
-	 * "M.".<br/>
-	 * CivilitesEnum.MONSIEUR.getAbreviationEnum().<br/>
-	 */
-	public static final String CIVILITE_M 
-		= CivilitesEnum.MONSIEUR.getAbreviationEnum();
 
+	/**
+	 * PROFIL_ADMIN : String :<br/>
+	 * "ADMINISTRATEUR".<br/>
+	 * ProfilsSimplesEnum.ADMINISTRATEUR.toString().<br/>
+	 */
+	public static final String PROFIL_ADMIN 
+		= ProfilsSimplesEnum.ADMINISTRATEUR.toString();
+	
+
+	/**
+	 * PROFIL_GESTIONNAIRE : String :<br/>
+	 * "GESTIONNAIRE_DONNEES".<br/>
+	 * ProfilsSimplesEnum.GESTIONNAIRE_DONNEES.toString().<br/>
+	 */
+	public static final String PROFIL_GESTIONNAIRE 
+		= ProfilsSimplesEnum.GESTIONNAIRE_DONNEES.toString();
+	
 	
 	/**
-	 * CIVILITE_MME : String :<br/>
-	 * "Mme".<br/>
-	 * CivilitesEnum.MADAME.getAbreviationEnum().<br/>
+	 * PROFIL_UTILISATEUR : String :<br/>
+	 * "UTILISATEUR".<br/>
+	 * ProfilsSimplesEnum.UTILISATEUR.toString().<br/>
 	 */
-	public static final String CIVILITE_MME 
-		= CivilitesEnum.MADAME.getAbreviationEnum();
+	public static final String PROFIL_UTILISATEUR 
+		= ProfilsSimplesEnum.UTILISATEUR.toString();
 	
 	
-	/**
-	 * CIVILITE_MLLE : String :<br/>
-	 * "Mlle".<br/>
-	 * CivilitesEnum.MADEMOISELLE.getAbreviationEnum().<br/>
-	 */
-	public static final String CIVILITE_MLLE 
-		= CivilitesEnum.MADEMOISELLE.getAbreviationEnum();
-	
-		
 	/**
 	 * TIRETS : String :<br/>
 	 * "--------------------------------------------------------".<br/>
 	 */
 	public static final String TIRETS 
 	= "--------------------------------------------------------";
-	
 
+	
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG = LogFactory.getLog(CiviliteTest.class);
+	private static final Log LOG 
+		= LogFactory.getLog(ProfilSimpleTest.class);
 
 	// *************************METHODES************************************/
 
 	
 	 /**
-	 * method CONSTRUCTEUR CiviliteTest() :<br/>
+	 * method CONSTRUCTEUR ProfilSimpleTest() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	public CiviliteTest() {
+	public ProfilSimpleTest() {
 		super();
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
@@ -126,17 +127,17 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objet1 
-		= new Civilite(2L
-				, CIVILITE_M);
+		final ProfilSimple objet1 
+		= new ProfilSimple(2L
+				, PROFIL_ADMIN);
 		
-		final Civilite objet2 
-		= new Civilite(3L
-				, CIVILITE_M);
+		final ProfilSimple objet2 
+		= new ProfilSimple(3L
+				, PROFIL_ADMIN);
 		
-		final Civilite objet3 
-		= new Civilite(4L
-				, CIVILITE_M);
+		final ProfilSimple objet3 
+		= new ProfilSimple(4L
+				, PROFIL_ADMIN);
 
 		
 		/* garantit le contrat Java reflexif x.equals(x). */
@@ -164,10 +165,10 @@ public class CiviliteTest {
 
 				
 		/* garantit que les null sont bien gérés dans equals(...). */
-		final Civilite objetNull1 
-			= new Civilite();
-		final Civilite objetNull2 
-			= new Civilite();
+		final ProfilSimple objetNull1 
+			= new ProfilSimple();
+		final ProfilSimple objetNull2 
+			= new ProfilSimple();
 
 		assertEquals("objetNull1.equals(objetNull2) : "
 				, objetNull1
@@ -185,12 +186,12 @@ public class CiviliteTest {
 					+ objetNull2.toString());
 		}
 		
-		final Civilite objet1AvecNull 
-			= new Civilite(2L
+		final ProfilSimple objet1AvecNull 
+			= new ProfilSimple(2L
 					, null);
 		
-		final Civilite objet2AvecNull 
-			= new Civilite(3L
+		final ProfilSimple objet2AvecNull 
+			= new ProfilSimple(3L
 					, null);
 
 		assertEquals("objet1AvecNull.equals(objet2AvecNull) : "
@@ -233,13 +234,13 @@ public class CiviliteTest {
 		
 		/* garantit le bon fonctionnement de equals() 
 		 * en cas d'inégalité métier. */
-		final Civilite objetDiff1 
-			= new Civilite(2L
-					, CIVILITE_M);
+		final ProfilSimple objetDiff1 
+			= new ProfilSimple(2L
+					, PROFIL_ADMIN);
 		
-		final Civilite objetDiff2 
-			= new Civilite(3L
-					, CIVILITE_MME);
+		final ProfilSimple objetDiff2 
+			= new ProfilSimple(3L
+					, PROFIL_UTILISATEUR);
 		
 		assertFalse("objetDiff1 PAS equals(objetDiff2) : "
 				, objetDiff1.equals(objetDiff2));
@@ -259,18 +260,18 @@ public class CiviliteTest {
 		
 	} // Fin de testEquals().______________________________________________
 
-	
 
+	
 	/**
 	 * method testCompareTo() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>compareTo(Civilite pLoc)</b> :
+	 * Teste la méthode <b>compareTo(ProfilSimple pLoc)</b> :
 	 * <li>garantit que compareTo(memeInstance) retourne 0.</li>
 	 * <li>garantit que compareTo(null) retourne un nombre négatif.</li>
 	 * <li>garantit le contrat Java Contrat Java : 
 	 * x.equals(y) ---> x.compareTo(y) == 0.</li>
 	 * <li>garantit que les null sont bien gérés 
-	 * dans compareTo(Civilite pLoc).</li>
+	 * dans compareTo(ProfilSimple pLoc).</li>
 	 * <li>garantit le bon fonctionnement (bon ordre) de compareTo().</li>
 	 * </ul>
 	 */
@@ -282,33 +283,33 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objet1 
-			= new Civilite(2L
-					, CIVILITE_M);
+		final ProfilSimple objet1 
+			= new ProfilSimple(2L
+					, PROFIL_ADMIN);
 		
-		final Civilite objet1MemeInstance = objet1;
+		final ProfilSimple objet1MemeInstance = objet1;
 		
-		final Civilite objetEquals1 
-			= new Civilite(10L
-					, CIVILITE_MLLE);
+		final ProfilSimple objetEquals1 
+			= new ProfilSimple(10L
+					, PROFIL_GESTIONNAIRE);
 		
-		final Civilite objetEquals2 
-			= new Civilite(11L
-					, CIVILITE_MLLE);
+		final ProfilSimple objetEquals2 
+			= new ProfilSimple(11L
+					, PROFIL_GESTIONNAIRE);
 
-		final Civilite objetNull1 
-		= new Civilite();
+		final ProfilSimple objetNull1 
+		= new ProfilSimple();
 	
-		final Civilite objetNull2 
-			= new Civilite();
+		final ProfilSimple objetNull2 
+			= new ProfilSimple();
 				
-		final Civilite objetCompAvant1 
-			= new Civilite(3L
-					, CIVILITE_M);
+		final ProfilSimple objetCompAvant1 
+			= new ProfilSimple(3L
+					, PROFIL_ADMIN);
 
-		final Civilite objetCompApres2 
-			= new Civilite(3L
-					, CIVILITE_MME);
+		final ProfilSimple objetCompApres2 
+			= new ProfilSimple(3L
+					, PROFIL_UTILISATEUR);
 
 	
 		/* garantit que compareTo(memeInstance) retourne 0. */		
@@ -356,7 +357,7 @@ public class CiviliteTest {
 		
 		
 		/* garantit que les null sont bien gérés dans 
-		 * compareTo(Civilite pLoc). */		
+		 * compareTo(ProfilSimple pLoc). */		
 		final int compareToEqualsNull = objetNull1.compareTo(objetNull2);
 		
 		assertTrue("InstanceNull.compareTo(equalsInstanceNull) doit retourner 0 : "
@@ -407,18 +408,18 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 		
-		final Civilite objetNull1 
-			= new Civilite();
+		final ProfilSimple objetNull1 
+			= new ProfilSimple();
 		
-		final Civilite objetNullClone1 
-			= (Civilite) objetNull1.clone();
+		final ProfilSimple objetNullClone1 
+			= (ProfilSimple) objetNull1.clone();
 		
-		final Civilite objet1 
-			= new Civilite(23L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(23L
+					, PROFIL_UTILISATEUR);
 		
-		final Civilite objetClone1 
-		= (Civilite) objet1.clone();
+		final ProfilSimple objetClone1 
+		= (ProfilSimple) objet1.clone();
 		
 		
 		/* garantit que les null sont bien gérés dans clone(). */
@@ -456,8 +457,8 @@ public class CiviliteTest {
 
 	} // Fin de testClone()._______________________________________________
 	
-	
-	
+
+		
 	/**
 	 * method testToString() :<br/>
 	 * <ul>
@@ -474,17 +475,17 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objetNull 
-			= new Civilite();
+		final ProfilSimple objetNull 
+			= new ProfilSimple();
 		
-		final Civilite objet1 
-			= new Civilite(2L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(2L
+					, PROFIL_ADMIN);
 
 		
 		/* garantit que les null sont bien gérés dans toString(). */
 		assertEquals("objetNull.toString() retourne une chaine : "
-				, "Civilite [id=null, civilité=null]"
+				, "ProfilSimple [id=null, profil=null]"
 						, objetNull.toString());
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -495,7 +496,7 @@ public class CiviliteTest {
 		
 		/* garantit le bon affichage de toString(). */
 		assertEquals("affichage : "
-				, "Civilite [id=2, civilité=Mme]"
+				, "ProfilSimple [id=2, profil=ADMINISTRATEUR]"
 						, objet1.toString());
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -523,15 +524,15 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objet1 
-			= new Civilite(2L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(2L
+					, PROFIL_GESTIONNAIRE);
 
 		/* garantit que getEnTeteCsv() retourne le bon en-tête csv. */
 		final String entete = objet1.getEnTeteCsv();
 		
 		assertEquals("en-tête csv : "
-				, "id;civilité;"
+				, "id;profil;"
 					, entete);
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -560,12 +561,12 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objetNull 
-		= new Civilite();
+		final ProfilSimple objetNull 
+		= new ProfilSimple();
 	
-		final Civilite objet1 
-			= new Civilite(27L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(27L
+					, PROFIL_UTILISATEUR);
 		
 		/* garantit que les null sont gérés dans toStringCsv(). */
 		final String ligneCsvNull = objetNull.toStringCsv();
@@ -584,7 +585,7 @@ public class CiviliteTest {
 		final String ligneCsv = objet1.toStringCsv();
 		
 		assertEquals("ligne csv : "
-				, "27;Mme;"
+				, "27;UTILISATEUR;"
 					, ligneCsv);
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -615,12 +616,12 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objetNull 
-		= new Civilite();
+		final ProfilSimple objetNull 
+			= new ProfilSimple();
 	
-		final Civilite objet1 
-			= new Civilite(27L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(27L
+					, PROFIL_UTILISATEUR);
 		
 		/* garantit que les null sont gérés 
 		 * dans getEnTeteColonne(int pI). */
@@ -635,8 +636,8 @@ public class CiviliteTest {
 		assertEquals("entete0 : ", "id", entete0);
 		assertEquals("enteteNull0 : ", "id", enteteNull0);
 		
-		assertEquals("entete1 : ", "civilité", entete1);
-		assertEquals("enteteNull1 : ", "civilité", enteteNull1);
+		assertEquals("entete1 : ", "profil", entete1);
+		assertEquals("enteteNull1 : ", "profil", enteteNull1);
 				
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -651,7 +652,7 @@ public class CiviliteTest {
 
 	} // Fin de testGetEnTeteColonne().____________________________________
 	
-
+	
 	
 	/**
 	 * method testGetValeurColonne() :<br/>
@@ -671,12 +672,12 @@ public class CiviliteTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final Civilite objetNull 
-		= new Civilite();
+		final ProfilSimple objetNull 
+		= new ProfilSimple();
 	
-		final Civilite objet1 
-			= new Civilite(27L
-					, CIVILITE_MME);
+		final ProfilSimple objet1 
+			= new ProfilSimple(27L
+					, PROFIL_ADMIN);
 		
 		/* garantit que les null sont gérés 
 		 * dans getValeurColonne(int pI). */
@@ -700,7 +701,7 @@ public class CiviliteTest {
 		final String valeur1 = (String) objet1.getValeurColonne(1);		
 		
 		assertEquals("valeur0 : ", "27", valeur0);		
-		assertEquals("valeur1 : ", "Mme", valeur1);
+		assertEquals("valeur1 : ", "ADMINISTRATEUR", valeur1);
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {	
@@ -713,5 +714,5 @@ public class CiviliteTest {
 	} // Fin de testGetValeurColonne().____________________________________
 	
 
-	
-} // FIN DE LA CLASSE CiviliteTest.------------------------------------------
+
+} // FIN DE LA CLASSE ProfilSimpleTest.--------------------------------------

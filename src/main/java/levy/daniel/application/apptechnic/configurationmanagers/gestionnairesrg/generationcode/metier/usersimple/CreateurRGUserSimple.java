@@ -1,4 +1,4 @@
-package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.metier.usersimple;
+package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.generationcode.metier.usersimple;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,5 +37,15 @@ public class CreateurRGUserSimple {
 	// *************************METHODES************************************/
 	
 	
+	 /**
+	 * method CONSTRUCTEUR CreateurRGUserSimple() :<br/>
+	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
+	 * <br/>
+	 */
+	public CreateurRGUserSimple() {
+		super();
+	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
-}
+	
+	
+} // FIN DE LA CLASSE CreateurRGUserSimple.----------------------------------

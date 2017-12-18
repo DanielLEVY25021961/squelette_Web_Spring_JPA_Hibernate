@@ -18,21 +18,22 @@ import org.apache.commons.logging.LogFactory;
 import levy.daniel.application.model.metier.IExportateurCsv;
 import levy.daniel.application.model.metier.IExportateurJTable;
 
+
 /**
- * class Civilite :<br/>
+ * class ProfilSimple :<br/>
  * <ul>
- * <li>Classe modélisant une <b>Civilite</b> (M., Mme, ...) 
- * d'un UserSimple.</li>
- * <li>La civilité ne peut prendre <i>que les valeurs</i> définies dans 
- * l'ENUMERATION <b>CivilitesEnum</b>.</li>
+ * <li>Classe modélisant un <b>ProfilSimple</b> 
+ * (ADMINISTRATEUR, UTILISATEUR, ...) d'un UserSimple.</li>
+ * <li>Le ProfilSimple ne peut prendre <i>que les valeurs</i> 
+ * définies dans l'ENUMERATION <b>ProfilsSimplesEnum</b>.</li>
  * </ul>
  * 
  *
  * - Exemple d'utilisation :<br/>
- * <code>//Instanciation d'un Civilite en lui passant la String 
- * associée à l'instance MONSIEUR de l'énumération.</code><br/>
- * <code>Civilite CIVILITE_M = new 
- * Civilite(CivilitesEnum.MONSIEUR.toString());</code><br/>
+ * <code>//Instanciation d'un ProfilSimple en lui passant la String 
+ * associée à l'instance ADMINISTRATEUR de l'énumération.</code><br/>
+ * <code>ProfilSimple PROFIL_ADMIN = new 
+ * ProfilSimple(ProfilsSimplesEnum.ADMINISTRATEUR.toString());</code><br/>
  *<br/>
  * 
  * - Mots-clé :<br/>
@@ -46,19 +47,20 @@ import levy.daniel.application.model.metier.IExportateurJTable;
  *
  * @author dan Lévy
  * @version 1.0
- * @since 9 déc. 2017
+ * @since 10 déc. 2017
  *
  */
-@Entity(name="Civilite")
-@Table(name="CIVILITES", schema="PUBLIC"
-, uniqueConstraints=@UniqueConstraint(name="UNICITE_CIVILITE"
-, columnNames={"CIVILITE"}))
-public class Civilite implements Serializable
-					, Comparable<Civilite>, Cloneable
-							, IExportateurCsv, IExportateurJTable {
+@Entity(name="ProfilSimple")
+@Table(name="PROFILSSIMPLES", schema="PUBLIC"
+, uniqueConstraints=@UniqueConstraint(name="UNICITE_PROFIL"
+, columnNames={"PROFIL"}))
+public class ProfilSimple implements Serializable
+					, Comparable<ProfilSimple>, Cloneable
+								, IExportateurCsv, IExportateurJTable {
 
 	// ************************ATTRIBUTS************************************/
-	
+
+
 	/**
 	 * serialVersionUID : long :<br/>
 	 * .<br/>
@@ -95,80 +97,80 @@ public class Civilite implements Serializable
 	
 	
 	/**
-	 * civiliteString : String :<br/>
-	 * civilité d'un UserSimple (M., Mme, ...).<br/>
+	 * profilString : String :<br/>
+	 * profil d'un UserSimple (ADMINISTRATEUR, UTILISATEUR, ...).<br/>
 	 */
-	private String civiliteString;
+	private String profilString;
 
 	
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG = LogFactory.getLog(Civilite.class);
-
+	private static final Log LOG = LogFactory.getLog(ProfilSimple.class);
 
 
 	// *************************METHODES************************************/
-	
+
 	
 	 /**
-	 * method CONSTRUCTEUR Civilite() :<br/>
+	 * method CONSTRUCTEUR ProfilSimple() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	public Civilite() {
+	public ProfilSimple() {
 		this(null, null);
 	} // Fin du CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
 	
 	
 	/**
-	 * method CONSTRUCTEUR Civilite(
+	 * method CONSTRUCTEUR ProfilSimple(
 	 * Long pId
-	 * , String pCivilite) :<br/>
+	 * , String pProfilString) :<br/>
 	 * <ul>
 	 * <li>CONSTRUCTEUR COMPLET.</li>
 	 * <li>SANS ID en base.</li>
 	 * </ul>
 	 *
-	 * @param pCivilite : String : Civilité d'un 
-	 * UserSimple (M., Mme, ...).<br/>
+	 * @param pProfilString : String : Profil d'un 
+	 * UserSimple (ADMINISTRATEUR, UTILISATEUR, ...).<br/>
 	 */
-	public Civilite(
-			final String pCivilite) {
+	public ProfilSimple(
+			final String pProfilString) {
 		
-		this(null, pCivilite);
+		this(null, pProfilString);
 		
 	} // Fin du CONSTRUCTEUR COMPLET.______________________________________
 	
 	
 	
 	 /**
-	 * method CONSTRUCTEUR Civilite(
+	 * method CONSTRUCTEUR ProfilSimple(
 	 * Long pId
-	 * , String pCivilite) :<br/>
+	 * , String pProfilString) :<br/>
 	 * <ul>
 	 * <li>CONSTRUCTEUR COMPLET BASE.</li>
 	 * <li>AVEC ID en base.</li>
 	 * </ul>
 	 *
 	 * @param pId : Long : ID en base.<br/>
-	 * @param pCivilite : String : Civilité d'un 
-	 * UserSimple (M., Mme, ...).<br/>
+	 * @param pProfilString : String : Profil d'un 
+	 * UserSimple (ADMINISTRATEUR, UTILISATEUR, ...).<br/>
 	 */
-	public Civilite(
+	public ProfilSimple(
 			final Long pId
-				, final String pCivilite) {
+				, final String pProfilString) {
 		
 		super();
 		
 		this.id = pId;
-		this.civiliteString = pCivilite;
+		this.profilString = pProfilString;
 		
 	} // Fin de CONSTRUCTEUR COMPLET BASE._________________________________
 
 	
+
 	
 	/**
 	 * {@inheritDoc}
@@ -176,11 +178,11 @@ public class Civilite implements Serializable
 	@Override
 	public final int hashCode() {
 
-		final int prime = 31;
-		int result = 1;
+		final int prime = 31;		
+		int result = 1;		
 		result = prime * result 
-				+ ((this.civiliteString == null) ? 0 
-						: this.civiliteString.hashCode());
+				+ ((this.profilString == null) ? 0 
+						: this.profilString.hashCode());		
 		return result;
 		
 	} // Fin de hashCode().________________________________________________
@@ -191,8 +193,8 @@ public class Civilite implements Serializable
 	 * {@inheritDoc}
 	 * <br/>
 	 * <ul>
-	 * <b>equals(...) pour un Civilite</b> sur :
-	 * <li>"civiliteString".</li>
+	 * <b>equals(...) pour un ProfilSimple</b> sur :
+	 * <li>"profilString".</li>
 	 *</ul>
 	 * <br/>
 	 */
@@ -208,19 +210,18 @@ public class Civilite implements Serializable
 			return false;
 		}
 		
-		if (!(pObjet instanceof Civilite)) {
+		if (!(pObjet instanceof ProfilSimple)) {
 			return false;
 		}
 		
-		final Civilite other = (Civilite) pObjet;
+		final ProfilSimple other = (ProfilSimple) pObjet;
 		
-		if (this.civiliteString == null) {
-			if (other.civiliteString != null) {
+		if (this.profilString == null) {
+			if (other.profilString != null) {
 				return false;
 			}
 		}
-		else if (!this.civiliteString
-				.equalsIgnoreCase(other.civiliteString)) {
+		else if (!this.profilString.equals(other.profilString)) {
 			return false;
 		}
 		
@@ -235,8 +236,8 @@ public class Civilite implements Serializable
 	 */
 	@Override
 	public final int compareTo(
-			final Civilite pObjet) {
-
+			final ProfilSimple pObjet) {
+		
 		if (this == pObjet) {
 			return 0;
 		}
@@ -245,40 +246,40 @@ public class Civilite implements Serializable
 			return -1;
 		}
 
-		int compareCivilite = 0;
+		int compareProfilString = 0;
 		
-		if (this.civiliteString == null) {
-			if (pObjet.getCiviliteString() != null) {
+		if (this.profilString == null) {
+			if (pObjet.getProfilString() != null) {
 				return +1;
 			}
 			
 			return 0;
 		}
 		
-		if (pObjet.getCiviliteString() == null) {
+		if (pObjet.getProfilString() == null) {
 			return -1;
 		}
 				
-		compareCivilite 
-			= this.civiliteString
-			.compareToIgnoreCase(pObjet.getCiviliteString());
+		compareProfilString 
+			= this.profilString
+			.compareToIgnoreCase(pObjet.getProfilString());
 		
-		return compareCivilite;
+		return compareProfilString;
 
 	} // Fin de compareTo(...).____________________________________________
-	
 
+	
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final Civilite clone() throws CloneNotSupportedException {
+	public final ProfilSimple clone() throws CloneNotSupportedException {
 		
-		final Civilite clone = (Civilite) super.clone();
+		final ProfilSimple clone = (ProfilSimple) super.clone();
 		
 		clone.setId(this.id);
-		clone.setCiviliteString(this.civiliteString);
+		clone.setProfilString(this.profilString);
 		
 		return clone;
 		
@@ -294,22 +295,22 @@ public class Civilite implements Serializable
 
 		final StringBuilder builder = new StringBuilder();
 		
-		builder.append("Civilite [");
+		builder.append("ProfilSimple [");
 		
 		builder.append("id=");
 		if (this.id != null) {
 			builder.append(this.id);
 		} else {
-			builder.append(NULL);			
+			builder.append(NULL);
 		}
 		
 		builder.append(VIRGULE_ESPACE);
 		
-		builder.append("civilité=");
-		if (this.civiliteString != null) {
-			builder.append(this.civiliteString);
+		builder.append("profil=");
+		if (this.profilString != null) {			
+			builder.append(this.profilString);
 		} else {
-			builder.append(NULL);			
+			builder.append(NULL);
 		}
 		
 		builder.append(']');
@@ -323,14 +324,14 @@ public class Civilite implements Serializable
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * <b>en-tête csv pour un Civilite</b> :<br/>
-	 * "id;civilité;".<br/>
+	 * <b>en-tête csv pour un ProfilSimple</b> :<br/>
+	 * "id;profil;".<br/>
 	 * <br/>
 	 */
 	@Transient
 	@Override
 	public final String getEnTeteCsv() {
-		return "id;civilité;";
+		return "id;profil;";
 	} // Fin de getEnTeteCsv().____________________________________________
 
 
@@ -338,8 +339,8 @@ public class Civilite implements Serializable
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * <b>ligne csv pour un Civilite</b> :<br/>
-	 * "id;civilité;".<br/>
+	 * <b>ligne csv pour un ProfilSimple</b> :<br/>
+	 * "id;profil;".<br/>
 	 * <br/>
 	 */
 	@Override
@@ -351,8 +352,8 @@ public class Civilite implements Serializable
 		stb.append(this.getId());
 		stb.append(POINT_VIRGULE);
 		
-		/* civilite. */
-		stb.append(this.getCiviliteString());
+		/* profil. */
+		stb.append(this.getProfilString());
 		stb.append(POINT_VIRGULE);
 		
 		return stb.toString();
@@ -360,12 +361,12 @@ public class Civilite implements Serializable
 	} // Fin de toStringCsv()._____________________________________________
 
 
-
+	
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * <b>en-tête Jtable pour un Civilite</b> :<br/>
-	 * "id;civilité;".<br/>
+	 * <b>en-tête Jtable pour un ProfilSimple</b> :<br/>
+	 * "id;profil;".<br/>
 	 * <br/>
 	 */
 	@Transient
@@ -382,7 +383,7 @@ public class Civilite implements Serializable
 			break;
 			
 		case 1:
-			entete = "civilité";
+			entete = "profil";
 			break;
 			
 		default:
@@ -400,8 +401,8 @@ public class Civilite implements Serializable
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * <b>ligne Jtable pour un Civilite</b> :<br/>
-	 * "id;civilité;".<br/>
+	 * <b>ligne Jtable pour un ProfilSimple</b> :<br/>
+	 * "id;profil;".<br/>
 	 * <br/>
 	 */
 	@Transient
@@ -421,7 +422,7 @@ public class Civilite implements Serializable
 			break;
 
 		case 1:
-			valeur = this.getCiviliteString();
+			valeur = this.getProfilString();
 			break;
 			
 		default:
@@ -435,7 +436,7 @@ public class Civilite implements Serializable
 	} // Fin de getValeurColonne(...)._____________________________________
 
 
-
+	
 	/**
 	 * method getId() :<br/>
 	 * Getter de l'ID en base.<br/>
@@ -445,7 +446,7 @@ public class Civilite implements Serializable
 	 */
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID_CIVILITE")
+	@Column(name="ID_PROFILSIMPLE")
 	public Long getId() {	
 		return this.id;
 	} // Fin de getId().___________________________________________________
@@ -468,35 +469,38 @@ public class Civilite implements Serializable
 
 	
 	/**
-	 * method getCiviliteString() :<br/>
-	 * Getter de la civilité d'un UserSimple (M., Mme, ...).<br/>
+	 * method getProfilString() :<br/>
+	 * Getter du profil d'un UserSimple 
+	 * (ADMINISTRATEUR, UTILISATEUR, ...).<br/>
 	 * <br/>
 	 *
-	 * @return civiliteString : String.<br/>
+	 * @return profilString : String.<br/>
 	 */
-	@Column(name = "CIVILITE"
-	, unique = true, nullable = false
-	, updatable = true, insertable = true)
-	@Size(min = 0, max = 10)
-	public String getCiviliteString() {	
-		return this.civiliteString;
-	} // Fin de getCiviliteString()._______________________________________
+	@Column(name = "PROFIL"
+			, unique = true, nullable = false
+			, updatable = true, insertable = true)
+			@Size(min = 1, max = 30)
+	public String getProfilString() {	
+		return this.profilString;
+	} // Fin de getProfilString()._________________________________________
 
 
 	
 	/**
-	* method setCiviliteString(
-	* String pCivilite) :<br/>
-	* Setter de la civilité d'un UserSimple (M., Mme, ...).<br/>
+	* method setProfilString(
+	* String pProfilString) :<br/>
+	* Setter du profil d'un UserSimple 
+	* (ADMINISTRATEUR, UTILISATEUR, ...).<br/>
 	* <br/>
 	*
-	* @param pCivilite : String : valeur à passer à civiliteString.<br/>
+	* @param pProfilString : String : 
+	* valeur à passer à profilString.<br/>
 	*/
-	public void setCiviliteString(
-			final String pCivilite) {	
-		this.civiliteString = pCivilite;
-	} // Fin de setCiviliteString(...).____________________________________
+	public void setProfilString(
+			final String pProfilString) {	
+		this.profilString = pProfilString;
+	} // Fin de setProfilString(...).______________________________________
 
-		
 	
-} // FIN DE LA CLASSE Civilite.----------------------------------------------
+	
+} // FIN DE LA CLASSE ProfilSimple.------------------------------------------

@@ -1,4 +1,4 @@
-package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.metier.usersimple;
+package levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.generationcode;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
  * @since 7 déc. 2017
  *
  */
-public class TestGen {
+public final class TestGen {
 
 	// ************************ATTRIBUTS************************************/
 
@@ -175,11 +175,40 @@ public class TestGen {
 				+ " doit contenir entre [3] et [20] caractères";
 
 
-	public static final String RG_USERSIMPLE_MDP_MOTIF_13 = "RG_USERSIMPLE_MDP_MOTIF_13 : mdp du UserSimple doit respecter un motif (Regex)";
+	/**
+	 * RG_USERSIMPLE_MDP_MOTIF_13 : String :<br/>
+	 * "RG_USERSIMPLE_MDP_MOTIF_13
+	 *  : le mdp du UserSimple doit respecter un motif (Regex)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_MDP_MOTIF_13 
+		= "RG_USERSIMPLE_MDP_MOTIF_13"
+				+ " : le mdp du UserSimple"
+				+ " doit respecter un motif (Regex)";
+
 	
-	public static final String RG_USERSIMPLE_PROFIL_RENSEIGNE_14 = "RG_USERSIMPLE_PROFIL_RENSEIGNE_14 : profil du UserSimple doit être renseigné (obligatoire)";
-	
-	public static final String RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 = "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 : profil du UserSimple doit respecter un ensemble fini de valeurs (nomenclature)";
+	/**
+	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_14 : String :<br/>
+	 * "RG_USERSIMPLE_PROFIL_RENSEIGNE_14
+	 *  : le profil du UserSimple
+	 *   doit être renseigné (obligatoire)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_PROFIL_RENSEIGNE_14 
+		= "RG_USERSIMPLE_PROFIL_RENSEIGNE_14"
+				+ " : le profil du UserSimple"
+				+ " doit être renseigné (obligatoire)";
+
+		
+	/**
+	 * RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 : String :<br/>
+	 * "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15
+	 *  : le profil du UserSimple
+	 *   doit respecter un ensemble fini de valeurs (nomenclature)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 
+		= "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15"
+				+ " : le profil du UserSimple"
+				+ " doit respecter un ensemble fini de valeurs"
+				+ " (nomenclature)";
 
 
 	/**
@@ -188,6 +217,20 @@ public class TestGen {
 	 */
 
 	private static final Log LOG = LogFactory.getLog(TestGen.class);
+	
 
 	// *************************METHODES************************************/
-}
+	
+	
+	 /**
+	 * method CONSTRUCTEUR TestGen() :<br/>
+	 * .<br/>
+	 * <br/>
+	 *
+	 */
+	private TestGen() {
+		super();
+	}
+	
+	
+} // FIN DE LA CLASSE TestGen.-----------------------------------------------

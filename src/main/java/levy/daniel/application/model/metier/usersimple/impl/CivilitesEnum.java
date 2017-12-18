@@ -10,6 +10,7 @@ package levy.daniel.application.model.metier.usersimple.impl;
  * <li>Le constructeur et les accesseurs permettent 
  * d'accéder aux abréviations des civilités ("M." pour MONSIEUR).</li>
  * </ul>
+ * <br/>
  *
  *
  * - Exemple d'utilisation :<br/>
