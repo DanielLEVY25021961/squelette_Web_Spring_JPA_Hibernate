@@ -273,7 +273,11 @@ public interface IUserSimple
 	/**
 	 * method getEmail() :<br/>
 	 * Getter de l'E-mail du UserSimple.<br/>
-	 * <br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_EMAIL_MOTIF_08
+	 *  : l'email du UserSimple doit respecter un motif (Regex) 
+	 *  d'un email (du type albacor.trust@google.fr)".<br/></li>
+	 * </ul>
 	 *
 	 * @return email : String.<br/>
 	 */
@@ -296,7 +300,14 @@ public interface IUserSimple
 	/**
 	 * method getLogin() :<br/>
 	 * Getter du Login.<br/>
-	 * <br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_LOGIN_RENSEIGNE_09
+	 *  : le login du UserSimple
+	 *   doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_LOGIN_LONGUEUR_10
+	 *  : le login du UserSimple 
+	 *  doit contenir entre [1] et [100] caractères".</li>
+	 * </ul>
 	 *
 	 * @return login : String.<br/>
 	 */
@@ -319,7 +330,17 @@ public interface IUserSimple
 	/**
 	 * method getMdp() :<br/>
 	 * Getter du Mot de passe.<br/>
-	 * <br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_MDP_RENSEIGNE_11
+	 *  : le mdp du UserSimple
+	 *   doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_MDP_LONGUEUR_12
+	 *  : le mdp du UserSimple
+	 *   doit contenir entre [3] et [20] caractères".</li>
+	 * <li>"RG_USERSIMPLE_MDP_MOTIF_13
+	 *  : le mdp du UserSimple
+	 *   doit respecter un motif (Regex)".</li>
+	 * </ul>
 	 *
 	 * @return mdp : String.<br/>
 	 */
@@ -343,7 +364,16 @@ public interface IUserSimple
 	 * method getProfil() :<br/>
 	 * Getter du Profil du UserSimple 
 	 * (administrateur, modérateur, ...).<br/>
-	 * <br/>
+	 * <ul>
+	 * <li>Le profil ne peut prendre <i>que les valeurs</i> définies dans 
+	 * l'ENUMERATION <b>ProfilsSimplesEnum</b>.</li>
+	 * <li>"RG_USERSIMPLE_PROFIL_RENSEIGNE_14
+	 *  : le profil du UserSimple
+	 *   doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_PROFIL_NOMENCLATURE_15
+	 *  : le profil du UserSimple
+	 *   doit respecter un ensemble fini de valeurs (nomenclature)".</li>
+	 * </ul>
 	 *
 	 * @return profil : String.<br/>
 	 */

@@ -131,7 +131,8 @@ public final class TestGen {
 	/**
 	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_09 : String :<br/>
 	 * "RG_USERSIMPLE_LOGIN_RENSEIGNE_09
-	 *  : le login du UserSimple doit être renseigné (obligatoire)".<br/>
+	 *  : le login du UserSimple
+	 *   doit être renseigné (obligatoire)".<br/>
 	 */
 	public static final String RG_USERSIMPLE_LOGIN_RENSEIGNE_09 
 		= "RG_USERSIMPLE_LOGIN_RENSEIGNE_09"

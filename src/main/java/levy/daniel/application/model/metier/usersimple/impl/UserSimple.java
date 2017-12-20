@@ -753,7 +753,6 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
-	/* cascade = {CascadeType.PERSIST, CascadeType.MERGE} */
 	@ManyToOne(targetEntity = Civilite.class
 			, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_CIVILITE"
@@ -905,10 +904,12 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
-	@Column(name = "PROFIL"
-	, unique = false, nullable = false
-	, updatable = true, insertable = true)
-	@Size(min = 1, max = 30)
+	@ManyToOne(targetEntity = ProfilSimple.class
+			, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_PROFIL"
+	, unique = false, nullable = true
+	, insertable = true, updatable = true
+	, foreignKey = @ForeignKey(name = "FK_USERSIMPLE_PROFILSIMPLE"))
 	@Override
 	public String getProfil() {	
 		return this.profil;

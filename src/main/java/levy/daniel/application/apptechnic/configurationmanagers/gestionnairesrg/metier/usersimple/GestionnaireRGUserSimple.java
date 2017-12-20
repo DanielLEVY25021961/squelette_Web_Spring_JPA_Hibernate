@@ -132,68 +132,103 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 				+ "doit contenir "
 				+ "entre [1] et [50] lettres";
 	
+
 	/**
-	 * RG_USERSIMPLE_EMAIL_MOTIF_07 : String :<br/>
-	 * "RG_USERSIMPLE_EMAIL_MOTIF_07
-	 *  : l'e-mail du UserSimple doit respecter le motif (Regex) d'un e-mail".<br/>
+	 * RG_USERSIMPLE_EMAIL_MOTIF_08 : String :<br/>
+	 * "RG_USERSIMPLE_EMAIL_MOTIF_08
+	 *  : l'email du UserSimple doit respecter un motif (Regex) 
+	 *  d'un email (du type albacor.trust@google.fr)".<br/>
 	 */
-	public static final String RG_USERSIMPLE_EMAIL_MOTIF_07 
-	= "RG_USERSIMPLE_EMAIL_MOTIF_07"
-			+ " : l'e-mail du UserSimple doit respecter le motif (Regex) d'un e-mail";
+	public static final String RG_USERSIMPLE_EMAIL_MOTIF_08 
+		= "RG_USERSIMPLE_EMAIL_MOTIF_08"
+				+ " : l'email du UserSimple "
+				+ "doit respecter le motif "
+				+ "(Regex) d'un email (du type albacor.trust@google.fr)";
+
+
+	/**
+	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_09 : String :<br/>
+	 * "RG_USERSIMPLE_LOGIN_RENSEIGNE_09
+	 *  : le login du UserSimple
+	 *   doit être renseigné (obligatoire)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_LOGIN_RENSEIGNE_09 
+		= "RG_USERSIMPLE_LOGIN_RENSEIGNE_09"
+				+ " : le login du UserSimple"
+				+ " doit être renseigné (obligatoire)";
+
+
+	/**
+	 * RG_USERSIMPLE_LOGIN_LONGUEUR_10 : String :<br/>
+	 * "RG_USERSIMPLE_LOGIN_LONGUEUR_10
+	 *  : le login du UserSimple 
+	 *  doit contenir entre [1] et [100] caractères".<br/>
+	 */
+	public static final String RG_USERSIMPLE_LOGIN_LONGUEUR_10 
+		= "RG_USERSIMPLE_LOGIN_LONGUEUR_10"
+				+ " : le login du UserSimple"
+				+ " doit contenir entre [1] et [100] caractères";
+
+
+	/**
+	 * RG_USERSIMPLE_MDP_RENSEIGNE_11 : String :<br/>
+	 * "RG_USERSIMPLE_MDP_RENSEIGNE_11
+	 *  : le mdp du UserSimple
+	 *   doit être renseigné (obligatoire)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_MDP_RENSEIGNE_11 
+		= "RG_USERSIMPLE_MDP_RENSEIGNE_11"
+				+ " : le mdp du UserSimple"
+				+ " doit être renseigné (obligatoire)";
+
+
+	/**
+	 * RG_USERSIMPLE_MDP_LONGUEUR_12 : String :<br/>
+	 * "RG_USERSIMPLE_MDP_LONGUEUR_12
+	 *  : le mdp du UserSimple
+	 *   doit contenir entre [3] et [20] caractères".<br/>
+	 */
+	public static final String RG_USERSIMPLE_MDP_LONGUEUR_12 
+		= "RG_USERSIMPLE_MDP_LONGUEUR_12"
+				+ " : le mdp du UserSimple"
+				+ " doit contenir entre [3] et [20] caractères";
+
+
+	/**
+	 * RG_USERSIMPLE_MDP_MOTIF_13 : String :<br/>
+	 * "RG_USERSIMPLE_MDP_MOTIF_13
+	 *  : le mdp du UserSimple
+	 *   doit respecter un motif (Regex)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_MDP_MOTIF_13 
+		= "RG_USERSIMPLE_MDP_MOTIF_13"
+				+ " : le mdp du UserSimple"
+				+ " doit respecter un motif (Regex)";
+
 	
 	/**
-	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_08 : String :<br/>
-	 * "RG_USERSIMPLE_LOGIN_RENSEIGNE_08
-	 *  : le login du UserSimple doit être renseigné".<br/>
+	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_14 : String :<br/>
+	 * "RG_USERSIMPLE_PROFIL_RENSEIGNE_14
+	 *  : le profil du UserSimple
+	 *   doit être renseigné (obligatoire)".<br/>
 	 */
-	public static final String RG_USERSIMPLE_LOGIN_RENSEIGNE_08 
-	= "RG_USERSIMPLE_LOGIN_RENSEIGNE_08"
-			+ " : le login du UserSimple doit être renseigné";
-	
+	public static final String RG_USERSIMPLE_PROFIL_RENSEIGNE_14 
+		= "RG_USERSIMPLE_PROFIL_RENSEIGNE_14"
+				+ " : le profil du UserSimple"
+				+ " doit être renseigné (obligatoire)";
+
+		
 	/**
-	 * RG_USERSIMPLE_LOGIN_LONGUEUR_09 : String :<br/>
-	 * "RG_USERSIMPLE_LOGIN_LONGUEUR_09
-	 *  : le login du UserSimple doit contenir entre 1 et 100 caractères".<br/>
+	 * RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 : String :<br/>
+	 * "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15
+	 *  : le profil du UserSimple
+	 *   doit respecter un ensemble fini de valeurs (nomenclature)".<br/>
 	 */
-	public static final String RG_USERSIMPLE_LOGIN_LONGUEUR_09 
-	= "RG_USERSIMPLE_LOGIN_LONGUEUR_09"
-			+ " : le login du UserSimple doit contenir entre 1 et 100 caractères";
-	
-	/**
-	 * RG_USERSIMPLE_MDP_RENSEIGNE_10 : String :<br/>
-	 * "RG_USERSIMPLE_MDP_RENSEIGNE_10
-	 *  : le mot de passe du UserSimple doit être renseigné".<br/>
-	 */
-	public static final String RG_USERSIMPLE_MDP_RENSEIGNE_10 
-	= "RG_USERSIMPLE_MDP_RENSEIGNE_10"
-			+ " : le mot de passe du UserSimple doit être renseigné";
-	
-	/**
-	 * RG_USERSIMPLE_MDP_LONGUEUR_11 : String :<br/>
-	 * "RG_USERSIMPLE_MDP_LONGUEUR_11
-	 *  : le mot de passe du UserSimple doit contenir entre 3 et 20 caractères".<br/>
-	 */
-	public static final String RG_USERSIMPLE_MDP_LONGUEUR_11 
-	= "RG_USERSIMPLE_MDP_LONGUEUR_11"
-			+ " : le mot de passe du UserSimple doit contenir entre 3 et 20 caractères";
-	
-	/**
-	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_12 : String :<br/>
-	 * "RG_USERSIMPLE_PROFIL_RENSEIGNE_12
-	 *  : le profil du UserSimple doit être renseigné".<br/>
-	 */
-	public static final String RG_USERSIMPLE_PROFIL_RENSEIGNE_12 
-	= "RG_USERSIMPLE_PROFIL_RENSEIGNE_12"
-			+ " : le profil du UserSimple doit être renseigné";
-	
-	/**
-	 * RG_USERSIMPLE_PROFIL_LONGUEUR_13 : String :<br/>
-	 * "RG_USERSIMPLE_PROFIL_LONGUEUR_13
-	 *  : le profil du UserSimple doit contenir entre 1 et 30 lettres".<br/>
-	 */
-	public static final String RG_USERSIMPLE_PROFIL_LONGUEUR_13 
-	= "RG_USERSIMPLE_PROFIL_LONGUEUR_13"
-			+ " : le profil du UserSimple doit contenir entre 1 et 30 lettres";
+	public static final String RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 
+		= "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15"
+				+ " : le profil du UserSimple"
+				+ " doit respecter un ensemble fini de valeurs"
+				+ " (nomenclature)";
 
 	
 	/* PRENOM. */

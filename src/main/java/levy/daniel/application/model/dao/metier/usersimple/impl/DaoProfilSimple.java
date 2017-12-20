@@ -12,27 +12,27 @@ import org.springframework.stereotype.Repository;
 
 import levy.daniel.application.model.dao.AbstractDaoGenericJPASpring;
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
-import levy.daniel.application.model.dao.metier.usersimple.IDaoCivilite;
-import levy.daniel.application.model.metier.usersimple.impl.Civilite;
+import levy.daniel.application.model.dao.metier.usersimple.IDaoProfilSimple;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
 
 
 /**
- * class DaoCivilite :<br/>
+ * class DaoProfilSimple :<br/>
  * <ul>
- * <li>DAO <b>CONCRET</b> pour les <b>Civilite</b>.</li>
+ * <li>DAO <b>CONCRET</b> pour les <b>ProfilSimple</b>.</li>
  * <li>
- * Implémente l'interface IDaoCivilite.
+ * Implémente l'interface IDaoProfilSimple.
  * </li>
  * <li>
  * Hérite de la classe abstraite 
- * AbstractDaoGenericJPASpring&lt;Civilite, Long&gt;.
+ * AbstractDaoGenericJPASpring&lt;ProfilSimple, Long&gt;.
  * </li>
  * <li>
  * Certaines méthodes (getOne(ID), ...) sont 
  * <b>compatibles SPRING DATA</b>.
  * </li>
  * <li>
- * Annoté (SPRING) <b>Repository(value="DaoCivilite")</b> 
+ * Annoté (SPRING) <b>Repository(value="DaoProfilSimple")</b> 
  * pour l'<b>injection</b> (Autowiring) dans les SERVICES par SPRING.
  * </li>
  * <br/>
@@ -59,19 +59,19 @@ import levy.daniel.application.model.metier.usersimple.impl.Civilite;
  * @since 10 déc. 2017
  *
  */
-@Repository(value="DaoCivilite")
-public class DaoCivilite 
-		extends AbstractDaoGenericJPASpring<Civilite, Long> 
-												implements IDaoCivilite {
+@Repository(value="DaoProfilSimple")
+public class DaoProfilSimple 
+		extends AbstractDaoGenericJPASpring<ProfilSimple, Long> 
+												implements IDaoProfilSimple {
 
 	// ************************ATTRIBUTS************************************/
 
 	/**
-	 * CLASSE_DAO_CIVILITE : String :<br/>
-	 * "Classe DaoCivilite".<br/>
+	 * CLASSE_DAO_PROFILSIMPLE : String :<br/>
+	 * "Classe DaoProfilSimple".<br/>
 	 */
-	public static final String CLASSE_DAO_CIVILITE 
-		= "Classe DaoCivilite";
+	public static final String CLASSE_DAO_PROFILSIMPLE 
+		= "Classe DaoProfilSimple";
 
 	
 	/**
@@ -83,30 +83,30 @@ public class DaoCivilite
 	
 	/**
 	 * SELECT_OBJET : String :<br/>
-	 * "select civilite from 
-	 * Civilite as civilite ".<br/>
+	 * "select profilsimple from 
+	 * ProfilSimple as profilsimple ".<br/>
 	 */
 	public static final String SELECT_OBJET 
-		= "select civilite from "
-				+ "Civilite as civilite ";
+		= "select profilsimple from "
+				+ "ProfilSimple as profilsimple ";
 
 
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG = LogFactory.getLog(DaoCivilite.class);
+	private static final Log LOG = LogFactory.getLog(DaoProfilSimple.class);
 
 	
 	// *************************METHODES************************************/
 
 	
 	 /**
-	 * method CONSTRUCTEUR DaoCivilite() :<br/>
+	 * method CONSTRUCTEUR DaoProfilSimple() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	public DaoCivilite() {
+	public DaoProfilSimple() {
 		super();
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 
@@ -117,7 +117,7 @@ public class DaoCivilite
 	 */
 	@Override
 	public final Long createReturnId(
-			final Civilite pObject) 
+			final ProfilSimple pObject) 
 				throws AbstractDaoException {
 
 		/* retourne null si pObject == null. */
@@ -141,7 +141,7 @@ public class DaoCivilite
 		}
 
 		/* Crée l'Objet en base ou jette une AbstractDaoException. */
-		final Civilite objetPersistant = this.create(pObject);
+		final ProfilSimple objetPersistant = this.create(pObject);
 
 		/* retourne null si l'objet pObject n'a pu être créé en base. */
 		if (objetPersistant == null) {
@@ -159,8 +159,8 @@ public class DaoCivilite
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final Civilite retrieve(
-			final Civilite pObject) 
+	public final ProfilSimple retrieve(
+			final ProfilSimple pObject) 
 						throws AbstractDaoException {
 
 		/* return null si pObject == null. */
@@ -168,25 +168,25 @@ public class DaoCivilite
 			return null;
 		}
 		
-		Civilite objetResultat = null;
+		ProfilSimple objetResultat = null;
 		
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where civilite.civiliteString = :pCiviliteString";
+				+ "where profilsimple.profilString = :pProfilString";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
 			= this.entityManager.createQuery(requeteString);
 		
 		/* Passage des paramètres de la requête HQL. */
-		requete.setParameter("pCiviliteString", pObject.getCiviliteString());
+		requete.setParameter("pProfilString", pObject.getProfilString());
 		
 		try {
 			
 			/* Execution de la requete HQL. */
 			objetResultat 
-			= (Civilite) requete.getSingleResult();
+			= (ProfilSimple) requete.getSingleResult();
 			
 		}
 		catch (NoResultException noResultExc) {
@@ -205,8 +205,8 @@ public class DaoCivilite
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException
 				.gererException(
-						CLASSE_DAO_CIVILITE
-						, "Méthode retrieve(Civilite pObject)", e);
+						CLASSE_DAO_PROFILSIMPLE
+						, "Méthode retrieve(ProfilSimple pObject)", e);
 		}
 				
 		return objetResultat;
@@ -219,8 +219,8 @@ public class DaoCivilite
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final Civilite retrieveByIdMetier(
-			final Civilite pObjet) throws AbstractDaoException {
+	public final ProfilSimple retrieveByIdMetier(
+			final ProfilSimple pObjet) throws AbstractDaoException {
 		return this.retrieve(pObjet);
 	} // Fin de retrieveByIdMetier(...).___________________________________
 
@@ -230,33 +230,33 @@ public class DaoCivilite
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final Civilite retrieveByCivilite(
-			final String pCiviliteString) throws AbstractDaoException {
+	public final ProfilSimple retrieveByProfil(
+			final String pProfilString) throws AbstractDaoException {
 
-		/* return null si pCiviliteString est blank. */
-		if (StringUtils.isBlank(pCiviliteString)) {
+		/* return null si pProfilString est blank. */
+		if (StringUtils.isBlank(pProfilString)) {
 			return null;
 		}
 		
-		Civilite objetResultat = null;
+		ProfilSimple objetResultat = null;
 		
 		/* REQUETE HQL PARMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where civilite.civiliteString = :pCiviliteString";
+				+ "where profilsimple.profilString = :pProfilString";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
 			= this.entityManager.createQuery(requeteString);
 		
 		/* Passage des paramètres de la requête HQL. */
-		requete.setParameter("pCiviliteString", pCiviliteString);
+		requete.setParameter("pProfilString", pProfilString);
 		
 		try {
 			
 			/* Execution de la requete HQL. */
 			objetResultat 
-			= (Civilite) requete.getSingleResult();
+			= (ProfilSimple) requete.getSingleResult();
 			
 		}
 		catch (NoResultException noResultExc) {
@@ -275,14 +275,14 @@ public class DaoCivilite
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException
 				.gererException(
-						CLASSE_DAO_CIVILITE
-						, "Méthode retrieveByCivilite("
-								+ "String pCiviliteString)", e);
+						CLASSE_DAO_PROFILSIMPLE
+						, "Méthode retrieveByProfil("
+								+ "String pProfilString)", e);
 		}
 				
 		return objetResultat;
 				
-	} // Fin de retrieveByCivilite(...).___________________________________
+	} // Fin de retrieveByProfilSimple(...).___________________________________
 
 	
 	
@@ -298,12 +298,12 @@ public class DaoCivilite
 			return;
 		}
 
-		Civilite objetPersistant = null;
+		ProfilSimple objetPersistant = null;
 
 		/* REQUETE HQL PARAMETREE. */
 		final String requeteString 
 		= SELECT_OBJET 
-		+ "where civilite.id = :pId";
+		+ "where profilsimple.id = :pId";
 
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -315,7 +315,7 @@ public class DaoCivilite
 		try {
 			/* Execution de la requete HQL. */
 			objetPersistant 
-			= (Civilite) requete.getSingleResult();
+			= (ProfilSimple) requete.getSingleResult();
 		}
 		catch (NoResultException noResultExc) {
 			objetPersistant = null;
@@ -344,7 +344,7 @@ public class DaoCivilite
 
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException
-				.gererException(CLASSE_DAO_CIVILITE
+				.gererException(CLASSE_DAO_PROFILSIMPLE
 						, "Méthode deleteById(Long pId)", e);
 		}
 		
@@ -366,12 +366,12 @@ public class DaoCivilite
 		
 		boolean resultat = false;
 		
-		Civilite objetPersistant = null;
+		ProfilSimple objetPersistant = null;
 
 		/* REQUETE HQL PARAMETREE. */
 		final String requeteString 
 		= SELECT_OBJET 
-		+ "where civilite.id = :pId";
+		+ "where profilsimple.id = :pId";
 
 		/* Construction de la requête HQL. */
 		final Query requete 
@@ -383,7 +383,7 @@ public class DaoCivilite
 		try {
 			/* Execution de la requete HQL. */
 			objetPersistant 
-			= (Civilite) requete.getSingleResult();
+			= (ProfilSimple) requete.getSingleResult();
 		}
 		catch (NoResultException noResultExc) {
 			objetPersistant = null;
@@ -413,7 +413,7 @@ public class DaoCivilite
 
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException
-				.gererException(CLASSE_DAO_CIVILITE
+				.gererException(CLASSE_DAO_PROFILSIMPLE
 						, "Méthode deleteByIdBoolean(Long pId)", e);
 		}
 		
@@ -428,7 +428,7 @@ public class DaoCivilite
 	 */
 	@Override
 	public final boolean exists(
-			final Civilite pObject) throws AbstractDaoException {
+			final ProfilSimple pObject) throws AbstractDaoException {
 		
 		/* retourne false si pObject == null. */
 		if (pObject == null) {
@@ -436,25 +436,25 @@ public class DaoCivilite
 		}
 
 		boolean resultat = false;		
-		Civilite objetResultat = null;
+		ProfilSimple objetResultat = null;
 		
 		/* REQUETE HQL PARAMETREE. */
 		final String requeteString 
 			= SELECT_OBJET
-				+ "where civilite.civiliteString = :pCiviliteString";
+				+ "where profilsimple.profilString = :pProfilString";
 		
 		/* Construction de la requête HQL. */
 		final Query requete 
 			= this.entityManager.createQuery(requeteString);
 		
 		/* Passage des paramètres de la requête HQL. */
-		requete.setParameter("pCiviliteString", pObject.getCiviliteString());
+		requete.setParameter("pProfilString", pObject.getProfilString());
 		
 		try {
 			
 			/* Execution de la requete HQL. */
 			objetResultat 
-			= (Civilite) requete.getSingleResult();
+			= (ProfilSimple) requete.getSingleResult();
 			
 			/* retourne true si l'objet existe en base. */
 			if (objetResultat != null) {
@@ -477,8 +477,8 @@ public class DaoCivilite
 			
 			/* Gestion de la DAO Exception. */
 			this.gestionnaireException
-				.gererException(CLASSE_DAO_CIVILITE
-						, "Méthode exists(Civilite pObject)", e);
+				.gererException(CLASSE_DAO_PROFILSIMPLE
+						, "Méthode exists(ProfilSimple pObject)", e);
 		}
 				
 		return resultat;
@@ -515,7 +515,7 @@ public class DaoCivilite
 	 */
 	@Override
 	public final String afficherListe(
-			final List<Civilite> pListe) {
+			final List<ProfilSimple> pListe) {
 		
 		/* retourne null si pListe == null. */
 		if (pListe == null) {
@@ -524,7 +524,7 @@ public class DaoCivilite
 		
 		final StringBuilder stb = new StringBuilder();
 		
-		for (final Civilite objet : pListe) {
+		for (final ProfilSimple objet : pListe) {
 			stb.append(objet.toString());
 			stb.append(SAUT_LIGNE_JAVA);
 		}
@@ -538,15 +538,15 @@ public class DaoCivilite
 	/**
 	 * {@inheritDoc}
 	 * <br/>
-	 * this.<b>classObjetMetier</b> dans DaoCivilite : 
-	 * <b>Civilite.class</b><br/>
+	 * this.<b>classObjetMetier</b> dans DaoProfilSimple : 
+	 * <b>ProfilSimple.class</b><br/>
 	 * <br/>
 	 */
 	@Override
 	protected final void renseignerClassObjetMetier() {
-		this.setClassObjetMetier(Civilite.class);		
+		this.setClassObjetMetier(ProfilSimple.class);		
 	} // Fin de renseignerClassObjetMetier().______________________________
 
 	
 	
-} // FIN DE LA CLASSE DaoCivilite.-------------------------------------------
+} // FIN DE LA CLASSE DaoProfilSimple.---------------------------------------

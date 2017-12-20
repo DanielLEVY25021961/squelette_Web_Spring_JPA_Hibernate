@@ -2,19 +2,19 @@ package levy.daniel.application.model.dao.metier.usersimple;
 
 import levy.daniel.application.model.dao.IDaoGenericJPASpring;
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
-import levy.daniel.application.model.metier.usersimple.impl.Civilite;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
 
 
 /**
- * class IDaoCivilite :<br/>
+ * class IDaoProfilSimple :<br/>
  * <ul>
- * <li>Interface des DAOs pour les <b>Civilite</b>.</li>
+ * <li>Interface des DAOs pour les <b>ProfilSimple</b>.</li>
  * <li>
  * HERITE DE L'INTERFACE GENERIQUE 
  * IDaoGenericJPASpring&lt;T, ID extends Serializable&gt;.
  * </li>
  * <li>
- * Définit les méthodes <i>spécifiques</i> aux Civilite.
+ * Définit les méthodes <i>spécifiques</i> aux ProfilSimple.
  * </li>
  * <li>
  * Définit en particulier la méthode de <b>recherche 
@@ -44,53 +44,53 @@ import levy.daniel.application.model.metier.usersimple.impl.Civilite;
  * @since 10 déc. 2017
  *
  */
-public interface IDaoCivilite 
-			extends IDaoGenericJPASpring<Civilite, Long> {
+public interface IDaoProfilSimple 
+			extends IDaoGenericJPASpring<ProfilSimple, Long> {
 	
 	
 
 	/**
 	 * method retrieveByIdMetier(
-	 * Civilite pObjet) :<br/>
+	 * ProfilSimple pObjet) :<br/>
 	 * <ul>
-	 * <li>Recherche un Civilite pObjet en base 
+	 * <li>Recherche un ProfilSimple pObjet en base 
 	 * via son identifiant métier.</li>
-	 * <li>Retourne Civilite trouvé en base.</li>
+	 * <li>Retourne ProfilSimple trouvé en base.</li>
 	 * </ul> 
 	 * <br/>
 	 *
-	 * @param pObjet : Civilite : 
+	 * @param pObjet : ProfilSimple : 
 	 * Objet à rechercher en base.<br/>
 	 * 
-	 * @return : Civilite : 
+	 * @return : ProfilSimple : 
 	 * L'Objet trouvé en base.<br/>
 	 * 
 	 * @throws AbstractDaoException
 	 */
-	Civilite retrieveByIdMetier(
-			Civilite pObjet) throws AbstractDaoException;
+	ProfilSimple retrieveByIdMetier(
+			ProfilSimple pObjet) throws AbstractDaoException;
 
 
 	
 	/**
-	 * method retrieveByCivilite(
-	 * String pCiviliteString) :<br/>
+	 * method retrieveByProfil(
+	 * String pProfilString) :<br/>
 	 * <ul>
-	 * <li>Recherche en base un Civilite ayant 
-	 * pour civiliteString pCiviliteString.</li>
+	 * <li>Recherche en base un ProfilSimple ayant 
+	 * pour profilString pProfilString.</li>
 	 * </ul>
-	 * return null si pCiviliteString est blank.<br/>
+	 * return null si pProfilString est blank.<br/>
 	 * <br/>
 	 *
-	 * @param pCiviliteString : String.<br/>
+	 * @param pProfilString : String.<br/>
 	 * 
-	 * @return Civilite.<br/>
+	 * @return ProfilSimple.<br/>
 	 * 
 	 * @throws AbstractDaoException
 	 */
-	Civilite retrieveByCivilite(
-			String pCiviliteString) throws AbstractDaoException;
+	ProfilSimple retrieveByProfil(
+			String pProfilString) throws AbstractDaoException;
 	
 	
 
-} // FIN DE L'INTERFACE IDaoCivilite.--------------------------------------
+} // FIN DE L'INTERFACE IDaoProfilSimple.------------------------------------

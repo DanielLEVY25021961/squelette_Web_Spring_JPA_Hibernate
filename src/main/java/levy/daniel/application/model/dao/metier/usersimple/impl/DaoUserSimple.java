@@ -11,7 +11,7 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 /**
  * class DaoUserSimple :<br/>
- *  <ul>
+ * <ul>
  * <li>DAO <b>CONCRET</b> pour les <b>IUserSimple</b>.</li>
  * <li>
  * HERITE DU DAO ABSTRAIT AbstractDaoUserSimple.
