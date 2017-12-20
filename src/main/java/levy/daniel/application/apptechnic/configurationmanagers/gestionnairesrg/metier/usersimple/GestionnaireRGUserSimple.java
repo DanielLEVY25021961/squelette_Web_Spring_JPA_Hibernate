@@ -35,7 +35,7 @@ import levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.
  * <br/>
  *
  *
- * @author daniel Lévy
+ * @author daniel.levy Lévy
  * @version 1.0
  * @since 5 déc. 2017
  *
@@ -227,7 +227,6 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	 * RG_USERSIMPLE_PRENOM_LONGUEUR_03 sur le prenom.<br/>
 	 */
 	private static Boolean validerUserSimplePrenomLongueur03;
-	
 	
 
 	/* NOM. */
@@ -1065,6 +1064,8 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 		return validerUserSimpleProfilLongueur13;
 	}
 	
-
+	
+	
+	
 	
 } // FIN DE LA CLASSE GestionnaireRGUserSimple.------------------------------
