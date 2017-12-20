@@ -129,6 +129,13 @@ public class UserSimple
 	/**
 	 * civilite : Civilite :<br/>
 	 * Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
+	 * <ul>
+	 * <li>La civilité ne peut prendre <i>que les valeurs</i> définies dans 
+	 * l'ENUMERATION <b>CivilitesEnum</b>.</li>
+	 * <li>"RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+	 * la civilite (M., Mme, ...) du UserSimple doit respecter 
+	 * un ensemble fini de valeurs (nomenclature)".</li>
+	 * </ul>
 	 */
 	private Civilite civilite;
 	
@@ -136,6 +143,17 @@ public class UserSimple
 	/**
 	 * prenom : String :<br/>
 	 * Prénom du User.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : 
+	 * le prénom du UserSimple doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_PRENOM_LITTERAL_03 : 
+	 * le prénom du UserSimple 
+	 * ne doit contenir que des lettres ou des 
+	 * caractères spéciaux '-', '_', ... (aucun chiffre)".</li>
+	 * <li>"RG_USERSIMPLE_PRENOM_LONGUEUR_04 : 
+	 * le prénom du UserSimple doit contenir 
+	 * entre [1] et [30] lettres".</li>
+	 * </ul>
 	 */
 	private String prenom;
 	
@@ -143,6 +161,17 @@ public class UserSimple
 	/**
 	 * nom : String :<br/>
 	 * Nom du User.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_NOM_RENSEIGNE_05
+	 *  : le nom du UserSimple doit être renseigné (obligatoire)".<br/></li>
+	 *  <li>"RG_USERSIMPLE_NOM_LITTERAL_06
+	 *  : le nom du UserSimple 
+	 *  ne doit contenir que des lettres ou des caractères spéciaux 
+	 *  '-', '_', ... (aucun chiffre)".</li>
+	 *  <li>"RG_USERSIMPLE_NOM_LONGUEUR_07
+	 *  : le nom du UserSimple doit contenir entre 
+	 *  [1] et [50] lettres".</li>
+	 * </ul>
 	 */
 	private String nom;
 	

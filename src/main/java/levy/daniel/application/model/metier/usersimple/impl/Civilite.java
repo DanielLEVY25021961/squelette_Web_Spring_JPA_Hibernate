@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-import javax.validation.constraints.Size;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +24,9 @@ import levy.daniel.application.model.metier.IExportateurJTable;
  * d'un UserSimple.</li>
  * <li>La civilité ne peut prendre <i>que les valeurs</i> définies dans 
  * l'ENUMERATION <b>CivilitesEnum</b>.</li>
+ * <li>"RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+ * la civilite (M., Mme, ...) du UserSimple doit respecter 
+ * un ensemble fini de valeurs (nomenclature)".</li>
  * </ul>
  * 
  *
@@ -477,7 +479,6 @@ public class Civilite implements Serializable
 	@Column(name = "CIVILITE"
 	, unique = true, nullable = false
 	, updatable = true, insertable = true)
-	@Size(min = 0, max = 10)
 	public String getCiviliteString() {	
 		return this.civiliteString;
 	} // Fin de getCiviliteString()._______________________________________
