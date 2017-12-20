@@ -53,7 +53,7 @@
 		<!-- ========================================================== -->
 		<class>levy.daniel.application.model.metier.usersimple.impl.UserSimple</class>
 		<class>levy.daniel.application.model.metier.usersimple.impl.Civilite</class>
-
+		<class>levy.daniel.application.model.metier.usersimple.impl.ProfilSimple</class>
 
 
 		
