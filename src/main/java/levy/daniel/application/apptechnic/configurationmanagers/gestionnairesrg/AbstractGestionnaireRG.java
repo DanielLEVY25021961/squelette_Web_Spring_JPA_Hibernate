@@ -108,7 +108,7 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 
 	
-	
+
 	/**
 	 * method getBundleExterneRG(
 	 * Locale pLocale) :<br/>
@@ -128,31 +128,31 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 	 */
 	private ResourceBundle getBundleExterneRG(
 			final Locale pLocale) throws MalformedURLException {
-
+	
 		ResourceBundle resourceBundle = null;
-
+	
 		/* Accède au répertoire externe 
 		 * contenant rg-objet.properties. */
 		final File repertoireRessourcesParametrables 
 			= new File(fournirCheminRessourceExterneRG());
-
+	
 		final URL[] urlsRessourcesParametrables 
 			= { repertoireRessourcesParametrables.toURI().toURL() };
-
+	
 		final ClassLoader loaderRessourcesParametrables 
 			= new URLClassLoader(urlsRessourcesParametrables);
-
+	
 		/* Récupère le ResourceBundle en utilisant le bon ClassLoader. */
 		resourceBundle 
 			= ResourceBundle.getBundle(
 					this.fournirNomBasePropertiesRG()
 						, pLocale
 							, loaderRessourcesParametrables);
-
-		return resourceBundle;
-
-	} // Fin de getBundleExterneRG(...).___________________________________
 	
+		return resourceBundle;
+	
+	} // Fin de getBundleExterneRG(...).___________________________________
+
 
 
 	/**

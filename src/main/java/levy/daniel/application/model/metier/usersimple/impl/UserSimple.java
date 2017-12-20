@@ -4,10 +4,14 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -17,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import levy.daniel.application.model.metier.usersimple.IUserSimple;
+
 
 /**
  * class UserSimple :<br/>
@@ -122,15 +127,33 @@ public class UserSimple
 
 	
 	/**
-	 * civilite : String :<br/>
+	 * civilite : Civilite :<br/>
 	 * Civilité du UserSimple (M., Mme, Mlle, ...).<br/>
+	 * <ul>
+	 * <li>La civilité ne peut prendre <i>que les valeurs</i> définies dans 
+	 * l'ENUMERATION <b>CivilitesEnum</b>.</li>
+	 * <li>"RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+	 * la civilite (M., Mme, ...) du UserSimple doit respecter 
+	 * un ensemble fini de valeurs (nomenclature)".</li>
+	 * </ul>
 	 */
-	private String civilite;
+	private Civilite civilite;
 	
 	
 	/**
 	 * prenom : String :<br/>
 	 * Prénom du User.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : 
+	 * le prénom du UserSimple doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_PRENOM_LITTERAL_03 : 
+	 * le prénom du UserSimple 
+	 * ne doit contenir que des lettres ou des 
+	 * caractères spéciaux '-', '_', ... (aucun chiffre)".</li>
+	 * <li>"RG_USERSIMPLE_PRENOM_LONGUEUR_04 : 
+	 * le prénom du UserSimple doit contenir 
+	 * entre [1] et [30] lettres".</li>
+	 * </ul>
 	 */
 	private String prenom;
 	
@@ -138,6 +161,17 @@ public class UserSimple
 	/**
 	 * nom : String :<br/>
 	 * Nom du User.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_NOM_RENSEIGNE_05
+	 *  : le nom du UserSimple doit être renseigné (obligatoire)".<br/></li>
+	 *  <li>"RG_USERSIMPLE_NOM_LITTERAL_06
+	 *  : le nom du UserSimple 
+	 *  ne doit contenir que des lettres ou des caractères spéciaux 
+	 *  '-', '_', ... (aucun chiffre)".</li>
+	 *  <li>"RG_USERSIMPLE_NOM_LONGUEUR_07
+	 *  : le nom du UserSimple doit contenir entre 
+	 *  [1] et [50] lettres".</li>
+	 * </ul>
 	 */
 	private String nom;
 	
@@ -199,7 +233,7 @@ public class UserSimple
 	 * <li>SANS ID en Base.</li>
 	 * </ul>>
 	 *
-	 * @param pCivilite : String : Civilité du UserSimple 
+	 * @param pCivilite : Civilite : Civilité du UserSimple 
 	 * (M., Mme, Mlle, ...).<br/>
 	 * @param pPrenom : String : Prénom du User.<br/>
 	 * @param pNom : String : Nom du User.<br/>
@@ -210,7 +244,7 @@ public class UserSimple
 	 * (administrateur, modérateur, ...).<br/>
 	 */
 	public UserSimple(
-			final String pCivilite
+			final Civilite pCivilite
 			, final String pPrenom, final String pNom
 			, final String pEmail
 			, final String pLogin, final String pMdp
@@ -236,7 +270,7 @@ public class UserSimple
 	 * </ul>
 	 *
 	 * @param pId : Long : ID en base.<br/>
-	 * @param pCivilite : String : Civilité du UserSimple 
+	 * @param pCivilite : Civilite : Civilité du UserSimple 
 	 * (M., Mme, Mlle, ...).<br/>
 	 * @param pPrenom : String : Prénom du User.<br/>
 	 * @param pNom : String : Nom du User.<br/>
@@ -248,7 +282,7 @@ public class UserSimple
 	 */
 	public UserSimple(
 			final Long pId
-			, final String pCivilite
+			, final Civilite pCivilite
 			, final String pPrenom, final String pNom
 			, final String pEmail
 			, final String pLogin, final String pMdp
@@ -448,7 +482,7 @@ public class UserSimple
 		/* civilite. */
 		builder.append("civilité=");
 		if (this.civilite != null) {
-			builder.append(this.civilite);
+			builder.append(this.civilite.getCiviliteString());
 		} else {
 			builder.append(NULL);
 		}
@@ -544,7 +578,11 @@ public class UserSimple
 		stb.append(this.getId());
 		stb.append(POINT_VIRGULE);
 		/* civilite. */
-		stb.append(this.getCivilite());
+		if (this.getCivilite() != null) {
+			stb.append(this.getCivilite().getCiviliteString());
+		} else {
+			stb.append(NULL);
+		}		
 		stb.append(POINT_VIRGULE);
 		/* prenom. */
 		stb.append(this.getPrenom());
@@ -646,7 +684,10 @@ public class UserSimple
 			break;
 
 		case 1:
-			valeur = this.getCivilite();
+			if (this.getCivilite() != null) {
+				valeur = this.getCivilite().getCiviliteString();
+			}
+			
 			break;
 			
 		case 2:
@@ -712,12 +753,15 @@ public class UserSimple
 	/**
 	 * {@inheritDoc}
 	 */
-	@Column(name = "CIVILITE"
+	/* cascade = {CascadeType.PERSIST, CascadeType.MERGE} */
+	@ManyToOne(targetEntity = Civilite.class
+			, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ID_CIVILITE"
 	, unique = false, nullable = true
-	, updatable = true, insertable = true)
-	@Size(min = 0, max = 10)
+	, insertable = true, updatable = true
+	, foreignKey = @ForeignKey(name = "FK_USERSIMPLE_CIVILITE"))
 	@Override
-	public String getCivilite() {
+	public Civilite getCivilite() {
 		return this.civilite;
 	} // Fin de getCivilite()._____________________________________________
 
@@ -728,7 +772,7 @@ public class UserSimple
 	 */
 	@Override
 	public void setCivilite(
-			final String pCivilite) {
+			final Civilite pCivilite) {
 		this.civilite = pCivilite;
 	} // Fin de setCivilite(...).__________________________________________
 

@@ -31,6 +31,11 @@ public interface IExportateurJTable {
 	* <li>Fournit l'en-tête de la pIème colonne (0-based) 
 	* pour affichage dans une JTable par exemple.</li>
 	* <li>Suit l'ordre défini dans le csv.</li>
+	* <li>doit être <b>transient</b> (Java ou JPA) 
+	 * car n'est pas persisté.<br/>
+	 * Or, commençant par <i>"get"</i>, les frameworks 
+	 * (Hibernate, Spring, ...) 
+	 * croiront qu'il s'agit d'une propriété persistante.</li>
 	* </ul>
 	*
 	* @param pI : int : pIème colonne (0 - based).<br/>
@@ -50,6 +55,11 @@ public interface IExportateurJTable {
 	* <li>Suit l'ordre défini dans le csv.</li>
 	* <li>Retourne toujours une <b>String</b> si l'objet n'est pas null.</li>
 	* <li>Retourne null si la valeur dans l'objet est null.</li>
+	* <li>doit être <b>transient</b> (Java ou JPA) 
+	 * car n'est pas persisté.<br/>
+	 * Or, commençant par <i>"get"</i>, les frameworks 
+	 * (Hibernate, Spring, ...) 
+	 * croiront qu'il s'agit d'une propriété persistante.</li>
 	* </ul>
 	*
 	* @param pI : int : pIème colonne (0 - based).<br/>

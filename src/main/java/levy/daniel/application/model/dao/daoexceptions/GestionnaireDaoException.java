@@ -10,6 +10,8 @@ import org.hibernate.exception.SQLGrammarException;
 import org.postgresql.util.PSQLException;
 
 import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoDoublonException;
+import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoPSQLException;
+import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoSQLGrammarException;
 
 /**
  * class GestionnaireDaoException :<br/>
@@ -68,16 +70,23 @@ public class GestionnaireDaoException {
 	
 	/**
 	 * method gererException(
-	 * Exception pE) :<br/>
+	 * String pClasse
+	 * , String pMethode
+	 * , Exception pE) :<br/>
 	 * .<br/>
 	 * <br/>
 	 *
+	 * @param pClasse : String : 
+	 * @param pMethode : String :  
 	 * @param pE : Exception.<br/>
 	 * 
 	 * @throws AbstractDaoException 
 	 */
-	public void gererException(final Exception pE) 
-				throws AbstractDaoException {
+	public void gererException(
+			final String pClasse
+				, final String pMethode
+					, final Exception pE) 
+								throws AbstractDaoException {
 		
 		final Throwable causeMere = pE.getCause();
 		Throwable causeGrandMere = null;
@@ -89,15 +98,24 @@ public class GestionnaireDaoException {
 		
 		/* Violation de contraintes. */
 		if (pE instanceof PersistenceException) {			
-			gererDoublon(pE, causeMere, causeGrandMere);			
+			gererPersistenceException(pClasse, pMethode
+					, pE, causeMere, causeGrandMere);			
 		}
 		
 		if (pE instanceof EntityExistsException) {
-			System.out.println("PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
+			System.out.println(pClasse 
+					+ TIRET_AERE 
+					+ pMethode 
+					+ TIRET_AERE 
+					+ "PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
 		}
 		
 		if (pE instanceof IllegalArgumentException) {
-			System.out.println("PROBLEME DE DEFINITION DES ENTITES IllegalArgumentException : " + pE);
+			System.out.println(pClasse 
+					+ TIRET_AERE 
+					+ pMethode 
+					+ TIRET_AERE 
+					+ "PROBLEME DE DEFINITION DES ENTITES IllegalArgumentException : " + pE);
 		}
 
 	} // Fin de gererException(...)._______________________________________
@@ -106,29 +124,37 @@ public class GestionnaireDaoException {
 	
 
 	/**
-	 * method gererDoublonPostgres(
-	 * Exception pE
+	 * method gererPersistenceException(
+	 * String pClasse
+	 * , String pMethode
+	 * , Exception pE
 	 * , Throwable pCauseMere
 	 * , Throwable pCauseGrandMere) :<br/>
 	 * .<br/>
 	 * <br/>
 	 *
-	 * @param pE
-	 * @param pCauseMere
-	 * @param pCauseGrandMere
+	 * @param pClasse : String : 
+	 * @param pMethode : String :  
+	 * @param pE : Exception : 
+	 * @param pCauseMere : Throwable : 
+	 * @param pCauseGrandMere : Throwable : 
 	 * 
-	 * @throws DaoDoublonException :  :  .<br/>
+	 * @throws AbstractDaoException
 	 */
-	private void gererDoublon(
-			final Exception pE
-				, final Throwable pCauseMere
-					, final Throwable pCauseGrandMere) 
-							throws DaoDoublonException {
+	private void gererPersistenceException(
+			final String pClasse
+			, final String pMethode
+				, final Exception pE
+					, final Throwable pCauseMere
+						, final Throwable pCauseGrandMere) 
+							throws AbstractDaoException {
 				
 		if (pCauseGrandMere != null) {
 			
+			/* PSQLException. */
 			if (pCauseGrandMere instanceof PSQLException) {
 				
+				/* SQLGrammarException : problème de création de tables. */
 				if (pCauseMere instanceof SQLGrammarException) {
 					
 					final String messageUtilisateur 
@@ -137,22 +163,23 @@ public class GestionnaireDaoException {
 									pCauseGrandMere.getMessage());
 				
 					final String messageTechnique 
-						= "PROBLEME DE CREATION DE TABLE - "
+						= pClasse + TIRET_AERE + pMethode + TIRET_AERE 
+							+ "PROBLEME DE CREATION DE TABLE - "
 							+ pCauseGrandMere.getMessage() 
 							+ TIRET_AERE 
 							+ pCauseGrandMere.getClass().getName();
 					
 					
-					final DaoDoublonException daoDoublonExc 
-					= new DaoDoublonException(
+					final DaoSQLGrammarException daoGrammarExc 
+					= new DaoSQLGrammarException(
 							pCauseGrandMere.getMessage(), pCauseGrandMere);
 					
-					daoDoublonExc.setMessageUtilisateur(messageUtilisateur);
-					daoDoublonExc.setMessageTechnique(messageTechnique);
+					daoGrammarExc.setMessageUtilisateur(messageUtilisateur);
+					daoGrammarExc.setMessageTechnique(messageTechnique);
 					
-					throw daoDoublonExc;
+					throw daoGrammarExc;
 					
-				}
+				} // Fin de SQLGrammarException._______________________
 				
 				final String messageUtilisateur 
 					= "TENTATIVE DE CREATION DE DOUBLON - " 
@@ -160,7 +187,11 @@ public class GestionnaireDaoException {
 									pCauseGrandMere.getMessage());
 				
 				final String messageTechnique 
-					= "TENTATIVE DE CREATION DE DOUBLON - "
+					= pClasse 
+						+ TIRET_AERE 
+						+ pMethode 
+						+ TIRET_AERE 
+						+ "TENTATIVE DE CREATION DE DOUBLON - "
 						+ pCauseGrandMere.getMessage() 
 						+ TIRET_AERE 
 						+ pCauseGrandMere.getClass().getName();
@@ -175,7 +206,7 @@ public class GestionnaireDaoException {
 				
 				throw daoDoublonExc;
 				
-			}
+			} //  Fin de PSQLException.__________________________________
 		}
 		else if (pCauseMere != null) {
 			
@@ -186,19 +217,20 @@ public class GestionnaireDaoException {
 			+  pCauseMere.getMessage();
 			
 			final String messageTechnique 
-			= "CAUSE MERE : " 
+			= pClasse + TIRET_AERE + pMethode + TIRET_AERE 
+			+ "CAUSE MERE : " 
 			+ pCauseMere.getClass().getName() 
 			+ TIRET_AERE 
 			+  pCauseMere.getMessage();
 			
-			final DaoDoublonException daoDoublonExc 
-			= new DaoDoublonException(
+			final DaoPSQLException daoPSQLExc 
+			= new DaoPSQLException(
 					pCauseMere.getMessage(), pCauseMere);
 			
-			daoDoublonExc.setMessageUtilisateur(messageUtilisateur);
-			daoDoublonExc.setMessageTechnique(messageTechnique);
+			daoPSQLExc.setMessageUtilisateur(messageUtilisateur);
+			daoPSQLExc.setMessageTechnique(messageTechnique);
 			
-			throw daoDoublonExc;
+			throw daoPSQLExc;
 			
 		}
 		else {
@@ -225,7 +257,7 @@ public class GestionnaireDaoException {
 			throw daoDoublonExc;			
 		}
 				
-	} // Fin de gererDoublonPostgres(...)._________________________________
+	} // Fin de gererPersistenceException(...).____________________________
 	
 
 	

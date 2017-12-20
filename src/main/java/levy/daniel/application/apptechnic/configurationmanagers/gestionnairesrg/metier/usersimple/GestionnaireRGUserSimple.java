@@ -44,59 +44,93 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	// ************************ATTRIBUTS************************************/
 
+
 	/**
-	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_01 : String :<br/>
-	 * "RG_USERSIMPLE_PRENOM_RENSEIGNE_01
-	 *  : le prénom du UserSimple doit être renseigné".<br/>
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : String :<br/>
+	 * "RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+	 * la civilite (M., Mme, ...) du UserSimple doit respecter 
+	 * un ensemble fini de valeurs (nomenclature)".<br/>
 	 */
-	public static final String RG_USERSIMPLE_PRENOM_RENSEIGNE_01 
-		= "RG_USERSIMPLE_PRENOM_RENSEIGNE_01"
-				+ " : le prénom du UserSimple doit être renseigné";
+	public static final String RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 
+	= "RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01"
+			+ " : la civilite (M., Mme, ...) du UserSimple "
+			+ "doit respecter un ensemble fini de valeurs (nomenclature)";
+
+
+	/**
+	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : String :<br/>
+	 * "RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : 
+	 * le prénom du UserSimple doit être renseigné (obligatoire)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_PRENOM_RENSEIGNE_02 
+		= "RG_USERSIMPLE_PRENOM_RENSEIGNE_02"
+			+ " : le prénom du UserSimple "
+				+ "doit être renseigné (obligatoire)";
+
 	
 	/**
-	 * RG_USERSIMPLE_PRENOM_LITTERAL_02 : String :<br/>
-	 * "RG_USERSIMPLE_PRENOM_LITTERAL_02
-	 *  : le prénom du UserSimple ne doit contenir que des lettres".<br/>
+	 * RG_USERSIMPLE_PRENOM_LITTERAL_03 : String :<br/>
+	 * "RG_USERSIMPLE_PRENOM_LITTERAL_03 : 
+	 * le prénom du UserSimple 
+	 * ne doit contenir que des lettres ou des 
+	 * caractères spéciaux '-', '_', ... (aucun chiffre)".<br/>
 	 */
-	public static final String RG_USERSIMPLE_PRENOM_LITTERAL_02 
-	= "RG_USERSIMPLE_PRENOM_LITTERAL_02"
-			+ " : le prénom du UserSimple ne doit contenir que des lettres";
+	public static final String RG_USERSIMPLE_PRENOM_LITTERAL_03 
+		= "RG_USERSIMPLE_PRENOM_LITTERAL_03"
+				+ " : le prénom du UserSimple "
+				+ "ne doit contenir que des "
+				+ "lettres ou des caractères spéciaux '-', '_', ... "
+				+ "(aucun chiffre)";
+
+
+	/**
+	 * RG_USERSIMPLE_PRENOM_LONGUEUR_04 : String :<br/>
+	 * "RG_USERSIMPLE_PRENOM_LONGUEUR_04 : 
+	 * le prénom du UserSimple doit contenir 
+	 * entre [1] et [30] lettres".<br/>
+	 */
+	public static final String RG_USERSIMPLE_PRENOM_LONGUEUR_04 
+		= "RG_USERSIMPLE_PRENOM_LONGUEUR_04"
+				+ " : le prénom du UserSimple "
+				+ "doit contenir entre [1] et [30] lettres";
+
+
+	/**
+	 * RG_USERSIMPLE_NOM_RENSEIGNE_05 : String :<br/>
+	 * "RG_USERSIMPLE_NOM_RENSEIGNE_05
+	 *  : le nom du UserSimple doit être renseigné (obligatoire)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_NOM_RENSEIGNE_05 
+		= "RG_USERSIMPLE_NOM_RENSEIGNE_05"
+				+ " : le nom du UserSimple "
+				+ "doit être renseigné (obligatoire)";
+
+
+	/**
+	 * RG_USERSIMPLE_NOM_LITTERAL_06 : String :<br/>
+	 * "RG_USERSIMPLE_NOM_LITTERAL_06
+	 *  : le nom du UserSimple 
+	 *  ne doit contenir que des lettres ou des caractères spéciaux 
+	 *  '-', '_', ... (aucun chiffre)".<br/>
+	 */
+	public static final String RG_USERSIMPLE_NOM_LITTERAL_06 
+	= "RG_USERSIMPLE_NOM_LITTERAL_06"
+			+ " : le nom du UserSimple "
+			+ "ne doit contenir que des lettres ou des "
+			+ "caractères spéciaux '-', '_', ... (aucun chiffre)";
+
 	
 	/**
-	 * RG_USERSIMPLE_PRENOM_LONGUEUR_03 : String :<br/>
-	 * "RG_USERSIMPLE_PRENOM_LONGUEUR_03
-	 *  : le prénom du UserSimple doit contenir entre 1 et 30 lettres".<br/>
+	 * RG_USERSIMPLE_NOM_LONGUEUR_07 : String :<br/>
+	 * "RG_USERSIMPLE_NOM_LONGUEUR_07
+	 *  : le nom du UserSimple doit contenir entre 
+	 *  [1] et [50] lettres".<br/>
 	 */
-	public static final String RG_USERSIMPLE_PRENOM_LONGUEUR_03 
-	= "RG_USERSIMPLE_PRENOM_LONGUEUR_03"
-			+ " : le prénom du UserSimple doit contenir entre 1 et 30 lettres";
-	
-	/**
-	 * RG_USERSIMPLE_NOM_RENSEIGNE_04 : String :<br/>
-	 * "RG_USERSIMPLE_NOM_RENSEIGNE_04
-	 *  : le prénom du UserSimple doit être renseigné".<br/>
-	 */
-	public static final String RG_USERSIMPLE_NOM_RENSEIGNE_04 
-	= "RG_USERSIMPLE_NOM_RENSEIGNE_04"
-			+ " : le prénom du UserSimple doit être renseigné";
-	
-	/**
-	 * RG_USERSIMPLE_NOM_LITTERAL_05 : String :<br/>
-	 * "RG_USERSIMPLE_NOM_LITTERAL_05
-	 *  : le nom du UserSimple ne doit contenir que des lettres".<br/>
-	 */
-	public static final String RG_USERSIMPLE_NOM_LITTERAL_05 
-	= "RG_USERSIMPLE_NOM_LITTERAL_05"
-			+ " : le nom du UserSimple ne doit contenir que des lettres";
-	
-	/**
-	 * RG_USERSIMPLE_NOM_LONGUEUR_06 : String :<br/>
-	 * "RG_USERSIMPLE_NOM_LONGUEUR_06
-	 *  : le nom du UserSimple doit contenir entre 1 et 50 lettres".<br/>
-	 */
-	public static final String RG_USERSIMPLE_NOM_LONGUEUR_06 
-	= "RG_USERSIMPLE_NOM_LONGUEUR_06"
-			+ " : le nom du UserSimple doit contenir entre 1 et 50 lettres";
+	public static final String RG_USERSIMPLE_NOM_LONGUEUR_07 
+		= "RG_USERSIMPLE_NOM_LONGUEUR_07"
+				+ " : le nom du UserSimple "
+				+ "doit contenir "
+				+ "entre [1] et [50] lettres";
 	
 	/**
 	 * RG_USERSIMPLE_EMAIL_MOTIF_07 : String :<br/>

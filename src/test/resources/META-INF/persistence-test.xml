@@ -46,7 +46,16 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 
+
+		<!-- ========================================================== -->
+		<!-- 			DECLARATION DES ENTITIES						-->
+		<!-- INDISPENSABLE POUR LES TESTS ??? 							-->
+		<!-- ========================================================== -->
 		<class>levy.daniel.application.model.metier.usersimple.impl.UserSimple</class>
+		<class>levy.daniel.application.model.metier.usersimple.impl.Civilite</class>
+
+
+
 		
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 

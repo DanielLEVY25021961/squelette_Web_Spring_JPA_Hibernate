@@ -1,4 +1,4 @@
-package levy.daniel.application.model.metier.usersimple;
+package levy.daniel.application.model.metier.usersimple.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,13 +10,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import levy.daniel.application.model.metier.usersimple.impl.Civilite;
-import levy.daniel.application.model.metier.usersimple.impl.CivilitesEnum;
-import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 /**
- * class UserSimpleTest :<br/>
- * Test JUnit de la classe <b>UserSimple</b>.<br/>
+ * class CiviliteTest :<br/>
+ * Test JUnit de la classe Civilite.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -29,12 +26,12 @@ import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
  * <br/>
  *
  *
- * @author daniel.levy Lévy
+ * @author dan Lévy
  * @version 1.0
- * @since 28 nov. 2017
+ * @since 9 déc. 2017
  *
  */
-public class UserSimpleTest {
+public class CiviliteTest {
 
 	// ************************ATTRIBUTS************************************/
 	
@@ -46,139 +43,55 @@ public class UserSimpleTest {
 
 	
 	/**
-	 * CIVILITE_M : Civilite :<br/>
+	 * CIVILITE_M : String :<br/>
 	 * "M.".<br/>
+	 * CivilitesEnum.MONSIEUR.getAbreviationEnum().<br/>
 	 */
-	public static final Civilite CIVILITE_M 
-		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
+	public static final String CIVILITE_M 
+		= CivilitesEnum.MONSIEUR.getAbreviationEnum();
 
 	
 	/**
-	 * CIVILITE_MME : Civilite :<br/>
+	 * CIVILITE_MME : String :<br/>
 	 * "Mme".<br/>
+	 * CivilitesEnum.MADAME.getAbreviationEnum().<br/>
 	 */
-	public static final Civilite CIVILITE_MME 
-		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
+	public static final String CIVILITE_MME 
+		= CivilitesEnum.MADAME.getAbreviationEnum();
 	
 	
 	/**
-	 * PRENOM_WALLACE1 : String :<br/>
-	 * "Wallace1".<br/>
+	 * CIVILITE_MLLE : String :<br/>
+	 * "Mlle".<br/>
+	 * CivilitesEnum.MADEMOISELLE.getAbreviationEnum().<br/>
 	 */
-	public static final String PRENOM_WALLACE1 = "Wallace1";
-
+	public static final String CIVILITE_MLLE 
+		= CivilitesEnum.MADEMOISELLE.getAbreviationEnum();
+	
 		
-	/**
-	 * PRENOM_AMANDINE : String :<br/>
-	 * "Amandine".<br/>
-	 */
-	public static final String PRENOM_AMANDINE = "Amandine";
-	
-	
-	/**
-	 * PRENOM_GERALDINE : String :<br/>
-	 * "Géraldine".<br/>
-	 */
-	public static final String PRENOM_GERALDINE = "Géraldine";
-	
-	
-	/**
-	 * NOM_WATSON : String :<br/>
-	 * "Watson".<br/>
-	 */
-	public static final String NOM_WATSON = "Watson";
-	
-	
-	/**
-	 * NOM_ROURKE_1 : String :<br/>
-	 * "Rourke1".<br/>
-	 */
-	public static final String NOM_ROURKE_1 = "Rourke1";
-	
-	
-	/**
-	 * EMAIL_YAHOO : String :<br/>
-	 * "email@yahoo.fr".<br/>
-	 */
-	public static final String EMAIL_YAHOO = "email@yahoo.fr";
-	
-	
-	/**
-	 * LOGIN : String :<br/>
-	 * "login".<br/>
-	 */
-	public static final String LOGIN = "login";
-
-	
-	/**
-	 * LOGIN_AMANDINE_WATSON : String :<br/>
-	 * "Amandine.Watson".<br/>
-	 */
-	public static final String LOGIN_AMANDINE_WATSON = "Amandine.Watson";
-
-	
-	/**
-	 * LOGIN_GERALDINE_WATSON : String :<br/>
-	 * "Geraldine.Watson".<br/>
-	 */
-	public static final String LOGIN_GERALDINE_WATSON = "Geraldine.Watson";
-			
-			
-	/**
-	 * MDP : String :<br/>
-	 * "mdp".<br/>
-	 */
-	public static final String MDP = "mdp";
-	
-	
-	/**
-	 * MDP_ZOZO93 : String :<br/>
-	 * "zozo93".<br/>
-	 */
-	public static final String MDP_ZOZO93 = "zozo93";
-	
-	
-	/**
-	 * ADMINISTRATEUR : String :<br/>
-	 * "ADMINISTRATEUR".<br/>
-	 */
-	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
-	
-	
-	/**
-	 * UTILISATEUR : String :<br/>
-	 * "UTILISATEUR".<br/>
-	 */
-	public static final String UTILISATEUR = "UTILISATEUR";
-
-
-	
-	
 	/**
 	 * TIRETS : String :<br/>
 	 * "--------------------------------------------------------".<br/>
 	 */
 	public static final String TIRETS 
 	= "--------------------------------------------------------";
-
+	
 
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
-	private static final Log LOG 
-		= LogFactory.getLog(UserSimpleTest.class);
+	private static final Log LOG = LogFactory.getLog(CiviliteTest.class);
 
 	// *************************METHODES************************************/
 
 	
-	
 	 /**
-	 * method CONSTRUCTEUR UserSimpleTest() :<br/>
+	 * method CONSTRUCTEUR CiviliteTest() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	public UserSimpleTest() {
+	public CiviliteTest() {
 		super();
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
@@ -213,29 +126,17 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objet1 
-		= new UserSimple(2L
-				, CIVILITE_M
-				, PRENOM_WALLACE1, NOM_ROURKE_1
-				, EMAIL_YAHOO
-				, LOGIN, MDP
-				, ADMINISTRATEUR);
+		final Civilite objet1 
+		= new Civilite(2L
+				, CIVILITE_M);
 		
-		final IUserSimple objet2 
-		= new UserSimple(3L
-				, CIVILITE_MME
-				, "June", "Rourke2"
-				, EMAIL_YAHOO
-				, LOGIN, MDP
-				, UTILISATEUR);
+		final Civilite objet2 
+		= new Civilite(3L
+				, CIVILITE_M);
 		
-		final IUserSimple objet3 
-		= new UserSimple(4L
-				, CIVILITE_M
-				, "Wallace3", "Rourke3"
-				, EMAIL_YAHOO
-				, LOGIN, MDP
-				, UTILISATEUR);
+		final Civilite objet3 
+		= new Civilite(4L
+				, CIVILITE_M);
 
 		
 		/* garantit le contrat Java reflexif x.equals(x). */
@@ -263,10 +164,10 @@ public class UserSimpleTest {
 
 				
 		/* garantit que les null sont bien gérés dans equals(...). */
-		final IUserSimple objetNull1 
-			= new UserSimple();
-		final IUserSimple objetNull2 
-			= new UserSimple();
+		final Civilite objetNull1 
+			= new Civilite();
+		final Civilite objetNull2 
+			= new Civilite();
 
 		assertEquals("objetNull1.equals(objetNull2) : "
 				, objetNull1
@@ -284,21 +185,13 @@ public class UserSimpleTest {
 					+ objetNull2.toString());
 		}
 		
-		final IUserSimple objet1AvecNull 
-			= new UserSimple(2L
-					, null
-					, PRENOM_WALLACE1, NOM_ROURKE_1
-					, EMAIL_YAHOO
-					, null, null
-					, ADMINISTRATEUR);
+		final Civilite objet1AvecNull 
+			= new Civilite(2L
+					, null);
 		
-		final IUserSimple objet2AvecNull 
-			= new UserSimple(3L
-					, CIVILITE_MME
-					, "June1", NOM_ROURKE_1
-					, EMAIL_YAHOO
-					, null, null
-					, ADMINISTRATEUR);
+		final Civilite objet2AvecNull 
+			= new Civilite(3L
+					, null);
 
 		assertEquals("objet1AvecNull.equals(objet2AvecNull) : "
 				, objet1AvecNull
@@ -310,6 +203,7 @@ public class UserSimpleTest {
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
+			System.out.println("testEquals()");
 			System.out.println("OBJET1AVECNULL : " 
 					+ objet1AvecNull.toString());
 			System.out.println("OBJET2AVECNULL : " 
@@ -339,21 +233,13 @@ public class UserSimpleTest {
 		
 		/* garantit le bon fonctionnement de equals() 
 		 * en cas d'inégalité métier. */
-		final IUserSimple objetDiff1 
-			= new UserSimple(2L
-					, CIVILITE_M
-					, PRENOM_WALLACE1, NOM_ROURKE_1
-					, EMAIL_YAHOO
-					, "login1", "mdp1"
-					, ADMINISTRATEUR);
+		final Civilite objetDiff1 
+			= new Civilite(2L
+					, CIVILITE_M);
 		
-		final IUserSimple objetDiff2 
-			= new UserSimple(3L
-					, CIVILITE_M
-					, PRENOM_WALLACE1, NOM_ROURKE_1
-					, EMAIL_YAHOO
-					, "login1", "mdp2"
-					, ADMINISTRATEUR);
+		final Civilite objetDiff2 
+			= new Civilite(3L
+					, CIVILITE_MME);
 		
 		assertFalse("objetDiff1 PAS equals(objetDiff2) : "
 				, objetDiff1.equals(objetDiff2));
@@ -378,13 +264,13 @@ public class UserSimpleTest {
 	/**
 	 * method testCompareTo() :<br/>
 	 * <ul>
-	 * Teste la méthode <b>compareTo(IUserSimple pLoc)</b> :
+	 * Teste la méthode <b>compareTo(Civilite pLoc)</b> :
 	 * <li>garantit que compareTo(memeInstance) retourne 0.</li>
 	 * <li>garantit que compareTo(null) retourne un nombre négatif.</li>
 	 * <li>garantit le contrat Java Contrat Java : 
 	 * x.equals(y) ---> x.compareTo(y) == 0.</li>
 	 * <li>garantit que les null sont bien gérés 
-	 * dans compareTo(IUserSimple pLoc).</li>
+	 * dans compareTo(Civilite pLoc).</li>
 	 * <li>garantit le bon fonctionnement (bon ordre) de compareTo().</li>
 	 * </ul>
 	 */
@@ -396,53 +282,33 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objet1 
-			= new UserSimple(2L
-					, CIVILITE_M
-					, PRENOM_WALLACE1, NOM_ROURKE_1
-					, EMAIL_YAHOO
-					, LOGIN, MDP
-					, ADMINISTRATEUR);
+		final Civilite objet1 
+			= new Civilite(2L
+					, CIVILITE_M);
 		
-		final IUserSimple objet1MemeInstance = objet1;
+		final Civilite objet1MemeInstance = objet1;
 		
-		final IUserSimple objetEquals1 
-			= new UserSimple(10L
-					, CIVILITE_MME
-					, PRENOM_GERALDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objetEquals1 
+			= new Civilite(10L
+					, CIVILITE_MLLE);
 		
-		final IUserSimple objetEquals2 
-			= new UserSimple(11L
-					, CIVILITE_MME
-					, PRENOM_GERALDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objetEquals2 
+			= new Civilite(11L
+					, CIVILITE_MLLE);
 
-		final IUserSimple objetNull1 
-		= new UserSimple();
+		final Civilite objetNull1 
+		= new Civilite();
 	
-		final IUserSimple objetNull2 
-			= new UserSimple();
+		final Civilite objetNull2 
+			= new Civilite();
 				
-		final IUserSimple objetCompAvant1 
-			= new UserSimple(3L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objetCompAvant1 
+			= new Civilite(3L
+					, CIVILITE_M);
 
-		final IUserSimple objetCompApres2 
-			= new UserSimple(3L
-					, CIVILITE_MME
-					, PRENOM_GERALDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_GERALDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objetCompApres2 
+			= new Civilite(3L
+					, CIVILITE_MME);
 
 	
 		/* garantit que compareTo(memeInstance) retourne 0. */		
@@ -490,7 +356,7 @@ public class UserSimpleTest {
 		
 		
 		/* garantit que les null sont bien gérés dans 
-		 * compareTo(IUserSimple pLoc). */		
+		 * compareTo(Civilite pLoc). */		
 		final int compareToEqualsNull = objetNull1.compareTo(objetNull2);
 		
 		assertTrue("InstanceNull.compareTo(equalsInstanceNull) doit retourner 0 : "
@@ -508,12 +374,9 @@ public class UserSimpleTest {
 		
 		/* garantit le bon fonctionnement (bon ordre) de compareTo(). */		
 		final int compare = objetCompAvant1.compareTo(objetCompApres2);
-		final int compareInverse = objetCompApres2.compareTo(objetCompAvant1);
 		
 		assertTrue("objetCompAvant1 doit être avant objetCompApres2 : "
 				, compare < 0);
-		assertTrue("objetCompAvant2 doit être après objetCompApres1 : "
-				, compareInverse > 0);
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
@@ -544,22 +407,18 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 		
-		final IUserSimple objetNull1 
-			= new UserSimple();
+		final Civilite objetNull1 
+			= new Civilite();
 		
-		final IUserSimple objetNullClone1 
-			= (IUserSimple) objetNull1.clone();
+		final Civilite objetNullClone1 
+			= (Civilite) objetNull1.clone();
 		
-		final IUserSimple objet1 
-			= new UserSimple(23L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(23L
+					, CIVILITE_MME);
 		
-		final IUserSimple objetClone1 
-		= (IUserSimple) objet1.clone();
+		final Civilite objetClone1 
+		= (Civilite) objet1.clone();
 		
 		
 		/* garantit que les null sont bien gérés dans clone(). */
@@ -615,21 +474,17 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objetNull 
-			= new UserSimple();
+		final Civilite objetNull 
+			= new Civilite();
 		
-		final IUserSimple objet1 
-			= new UserSimple(2L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(2L
+					, CIVILITE_MME);
 
 		
 		/* garantit que les null sont bien gérés dans toString(). */
 		assertEquals("objetNull.toString() retourne une chaine : "
-				, "UserSimple [id=null, civilité=null, prénom=null, nom=null, e-mail=null, login=null, mdp=null, profil=null]"
+				, "Civilite [id=null, civilité=null]"
 						, objetNull.toString());
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -640,7 +495,7 @@ public class UserSimpleTest {
 		
 		/* garantit le bon affichage de toString(). */
 		assertEquals("affichage : "
-				, "UserSimple [id=2, civilité=Mme, prénom=Amandine, nom=Watson, e-mail=email@yahoo.fr, login=Amandine.Watson, mdp=zozo93, profil=UTILISATEUR]"
+				, "Civilite [id=2, civilité=Mme]"
 						, objet1.toString());
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -668,19 +523,15 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objet1 
-			= new UserSimple(2L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(2L
+					, CIVILITE_MME);
 
 		/* garantit que getEnTeteCsv() retourne le bon en-tête csv. */
 		final String entete = objet1.getEnTeteCsv();
 		
 		assertEquals("en-tête csv : "
-				, "id;civilité;prénom;nom;e-mail;login;mdp;profil;"
+				, "id;civilité;"
 					, entete);
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -709,22 +560,18 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objetNull 
-		= new UserSimple();
+		final Civilite objetNull 
+		= new Civilite();
 	
-		final IUserSimple objet1 
-			= new UserSimple(27L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(27L
+					, CIVILITE_MME);
 		
 		/* garantit que les null sont gérés dans toStringCsv(). */
 		final String ligneCsvNull = objetNull.toStringCsv();
 						
 		assertEquals("ligne csv null : "
-				, "null;null;null;null;null;null;null;null;"
+				, "null;null;"
 					, ligneCsvNull);
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -737,7 +584,7 @@ public class UserSimpleTest {
 		final String ligneCsv = objet1.toStringCsv();
 		
 		assertEquals("ligne csv : "
-				, "27;Mme;Amandine;Watson;email@yahoo.fr;Amandine.Watson;zozo93;UTILISATEUR;"
+				, "27;Mme;"
 					, ligneCsv);
 		
 		/* AFFICHAGE A LA CONSOLE. */
@@ -768,16 +615,12 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objetNull 
-		= new UserSimple();
+		final Civilite objetNull 
+		= new Civilite();
 	
-		final IUserSimple objet1 
-			= new UserSimple(27L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(27L
+					, CIVILITE_MME);
 		
 		/* garantit que les null sont gérés 
 		 * dans getEnTeteColonne(int pI). */
@@ -788,18 +631,13 @@ public class UserSimpleTest {
 		 * la bonne en-tête de colonne. */
 		final String entete1 = objet1.getEnTeteColonne(1);
 		final String enteteNull1 = objetNull.getEnTeteColonne(1);
-		final String entete2 = objet1.getEnTeteColonne(2);
-		final String enteteNull2 = objetNull.getEnTeteColonne(2);
 		
 		assertEquals("entete0 : ", "id", entete0);
 		assertEquals("enteteNull0 : ", "id", enteteNull0);
 		
 		assertEquals("entete1 : ", "civilité", entete1);
 		assertEquals("enteteNull1 : ", "civilité", enteteNull1);
-		
-		assertEquals("entete2 : ", "prénom", entete2);
-		assertEquals("enteteNull2 : ", "prénom", enteteNull2);
-		
+				
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testGetEnTeteColonne()");
@@ -809,8 +647,6 @@ public class UserSimpleTest {
 			System.out.println("entete1 : " + entete1);
 			System.out.println("enteteNull1 : " + enteteNull1);
 			
-			System.out.println("entete2 : " + entete2);
-			System.out.println("enteteNull2 : " + enteteNull2);
 		}
 
 	} // Fin de testGetEnTeteColonne().____________________________________
@@ -835,48 +671,26 @@ public class UserSimpleTest {
 		final boolean affichage = false;
 		// **********************************
 
-		final IUserSimple objetNull 
-		= new UserSimple();
+		final Civilite objetNull 
+		= new Civilite();
 	
-		final IUserSimple objet1 
-			= new UserSimple(27L
-					, CIVILITE_MME
-					, PRENOM_AMANDINE, NOM_WATSON
-					, EMAIL_YAHOO
-					, LOGIN_AMANDINE_WATSON, MDP_ZOZO93
-					, UTILISATEUR);
+		final Civilite objet1 
+			= new Civilite(27L
+					, CIVILITE_MME);
 		
 		/* garantit que les null sont gérés 
 		 * dans getValeurColonne(int pI). */
 		final String valeurNull0 = (String) objetNull.getValeurColonne(0);
 		final String valeurNull1 = (String) objetNull.getValeurColonne(1);
-		final String valeurNull2 = (String) objetNull.getValeurColonne(2);
-		final String valeurNull3 = (String) objetNull.getValeurColonne(3);
-		final String valeurNull4 = (String) objetNull.getValeurColonne(4);
-		final String valeurNull5 = (String) objetNull.getValeurColonne(5);
-		final String valeurNull6 = (String) objetNull.getValeurColonne(6);
-		final String valeurNull7 = (String) objetNull.getValeurColonne(7);
 		
 		assertEquals("valeurNull0 : ", null, valeurNull0);
 		assertEquals("valeurNull1 : ", null, valeurNull1);
-		assertEquals("valeurNull2 : ", null, valeurNull2);
-		assertEquals("valeurNull3 : ", null, valeurNull3);
-		assertEquals("valeurNull4 : ", null, valeurNull4);
-		assertEquals("valeurNull5 : ", null, valeurNull5);
-		assertEquals("valeurNull6 : ", null, valeurNull6);
-		assertEquals("valeurNull7 : ", null, valeurNull7);
 
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {
 			System.out.println("testGetValeurColonne()");
 			System.out.println("valeurNull0 : " + valeurNull0);
 			System.out.println("valeurNull1 : " + valeurNull1);			
-			System.out.println("valeurNull2 : " + valeurNull2);
-			System.out.println("valeurNull3 : " + valeurNull3);
-			System.out.println("valeurNull4 : " + valeurNull4);
-			System.out.println("valeurNull5 : " + valeurNull5);
-			System.out.println("valeurNull6 : " + valeurNull6);
-			System.out.println("valeurNull7 : " + valeurNull7);
 		}
 
 		
@@ -884,21 +698,9 @@ public class UserSimpleTest {
 		 * la bonne en-tête de colonne. */
 		final String valeur0 = (String) objet1.getValeurColonne(0);
 		final String valeur1 = (String) objet1.getValeurColonne(1);		
-		final String valeur2 = (String) objet1.getValeurColonne(2);
-		final String valeur3 = (String) objet1.getValeurColonne(3);
-		final String valeur4 = (String) objet1.getValeurColonne(4);
-		final String valeur5 = (String) objet1.getValeurColonne(5);
-		final String valeur6 = (String) objet1.getValeurColonne(6);
-		final String valeur7 = (String) objet1.getValeurColonne(7);
 		
 		assertEquals("valeur0 : ", "27", valeur0);		
 		assertEquals("valeur1 : ", "Mme", valeur1);
-		assertEquals("valeur2 : ", "Amandine", valeur2);
-		assertEquals("valeur3 : ", "Watson", valeur3);
-		assertEquals("valeur4 : ", "email@yahoo.fr", valeur4);
-		assertEquals("valeur5 : ", "Amandine.Watson", valeur5);
-		assertEquals("valeur6 : ", "zozo93", valeur6);
-		assertEquals("valeur7 : ", "UTILISATEUR", valeur7);
 		
 		/* AFFICHAGE A LA CONSOLE. */
 		if (AFFICHAGE_GENERAL && affichage) {	
@@ -906,16 +708,10 @@ public class UserSimpleTest {
 			System.out.println("testGetValeurColonne()");
 			System.out.println("valeur0 : " + valeur0);
 			System.out.println("valeur1 : " + valeur1);			
-			System.out.println("valeur2 : " + valeur2);
-			System.out.println("valeur3 : " + valeur3);
-			System.out.println("valeur4 : " + valeur4);
-			System.out.println("valeur5 : " + valeur5);
-			System.out.println("valeur6 : " + valeur6);
-			System.out.println("valeur7 : " + valeur7);
 		}
 
 	} // Fin de testGetValeurColonne().____________________________________
 	
 
-
-} // FIN DE LA CLASSE UserSimpleTest.----------------------------------------
+	
+} // FIN DE LA CLASSE CiviliteTest.------------------------------------------

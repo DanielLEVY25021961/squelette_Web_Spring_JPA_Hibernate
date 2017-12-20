@@ -52,6 +52,15 @@ public class DaoUserSimple extends AbstractDaoUserSimple {
 
 	// ************************ATTRIBUTS************************************/
 
+
+	/**
+	 * CLASSE_DAO_USERSIMPLE : String :<br/>
+	 * "Classe DaoUserSimple".<br/>
+	 */
+	public static final String CLASSE_DAO_USERSIMPLE 
+		= "Classe DaoUserSimple";
+
+	
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
@@ -108,7 +117,10 @@ public class DaoUserSimple extends AbstractDaoUserSimple {
 			objetTrouve = null;
 			
 			/* Gestion de la DAO Exception. */
-			this.gestionnaireException.gererException(e);
+			this.gestionnaireException
+				.gererException(
+						CLASSE_DAO_USERSIMPLE
+						, "Méthode findById(Long pId)", e);
 			
 		}
 		
