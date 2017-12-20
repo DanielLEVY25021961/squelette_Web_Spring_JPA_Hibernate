@@ -3,6 +3,7 @@ package levy.daniel.application.model.metier.usersimple;
 import levy.daniel.application.model.metier.IExportateurCsv;
 import levy.daniel.application.model.metier.IExportateurJTable;
 import levy.daniel.application.model.metier.usersimple.impl.Civilite;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
 
 /**
  * INTERFACE IUserSimple :<br/>
@@ -375,22 +376,22 @@ public interface IUserSimple
 	 *   doit respecter un ensemble fini de valeurs (nomenclature)".</li>
 	 * </ul>
 	 *
-	 * @return profil : String.<br/>
+	 * @return profil : ProfilSimple.<br/>
 	 */
-	String getProfil();
+	ProfilSimple getProfil();
 	
 	
 
 	/**
 	* method setProfil(
-	* String pProfil) :<br/>
+	* ProfilSimple pProfil) :<br/>
 	* Setter du Profil du UserSimple 
 	* (administrateur, modérateur, ...).<br/>
 	* <br/>
 	*
 	* @param pProfil : String : valeur à passer à profil.<br/>
 	*/
-	void setProfil(String pProfil);
+	void setProfil(ProfilSimple pProfil);
 	
 	
 

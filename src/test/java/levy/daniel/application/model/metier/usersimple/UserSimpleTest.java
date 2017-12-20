@@ -12,6 +12,8 @@ import org.junit.Test;
 
 import levy.daniel.application.model.metier.usersimple.impl.Civilite;
 import levy.daniel.application.model.metier.usersimple.impl.CivilitesEnum;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilsSimplesEnum;
 import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 /**
@@ -139,17 +141,21 @@ public class UserSimpleTest {
 	
 	
 	/**
-	 * ADMINISTRATEUR : String :<br/>
+	 * ADMINISTRATEUR : ProfilSimple :<br/>
 	 * "ADMINISTRATEUR".<br/>
 	 */
-	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
+	public static final ProfilSimple ADMINISTRATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.ADMINISTRATEUR.toString());
 	
 	
 	/**
-	 * UTILISATEUR : String :<br/>
+	 * UTILISATEUR : ProfilSimple :<br/>
 	 * "UTILISATEUR".<br/>
 	 */
-	public static final String UTILISATEUR = "UTILISATEUR";
+	public static final ProfilSimple UTILISATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.UTILISATEUR.toString());
 
 
 	
