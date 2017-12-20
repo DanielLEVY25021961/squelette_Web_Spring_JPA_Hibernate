@@ -8,7 +8,7 @@
  * <li>Cette logique métier doit rester <i>inchangée</i> 
  * quelle que soit la technologie utilisée (Web, Standalone, ...).</li>
  * <br/>
- * <li>L'arborescence du package model est la suivante :</li>
+ * <li>L'arborescence du package <b>model</b> est la suivante :</li>
  * <br/>
  * <li>
  * <img src="../../../../../../../javadoc/images/arborescence_model.png" 

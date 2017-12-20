@@ -22,7 +22,7 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
  * </li>
  * <br/>
  * <li>
- * <img src="../../../../../../../../../../../javadoc/images/.png" 
+ * <img src="../../../../../../../../../../javadoc/images/implementation_DaoProfilSimple.png" 
  * alt="implémentation des DAOs" border="1" align="center" />
  * </li>
  * </ul>

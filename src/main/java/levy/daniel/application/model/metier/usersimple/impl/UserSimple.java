@@ -179,6 +179,11 @@ public class UserSimple
 	/**
 	 * email : String :<br/>
 	 * E-mail du UserSimple.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_EMAIL_MOTIF_08
+	 *  : l'email du UserSimple doit respecter un motif (Regex) 
+	 *  d'un email (du type albacor.trust@google.fr)".<br/></li>
+	 * </ul>
 	 */
 	private String email;
 	
@@ -186,6 +191,14 @@ public class UserSimple
 	/**
 	 * login : String :<br/>
 	 * login.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_LOGIN_RENSEIGNE_09
+	 *  : le login du UserSimple
+	 *   doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_LOGIN_LONGUEUR_10
+	 *  : le login du UserSimple 
+	 *  doit contenir entre [1] et [100] caractères".</li>
+	 * </ul>
 	 */
 	private String login;
 
@@ -193,15 +206,26 @@ public class UserSimple
 	/**
 	 * mdp : String :<br/>
 	 * Mot de passe.<br/>
+	 * <ul>
+	 * <li>"RG_USERSIMPLE_MDP_RENSEIGNE_11
+	 *  : le mdp du UserSimple
+	 *   doit être renseigné (obligatoire)".</li>
+	 * <li>"RG_USERSIMPLE_MDP_LONGUEUR_12
+	 *  : le mdp du UserSimple
+	 *   doit contenir entre [3] et [20] caractères".</li>
+	 * <li>"RG_USERSIMPLE_MDP_MOTIF_13
+	 *  : le mdp du UserSimple
+	 *   doit respecter un motif (Regex)".</li>
+	 * </ul>
 	 */
 	private String mdp;
 
 	
 	/**
-	 * profil : String :<br/>
+	 * profil : ProfilSimple :<br/>
 	 * Profil du UserSimple (administrateur, modérateur, ...).<br/>
 	 */
-	private String profil;
+	private ProfilSimple profil;
 	
 	
 	/**
@@ -240,7 +264,7 @@ public class UserSimple
 	 * @param pEmail : String : E-mail du UserSimple.<br/>
 	 * @param pLogin : String : Login.<br/>
 	 * @param pMdp : String : Mot de passe.<br/>
-	 * @param pProfil : String : Profil du UserSimple 
+	 * @param pProfil : ProfilSimple : Profil du UserSimple 
 	 * (administrateur, modérateur, ...).<br/>
 	 */
 	public UserSimple(
@@ -248,7 +272,7 @@ public class UserSimple
 			, final String pPrenom, final String pNom
 			, final String pEmail
 			, final String pLogin, final String pMdp
-				, final String pProfil) {
+				, final ProfilSimple pProfil) {
 		
 		this(null
 				, pCivilite
@@ -277,7 +301,7 @@ public class UserSimple
 	 * @param pEmail : String : E-mail du UserSimple.<br/>
 	 * @param pLogin : String : Login.<br/>
 	 * @param pMdp : String : Mot de passe.<br/>
-	 * @param pProfil : String : Profil du UserSimple 
+	 * @param pProfil : ProfilSimple : Profil du UserSimple 
 	 * (administrateur, modérateur, ...).<br/>
 	 */
 	public UserSimple(
@@ -286,7 +310,7 @@ public class UserSimple
 			, final String pPrenom, final String pNom
 			, final String pEmail
 			, final String pLogin, final String pMdp
-				, final String pProfil) {
+				, final ProfilSimple pProfil) {
 		
 		super();
 		
@@ -542,7 +566,7 @@ public class UserSimple
 		/* profil. */
 		builder.append("profil=");
 		if (this.profil != null) {			
-			builder.append(this.profil);
+			builder.append(this.profil.getProfilString());
 		} else {
 			builder.append(NULL);
 		}
@@ -600,7 +624,11 @@ public class UserSimple
 		stb.append(this.getMdp());
 		stb.append(POINT_VIRGULE);
 		/* profil. */
-		stb.append(this.getProfil());
+		if (this.getProfil() != null) {
+			stb.append(this.getProfil().getProfilString());
+		} else {
+			stb.append(NULL);
+		}		
 		stb.append(POINT_VIRGULE);
 		
 		return stb.toString();
@@ -711,7 +739,10 @@ public class UserSimple
 			break;
 
 		case 7:
-			valeur = this.getProfil();
+			if (this.getProfil() != null) {
+				valeur = this.getProfil().getProfilString();
+			}
+			
 			break;
 
 		default:
@@ -911,7 +942,7 @@ public class UserSimple
 	, insertable = true, updatable = true
 	, foreignKey = @ForeignKey(name = "FK_USERSIMPLE_PROFILSIMPLE"))
 	@Override
-	public String getProfil() {	
+	public ProfilSimple getProfil() {	
 		return this.profil;
 	} // Fin de getProfil()._______________________________________________
 
@@ -922,7 +953,7 @@ public class UserSimple
 	 */
 	@Override
 	public void setProfil(
-			final String pProfil) {	
+			final ProfilSimple pProfil) {	
 		this.profil = pProfil;
 	} // Fin de setProfil(...).____________________________________________
 

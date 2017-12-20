@@ -2,8 +2,9 @@
  * class package-info :<br/>
  * <ul>
  * <li>
- * Ce package contient toutes les classes de la <b>COUCHE</b> 
- * de <b>persistance des données</b>.
+ * Ce package <b>levy.daniel.application.model.dao</b> 
+ * contient toutes les classes de la <b>COUCHE</b> 
+ * de <b>persistance des données (DAO)</b>.
  * </li>
  * <li>
  * La COUCHE <b>DAO</b> (Data Access Objects) a la responsabilité 
@@ -17,6 +18,13 @@
  * <li>
  * <img src="../../../../../../../../javadoc/images/architecture_applicative.png" 
  * alt="architecture applicative" border="1" align="center" />
+ * </li>
+ * <br/>
+ * <li>L'arborescence du package <b>dao</b> est la suivante :</li>
+ * <br/>
+ * <li>
+ * <img src="../../../../../../../javadoc/images/" 
+ * alt="arborescence du package services" border="1" align="center" />
  * </li>
  * <br/>
  * </ul>

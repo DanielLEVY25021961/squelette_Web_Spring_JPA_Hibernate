@@ -25,6 +25,8 @@ import levy.daniel.application.model.dao.metier.usersimple.IDaoUserSimple;
 import levy.daniel.application.model.metier.usersimple.IUserSimple;
 import levy.daniel.application.model.metier.usersimple.impl.Civilite;
 import levy.daniel.application.model.metier.usersimple.impl.CivilitesEnum;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
+import levy.daniel.application.model.metier.usersimple.impl.ProfilsSimplesEnum;
 import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 
@@ -138,7 +140,8 @@ public class DaoUserSimpleTest {
 	 * "M.".<br/>
 	 */
 	public static final Civilite CIVILITE_M 
-		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
+		= new Civilite(
+				CivilitesEnum.MONSIEUR.getAbreviationEnum());
 
 	
 	/**
@@ -146,7 +149,8 @@ public class DaoUserSimpleTest {
 	 * "Mme".<br/>
 	 */
 	public static final Civilite CIVILITE_MME 
-		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
+		= new Civilite(
+				CivilitesEnum.MADAME.getAbreviationEnum());
 	
 	
 	/**
@@ -154,7 +158,8 @@ public class DaoUserSimpleTest {
 	 * "Mlle".<br/>
 	 */
 	public static final Civilite CIVILITE_MLLE 
-		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
+		= new Civilite(
+				CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
 
 	
 	/**
@@ -270,17 +275,21 @@ public class DaoUserSimpleTest {
 	
 	
 	/**
-	 * ADMINISTRATEUR : String :<br/>
+	 * ADMINISTRATEUR : ProfilSimple :<br/>
 	 * "ADMINISTRATEUR".<br/>
 	 */
-	public static final String ADMINISTRATEUR = "ADMINISTRATEUR";
+	public static final ProfilSimple ADMINISTRATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.ADMINISTRATEUR.toString());
 	
 	
 	/**
-	 * UTILISATEUR : String :<br/>
+	 * UTILISATEUR : ProfilSimple :<br/>
 	 * "UTILISATEUR".<br/>
 	 */
-	public static final String UTILISATEUR = "UTILISATEUR";
+	public static final ProfilSimple UTILISATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.UTILISATEUR.toString());
 
 	
 	/**
@@ -299,6 +308,15 @@ public class DaoUserSimpleTest {
 	 */
 	@Autowired
 	private transient DaoCivilite daoCivilite;
+	
+	
+	/**
+	 * daoProfilSimple : DaoProfilSimple :<br/>
+	 * DAO pour les ProfilSimple.<br/>
+	 * INJECTE PAR SPRING (Autowired).<b/>
+	 */
+	@Autowired
+	private transient DaoProfilSimple daoProfilSimple;
 	
 	
 	/**
@@ -446,29 +464,21 @@ public class DaoUserSimpleTest {
 		IUserSimple objet1Persistant = null;
 		IUserSimple objet2Persistant = null;
 		IUserSimple objet3Persistant = null;
-		
-//		Civilite civiliteM 
-//			= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
-//		Civilite civiliteMlle 
-//			= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
-		
-//		civiliteM = this.daoCivilite.create(civiliteM);
-//		civiliteMlle = this.daoCivilite.create(civiliteMlle);
-		
+				
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet1 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		final IUserSimple objet2 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_MLLE)
 				, "Francine", "Bourgeât"
 				, "francine.bourgeat@tele2.fr"
 				, "francine.bourgeat", "1234VB56"
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
@@ -544,7 +554,7 @@ public class DaoUserSimpleTest {
 				, "Robert", "Badinter"
 				, "robert.badinter@free.fr"
 				, "robert.badinter", "cerbere"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		try {
 			
@@ -631,7 +641,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet2Equals1 
@@ -639,7 +649,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
@@ -842,7 +852,7 @@ public class DaoUserSimpleTest {
 				, "Christopher", "Columbus"
 				, "Christopher.columbus@yahoo.com"
 				, "Christopher.columbus", MDP_ZOZO93
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
@@ -952,7 +962,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet2Equals1 
@@ -960,7 +970,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1166,7 +1176,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1277,7 +1287,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet2Equals1 
@@ -1285,7 +1295,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1494,7 +1504,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1604,7 +1614,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet2Equals1 
@@ -1612,7 +1622,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1822,7 +1832,7 @@ public class DaoUserSimpleTest {
 				, "David", "Copperfield"
 				, "david.copperfield@tele1.com"
 				, "david.copperfield", "dcopperfield"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 				
 		/* Compte du nombre d'Objets initialement en base. */
@@ -1934,7 +1944,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Instanciation d'un IUserSimple. */
 		final IUserSimple objet2Equals1 
@@ -1942,7 +1952,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_BORNE, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		
 		/* Compte du nombre d'Objets initialement en base. */
@@ -2067,7 +2077,7 @@ public class DaoUserSimpleTest {
 				, "Zorro", "Halliday"
 				, EMAIL_BORNE
 				, "Zorro.Halliday", MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet2Null = null;
 		
@@ -2076,14 +2086,14 @@ public class DaoUserSimpleTest {
 				, "Zorro", "Halliday"
 				, EMAIL_BORNE
 				, "Zorro.Halliday", MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet4 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
 				, "Calamity", "Jane"
 				, EMAIL_YAHOO
 				, "Calamity.Jane", MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		/* Constitution d'un lot d'objets. */
 		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
@@ -2205,7 +2215,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet2Null = null;
 		
@@ -2214,21 +2224,21 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet4 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		final IUserSimple objet5 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
 				, PRENOM_WALLACE1, NOM_ROURKE_1
 				, EMAIL_YAHOO
 				, LOGIN, MDP_ZOZO93
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objetInexistant 
 		= new UserSimple(
@@ -2236,7 +2246,7 @@ public class DaoUserSimpleTest {
 				, "prenomInexistant1", "nomInexistant1"
 				, "emailInexistant1"
 				, "loginInexistant1", "mdpInexistant1"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Constitution d'un lot d'objets. */
 		final List<IUserSimple> lot = new ArrayList<IUserSimple>();
@@ -2680,7 +2690,7 @@ public class DaoUserSimpleTest {
 				, "prenomInexistant", "nomInexistant"
 				, "emailInexistant"
 				, "loginInexistant", "mdpInexistant"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* ************************************************ */
 		/* ***************** UPDATE(Objet) **************** */
@@ -2766,7 +2776,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 				
 		/* Récupération de l'objet persistant. */
 		objet1Persistant = this.daoUserSimple.retrieve(objet1);
@@ -2863,7 +2873,7 @@ public class DaoUserSimpleTest {
 				, "Papy1", "Gonzales1"
 				, "papy.gonzales1@free.fr"
 				, "papy.gonzales1", "ppg1"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objetInexistant 
 		= new UserSimple(
@@ -2871,7 +2881,7 @@ public class DaoUserSimpleTest {
 				, "prenomInexistant2", "nomInexistant2"
 				, "emailInexistant2"
 				, "loginInexistant2", "mdpInexistant2"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 
 		/* remplit de la table. */
@@ -2982,7 +2992,7 @@ public class DaoUserSimpleTest {
 				, "Papy3", "Gonzales3"
 				, "papy.gonzales3@free.fr"
 				, "papy.gonzales3", "ppg3"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -3091,7 +3101,7 @@ public class DaoUserSimpleTest {
 				, "Papy4", "Gonzales4"
 				, "papy.gonzales4@free.fr"
 				, "papy.gonzales4", "ppg4"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -3199,7 +3209,7 @@ public class DaoUserSimpleTest {
 				, "Papy7", "Gonzales7"
 				, "papy.gonzales7@free.fr"
 				, "papy.gonzales7", "ppg7"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -3311,7 +3321,7 @@ public class DaoUserSimpleTest {
 				, "Papy8", "Gonzales8"
 				, "papy.gonzales8@free.fr"
 				, "papy.gonzales8", "ppg8"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -3424,7 +3434,7 @@ public class DaoUserSimpleTest {
 				, "Papy", "Gonzales"
 				, "papy.gonzales@free.fr"
 				, "papy.gonzales", "ppg"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 
 		/* remplit de la table. */
 		this.remplirTable(affichage);
@@ -3557,14 +3567,14 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet4 
 		= new UserSimple(CIVILITE_MME
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		final IUserSimple objetInexistant 
 		= new UserSimple(
@@ -3572,7 +3582,7 @@ public class DaoUserSimpleTest {
 				, "prenomInexistant4", "nomInexistant4"
 				, "emailInexistant4"
 				, "loginInexistant4", "mdpInexistant4"
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		/* Constitution du lot d'iterables. */
 		final List<IUserSimple> lotPersistantIterable 
@@ -3637,6 +3647,7 @@ public class DaoUserSimpleTest {
 					throws AbstractDaoException {
 		
 		Civilite civilitePersistante = null;
+		
 		if (this.daoCivilite.exists(pCivilite)) {
 			civilitePersistante = this.daoCivilite.retrieve(pCivilite);
 		} else {
@@ -3647,6 +3658,41 @@ public class DaoUserSimpleTest {
 		
 	} // Fin de fournirCivilitePersistante(...).___________________________
 
+
+		
+	/**
+	 * method fournirProfilSimplePersistant(
+	 * ProfilSimple pProfilSimple) :<br/>
+	 * <ul>
+	 * <li>Fournit une instance persistante managée 
+	 * par la session d'un ProfilSimple.</li>
+	 * <li>Recherche en base l'instance si elle a déjà été persistée.</li>
+	 * </ul>
+	 *
+	 * @param pProfilSimple : ProfilSimple<br/>
+	 * 
+	 * @return ProfilSimple persistant.<br/>
+	 * 
+	 * @throws AbstractDaoException
+	 */
+	private ProfilSimple fournirProfilSimplePersistant(
+			final ProfilSimple pProfilSimple) 
+					throws AbstractDaoException {
+		
+		ProfilSimple profilSImplePersistant = null;
+		
+		if (this.daoProfilSimple.exists(pProfilSimple)) {
+			profilSImplePersistant 
+				= this.daoProfilSimple.retrieve(pProfilSimple);
+		} else {
+			profilSImplePersistant 
+				= this.daoProfilSimple.create(pProfilSimple);
+		}
+		
+		return profilSImplePersistant;
+		
+	} // Fin de fournirProfilSimplePersistant(...).________________________
+	
 	
 	
 	/**
@@ -3673,7 +3719,7 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet2Null = null;
 		
@@ -3682,21 +3728,21 @@ public class DaoUserSimpleTest {
 				, PRENOM_JEAN_FREDERIC, NOM_BORNE
 				, EMAIL_BORNE
 				, LOGIN_BORNE, MDP_BORNE
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		final IUserSimple objet4 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_MME)
 				, PRENOM_AMANDINE, NOM_WATSON
 				, EMAIL_YAHOO
 				, LOGIN_AMANDINE_WATSON, MDP_BORNE
-				, ADMINISTRATEUR);
+				, fournirProfilSimplePersistant(ADMINISTRATEUR));
 		
 		final IUserSimple objet5 
 		= new UserSimple(fournirCivilitePersistante(CIVILITE_M)
 				, PRENOM_WALLACE1, NOM_ROURKE_1
 				, EMAIL_YAHOO
 				, LOGIN, MDP_ZOZO93
-				, UTILISATEUR);
+				, fournirProfilSimplePersistant(UTILISATEUR));
 		
 		
 		/* Constitution d'un lot d'objets. */
