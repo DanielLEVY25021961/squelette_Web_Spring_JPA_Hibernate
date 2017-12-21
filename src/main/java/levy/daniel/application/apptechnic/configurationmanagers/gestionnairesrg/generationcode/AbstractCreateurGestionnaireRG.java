@@ -798,23 +798,37 @@ public abstract class AbstractCreateurGestionnaireRG {
 		
 	} // Fin de mettreEnMajuscules(...).___________________________________
 
+
 	
 	/**
 	 * method mettrePremiereEnMajuscule() :<br/>
-	 * .<br/>
+	 * <ul>
+	 * <li>Met la première lettre de chaque mots séparés 
+	 * par des espaces en majuscule.</li>
+	 * <li>Met les autres de lettres de chaque mots séparés 
+	 * par un espace en minuscule.</li>
+	 * <li>Par exemple : "premier" est transformé en "Premier".</li>
+	 * <li>"PREMIER" est transformé en "Premier".</li>
+	 * </ul>
+	 * retourne null si pString == null.<br/>
 	 * <br/>
+	 * 
 	 *
-	 * @param pString
-	 * @return : String :  .<br/>
+	 * @param pString : String. <br/>
+	 * 
+	 * @return : String.<br/>
 	 */
-	private String mettrePremiereEnMajuscule(String pString) {
+	private String mettrePremiereEnMajuscule(
+			final String pString) {
 		
+		/* retourne null si pString == null. */
 		if (pString == null) {
 			return null;
 		}
 		
 		return WordUtils.capitalizeFully(pString);
-	}
+		
+	} // Fin de mettrePremiereEnMajuscule(...).____________________________
 	
 	
 	
