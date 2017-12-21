@@ -938,7 +938,7 @@ public class UserSimple
 	@ManyToOne(targetEntity = ProfilSimple.class
 			, fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PROFIL"
-	, unique = false, nullable = true
+	, unique = false, nullable = false
 	, insertable = true, updatable = true
 	, foreignKey = @ForeignKey(name = "FK_USERSIMPLE_PROFILSIMPLE"))
 	@Override

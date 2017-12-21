@@ -90,6 +90,31 @@ public class ProfilSimple implements Serializable
 	
 
 	/**
+	 * ADMINISTRATEUR : ProfilSimple :<br/>
+	 * ADMINISTRATEUR.<br/>
+	 */
+	public static final ProfilSimple ADMINISTRATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.ADMINISTRATEUR.toString());
+	
+	/**
+	 * GESTIONNAIRE_DONNEES : ProfilSimple :<br/>
+	 * GESTIONNAIRE_DONNEES.<br/>
+	 */
+	public static final ProfilSimple GESTIONNAIRE_DONNEES 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.GESTIONNAIRE_DONNEES.toString());
+
+	/**
+	 * UTILISATEUR : ProfilSimple :<br/>
+	 * UTILISATEUR.<br/>
+	 */
+	public static final ProfilSimple UTILISATEUR 
+		= new ProfilSimple(
+				ProfilsSimplesEnum.UTILISATEUR.toString());	
+
+	
+	/**
 	 * id : Long :<br/>
 	 * ID en base.<br/>
 	 */

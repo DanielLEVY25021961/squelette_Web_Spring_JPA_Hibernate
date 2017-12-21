@@ -11,14 +11,15 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang.WordUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.TypesValidation;
+import levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.generationcode.metier.usersimple.CreateurRGUserSimple;
 
 /**
- * class CreateurGestionnaireRG :<br/>
+ * class AbstractCreateurGestionnaireRG :<br/>
  * .<br/>
  * <br/>
  *
@@ -40,7 +41,7 @@ import levy.daniel.application.apptechnic.configurationmanagers.gestionnairesrg.
  * @since 7 déc. 2017
  *
  */
-public final class CreateurGestionnaireRG {
+public abstract class AbstractCreateurGestionnaireRG {
 
 	// ************************ATTRIBUTS************************************/
 
@@ -136,7 +137,7 @@ public final class CreateurGestionnaireRG {
 	 * "levy.daniel.application.model.metier.usersimple
 	 * .impl.UserSimple".<br/>
 	 */
-	public static transient String nomCompletClasse;
+	public transient String nomCompletClasse;
 	
 	
 	/**
@@ -146,7 +147,7 @@ public final class CreateurGestionnaireRG {
 	 * "levy.daniel.application.model.metier.usersimple
 	 * .impl.UserSimple".<br/>
 	 */
-	public static transient String nomSimpleClasse;
+	public transient String nomSimpleClasse;
 	
 	
 	/**
@@ -156,7 +157,7 @@ public final class CreateurGestionnaireRG {
 	 * "levy.daniel.application.model.metier.usersimple
 	 * .impl.UserSimple".<br/>
 	 */
-	public static transient String nomSimpleClasseMaj;
+	public transient String nomSimpleClasseMaj;
 	
 	
 	/**
@@ -166,7 +167,7 @@ public final class CreateurGestionnaireRG {
 	 * "levy.daniel.application.model.metier.usersimple
 	 * .impl.UserSimple".<br/>
 	 */
-	public static transient String nomSimpleClasseMin;
+	public transient String nomSimpleClasseMin;
 	
 	
 	/**
@@ -175,7 +176,7 @@ public final class CreateurGestionnaireRG {
 	 * de l'objet métier pour lequel on veut construire un 
 	 * GestionnaireRG.<br/>
 	 */
-	public static transient Field[] attributs;
+	public transient Field[] attributs;
 	
 	
 	/**
@@ -187,7 +188,7 @@ public final class CreateurGestionnaireRG {
 	 * <li>Sans les attributs commençant par "id".</li>
 	 * </ul>
 	 */
-	public static transient List<Field> attributsPrivate;
+	public transient List<Field> attributsPrivate;
 	
 	
 	/**
@@ -199,7 +200,7 @@ public final class CreateurGestionnaireRG {
 	 * <li>Sans les attributs commençant par "id".</li>
 	 * </ul>
 	 */
-	public static transient List<String> nomsAttributsPrivate;
+	public transient List<String> nomsAttributsPrivate;
 
 	
 	/**
@@ -211,7 +212,7 @@ public final class CreateurGestionnaireRG {
 	 * liste des types de RG à appliquer pour l'attribut.</li>
 	 * </ul>
 	 */
-	public static transient Map<String, List<String>> mapRgsParAttribut 
+	public transient Map<String, List<String>> mapRgsParAttribut 
 		= new ConcurrentHashMap<String, List<String>>();
 	
 	
@@ -226,7 +227,7 @@ public final class CreateurGestionnaireRG {
 	 * Toujours :<br/>
 	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
 	 */
-	public static transient List<String> listIdsRgs 
+	public transient List<String> listIdsRgs 
 		= new ArrayList<String>();
 
 	
@@ -245,29 +246,39 @@ public final class CreateurGestionnaireRG {
 	 * Toujours :<br/>
 	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
 	 */
-	public static transient List<String> listLignesCodeRgs 
+	public transient List<String> listLignesCodeRgs 
 		= new ArrayList<String>();
+
+	
+	/**
+	 * listBooleansValideurs : List<String> :<br/>
+	 * .<br/>
+	 */
+	public transient List<String> listBooleansValideurs 
+		= new ArrayList<String>();
+	
 	
 	/**
 	 * LOG : Log : 
 	 * Logger pour Log4j (utilisant commons-logging).
 	 */
 	private static final Log LOG 
-	 = LogFactory.getLog(CreateurGestionnaireRG.class);
+	 = LogFactory.getLog(AbstractCreateurGestionnaireRG.class);
 
 
 	// *************************METHODES************************************/
 	
 	
 	 /**
-	 * method CONSTRUCTEUR CreateurGestionnaireRG() :<br/>
+	 * method CONSTRUCTEUR AbstractCreateurGestionnaireRG() :<br/>
 	 * CONSTRUCTEUR D'ARITE NULLE.<br/>
 	 * <br/>
 	 */
-	private CreateurGestionnaireRG() {
+	protected AbstractCreateurGestionnaireRG() {
 		super();
 	} // Fin de CONSTRUCTEUR D'ARITE NULLE.________________________________
 	
+
 	
 	/**
 	 * method creerGestionnaireRG(
@@ -278,7 +289,7 @@ public final class CreateurGestionnaireRG {
 	 * @param pClasse :  :  .<br/>
 	 * @throws ClassNotFoundException 
 	 */
-	public static void creerGestionnaireRG(
+	public void creerGestionnaireRG(
 			final String pClasse) throws ClassNotFoundException {
 		
 		if (StringUtils.isBlank(pClasse)) {
@@ -288,48 +299,57 @@ public final class CreateurGestionnaireRG {
 		final Class<?> classe = Class.forName(pClasse);
 		
 		/* Récupère le nom complet de la classe. */
-		nomCompletClasse = recupererNomCompletClass(classe);
+		this.nomCompletClasse = recupererNomCompletClass(classe);
 		
 		/* Récupère le nom simple de la classe. */
-		nomSimpleClasse = recupererNomSimpleClass(classe);
+		this.nomSimpleClasse = recupererNomSimpleClass(classe);
 		/* Récupère le nom simple de la classe en majuscules. */
-		nomSimpleClasseMaj = mettreEnMajuscules(nomSimpleClasse);
+		this.nomSimpleClasseMaj = mettreEnMajuscules(this.nomSimpleClasse);
 		/* Récupère le nom simple de la classe en minuscules. */
-		nomSimpleClasseMin = mettreEnMinuscules(nomSimpleClasse);
+		this.nomSimpleClasseMin = mettreEnMinuscules(this.nomSimpleClasse);
 		
 		/* récupère tous les attributs de la classe. */
-		attributs = recupererAttributs(classe);
+		this.attributs = recupererAttributs(classe);
 		/* récupère tous les attributs private de la classe. */
-		attributsPrivate = recupererAttributsPrivate(classe);
+		this.attributsPrivate = recupererAttributsPrivate(classe);
 		/* récupère les noms de tous les attributs private de la classe. */
-		nomsAttributsPrivate = recupererNomsAttributsPrivate(classe);
+		this.nomsAttributsPrivate = recupererNomsAttributsPrivate(classe);
 		
 		/* AFFICHAGE DES ATTRIBUTS PRIVATE. */
 		System.out.println();
 		System.out.println(TIRETS);
 		System.out.println("LISTE DES ATTRIBUTS SIMPLEMENT PRIVATE DE LA CLASSE (sans id) : ");
-		System.out.println(afficherListString(nomsAttributsPrivate));
+		System.out.println(afficherListString(this.nomsAttributsPrivate));
 		System.out.println(TIRETS);
 		System.out.println();
 		
 		/* CREE LA MAP DES REGLES PAR ATTRIBUT. */
-		affecterRgAuxAttributs();
+		this.affecterRgAuxAttributs();
 		
 		/* Crée la liste des identifiants des RG listIdsRgs. */
 		/* Crée la liste des lignes de code des RG listLignesCodeRgs. */
-		creerListesRG();
+		this.creerListesRG();
 		
 		System.out.println();
 		System.out.println(TIRETS);
 		System.out.println("LISTE DES IDENTIFIANTS DES RG : ");
-		System.out.println(afficherListString(listIdsRgs));
+		System.out.println(afficherListString(this.listIdsRgs));
 		System.out.println(TIRETS);
 		System.out.println();
 		
 		System.out.println();
 		System.out.println(TIRETS);
 		System.out.println("LISTE DES LIGNES DE CODE RG : ");
-		System.out.println(afficherListString(listLignesCodeRgs));
+		System.out.println(afficherListString(this.listLignesCodeRgs));
+		System.out.println(TIRETS);
+		System.out.println();
+		
+		this.creerBooleans();
+		
+		System.out.println();
+		System.out.println(TIRETS);
+		System.out.println("LISTE DES VALIDEURS : ");
+		System.out.println(afficherListString(this.listBooleansValideurs));
 		System.out.println(TIRETS);
 		System.out.println();
 		
@@ -341,57 +361,12 @@ public final class CreateurGestionnaireRG {
 	 * method affecterRgAuxAttributs() :<br/>
 	 * <ul>
 	 * <li>CREE la <b>mapRgsParAttribut</b>.</li>
-	 * <li>A FAIRE A LA MAIN.</li>
+	 * <li>A FAIRE A LA MAIN DANS CHAQUE CREATEUR CONCRET.</li>
 	 * </ul>
 	 */
-	private static void affecterRgAuxAttributs() {
-		
-		/* civilite. */
-		final List<String> listCivilite = new ArrayList<String>();
-		listCivilite.add(TypesValidation.NOMENCLATURE.toString());
-		mapRgsParAttribut.put("civilite", listCivilite);
-		
-		/* prenom. */
-		final List<String> listPrenom = new ArrayList<String>();
-		listPrenom.add(TypesValidation.RENSEIGNE.toString());
-		listPrenom.add(TypesValidation.LITTERAL.toString());
-		listPrenom.add(TypesValidation.LONGUEUR.toString());
-		mapRgsParAttribut.put("prenom", listPrenom);
-		
-		/* nom. */
-		final List<String> listNom = new ArrayList<String>();
-		listNom.add(TypesValidation.RENSEIGNE.toString());
-		listNom.add(TypesValidation.LITTERAL.toString());
-		listNom.add(TypesValidation.LONGUEUR.toString());
-		mapRgsParAttribut.put("nom", listNom);
-		
-		/* email. */
-		final List<String> listEmail = new ArrayList<String>();
-		listEmail.add(TypesValidation.MOTIF.toString());
-		mapRgsParAttribut.put("email", listEmail);
-		
-		/* login. */
-		final List<String> listLogin = new ArrayList<String>();
-		listLogin.add(TypesValidation.RENSEIGNE.toString());
-		listLogin.add(TypesValidation.LONGUEUR.toString());
-		mapRgsParAttribut.put("login", listLogin);
-		
-		/* mdp. */
-		final List<String> listMdp = new ArrayList<String>();
-		listMdp.add(TypesValidation.RENSEIGNE.toString());
-		listMdp.add(TypesValidation.LONGUEUR.toString());
-		listMdp.add(TypesValidation.MOTIF.toString());
-		mapRgsParAttribut.put("mdp", listMdp);
-		
-		/* profil. */
-		final List<String> listProfil = new ArrayList<String>();
-		listProfil.add(TypesValidation.RENSEIGNE.toString());
-		listProfil.add(TypesValidation.NOMENCLATURE.toString());
-		mapRgsParAttribut.put("profil", listProfil);
-		
-	} // Fin de affecterRgAuxAttributs().__________________________________
+	protected abstract void affecterRgAuxAttributs();
 	
-	
+
 	
 	/**
 	 * method creerListesRG() :<br/>
@@ -411,14 +386,14 @@ public final class CreateurGestionnaireRG {
 	 * </ul>
 	 *
 	 */
-	private static void creerListesRG() {
+	private void creerListesRG() {
 
 		int compteur = 0;
 
-		for (final String nomAttribut : nomsAttributsPrivate) {
+		for (final String nomAttribut : this.nomsAttributsPrivate) {
 
 			final List<String> typesRg 
-				= mapRgsParAttribut.get(nomAttribut);
+				= this.mapRgsParAttribut.get(nomAttribut);
 
 			for (final String type : typesRg) {
 
@@ -432,7 +407,7 @@ public final class CreateurGestionnaireRG {
 				/* Identifiant RG. */
 				stbId.append(RG);
 				stbId.append(UNDERSCORE);
-				stbId.append(nomSimpleClasseMaj);
+				stbId.append(this.nomSimpleClasseMaj);
 				stbId.append(UNDERSCORE);
 				stbId.append(mettreEnMajuscules(nomAttribut));
 				stbId.append(UNDERSCORE);
@@ -440,7 +415,7 @@ public final class CreateurGestionnaireRG {
 				stbId.append(UNDERSCORE);
 				stbId.append(formaterNumero(compteur));
 
-				listIdsRgs.add(stbId.toString());
+				this.listIdsRgs.add(stbId.toString());
 				
 				/* Ligne de code RG. */
 				stbCode.append(stbId);
@@ -451,19 +426,136 @@ public final class CreateurGestionnaireRG {
 				stbCode.append(DEUX_POINTS_ESPACE);
 				stbCode.append(nomAttribut);
 				stbCode.append(DU);
-				stbCode.append(nomSimpleClasse);
+				stbCode.append(this.nomSimpleClasse);
 				stbCode.append(ESPACE);
 				stbCode.append(fournirMessageType(type));
 				stbCode.append(DOUBLE_COTES);
 				stbCode.append(POINT_VIRGULE);
 
-				listLignesCodeRgs.add(stbCode.toString());
+				this.listLignesCodeRgs.add(stbCode.toString());
 
 			} // Fin de TypeRG.__________________________________
 		}
 
 	} // Fin de creerListesRG(...).________________________________________
 
+	
+	
+	/**
+	 * method fournirMessageType(
+	 * String pType) :<br/>
+	 * <ul>
+	 * <li>Fournit une partie du <b>message</b> d'une RG 
+	 * en fonction de son <b>type</b>.</li>
+	 * <li>Par exemple "doit être renseigné" 
+	 * si pType vaut "RENSEIGNE".</li>
+	 * </ul>
+	 * retourne null si pType est blank.<br/>
+	 * <br/>
+	 *
+	 * @param pType : String : valeur possible dans 
+	 * l'Enumeration TypesValidation.<br/>
+	 * 
+	 * @return : String : fin du message de la RG 
+	 * en fonction du type.<br/>
+	 */
+	private static String fournirMessageType(
+			final String pType) {
+		
+		/* retourne null si pType est blank. */
+		if (StringUtils.isBlank(pType)) {
+			return null;
+		}
+		
+		String resultat = null;
+		
+		if (StringUtils.equalsIgnoreCase(
+				"RENSEIGNE", pType)) {
+			resultat = "doit être renseigné (obligatoire)";
+		}
+		else if (StringUtils.equalsIgnoreCase(
+				"LITTERAL", pType)) {
+			resultat = "ne doit contenir que des lettres ou des "
+					+ "caractères spéciaux '-', '_', "
+					+ "... (aucun chiffre)";
+		}
+		else if (StringUtils.equalsIgnoreCase(
+				"LITTERAL_ALPHABETIQUE", pType)) {
+			resultat = "ne doit contenir que des lettres de l'alphabet "
+					+ "(aucun caractères spéciaux '-', '_', "
+					+ "et aucun chiffre)";
+		}
+		else if (StringUtils.equalsIgnoreCase(
+				"NUMERIQUE", pType)) {
+			resultat = "ne doit contenir que des chiffres "
+					+ "(aucune lettre ou caractère spécial)";
+		}
+		else if (StringUtils.equalsIgnoreCase(
+				"LONGUEUR", pType)) {
+			resultat = "doit contenir entre [min] et [max] caractères";
+		}
+		else if (StringUtils.equalsIgnoreCase(
+				"MOTIF", pType)) {
+			resultat = "doit respecter un motif (Regex)";
+		}
+		else if (StringUtils.equalsIgnoreCase("NOMENCLATURE", pType)) {
+			resultat = "doit respecter un ensemble "
+					+ "fini de valeurs (nomenclature)";
+		}
+		else if (StringUtils.equalsIgnoreCase("FOURCHETTE", pType)) {
+			resultat = "doit être compris entre [min] et [max]";
+		}
+		
+		return resultat;
+		
+	} // Fin de fournirMessageType(...).___________________________________
+	
+
+	
+	/**
+	 * method creerBooleans() :<br/>
+	 * .<br/>
+	 * <br/>
+	 */
+	private void creerBooleans() {
+		
+
+		int compteur = 0;
+		
+
+		for (final String nomAttribut : this.nomsAttributsPrivate) {
+			
+			final StringBuilder stbValideurBoolean = new StringBuilder();
+			
+			/* Base Ligne de code Valideur. */
+			stbValideurBoolean.append("valider");
+			stbValideurBoolean.append(this.nomSimpleClasse);
+			stbValideurBoolean.append(mettrePremiereEnMajuscule(nomAttribut));
+			
+			final String baseAttribut = stbValideurBoolean.toString();
+			this.listBooleansValideurs.add(baseAttribut);
+
+			final List<String> typesRg 
+				= this.mapRgsParAttribut.get(nomAttribut);
+
+			for (final String type : typesRg) {
+
+				compteur++;
+				
+				final StringBuilder stb = new StringBuilder();
+				
+				stb.append(baseAttribut);
+				stb.append(mettrePremiereEnMajuscule(type));
+				stb.append(formaterNumero(compteur));
+				
+				this.listBooleansValideurs.add(stb.toString());
+
+			} // Fin de TypeRG.__________________________________
+			
+		}
+		
+	} // Fin de creerBooleans().___________________________________________
+	
 	
 	
 	/**
@@ -482,7 +574,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String : nom complet de la classe.<br/>
 	 */
-	public static String recupererNomCompletClass(
+	private String recupererNomCompletClass(
 			final Class<?> pClasse) {
 		
 		/* retourne null si pClasse == null. */
@@ -513,7 +605,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String : nom complet de la classe.<br/>
 	 */
-	public static String recupererNomSimpleClass(
+	private String recupererNomSimpleClass(
 			final Class<?> pClasse) {
 		
 		/* retourne null si pClasse == null. */
@@ -542,7 +634,7 @@ public final class CreateurGestionnaireRG {
 	 * @return : Field[] : Tableau des attributs 
 	 * déclarés DANS la classe.<br/>
 	 */
-	public static Field[] recupererAttributs(
+	private Field[] recupererAttributs(
 			final Class<?> pClasse) {
 		
 		/* retourne null si pClasse == null. */
@@ -577,7 +669,7 @@ public final class CreateurGestionnaireRG {
 	 * @return : List&lt;Field&gt; : liste des <b>attributs</b> 
 	 * simplement PRIVATE déclarés DANS la classe (sans l'id).<br/>
 	 */
-	public static List<Field> recupererAttributsPrivate(
+	private List<Field> recupererAttributsPrivate(
 			final Class<?> pClasse) {
 		
 		/* retourne null si pClasse == null. */
@@ -636,7 +728,7 @@ public final class CreateurGestionnaireRG {
 	 * @return : List&lt;String&gt; : liste des <b>noms</b> des attributs 
 	 * simplement PRIVATE déclarés DANS la classe (sans l'id).<br/>
 	 */
-	public static List<String> recupererNomsAttributsPrivate(
+	private List<String> recupererNomsAttributsPrivate(
 			final Class<?> pClasse) {
 		
 		/* retourne null si pClasse == null. */
@@ -689,7 +781,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String : chaine entièrement en majuscules.<br/>
 	 */
-	public static String mettreEnMajuscules(
+	private String mettreEnMajuscules(
 			final String pString) {
 		
 		/* retourne null si pString est blank. */
@@ -707,6 +799,24 @@ public final class CreateurGestionnaireRG {
 	} // Fin de mettreEnMajuscules(...).___________________________________
 
 	
+	/**
+	 * method mettrePremiereEnMajuscule() :<br/>
+	 * .<br/>
+	 * <br/>
+	 *
+	 * @param pString
+	 * @return : String :  .<br/>
+	 */
+	private String mettrePremiereEnMajuscule(String pString) {
+		
+		if (pString == null) {
+			return null;
+		}
+		
+		return WordUtils.capitalizeFully(pString);
+	}
+	
+	
 	
 	/**
 	 * method mettreEnMinuscules(
@@ -722,7 +832,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String : chaine entièrement en minuscules.<br/>
 	 */
-	public static String mettreEnMinuscules(
+	private String mettreEnMinuscules(
 			final String pString) {
 		
 		/* retourne null si pString est blank. */
@@ -740,6 +850,98 @@ public final class CreateurGestionnaireRG {
 	} // Fin de mettreEnMinuscules(...).___________________________________
 	
 	
+	
+	/**
+	 * method modifierFromString(
+	 * String pString) :<br/>
+	 * <ul>
+	 * <li>Fournit la <b>valeur entière</b> de la constante stockée 
+	 * dans la classe Modifier pour un modificateur.</li>
+	 * <li>Par exemple, modifierFromString("static") 
+	 * retourne 8.</li>
+	 * 
+	 * </ul>
+	 *
+	 * @param pString : modificateur comme "static".<br/>
+	 * 
+	 * @return : int : Valeur entière de la Constante associée 
+	 * au modificateur dans la classe Modifier.<br/>
+	 */
+	private int modifierFromString(
+			final String pString) {
+
+		int m = 0x0;
+		
+		if ("public".equalsIgnoreCase(pString)) {
+			m |= Modifier.PUBLIC;
+		}
+		else if ("protected".equalsIgnoreCase(pString)) {
+			m |= Modifier.PROTECTED;
+		}
+		else if ("private".equalsIgnoreCase(pString)) {
+			m |= Modifier.PRIVATE;
+		}
+		else if ("static".equalsIgnoreCase(pString)) {
+			m |= Modifier.STATIC;
+		}
+		else if ("final".equalsIgnoreCase(pString)) {
+			m |= Modifier.FINAL;
+		}
+		else if ("transient".equalsIgnoreCase(pString)) {
+			m |= Modifier.TRANSIENT;
+		}
+		else if ("volatile".equalsIgnoreCase(pString)) {
+			m |= Modifier.VOLATILE;
+		}
+		
+		return m;
+		
+	} // Fin de modifierFromString(...).___________________________________
+
+	
+	
+	/**
+	 * method formaterNumero(
+	 * int pNumero) :<br/>
+	 * <ul>
+	 * <li>Formate un <b>numéro entier</b> en <b>String</b>.</li>
+	 * <li>Complémente avec un 0 à gauche les entiers < 10.</li>
+	 * <li>Par exemple, 2 est transformé en "02", 12 en "12".</li>
+	 * </ul>
+	 *
+	 * @param pNumero : int : numéro.<br/>
+	 * 
+	 * @return : String : entier transformé en String avec un zéro 
+	 * en complément à gauche si pNumero < 10.<br/>
+	 */
+	private String formaterNumero(
+			final int pNumero) {
+		
+		String resultat = null;
+		
+		/* Si le nombre < 10, rajoute un zéro à gauche. */
+		if (pNumero < 10) {
+			
+			resultat 
+				= String.format(
+						Locale.getDefault()
+						, "%1$02d"
+						, pNumero);
+		}
+		else {
+			
+			resultat 
+			= String.format(
+					Locale.getDefault()
+					, "%1$d"
+					, pNumero);
+		}
+				
+		return resultat;
+		
+	} // Fin de formaterNumero(...)._______________________________________
+
+
 	
 	/**
 	 * method afficherAttributs(
@@ -761,7 +963,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String.<br/>
 	 */
-	public static String afficherAttributs(
+	public String afficherAttributs(
 			final Field[] pAttributs) {
 		
 		/* retourne null si pAttributs == null. */
@@ -815,7 +1017,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String.<br/>
 	 */
-	public static String afficherListAttributs(
+	public String afficherListAttributs(
 			final List<Field> pAttributs) {
 		
 		/* retourne null si pAttributs == null. */
@@ -863,7 +1065,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String.<br/>
 	 */
-	public static String afficherListString(
+	public String afficherListString(
 			final List<String> pList) {
 		
 		/* retourne null si pList == null. */
@@ -908,7 +1110,7 @@ public final class CreateurGestionnaireRG {
 	 * 
 	 * @return : String.<br/>
 	 */
-	public static String afficherMapStringList(
+	public String afficherMapStringList(
 			final Map<String, List<String>> pMap) {
 		
 		/* return null si pMap == null. */
@@ -951,175 +1153,14 @@ public final class CreateurGestionnaireRG {
 		
 		return stb.toString();
 		
-	}
+	} // Fiin de afficherMapStringList(...)._______________________________
 	
-	
-	
-	/**
-	 * method modifierFromString(
-	 * String pString) :<br/>
-	 * <ul>
-	 * <li>Fournit la <b>valeur entière</b> de la constante stockée 
-	 * dans la classe Modifier pour un modificateur.</li>
-	 * <li>Par exemple, modifierFromString("static") 
-	 * retourne 8.</li>
-	 * 
-	 * </ul>
-	 *
-	 * @param pString : modificateur comme "static".<br/>
-	 * 
-	 * @return : int : Valeur entière de la Constante associée 
-	 * au modificateur dans la classe Modifier.<br/>
-	 */
-	public static int modifierFromString(
-			final String pString) {
-
-		int m = 0x0;
-		
-		if ("public".equalsIgnoreCase(pString)) {
-			m |= Modifier.PUBLIC;
-		}
-		else if ("protected".equalsIgnoreCase(pString)) {
-			m |= Modifier.PROTECTED;
-		}
-		else if ("private".equalsIgnoreCase(pString)) {
-			m |= Modifier.PRIVATE;
-		}
-		else if ("static".equalsIgnoreCase(pString)) {
-			m |= Modifier.STATIC;
-		}
-		else if ("final".equalsIgnoreCase(pString)) {
-			m |= Modifier.FINAL;
-		}
-		else if ("transient".equalsIgnoreCase(pString)) {
-			m |= Modifier.TRANSIENT;
-		}
-		else if ("volatile".equalsIgnoreCase(pString)) {
-			m |= Modifier.VOLATILE;
-		}
-		
-		return m;
-		
-	} // Fin de modifierFromString(...).___________________________________
-
-	
-	
-	/**
-	 * method formaterNumero(
-	 * int pNumero) :<br/>
-	 * <ul>
-	 * <li>Formate un <b>numéro entier</b> en <b>String</b>.</li>
-	 * <li>Complémente avec un 0 à gauche les entiers < 10.</li>
-	 * <li>Par exemple, 2 est transformé en "02", 12 en "12".</li>
-	 * </ul>
-	 *
-	 * @param pNumero : int : numéro.<br/>
-	 * 
-	 * @return : String : entier transformé en String avec un zéro 
-	 * en complément à gauche si pNumero < 10.<br/>
-	 */
-	public static String formaterNumero(
-			final int pNumero) {
-		
-		String resultat = null;
-		
-		/* Si le nombre < 10, rajoute un zéro à gauche. */
-		if (pNumero < 10) {
-			
-			resultat 
-				= String.format(
-						Locale.getDefault()
-						, "%1$02d"
-						, pNumero);
-		}
-		else {
-			
-			resultat 
-			= String.format(
-					Locale.getDefault()
-					, "%1$d"
-					, pNumero);
-		}
-				
-		return resultat;
-		
-	} // Fin de formaterNumero(...)._______________________________________
-
-
-	
-	/**
-	 * method fournirMessageType(
-	 * String pType) :<br/>
-	 * <ul>
-	 * <li>Fournit une partie du <b>message</b> d'une RG 
-	 * en fonction de son <b>type</b>.</li>
-	 * <li>Par exemple "doit être renseigné" 
-	 * si pType vaut "RENSEIGNE".</li>
-	 * </ul>
-	 * retourne null si pType est blank.<br/>
-	 * <br/>
-	 *
-	 * @param pType : String : valeur possible dans 
-	 * l'Enumeration TypesValidation.<br/>
-	 * 
-	 * @return : String : fin du message de la RG 
-	 * en fonction du type.<br/>
-	 */
-	public static String fournirMessageType(
-			final String pType) {
-		
-		/* retourne null si pType est blank. */
-		if (StringUtils.isBlank(pType)) {
-			return null;
-		}
-		
-		String resultat = null;
-		
-		if (StringUtils.equalsIgnoreCase(
-				"RENSEIGNE", pType)) {
-			resultat = "doit être renseigné (obligatoire)";
-		}
-		else if (StringUtils.equalsIgnoreCase(
-				"LITTERAL", pType)) {
-			resultat = "ne doit contenir que des lettres ou des "
-					+ "caractères spéciaux '-', '_', "
-					+ "... (aucun chiffre)";
-		}
-		else if (StringUtils.equalsIgnoreCase(
-				"LITTERAL_ALPHABETIQUE", pType)) {
-			resultat = "ne doit contenir que des lettres de l'alphabet "
-					+ "(aucun caractères spéciaux '-', '_', "
-					+ "et aucun chiffre)";
-		}
-		else if (StringUtils.equalsIgnoreCase(
-				"NUMERIQUE", pType)) {
-			resultat = "ne doit contenir que des chiffres "
-					+ "(aucune lettre ou caractère spécial)";
-		}
-		else if (StringUtils.equalsIgnoreCase(
-				"LONGUEUR", pType)) {
-			resultat = "doit contenir entre [min] et [max] caractères";
-		}
-		else if (StringUtils.equalsIgnoreCase(
-				"MOTIF", pType)) {
-			resultat = "doit respecter un motif (Regex)";
-		}
-		else if (StringUtils.equalsIgnoreCase("NOMENCLATURE", pType)) {
-			resultat = "doit respecter un ensemble "
-					+ "fini de valeurs (nomenclature)";
-		}
-		else if (StringUtils.equalsIgnoreCase("FOURCHETTE", pType)) {
-			resultat = "doit être compris entre [min] et [max]";
-		}
-		
-		return resultat;
-		
-	} // Fin de fournirMessageType(...).___________________________________
 	
 	
 	
 	/**
-	 * method main() :<br/>
+	 * method main(
+	 * String[] args) :<br/>
 	 * .<br/>
 	 * <br/>
 	 *
@@ -1129,9 +1170,12 @@ public final class CreateurGestionnaireRG {
 	public static void main(
 			final String[] args) throws ClassNotFoundException {
 		
-		creerGestionnaireRG("levy.daniel.application.model.metier.usersimple.impl.UserSimple");
+		final AbstractCreateurGestionnaireRG createur = new CreateurRGUserSimple();
+		
+		createur.creerGestionnaireRG("levy.daniel.application.model.metier.usersimple.impl.UserSimple");
 
-	}
+	} // Fin de main(...)._________________________________________________
 
+	
 
-}
+} // FIN DE LA CLASSE AbstractCreateurGestionnaireRG.------------------------

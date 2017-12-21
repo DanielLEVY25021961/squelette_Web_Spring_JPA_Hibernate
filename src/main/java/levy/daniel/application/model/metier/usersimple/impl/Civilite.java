@@ -87,8 +87,32 @@ public class Civilite implements Serializable
 	 * "null".<br/>
 	 */
 	public static final String NULL = "null";
-	
 
+	
+	/**
+	 * MONSIEUR : Civilite :<br/>
+	 * "M.".<br/>
+	 */
+	public static final Civilite MONSIEUR 
+		= new Civilite(CivilitesEnum.MONSIEUR.getAbreviationEnum());
+
+	
+	/**
+	 * MADAME : Civilite :<br/>
+	 * "Mme".<br/>
+	 */
+	public static final Civilite MADAME 
+		= new Civilite(CivilitesEnum.MADAME.getAbreviationEnum());
+
+	
+	/**
+	 * MADEMOISELLE : Civilite :<br/>
+	 * "Mlle".<br/>
+	 */
+	public static final Civilite MADEMOISELLE 
+		= new Civilite(CivilitesEnum.MADEMOISELLE.getAbreviationEnum());
+
+	
 	/**
 	 * id : Long :<br/>
 	 * ID en base.<br/>

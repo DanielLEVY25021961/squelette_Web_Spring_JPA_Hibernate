@@ -13,7 +13,7 @@
 	<!--  -->
 	<display-name>squelette_Web_Spring_JPA_Hibernate</display-name>
 	
-	<descr>squelette d'une application web avec java 1.8.144, Spring 5.0.0, Servlet 3.1, JPA 2.1, Hibernate 5.2.10</descr>
+<!-- 	<descr>squelette d'une application web avec java 1.8.144, Spring 5.0.0, Servlet 3.1, JPA 2.1, Hibernate 5.2.10</descr> -->
 
 
 	

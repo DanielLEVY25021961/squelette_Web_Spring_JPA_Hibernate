@@ -2,6 +2,7 @@ package levy.daniel.application.model.dao.daoexceptions;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.PersistenceException;
+import javax.persistence.TransactionRequiredException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -12,6 +13,7 @@ import org.postgresql.util.PSQLException;
 import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoDoublonException;
 import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoPSQLException;
 import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoSQLGrammarException;
+import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoTransactionException;
 
 /**
  * class GestionnaireDaoException :<br/>
@@ -37,6 +39,32 @@ import levy.daniel.application.model.dao.daoexceptions.technical.impl.DaoSQLGram
 public class GestionnaireDaoException {
 
 	// ************************ATTRIBUTS************************************/
+
+	/**
+	 * CLASSE_GESTIONNAIREDAOEXCEPTION : String :<br/>
+	 * "Classe GestionnaireDaoException".<br/>
+	 */
+	public static final String CLASSE_GESTIONNAIREDAOEXCEPTION 
+		= "Classe GestionnaireDaoException";
+
+	
+	/**
+	 * METHOD_GEREREXCEPTION : String :<br/>
+	 * "Méthode gererException(Exception pE)".<br/>
+	 */
+	public static final String METHOD_GEREREXCEPTION 
+		= "Méthode gererException(Exception pE)";
+	
+	
+	/**
+	 * METHOD_GERER_DOUBLONS : String :<br/>
+	 * "Méthode gererDoublon(Exception pE
+	 * , Throwable pCauseMere, Throwable pCauseGrandMere)".<br/>
+	 */
+	public static final String METHOD_GERER_DOUBLONS 
+		= "Méthode gererDoublon(Exception pE"
+				+ ", Throwable pCauseMere, Throwable pCauseGrandMere)";
+	
 
 	/**
 	 * TIRET_AERE : String :<br/>
@@ -96,8 +124,9 @@ public class GestionnaireDaoException {
 		}
 		
 		
-		/* Violation de contraintes. */
-		if (pE instanceof PersistenceException) {			
+		/* Violation de contraintes ou Tables absentes. */
+		if (pE instanceof PersistenceException) {
+			
 			gererPersistenceException(pClasse, pMethode
 					, pE, causeMere, causeGrandMere);			
 		}
@@ -148,6 +177,92 @@ public class GestionnaireDaoException {
 					, final Throwable pCauseMere
 						, final Throwable pCauseGrandMere) 
 							throws AbstractDaoException {
+
+		
+		/* Problème de transaction. */
+		if (pE instanceof TransactionRequiredException) {
+							
+			final String messageUtilisateur 
+				= "PROBLEME GRAVE DE TRANSACTION - Prévenez le centre serveur";
+			
+			final String messageTechnique 
+				= "PROBLEME GRAVE DE TRANSACTION - "
+					+ pE.getMessage();
+			
+			
+			final DaoTransactionException daoTransactionExc 
+			= new DaoTransactionException(pE.getMessage(), pE);
+			
+			daoTransactionExc.setMessageUtilisateur(messageUtilisateur);
+			daoTransactionExc.setMessageTechnique(messageTechnique);
+			
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(messageUtilisateur, pE);
+			}
+			
+			throw daoTransactionExc;
+			
+		} // Fin de Problème de transaction.________________
+
+		
+		
+		if (pE instanceof EntityExistsException) {
+			System.out.println("PROBLEME DE PERSISTANCE EntityExistsException : " + pE);
+		}
+
+		
+		/* Tables absentes. */
+		if (pCauseMere instanceof SQLGrammarException) {
+			
+			final String baseMessage = "PROBLEME GRAVE POSTGRESQL";
+			final String baseUtilisateur = "Prévenez le centre serveur";
+			
+			String messageUtilisateur = null;			
+			String messageTechnique = null;
+		
+			if (pCauseGrandMere instanceof PSQLException) {
+				
+				messageUtilisateur 
+					= baseMessage + TIRET_AERE 
+					+ pCauseGrandMere.getMessage() + TIRET_AERE 
+					+ baseUtilisateur;
+				
+				messageTechnique 
+					= CLASSE_GESTIONNAIREDAOEXCEPTION + TIRET_AERE 
+					+ METHOD_GEREREXCEPTION + TIRET_AERE 
+					+ baseMessage + TIRET_AERE 
+					+ pCauseGrandMere.getMessage() + TIRET_AERE 
+					+ pE.getMessage();
+				
+			} else {
+				
+				messageUtilisateur 
+				= baseMessage + TIRET_AERE 
+				+ baseUtilisateur;
+				
+				messageTechnique 
+				= CLASSE_GESTIONNAIREDAOEXCEPTION + TIRET_AERE 
+					+ METHOD_GEREREXCEPTION + TIRET_AERE 
+					+ baseMessage + TIRET_AERE 
+					+ pE.getMessage();
+				
+			}
+							
+			final DaoPSQLException daoPSQLExc 
+			= new DaoPSQLException(pE.getMessage(), pE);
+			
+			daoPSQLExc.setMessageUtilisateur(messageUtilisateur);
+			daoPSQLExc.setMessageTechnique(messageTechnique);
+			
+			if (LOG.isFatalEnabled()) {
+				LOG.fatal(messageUtilisateur, pE);
+			}
+			
+			throw daoPSQLExc;
+			
+		} // Fin de Tables absentes.________________________
+
+
 				
 		if (pCauseGrandMere != null) {
 			

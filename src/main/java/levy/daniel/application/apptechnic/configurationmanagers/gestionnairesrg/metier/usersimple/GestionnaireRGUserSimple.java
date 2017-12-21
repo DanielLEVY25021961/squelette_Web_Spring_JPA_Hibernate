@@ -230,6 +230,23 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 				+ " doit respecter un ensemble fini de valeurs"
 				+ " (nomenclature)";
 
+
+	/* CIVILITE. */	
+	/**
+	 * validerUserSimpleCivilite : Boolean :<br/>
+	 * Boolean activant globalement la validation des RG 
+	 * sur la civilite du userSimple.<br/>
+	 */
+	private static Boolean validerUserSimpleCivilite;
+	
+	
+	/**
+	 * validerUserSimpleCiviliteNomenclature01 : Boolean :<br/>
+	 * Boolean activant la validation de 
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.<br/>
+	 */
+	private static Boolean validerUserSimpleCiviliteNomenclature01;
+	
 	
 	/* PRENOM. */
 	/**
@@ -241,27 +258,27 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * validerUserSimplePrenomRenseigne01 : Boolean :<br/>
+	 * validerUserSimplePrenomRenseigne02 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_01 sur le prenom.<br/>
+	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_02 sur le prenom.<br/>
 	 */
-	private static Boolean validerUserSimplePrenomRenseigne01;
+	private static Boolean validerUserSimplePrenomRenseigne02;
 
 	
 	/**
-	 * validerUserSimplePrenomLitteral02 : Boolean :<br/>
+	 * validerUserSimplePrenomLitteral03 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_LITTERAL_02 sur le prenom.<br/>
+	 * RG_USERSIMPLE_PRENOM_LITTERAL_03 sur le prenom.<br/>
 	 */
-	private static Boolean validerUserSimplePrenomLitteral02;
+	private static Boolean validerUserSimplePrenomLitteral03;
 
 	
 	/**
-	 * validerUserSimplePrenomLongueur03 : Boolean :<br/>
+	 * validerUserSimplePrenomLongueur04 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_LONGUEUR_03 sur le prenom.<br/>
+	 * RG_USERSIMPLE_PRENOM_LONGUEUR_04 sur le prenom.<br/>
 	 */
-	private static Boolean validerUserSimplePrenomLongueur03;
+	private static Boolean validerUserSimplePrenomLongueur04;
 	
 
 	/* NOM. */
@@ -274,27 +291,27 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * validerUserSimpleNomRenseigne04 : Boolean :<br/>
+	 * validerUserSimpleNomRenseigne05 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_RENSEIGNE_04 sur le nom.<br/>
+	 * RG_USERSIMPLE_NOM_RENSEIGNE_05 sur le nom.<br/>
 	 */
-	private static Boolean validerUserSimpleNomRenseigne04;
+	private static Boolean validerUserSimpleNomRenseigne05;
 
 	
 	/**
-	 * validerUserSimpleNomLitteral05 : Boolean :<br/>
+	 * validerUserSimpleNomLitteral06 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_LITTERAL_05 sur le nom.<br/>
+	 * RG_USERSIMPLE_NOM_LITTERAL_06 sur le nom.<br/>
 	 */
-	private static Boolean validerUserSimpleNomLitteral05;
+	private static Boolean validerUserSimpleNomLitteral06;
 
 	
 	/**
-	 * validerUserSimpleNomLongueur06 : Boolean :<br/>
+	 * validerUserSimpleNomLongueur07 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_LONGUEUR_06 sur le nom.<br/>
+	 * RG_USERSIMPLE_NOM_LONGUEUR_07 sur le nom.<br/>
 	 */
-	private static Boolean validerUserSimpleNomLongueur06;
+	private static Boolean validerUserSimpleNomLongueur07;
 	
 
 	/* EMAIL. */
@@ -307,11 +324,11 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * validerUserSimpleEmailMotif07 : Boolean :<br/>
+	 * validerUserSimpleEmailMotif08 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_EMAIL_MOTIF_07 sur l'email.<br/>
+	 * RG_USERSIMPLE_EMAIL_MOTIF_08 sur l'email.<br/>
 	 */
-	private static Boolean validerUserSimpleEmailMotif07;
+	private static Boolean validerUserSimpleEmailMotif08;
 	
 
 	/* LOGIN. */
@@ -324,19 +341,19 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * validerUserSimpleLoginRenseigne08 : Boolean :<br/>
+	 * validerUserSimpleLoginRenseigne09 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_08 sur le Login.<br/>
+	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_09 sur le Login.<br/>
 	 */
-	private static Boolean validerUserSimpleLoginRenseigne08;
+	private static Boolean validerUserSimpleLoginRenseigne09;
 
 	
 	/**
-	 * validerUserSimpleLoginLongueur09 : Boolean :<br/>
+	 * validerUserSimpleLoginLongueur10 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_LOGIN_LONGUEUR_09 sur le Login.<br/>
+	 * RG_USERSIMPLE_LOGIN_LONGUEUR_10 sur le Login.<br/>
 	 */
-	private static Boolean validerUserSimpleLoginLongueur09;
+	private static Boolean validerUserSimpleLoginLongueur10;
 
 	
 	/* MDP. */
@@ -349,19 +366,27 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * validerUserSimpleMdpRenseigne10 : Boolean :<br/>
+	 * validerUserSimpleMdpRenseigne11 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_MDP_RENSEIGNE_10 sur le mdp.<br/>
+	 * RG_USERSIMPLE_MDP_RENSEIGNE_11 sur le mdp.<br/>
 	 */
-	private static Boolean validerUserSimpleMdpRenseigne10;
+	private static Boolean validerUserSimpleMdpRenseigne11;
 
 	
 	/**
-	 * validerUserSimpleMdpLongueur11 : Boolean :<br/>
+	 * validerUserSimpleMdpLongueur12 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_MDP_LONGUEUR_11 sur le mdp.<br/>
+	 * RG_USERSIMPLE_MDP_LONGUEUR_12 sur le mdp.<br/>
 	 */
-	private static Boolean validerUserSimpleMdpLongueur11;
+	private static Boolean validerUserSimpleMdpLongueur12;
+
+	
+	/**
+	 * validerUserSimpleMdpMotif13 : Boolean :<br/>
+	 * Boolean activant la validation de 
+	 * RG_USERSIMPLE_MDP_MOTIF_13 sur le mdp.<br/>
+	 */
+	private static Boolean validerUserSimpleMdpMotif13;
 
 	
 	/* PROFIL. */
@@ -374,19 +399,19 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * validerUserSimpleProfilRenseigne12 : Boolean :<br/>
+	 * validerUserSimpleProfilRenseigne14 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_12 sur le profil.<br/>
+	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_14 sur le profil.<br/>
 	 */
-	private static Boolean validerUserSimpleProfilRenseigne12;
+	private static Boolean validerUserSimpleProfilRenseigne14;
 
 	
 	/**
-	 * validerUserSimpleProfilLongueur13 : Boolean :<br/>
+	 * validerUserSimpleProfilNomenclature15 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_PROFIL_LONGUEUR_13 sur le profil.<br/>
+	 * RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 sur le profil.<br/>
 	 */
-	private static Boolean validerUserSimpleProfilLongueur13;
+	private static Boolean validerUserSimpleProfilNomenclature15;
 	
 	
 	
@@ -815,292 +840,313 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	} // Fin de fournirCleValiderUserSimpleProfilLongueur13()._____________
 
 
+	
+	/**
+	 * method getValiderUserSimpleCivilite() :<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur la civilite du userSimple.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleCivilite : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleCivilite() {
+		return validerUserSimpleCivilite;
+	} // Fin de getValiderUserSimpleCivilite().____________________________
+
 
 	
 	/**
+	 * method getValiderUserSimpleCiviliteNomenclature01() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleCiviliteNomenclature01 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleCiviliteNomenclature01() {
+		return validerUserSimpleCiviliteNomenclature01;
+	} // Fin de getValiderUserSimpleCiviliteNomenclature01().______________
+
+
+
+	/**
 	 * method getValiderUserSimplePrenom() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur le prenom du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimplePrenom : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimplePrenom() {
-	
+	public static final Boolean getValiderUserSimplePrenom() {	
 		return validerUserSimplePrenom;
-	}
-
+	} // Fin de getValiderUserSimplePrenom().______________________________
 
 
 	
 	/**
 	 * method getValiderUserSimplePrenomRenseigne01() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_02 sur le prenom.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimplePrenomRenseigne01 : Boolean.<br/>
+	 * @return validerUserSimplePrenomRenseigne02 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimplePrenomRenseigne01() {
-	
-		return validerUserSimplePrenomRenseigne01;
-	}
+	public static final Boolean getValiderUserSimplePrenomRenseigne02() {	
+		return validerUserSimplePrenomRenseigne02;
+	} // Fin de getValiderUserSimplePrenomRenseigne02().___________________
 
+
+
+	/**
+	 * method getValiderUserSimplePrenomLitteral03() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_PRENOM_LITTERAL_03 sur le prenom.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimplePrenomLitteral03 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimplePrenomLitteral03() {	
+		return validerUserSimplePrenomLitteral03;
+	} // Fin de getValiderUserSimplePrenomLitteral03().____________________
 
 
 	
 	/**
-	 * method getValiderUserSimplePrenomLitteral02() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimplePrenomLongueur04() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_PRENOM_LONGUEUR_04 sur le prenom.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimplePrenomLitteral02 : Boolean.<br/>
+	 * @return validerUserSimplePrenomLongueur04 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimplePrenomLitteral02() {
-	
-		return validerUserSimplePrenomLitteral02;
-	}
+	public static final Boolean getValiderUserSimplePrenomLongueur04() {	
+		return validerUserSimplePrenomLongueur04;
+	} // Fin de getValiderUserSimplePrenomLongueur04().____________________
 
 
 
-	
-	/**
-	 * method getValiderUserSimplePrenomLongueur03() :<br/>
-	 * Getter .<br/>
-	 * <br/>
-	 *
-	 * @return validerUserSimplePrenomLongueur03 : Boolean.<br/>
-	 */
-	public static final Boolean getValiderUserSimplePrenomLongueur03() {
-	
-		return validerUserSimplePrenomLongueur03;
-	}
-
-
-
-	
 	/**
 	 * method getValiderUserSimpleNom() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur le nom du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimpleNom : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleNom() {
-	
+	public static final Boolean getValiderUserSimpleNom() {	
 		return validerUserSimpleNom;
-	}
-
-
-
-	
-	/**
-	 * method getValiderUserSimpleNomRenseigne04() :<br/>
-	 * Getter .<br/>
-	 * <br/>
-	 *
-	 * @return validerUserSimpleNomRenseigne04 : Boolean.<br/>
-	 */
-	public static final Boolean getValiderUserSimpleNomRenseigne04() {
-	
-		return validerUserSimpleNomRenseigne04;
-	}
-
+	} // Fin de getValiderUserSimpleNom()._________________________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleNomLitteral05() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleNomRenseigne05() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_NOM_RENSEIGNE_05 sur le nom.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleNomLitteral05 : Boolean.<br/>
+	 * @return validerUserSimpleNomRenseigne05 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleNomLitteral05() {
-	
-		return validerUserSimpleNomLitteral05;
-	}
-
+	public static final Boolean getValiderUserSimpleNomRenseigne05() {
+		return validerUserSimpleNomRenseigne05;
+	} // Fin de getValiderUserSimpleNomRenseigne05().______________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleNomLongueur06() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleNomLitteral06() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_NOM_LITTERAL_06 sur le nom.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleNomLongueur06 : Boolean.<br/>
+	 * @return validerUserSimpleNomLitteral06 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleNomLongueur06() {
-	
-		return validerUserSimpleNomLongueur06;
-	}
+	public static final Boolean getValiderUserSimpleNomLitteral06() {	
+		return validerUserSimpleNomLitteral06;
+	} // Fin de getValiderUserSimpleNomLitteral06()._______________________
 
+
+	
+	/**
+	 * method getValiderUserSimpleNomLongueur07() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_NOM_LONGUEUR_07 sur le nom.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleNomLongueur07 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleNomLongueur07() {	
+		return validerUserSimpleNomLongueur07;
+	} // Fin de getValiderUserSimpleNomLongueur07()._______________________
 
 
 	
 	/**
 	 * method getValiderUserSimpleEmail() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur l'email du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimpleEmail : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleEmail() {
-	
+	public static final Boolean getValiderUserSimpleEmail() {	
 		return validerUserSimpleEmail;
-	}
-
+	} // Fin de getValiderUserSimpleEmail()._______________________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleEmailMotif07() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleEmailMotif08() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_EMAIL_MOTIF_08 sur l'email.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleEmailMotif07 : Boolean.<br/>
+	 * @return validerUserSimpleEmailMotif08 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleEmailMotif07() {
-	
-		return validerUserSimpleEmailMotif07;
-	}
-
+	public static final Boolean getValiderUserSimpleEmailMotif08() {	
+		return validerUserSimpleEmailMotif08;
+	} // Fin de getValiderUserSimpleEmailMotif08().________________________
 
 
 	
 	/**
 	 * method getValiderUserSimpleLogin() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur le login du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimpleLogin : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleLogin() {
-	
+	public static final Boolean getValiderUserSimpleLogin() {	
 		return validerUserSimpleLogin;
-	}
-
-
-
-	
-	/**
-	 * method getValiderUserSimpleLoginRenseigne08() :<br/>
-	 * Getter .<br/>
-	 * <br/>
-	 *
-	 * @return validerUserSimpleLoginRenseigne08 : Boolean.<br/>
-	 */
-	public static final Boolean getValiderUserSimpleLoginRenseigne08() {
-	
-		return validerUserSimpleLoginRenseigne08;
-	}
-
+	} // Fin de getValiderUserSimpleLogin()._______________________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleLoginLongueur09() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleLoginRenseigne09() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_09 sur le Login.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleLoginLongueur09 : Boolean.<br/>
+	 * @return validerUserSimpleLoginRenseigne09 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleLoginLongueur09() {
-	
-		return validerUserSimpleLoginLongueur09;
-	}
+	public static final Boolean getValiderUserSimpleLoginRenseigne09() {	
+		return validerUserSimpleLoginRenseigne09;
+	} // Fin de getValiderUserSimpleLoginRenseigne09().____________________
 
+
+	
+	/**
+	 * method getValiderUserSimpleLoginLongueur10() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_LOGIN_LONGUEUR_10 sur le Login.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleLoginLongueur10 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleLoginLongueur10() {	
+		return validerUserSimpleLoginLongueur10;
+	} // Fin de getValiderUserSimpleLoginLongueur10()._____________________
 
 
 	
 	/**
 	 * method getValiderUserSimpleMdp() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur le mdp du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimpleMdp : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleMdp() {
-	
+	public static final Boolean getValiderUserSimpleMdp() {	
 		return validerUserSimpleMdp;
-	}
-
-
-
-	
-	/**
-	 * method getValiderUserSimpleMdpRenseigne10() :<br/>
-	 * Getter .<br/>
-	 * <br/>
-	 *
-	 * @return validerUserSimpleMdpRenseigne10 : Boolean.<br/>
-	 */
-	public static final Boolean getValiderUserSimpleMdpRenseigne10() {
-	
-		return validerUserSimpleMdpRenseigne10;
-	}
-
+	} // Fin de getValiderUserSimpleMdp()._________________________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleMdpLongueur11() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleMdpRenseigne11() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_MDP_RENSEIGNE_11 sur le mdp.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleMdpLongueur11 : Boolean.<br/>
+	 * @return validerUserSimpleMdpRenseigne11 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleMdpLongueur11() {
-	
-		return validerUserSimpleMdpLongueur11;
-	}
+	public static final Boolean getValiderUserSimpleMdpRenseigne11() {	
+		return validerUserSimpleMdpRenseigne11;
+	} // Fin de getValiderUserSimpleMdpRenseigne11().______________________
 
+
+	
+	/**
+	 * method getValiderUserSimpleMdpLongueur12() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_MDP_LONGUEUR_12 sur le mdp.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleMdpLongueur12 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleMdpLongueur12() {	
+		return validerUserSimpleMdpLongueur12;
+	} // Fin de getValiderUserSimpleMdpLongueur12()._______________________
+
+
+		
+	/**
+	 * method getValiderUserSimpleMdpMotif13() :<br/>
+	 * Getter Boolean activant la validation de 
+	 * RG_USERSIMPLE_MDP_MOTIF_13 sur le mdp.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleMdpMotif13 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleMdpMotif13() {
+		return validerUserSimpleMdpMotif13;
+	} // Fin de getValiderUserSimpleMdpMotif13().__________________________
 
 
 	
 	/**
 	 * method getValiderUserSimpleProfil() :<br/>
-	 * Getter .<br/>
+	 * Getter du Boolean activant globalement la validation des RG 
+	 * sur le profil du userSimple.<br/>
 	 * <br/>
 	 *
 	 * @return validerUserSimpleProfil : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleProfil() {
-	
+	public static final Boolean getValiderUserSimpleProfil() {	
 		return validerUserSimpleProfil;
-	}
-
-
-
-	
-	/**
-	 * method getValiderUserSimpleProfilRenseigne12() :<br/>
-	 * Getter .<br/>
-	 * <br/>
-	 *
-	 * @return validerUserSimpleProfilRenseigne12 : Boolean.<br/>
-	 */
-	public static final Boolean getValiderUserSimpleProfilRenseigne12() {
-	
-		return validerUserSimpleProfilRenseigne12;
-	}
-
+	} // Fin de getValiderUserSimpleProfil().______________________________
 
 
 	
 	/**
-	 * method getValiderUserSimpleProfilLongueur13() :<br/>
-	 * Getter .<br/>
+	 * method getValiderUserSimpleProfilRenseigne14() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_14 sur le profil.<br/>
 	 * <br/>
 	 *
-	 * @return validerUserSimpleProfilLongueur13 : Boolean.<br/>
+	 * @return validerUserSimpleProfilRenseigne14 : Boolean.<br/>
 	 */
-	public static final Boolean getValiderUserSimpleProfilLongueur13() {
+	public static final Boolean getValiderUserSimpleProfilRenseigne14() {	
+		return validerUserSimpleProfilRenseigne14;
+	} // Fin de getValiderUserSimpleProfilRenseigne14().___________________
+
+
 	
-		return validerUserSimpleProfilLongueur13;
-	}
-	
-	
-	
+	/**
+	 * method getValiderUserSimpleProfilNomenclature15() :<br/>
+	 * Getter du Boolean activant la validation de 
+	 * RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 sur le profil.<br/>
+	 * <br/>
+	 *
+	 * @return validerUserSimpleProfilNomenclature15 : Boolean.<br/>
+	 */
+	public static final Boolean getValiderUserSimpleProfilNomenclature15() {
+		return validerUserSimpleProfilNomenclature15;
+	} // Fin de getValiderUserSimpleProfilNomenclature15().________________
+
 	
 	
 } // FIN DE LA CLASSE GestionnaireRGUserSimple.------------------------------
