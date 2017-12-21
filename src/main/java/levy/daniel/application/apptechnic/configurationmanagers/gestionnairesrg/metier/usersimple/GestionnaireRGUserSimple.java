@@ -243,7 +243,7 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	/**
 	 * validerUserSimpleCiviliteNomenclature01 : Boolean :<br/>
 	 * Boolean activant la validation de 
-	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01.<br/>
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 sur la civilite.<br/>
 	 */
 	private static Boolean validerUserSimpleCiviliteNomenclature01;
 	
@@ -491,7 +491,42 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 
 	
+	/* CIVILITE. */
+	/**
+	 * method fournirCleValiderUserSimpleCivilite() :<br/>
+	 * <ul>
+	 * <li>retourne la <b>clé</b> du Boolean 
+	 * <b>validerUserSimpleCivilite</b> 
+	 * dans <b>rg-usersimple.properties</b>.</li>
+	 * <li>Boolean activant globalement la validation des RG 
+	 * sur la civilite du userSimple.</li>
+	 * </ul>
+	 *
+	 * @return : String : "valider.UserSimple.Civilite".<br/>
+	 */
+	private String fournirCleValiderUserSimpleCivilite() {
+		return "valider.UserSimple.Civilite";
+	} // Fin de fournirCleValiderUserSimpleCivilite()._____________________
 
+
+	
+	/**
+	 * method fournirCleValiderUserSimpleCiviliteNomenclature01() :<br/>
+	 * <ul>
+	 * <li>retourne la <b>clé</b> du Boolean 
+	 * <b>validerUserSimpleCiviliteNomenclature01</b> 
+	 * dans <b>rg-usersimple.properties</b>.</li>
+	 * <li>Boolean activant la validation de 
+	 * RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 sur la civilite.</li>
+	 * </ul>
+	 *
+	 * @return : String :  .<br/>
+	 */
+	private String fournirCleValiderUserSimpleCiviliteNomenclature01() {
+		return "valider.UserSimple.Civilite.Nomenclature.01";
+	} // Fin de fournirCleValiderUserSimpleCiviliteNomenclature01()._______
+	
+	
 	
 	/* PRENOM. */	
 	/**
@@ -513,56 +548,56 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 
 	
 	/**
-	 * method fournirCleValiderUserSimplePrenomRenseigne01() :<br/>
+	 * method fournirCleValiderUserSimplePrenomRenseigne02() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
 	 * <b>validerUserSimplePrenomRenseigne01</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_01 sur le prenom.</li>
+	 * RG_USERSIMPLE_PRENOM_RENSEIGNE_02 sur le prenom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Prenom.Renseigne.01".<br/>
+	 * @return : String : "valider.UserSimple.Prenom.Renseigne.02".<br/>
 	 */
-	private String fournirCleValiderUserSimplePrenomRenseigne01() {
-		return "valider.UserSimple.Prenom.Renseigne.01";
-	} // Fin de fournirCleValiderUserSimplePrenomRenseigne01().____________
+	private String fournirCleValiderUserSimplePrenomRenseigne02() {
+		return "valider.UserSimple.Prenom.Renseigne.02";
+	} // Fin de fournirCleValiderUserSimplePrenomRenseigne02().____________
 	
 
 	
 	/**
-	 * method fournirCleValiderUserSimplePrenomLitteral02() :<br/>
+	 * method fournirCleValiderUserSimplePrenomLitteral03() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
 	 * <b>validerUserSimplePrenomLitteral02</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_LITTERAL_02 sur le prenom.</li>
+	 * RG_USERSIMPLE_PRENOM_LITTERAL_03 sur le prenom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Prenom.Litteral.02".<br/>
+	 * @return : String : "valider.UserSimple.Prenom.Litteral.03".<br/>
 	 */
-	private String fournirCleValiderUserSimplePrenomLitteral02() {
-		return "valider.UserSimple.Prenom.Litteral.02";
-	} // Fin de fournirCleValiderUserSimplePrenomLitteral02()._____________
+	private String fournirCleValiderUserSimplePrenomLitteral03() {
+		return "valider.UserSimple.Prenom.Litteral.03";
+	} // Fin de fournirCleValiderUserSimplePrenomLitteral03()._____________
 
 	
 	
 	/**
-	 * method fournirCleValiderUserSimplePrenomLongueur03() :<br/>
+	 * method fournirCleValiderUserSimplePrenomLongueur04() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimplePrenomLongueur03</b> 
+	 * <b>validerUserSimplePrenomLongueur04</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_PRENOM_LONGUEUR_03 sur le prenom.</li>
+	 * RG_USERSIMPLE_PRENOM_LONGUEUR_04 sur le prenom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Prenom.Longueur.03".<br/>
+	 * @return : String : "valider.UserSimple.Prenom.Longueur.04".<br/>
 	 */
-	private String fournirCleValiderUserSimplePrenomLongueur03() {
-		return "valider.UserSimple.Prenom.Longueur.03";
-	} // Fin de fournirCleValiderUserSimplePrenomLongueur03()._____________
+	private String fournirCleValiderUserSimplePrenomLongueur04() {
+		return "valider.UserSimple.Prenom.Longueur.04";
+	} // Fin de fournirCleValiderUserSimplePrenomLongueur04()._____________
 	
 	
 	
@@ -586,56 +621,56 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleNomRenseigne04() :<br/>
+	 * method fournirCleValiderUserSimpleNomRenseigne05() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
 	 * <b>validerUserSimpleNomRenseigne04</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_RENSEIGNE_04 sur le nom.</li>
+	 * RG_USERSIMPLE_NOM_RENSEIGNE_05 sur le nom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Nom.Renseigne.04".<br/>
+	 * @return : String : "valider.UserSimple.Nom.Renseigne.05".<br/>
 	 */
-	private String fournirCleValiderUserSimpleNomRenseigne04() {
-		return "valider.UserSimple.Nom.Renseigne.04";
-	} // Fin de fournirCleValiderUserSimpleNomRenseigne04()._______________
+	private String fournirCleValiderUserSimpleNomRenseigne05() {
+		return "valider.UserSimple.Nom.Renseigne.05";
+	} // Fin de fournirCleValiderUserSimpleNomRenseigne05()._______________
 	
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleNomLitteral05() :<br/>
+	 * method fournirCleValiderUserSimpleNomLitteral06() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleNomLitteral05</b> 
+	 * <b>validerUserSimpleNomLitteral06</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_LITTERAL_05 sur le nom.</li>
+	 * RG_USERSIMPLE_NOM_LITTERAL_06 sur le nom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Nom.Litteral.05".<br/>
+	 * @return : String : "valider.UserSimple.Nom.Litteral.06".<br/>
 	 */
-	private String fournirCleValiderUserSimpleNomLitteral05() {
-		return "valider.UserSimple.Nom.Litteral.05";
-	} // Fin de fournirCleValiderUserSimpleNomLitteral05().________________
+	private String fournirCleValiderUserSimpleNomLitteral06() {
+		return "valider.UserSimple.Nom.Litteral.06";
+	} // Fin de fournirCleValiderUserSimpleNomLitteral06().________________
 	
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleNomLongueur06() :<br/>
+	 * method fournirCleValiderUserSimpleNomLongueur07() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleNomLongueur06</b> 
+	 * <b>validerUserSimpleNomLongueur07</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_NOM_LONGUEUR_06 sur le nom.</li>
+	 * RG_USERSIMPLE_NOM_LONGUEUR_07 sur le nom.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Nom.Longueur.06".<br/>
+	 * @return : String : "valider.UserSimple.Nom.Longueur.07".<br/>
 	 */
-	private String fournirCleValiderUserSimpleNomLongueur06() {
-		return "valider.UserSimple.Nom.Longueur.06";
-	} // Fin de fournirCleValiderUserSimpleNomLongueur06().________________
+	private String fournirCleValiderUserSimpleNomLongueur07() {
+		return "valider.UserSimple.Nom.Longueur.07";
+	} // Fin de fournirCleValiderUserSimpleNomLongueur07().________________
 	
 
 	
@@ -659,20 +694,20 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleEmailMotif07() :<br/>
+	 * method fournirCleValiderUserSimpleEmailMotif08() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleEmailMotif07</b> 
+	 * <b>validerUserSimpleEmailMotif08</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_EMAIL_MOTIF_07 sur l'email.</li>
+	 * RG_USERSIMPLE_EMAIL_MOTIF_08 sur l'email.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Email.Motif.07".<br/>
+	 * @return : String : "valider.UserSimple.Email.Motif.08".<br/>
 	 */
-	private String fournirCleValiderUserSimpleEmailMotif07() {
-		return "valider.UserSimple.Email.Motif.07";
-	} // Fin de fournirCleValiderUserSimpleEmailMotif07()._________________
+	private String fournirCleValiderUserSimpleEmailMotif08() {
+		return "valider.UserSimple.Email.Motif.08";
+	} // Fin de fournirCleValiderUserSimpleEmailMotif08()._________________
 	
 
 	
@@ -696,38 +731,38 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleLoginRenseigne08() :<br/>
+	 * method fournirCleValiderUserSimpleLoginRenseigne09() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleLoginRenseigne08</b> 
+	 * <b>validerUserSimpleLoginRenseigne09</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_08 sur le Login.</li>
+	 * RG_USERSIMPLE_LOGIN_RENSEIGNE_09 sur le Login.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Login.Renseigne.08".<br/>
+	 * @return : String : "valider.UserSimple.Login.Renseigne.09".<br/>
 	 */
-	private String fournirCleValiderUserSimpleLoginRenseigne08() {
-		return "valider.UserSimple.Login.Renseigne.08";
-	} // Fin de fournirCleValiderUserSimpleLoginRenseigne08()._____________
+	private String fournirCleValiderUserSimpleLoginRenseigne09() {
+		return "valider.UserSimple.Login.Renseigne.09";
+	} // Fin de fournirCleValiderUserSimpleLoginRenseigne09()._____________
 	
 
 	
 	/**
-	 * method fournirCleValiderUserSimpleLoginLongueur09() :<br/>
+	 * method fournirCleValiderUserSimpleLoginLongueur10() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleLoginLongueur09</b> 
+	 * <b>validerUserSimpleLoginLongueur10</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_LOGIN_LONGUEUR_09 sur le Login.</li>
+	 * RG_USERSIMPLE_LOGIN_LONGUEUR_10 sur le Login.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Login.Longueur.09".<br/>
+	 * @return : String : "valider.UserSimple.Login.Longueur.10".<br/>
 	 */
-	private String fournirCleValiderUserSimpleLoginLongueur09() {
-		return "valider.UserSimple.Login.Longueur.09";
-	} // Fin de fournirCleValiderUserSimpleLoginLongueur09().______________
+	private String fournirCleValiderUserSimpleLoginLongueur10() {
+		return "valider.UserSimple.Login.Longueur.10";
+	} // Fin de fournirCleValiderUserSimpleLoginLongueur10().______________
 	
 
 	
@@ -751,38 +786,56 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleMdpRenseigne10() :<br/>
+	 * method fournirCleValiderUserSimpleMdpRenseigne11() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleMdpRenseigne10</b> 
+	 * <b>validerUserSimpleMdpRenseigne11</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_MDP_RENSEIGNE_10 sur le mdp.</li>
+	 * RG_USERSIMPLE_MDP_RENSEIGNE_11 sur le mdp.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Mdp.Renseigne.10".<br/>
+	 * @return : String : "valider.UserSimple.Mdp.Renseigne.11".<br/>
 	 */
-	private String fournirCleValiderUserSimpleMdpRenseigne10() {
-		return "valider.UserSimple.Mdp.Renseigne.10";
-	} // Fin de fournirCleValiderUserSimpleMdpRenseigne10()._______________
+	private String fournirCleValiderUserSimpleMdpRenseigne11() {
+		return "valider.UserSimple.Mdp.Renseigne.11";
+	} // Fin de fournirCleValiderUserSimpleMdpRenseigne11()._______________
 	
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleMdpLongueur11() :<br/>
+	 * method fournirCleValiderUserSimpleMdpLongueur12() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleMdpLongueur11</b> 
+	 * <b>validerUserSimpleMdpLongueur12</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_MDP_LONGUEUR_11 sur le mdp.</li>
+	 * RG_USERSIMPLE_MDP_LONGUEUR_12 sur le mdp.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Mdp.Longueur.11".<br/>
+	 * @return : String : "valider.UserSimple.Mdp.Longueur.12".<br/>
 	 */
-	private String fournirCleValiderUserSimpleMdpLongueur11() {
-		return "valider.UserSimple.Mdp.Longueur.11";
-	} // Fin de fournirCleValiderUserSimpleMdpLongueur11().________________
+	private String fournirCleValiderUserSimpleMdpLongueur12() {
+		return "valider.UserSimple.Mdp.Longueur.12";
+	} // Fin de fournirCleValiderUserSimpleMdpLongueur12().________________
+	
+
+	
+	/**
+	 * method fournirCleValiderUserSimpleMdpMotif13() :<br/>
+	 * <ul>
+	 * <li>retourne la <b>clé</b> du Boolean 
+	 * <b>validerUserSimpleMdpMotif13</b> 
+	 * dans <b>rg-usersimple.properties</b>.</li>
+	 * <li>Boolean activant la validation de 
+	 * RG_USERSIMPLE_MDP_MOTIF_13 sur le mdp.</li>
+	 * </ul>
+	 *
+	 * @return : String : "valider.UserSimple.Mdp.Motif.13".<br/>
+	 */
+	private String fournirCleValiderUserSimpleMdpMotif13() {
+		return "valider.UserSimple.Mdp.Motif.13";
+	} // Fin de fournirCleValiderUserSimpleMdpMotif13().________________
 	
 
 	
@@ -806,38 +859,38 @@ public class GestionnaireRGUserSimple extends AbstractGestionnaireRG {
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleProfilRenseigne12() :<br/>
+	 * method fournirCleValiderUserSimpleProfilRenseigne14() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleProfilRenseigne12</b> 
+	 * <b>validerUserSimpleProfilRenseigne14</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_12 sur le profil.</li>
+	 * RG_USERSIMPLE_PROFIL_RENSEIGNE_14 sur le profil.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Profil.Renseigne.12".<br/>
+	 * @return : String : "valider.UserSimple.Profil.Renseigne.14".<br/>
 	 */
-	private String fournirCleValiderUserSimpleProfilRenseigne12() {
-		return "valider.UserSimple.Profil.Renseigne.12";
-	} // Fin de fournirCleValiderUserSimpleProfilRenseigne12().____________
+	private String fournirCleValiderUserSimpleProfilRenseigne14() {
+		return "valider.UserSimple.Profil.Renseigne.14";
+	} // Fin de fournirCleValiderUserSimpleProfilRenseigne14().____________
 
 	
 	
 	/**
-	 * method fournirCleValiderUserSimpleProfilLongueur13() :<br/>
+	 * method fournirCleValiderUserSimpleProfilNomenclature15() :<br/>
 	 * <ul>
 	 * <li>retourne la <b>clé</b> du Boolean 
-	 * <b>validerUserSimpleProfilLongueur13</b> 
+	 * <b>validerUserSimpleProfilNomenclature15</b> 
 	 * dans <b>rg-usersimple.properties</b>.</li>
 	 * <li>Boolean activant la validation de 
-	 * RG_USERSIMPLE_PROFIL_LONGUEUR_13 sur le profil.</li>
+	 * RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 sur le profil.</li>
 	 * </ul>
 	 *
-	 * @return : String : "valider.UserSimple.Profil.Longueur.13".<br/>
+	 * @return : String : "valider.UserSimple.Profil.Nomenclature.15".<br/>
 	 */
-	private String fournirCleValiderUserSimpleProfilLongueur13() {
-		return "valider.UserSimple.Profil.Longueur.13";
-	} // Fin de fournirCleValiderUserSimpleProfilLongueur13()._____________
+	private String fournirCleValiderUserSimpleProfilNomenclature15() {
+		return "valider.UserSimple.Profil.Nomenclature.15";
+	} // Fin de fournirCleValiderUserSimpleProfilNomenclature15()._________
 
 
 	
