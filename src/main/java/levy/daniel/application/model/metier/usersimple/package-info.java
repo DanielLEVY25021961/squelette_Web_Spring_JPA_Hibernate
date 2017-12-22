@@ -6,9 +6,11 @@
  * à l'application et qui n'a pas plusieurs <i>profils</i> 
  * ou <i>Rôles</i>.
  * <li>
- * Le <b>PROFIL</b> n'est <b>pas un Objet</b> mais 
- * une <i>simple String</i>.
+ * Le <b>PROFIL</b> est <b>un Objet ProfilSimple</b>, mais ProfilSimple 
+ * contient une <i>simple String</i> provenant d'une <b>énumération</b> 
+ * ProfilsSimplesEnum.
  * </li>
+ * <br/>
  * <li>Les attributs d'un UserSimple sont : </li>
  * <ul>
  * <li><b>id</b> pour la mise en base.</li>
@@ -21,6 +23,8 @@
  * <li><b>profil</b> (Adminstrateur, Utilisateur, ...).</li>
  * </ul>
  * <br/>
+ * <li>La Civilité est un <b>Objet</b> contenant une <i>simple String</i> provenant d'une <b>énumération</b> CivilitesEnum.</li>
+ * <br/>
  * <li>
  * L'<b>égalité metier</b> d'un UserSimple est vérifiée sur :
  * <ul>
@@ -30,8 +34,15 @@
  * </li>
  * <br/>
  * <li>
+ * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple_Enumerations.png" 
+ * alt="implémentation du UserSimple avec énumérations" border="1" align="center" />
+ * </li>
+ * <br/>
+ * <li>Le diagramme de classes simplifié (sans les énumérations) peut se résumer à : </li>
+ * <br/>
+ * <li>
  * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple.png" 
- * alt="implémentation du UserSimple" border="1" align="center" />
+ * alt="implémentation du UserSimple sans énumérations" border="1" align="center" />
  * </li>
  * </ul>
  * <br/>

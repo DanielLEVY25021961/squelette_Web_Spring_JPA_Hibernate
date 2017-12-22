@@ -22,10 +22,19 @@ import levy.daniel.application.model.metier.IExportateurJTable;
 /**
  * class ProfilSimple :<br/>
  * <ul>
- * <li>Classe modélisant un <b>ProfilSimple</b> 
- * (ADMINISTRATEUR, UTILISATEUR, ...) d'un UserSimple.</li>
+ * <li>Classe modélisant un <b>ProfilSimple</b>
+ * (ADMINISTRATEUR, UTILISATEUR, ...) typant l'attribut 
+ * <b>profil</b> d'un <b>UserSimple</b>.</li>
  * <li>Le ProfilSimple ne peut prendre <i>que les valeurs</i> 
  * définies dans l'ENUMERATION <b>ProfilsSimplesEnum</b>.</li>
+ * 
+ * <br/>
+ * 
+ * <li>
+ * <img src="../../../../../../../../../../javadoc/images/Implementation_ProfilSimple.png" 
+ * alt="Enumération ProfilsSimplesEnum" border="1" align="center" />
+ * </li>
+ * <br/>
  * </ul>
  * 
  *

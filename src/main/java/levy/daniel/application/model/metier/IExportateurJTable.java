@@ -3,7 +3,8 @@ package levy.daniel.application.model.metier;
 /**
  * class IExportateurJTable :<br/>
  * Interface qui garantit que tous les objets qui 
- * l'implémentent pourront être exportés dans des JTable.<br/>
+ * l'implémentent pourront être exportés dans des <b>JTable 
+ * (Swing)</b>.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>

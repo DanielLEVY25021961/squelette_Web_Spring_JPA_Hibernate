@@ -17,10 +17,11 @@
  * alt="architecture applicative" border="1" align="center" />
  * </li>
  * <br/>
- * <li>L'arborescence du package <b>metier</b> est la suivante :</li>
+ * <li>L'arborescence du package <b>metier</b> est la suivante 
+ * (1 package par Objet metier sous model>metier) : </li>
  * <br/>
  * <li>
- * <img src="../../../../../../../javadoc/images/" 
+ * <img src="../../../../../../../../javadoc/images/arborescence_package_metier.png" 
  * alt="arborescence du package metier" border="1" align="center" />
  * </li>
  * <br/>

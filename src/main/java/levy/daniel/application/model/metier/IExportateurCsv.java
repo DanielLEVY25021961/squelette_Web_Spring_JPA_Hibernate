@@ -3,7 +3,7 @@ package levy.daniel.application.model.metier;
 /**
  * class IExportateurCsv :<br/>
  * Interface qui garantit que tous les objets qui 
- * l'implémentent pourront être exportés au format csv.<br/>
+ * l'implémentent pourront être <b>exportés au format csv</b>.<br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>

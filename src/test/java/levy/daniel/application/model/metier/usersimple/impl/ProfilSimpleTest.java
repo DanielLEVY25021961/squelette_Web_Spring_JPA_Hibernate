@@ -671,7 +671,7 @@ public class ProfilSimpleTest {
 		// AFFICHAGE DANS LE TEST ou NON
 		final boolean affichage = false;
 		// **********************************
-
+		
 		final ProfilSimple objetNull 
 		= new ProfilSimple();
 	
