@@ -196,6 +196,8 @@ static {
 	mapTypesControle.put(3, "fourchette [Min-Max]");
 	mapTypesControle.put(4, "nomenclature");
 	mapTypesControle.put(5, "valeur par défaut");
+	mapTypesControle.put(6, "longueur");
+	mapTypesControle.put(7, "expression régulière (Regex)");
 }
 
 

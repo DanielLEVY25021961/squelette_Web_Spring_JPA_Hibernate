@@ -158,12 +158,13 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 	/**
 	 * method fournirCheminRessourceExterneRG() :<br/>
 	 * <ul>
-	 * <li>fournit le chemin <b>externe</b> (hors classpath) du répertoire 
-	 * contenant le fichier <b>rg-objet.properties</b>.</li>
+	 * <li>fournit le chemin <b>externe</b> (hors classpath) du 
+	 * <b>répertoire</b> contenant le fichier 
+	 * <b>rg-objet.properties</b>.</li>
 	 * <li>Ce chemin doit être écrit <b>EN ABSOLU</b> 
 	 * (surtout pas relatif au projet Eclipse).</li>
-	 * <li>Par exemple H:.../ressources_externes/rg/metier
-	 * /rg-usersimple_fr_FR.properties</li>
+	 * <li>Par exemple H:.../ressources_externes/rg/metier/ 
+	 * pour le fichier "rg-usersimple_fr_FR.properties".</li>
 	 * </ul>
 	 *
 	 * @return : String : chemin absolu vers le File 
@@ -180,7 +181,7 @@ public abstract class AbstractGestionnaireRG implements IGestionnaireRG {
 	 * fournit le <b>nom de base</b> du rg-objet.properties 
 	 * en fonction de l'objet traité par le <b>GestionnaireRGObjet</b>.
 	 * </li>
-	 * <li>Par exemple : rg-usersimple pour l'Object UserSimple.</li>
+	 * <li>Par exemple : "rg-usersimple" pour l'Object UserSimple.</li>
 	 * </ul>
 	 *
 	 * @return : String : Nom de base du rg-objet.properties.<br/>

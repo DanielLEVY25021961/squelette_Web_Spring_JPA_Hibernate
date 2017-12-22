@@ -53,13 +53,40 @@ public abstract class AbstractCreateurGestionnaireRG {
 
 	
 	/**
+	 * PARENTHESES : String :<br/>
+	 * "() ".<br/>
+	 */
+	public static final String PARENTHESES = "() ";
+
+	
+	/**
+	 * CROCHET_OUVRANT : char :<br/>
+	 * '{'.<br/>
+	 */
+	public static final char CROCHET_OUVRANT = '{';
+
+	
+	/**
+	 * CROCHET_FERMANT : char :<br/>
+	 * '}'.<br/>
+	 */
+	public static final char CROCHET_FERMANT = '}';
+
+	
+	/**
+	 * POINT : char :<br/>
+	 * '.'.<br/>
+	 */
+	public static final char POINT = '.';
+	
+	
+	/**
 	 * UNDERSCORE : char :<br/>
 	 * '_'.<br/>
 	 */
 	public static final char UNDERSCORE = '_';
 	
-	
-	
+		
 	/**
 	 * SAUT_LIGNE : char :<br/>
 	 * '\n'.<br/>
@@ -237,13 +264,19 @@ public abstract class AbstractCreateurGestionnaireRG {
 	 * <b>Liste des lignes de code des RG</b> à incorporer 
 	 * dans une classe GestionnaireRGxxx comme :
 	 * <li>public static final String RG_USERSIMPLE
-	 * _CIVILITE_NOMENCLATURE_01.</li>
+	 * _CIVILITE_NOMENCLATURE_01 
+	 * = "RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : 
+	 * civilite du UserSimple doit respecter un ensemble 
+	 * fini de valeurs (nomenclature)";</li>
 	 * <li>public static final String RG_USERSIMPLE
-	 * _PRENOM_RENSEIGNE_02.</li>
+	 * _PRENOM_RENSEIGNE_02 = "RG_USERSIMPLE_PRENOM_RENSEIGNE_02 
+	 * : prenom du UserSimple doit être renseigné (obligatoire)";</li>
 	 * <li>public static final String RG_USERSIMPLE
-	 * _PRENOM_LITTERAL_03.</li>
+	 * _PRENOM_LITTERAL_03 = "RG_USERSIMPLE_PRENOM_LITTERAL_03 : 
+	 * prenom du UserSimple ne doit contenir que des lettres 
+	 * ou des caractères spéciaux '-', '_', ... (aucun chiffre)";</li>
 	 * </ul>
-	 * Toujours :<br/>
+	 * Une RG s'écrit Toujours :<br/>
 	 * <b>[RG_CLASSE_ATTRIBUT_TYPE-RG_NUMERO]</b><br/>
 	 */
 	public transient List<String> listLignesCodeRgs 
@@ -251,10 +284,36 @@ public abstract class AbstractCreateurGestionnaireRG {
 
 	
 	/**
-	 * listBooleansValideurs : List<String> :<br/>
-	 * .<br/>
+	 * listBooleansValideurs : List&lt;String&gt; :<br/>
+	 * <ul>
+	 * Liste des <b>lignes de code</b> relatives aux 
+	 * <b>Booleans de validation</b> comme par exemple :
+	 * <li>private static Boolean validerUserSimpleNom;</li>
+	 * <li>private static Boolean validerUserSimpleNomRenseigne05;</li>
+	 * <li>private static Boolean validerUserSimpleNomLitteral06;</li>
+	 * <li>private static Boolean validerUserSimpleNomLongueur07;</li>
+	 * </ul>
 	 */
 	public transient List<String> listBooleansValideurs 
+		= new ArrayList<String>();
+	
+	
+	/**
+	 * listMethodesFournirCle : List&lt;String&gt; :<br/>
+	 * <ul>
+	 * Liste des <b>lignes de code</b> relatives aux 
+	 * <b>méthodes fournirCleBooleanxxx</b> comme par exemple :
+	 * <li>private String fournirCleValiderUserSimpleNom() 
+	 * {return "valider.UserSimple.Nom";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomRenseigne05() 
+	 * {return "valider.UserSimple.Nom.Renseigne.05";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomLitteral06() 
+	 * {return "valider.UserSimple.Nom.Litteral.06";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomLongueur07()
+	 *  {return "valider.UserSimple.Nom.Longueur.07";}</li>
+	 * </ul>
+	 */
+	public transient List<String> listMethodesFournirCle 
 		= new ArrayList<String>();
 	
 	
@@ -326,8 +385,8 @@ public abstract class AbstractCreateurGestionnaireRG {
 		/* CREE LA MAP DES REGLES PAR ATTRIBUT. */
 		this.affecterRgAuxAttributs();
 		
-		/* Crée la liste des identifiants des RG listIdsRgs. */
-		/* Crée la liste des lignes de code des RG listLignesCodeRgs. */
+		/* CREE la liste des identifiants des RG listIdsRgs. */
+		/* CREE la liste des lignes de code des RG listLignesCodeRgs. */
 		this.creerListesRG();
 		
 		System.out.println();
@@ -344,12 +403,23 @@ public abstract class AbstractCreateurGestionnaireRG {
 		System.out.println(TIRETS);
 		System.out.println();
 		
+		/* CREE LA LISTE DES BOOLEANS. */
 		this.creerBooleans();
 		
 		System.out.println();
 		System.out.println(TIRETS);
 		System.out.println("LISTE DES VALIDEURS : ");
 		System.out.println(afficherListString(this.listBooleansValideurs));
+		System.out.println(TIRETS);
+		System.out.println();
+		
+		/* CREE LA LISTE DES METHODES fournirCle. */
+		this.creerMethodesFournirCle();
+		
+		System.out.println();
+		System.out.println(TIRETS);
+		System.out.println("LISTE DES METHODES fournirCle : ");
+		System.out.println(afficherListString(this.listMethodesFournirCle));
 		System.out.println(TIRETS);
 		System.out.println();
 		
@@ -514,12 +584,17 @@ public abstract class AbstractCreateurGestionnaireRG {
 	
 	/**
 	 * method creerBooleans() :<br/>
-	 * .<br/>
-	 * <br/>
+	 * <ul>
+	 * Crée la liste <b>listBooleansValideurs</b> des <b>lignes de code</b> 
+	 * relatives aux <b>Booleans de validation</b> comme par exemple :
+	 * <li>private static Boolean validerUserSimpleNom;</li>
+	 * <li>private static Boolean validerUserSimpleNomRenseigne05;</li>
+	 * <li>private static Boolean validerUserSimpleNomLitteral06;</li>
+	 * <li>private static Boolean validerUserSimpleNomLongueur07;</li>
+	 * </ul>
 	 */
 	private void creerBooleans() {
 		
-
 		int compteur = 0;
 		
 
@@ -528,12 +603,14 @@ public abstract class AbstractCreateurGestionnaireRG {
 			final StringBuilder stbValideurBoolean = new StringBuilder();
 			
 			/* Base Ligne de code Valideur. */
+			stbValideurBoolean.append("private static Boolean ");
 			stbValideurBoolean.append("valider");
 			stbValideurBoolean.append(this.nomSimpleClasse);
 			stbValideurBoolean.append(mettrePremiereEnMajuscule(nomAttribut));
 			
 			final String baseAttribut = stbValideurBoolean.toString();
-			this.listBooleansValideurs.add(baseAttribut);
+			this.listBooleansValideurs.add(
+					baseAttribut + POINT_VIRGULE);
 
 			final List<String> typesRg 
 				= this.mapRgsParAttribut.get(nomAttribut);
@@ -548,7 +625,8 @@ public abstract class AbstractCreateurGestionnaireRG {
 				stb.append(mettrePremiereEnMajuscule(type));
 				stb.append(formaterNumero(compteur));
 				
-				this.listBooleansValideurs.add(stb.toString());
+				this.listBooleansValideurs.add(
+						stb.toString() + POINT_VIRGULE);
 
 			} // Fin de TypeRG.__________________________________
 			
@@ -558,6 +636,98 @@ public abstract class AbstractCreateurGestionnaireRG {
 	
 	
 	
+	/**
+	 * method creerMethodesFournirCle() :<br/>
+	 * <ul>
+	 * Crée la Liste <b>"listMethodesFournirCle"</b> 
+	 * des <b>lignes de code</b> relatives aux 
+	 * <b>méthodes fournirCleBooleanxxx</b> comme par exemple :
+	 * <li>private String fournirCleValiderUserSimpleNom() 
+	 * {return "valider.UserSimple.Nom";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomRenseigne05() 
+	 * {return "valider.UserSimple.Nom.Renseigne.05";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomLitteral06() 
+	 * {return "valider.UserSimple.Nom.Litteral.06";}</li>
+	 * <li>private String fournirCleValiderUserSimpleNomLongueur07()
+	 *  {return "valider.UserSimple.Nom.Longueur.07";}</li>
+	 * </ul>
+	 */
+	private void creerMethodesFournirCle() {
+		
+		int compteur = 0;
+		
+		for (final String nomAttribut : this.nomsAttributsPrivate) {
+			
+			final StringBuilder stbValideurBoolean = new StringBuilder();
+			final StringBuilder stbCorpsMethode = new StringBuilder();
+			final StringBuilder stbCle = new StringBuilder();
+			
+			/* Base Ligne de code Valideur. */
+			stbValideurBoolean.append("private String fournirCle");
+			stbValideurBoolean.append("Valider");
+			stbValideurBoolean.append(this.nomSimpleClasse);
+			stbValideurBoolean.append(mettrePremiereEnMajuscule(nomAttribut));
+			
+			/* private String fournirCleValiderUserSimpleNom. */
+			final String baseAttribut = stbValideurBoolean.toString();
+			
+			stbCorpsMethode.append(baseAttribut);
+			stbCorpsMethode.append(PARENTHESES);
+			stbCorpsMethode.append(CROCHET_OUVRANT);
+			
+			stbCle.append("valider");
+			stbCle.append(POINT);
+			stbCle.append(this.nomSimpleClasse);
+			stbCle.append(POINT);
+			stbCle.append(mettrePremiereEnMajuscule(nomAttribut));
+			
+			stbCorpsMethode.append(stbCle);
+			stbCorpsMethode.append(CROCHET_FERMANT);
+			stbCorpsMethode.append(POINT_VIRGULE);
+			
+			/* valider.UserSimple.Nom */
+			final String baseCle = stbCle.toString();
+			final String corpsMethode = stbCorpsMethode.toString();
+			
+			this.listMethodesFournirCle.add(corpsMethode);
+
+			final List<String> typesRg 
+				= this.mapRgsParAttribut.get(nomAttribut);
+
+			for (final String type : typesRg) {
+
+				compteur++;
+				
+				final StringBuilder stb = new StringBuilder();
+				final StringBuilder stbCorpsMethodeInterne = new StringBuilder();
+				
+				/* private String fournirCleValiderUserSimpleNom. */
+				stb.append(baseAttribut);
+				stb.append(mettrePremiereEnMajuscule(type));
+				stb.append(formaterNumero(compteur));
+				
+				stbCorpsMethodeInterne.append(stb);
+				stbCorpsMethodeInterne.append(PARENTHESES);
+				stbCorpsMethodeInterne.append(CROCHET_OUVRANT);
+				stbCorpsMethodeInterne.append(baseCle);
+				stbCorpsMethodeInterne.append(POINT);
+				stbCorpsMethodeInterne.append(mettrePremiereEnMajuscule(type));
+				stbCorpsMethodeInterne.append(POINT);
+				stbCorpsMethodeInterne.append(formaterNumero(compteur));
+				stbCorpsMethodeInterne.append(CROCHET_FERMANT);
+				stbCorpsMethodeInterne.append(POINT_VIRGULE);
+				
+				this.listMethodesFournirCle.add(
+						stbCorpsMethodeInterne.toString());
+
+			} // Fin de TypeRG.__________________________________
+			
+		}
+		
+	} // Fin de creerMethodesFournirCle()._________________________________
+
+
+
 	/**
 	 * method recupererNomCompletClass(
 	 * Class<?> pClasse) :<br/>

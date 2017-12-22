@@ -65,7 +65,7 @@ public enum TypesValidation {
 	
 	, /**
 	 * NOMENCLATURE : TypesValidation :<br/>
-	 * Attributs devant de conformer à une nomenclature.<br/>
+	 * Attributs devant se conformer à une nomenclature.<br/>
 	 */
 	NOMENCLATURE
 	
