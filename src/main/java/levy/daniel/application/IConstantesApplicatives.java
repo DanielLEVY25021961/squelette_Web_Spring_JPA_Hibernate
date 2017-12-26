@@ -39,42 +39,42 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * POINT_VIRGULE : char :<br/>
-	 * ';'.<br/>
+	 * ';'
 	 */
 	char POINT_VIRGULE = ';';
 
 	
 	/**
 	 * VIRGULE_ESPACE : String :<br/>
-	 * ", ".<br/>
+	 * ", "
 	 */
 	String VIRGULE_ESPACE = ", ";
 
 	
 	/**
 	 * SEPARATEUR_MOINS_AERE : String :<br/>
-	 * " - ".<br/>
+	 * " - "
 	 */
 	String SEPARATEUR_MOINS_AERE = " - ";
 	
 	
 	/**
 	 * UNDERSCORE : String :<br/>
-	 * '_'.<br/>
+	 * '_'
 	 */
 	char UNDERSCORE = '_';
 
 	
 	/**
 	 * CROCHET_OUVRANT : char :<br/>
-	 * '['.<br/>
+	 * '['
 	 */
 	char CROCHET_OUVRANT = '[';
 
 	
 	/**
 	 * CROCHET_FERMANT : char :<br/>
-	 * ']'.<br/>
+	 * ']'
 	 */
 	char CROCHET_FERMANT = ']';
 	
@@ -82,14 +82,14 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * SAUT_LIGNE_JAVA : String :<br/>
-	 * "\n".<br/>
+	 * "\n"
 	 */
 	String SAUT_LIGNE_JAVA = "\n";
 	
 
 	/**
 	 * SAUT_LIGNE_HTML : String :<br/>
-	 * "<br/>".<br/>
+	 * "&lt;br/&gt;".<br/>
 	 */
 	String SAUT_LIGNE_HTML = "<br/>";
 	
@@ -97,7 +97,7 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * NULL : String :<br/>
-	 * "null".<br/>
+	 * "null"
 	 */
 	String NULL = "null";
 	
@@ -105,21 +105,24 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * DIMENSION_ECRAN : Dimension :<br/>
-	 * La dimension de l'écran de l'utilisateur.<br/>
+	 * Toolkit.getDefaultToolkit().getScreenSize().<br/>
+	 * La dimension de l'écran de l'utilisateur
 	 */
 	Dimension DIMENSION_ECRAN 
 		= Toolkit.getDefaultToolkit().getScreenSize();
 	
 	/**
 	 * LARGEUR_ECRAN : int :<br/>
-	 * Largeur de l'écran de l'utilisateur en pixels.<br/>
+	 * DIMENSION_ECRAN.width.<br/>
+	 * Largeur de l'écran de l'utilisateur en pixels
 	 */
 	int LARGEUR_ECRAN = DIMENSION_ECRAN.width;
 	
 	
 	/**
 	 * HAUTEUR_ECRAN : int :<br/>
-	 * Hauteur de l'écran de l'utilisateur en pixels.<br/>
+	 * DIMENSION_ECRAN.height.<br/>
+	 * Hauteur de l'écran de l'utilisateur en pixels
 	 */
 	int HAUTEUR_ECRAN = DIMENSION_ECRAN.height;
 	
@@ -127,7 +130,8 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * LOCALE_FR : Locale : <br/>
-	 * Locale France.<br/>
+	 * new Locale("fr", "FR").<br/>
+	 * Locale France
 	 */
 	Locale LOCALE_FR = new Locale("fr", "FR");
 	
@@ -135,32 +139,32 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * SUCCES : String : <br/>
-	 * "success".<br/>
+	 * "success".
 	 */
 	String SUCCES = "success";
 	
 	/**
 	 * ECHEC : String : <br/>
-	 * "failure".<br/>
+	 * "failure".
 	 */
 	String ECHEC = "failure";
 		
 	/**
 	 * LIST : String :<br/>
-	 * "list".<br/>
+	 * "list".
 	 */
 	String LIST = "list";
 	
 	/**
 	 * TROUVE : String :<br/>
-	 * "trouve".<br/>
+	 * "trouve".
 	 */
 	String TROUVE = "trouve";
 
 
 	/**
 	 * SANS_OBJET : String :<br/>
-	 * "Sans Objet (contrôle non effectué)".<br/>
+	 * "Sans Objet (contrôle non effectué)".
 	 */
 	String SANS_OBJET 
 		= "Sans Objet (contrôle non effectué)";
@@ -169,28 +173,28 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * ROOT : String :<br/>
-	 * "ROOT : ".<br/>
+	 * "ROOT : ".
 	 */
 	String ROOT = "ROOT : ";
 
 	
 	/**
 	 * NODE : String :<br/>
-	 * "NOEUD (balise ou attribut) : ".<br/>
+	 * "NOEUD (balise ou attribut) : ".
 	 */
 	String NODE = "NOEUD (balise ou attribut) : ";
 	
 	
 	/**
 	 * ELEMENT : String :<br/>
-	 * "ELEMENT (Balise) : ".<br/>
+	 * "ELEMENT (Balise) : ".
 	 */
 	String ELEMENT = "ELEMENT (Balise) : ";
 	
 	
 	/**
 	 * ATTRIBUT : String :<br/>
-	 * "ATTRIBUT".<br/>
+	 * "ATTRIBUT".
 	 */
 	String ATTRIBUT = "ATTRIBUT";
 	
@@ -198,7 +202,9 @@ public interface IConstantesApplicatives {
 	
 	/**
 	 * BOM_UTF : char :<br/>
-	 * BOM UTF-8 pour forcer Excel 2010 à lire en UTF-8.<br/>
+	 * BOM UTF-8 à rajouter au début d'un fichier CSV pour 
+	 * forcer Excel 2010 à le lire en UTF-8.<br/>
+	 * '\uFEFF'.
 	 */
 	char BOM_UTF_8 = '\uFEFF';
 

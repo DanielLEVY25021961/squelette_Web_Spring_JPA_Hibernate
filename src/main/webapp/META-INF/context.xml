@@ -16,7 +16,7 @@
 				<!-- pour une base de données postgres  -->
 	<Resource auth="Container"
     	name="jdbc/ds_squelette_Web_Spring_JPA_Hibernate"
-		url="jdbc:postgresql://localhost:5433/base-squelette_Web_Spring_JPA_Hibernate"
+		url="jdbc:postgresql://localhost:5432/base-squelette_Web_Spring_JPA_Hibernate"
         username="postgres"
         password="postgres"
         type="javax.sql.DataSource"

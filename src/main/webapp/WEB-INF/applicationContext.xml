@@ -124,7 +124,7 @@
     	<!-- qui connait la référence de la DataSource déclarée 			-->
     	<!-- dans le context.xml de TOMCAT (éventuellement surchargé). 		-->
         <property name="dataSource" ref="dataSource" />
-               
+        
         <!-- Fait le lien avec le persistence unit défini dans persistence.xml -->
         <property name="persistenceUnitName" value="persistence_unit_base-squelette_Web_Spring_JPA_Hibernate" />
         
@@ -170,12 +170,12 @@
     <!-- ============================================================== -->
     <!--                             POSTGRESQL                         -->
     <!-- ============================================================== -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-       <property name="driverClassName" value="org.postgresql.Driver" />
-       <property name="url" value="jdbc:postgresql://localhost:5433/base-squelette_Web_Spring_JPA_Hibernate" />
-       <property name="username" value="postgres" />
-       <property name="password" value="postgres" />
-    </bean>
+<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!--        <property name="driverClassName" value="org.postgresql.Driver" /> -->
+<!--        <property name="url" value="jdbc:postgresql://localhost:5432/base-squelette_Web_Spring_JPA_Hibernate" /> -->
+<!--        <property name="username" value="postgres" /> -->
+<!--        <property name="password" value="postgres" /> -->
+<!--     </bean> -->
 
 
     <!-- ============================================================== -->
@@ -218,9 +218,9 @@
 	<!-- précise qu'il s'agit d'une ressource jdbc.						-->
 	<!-- Le nom JNDI suit par convention le sous-contexte /jdbc		    -->
 	<!-- (DataSource = jdbc/ds_squelette_Web_Spring_JPA_Hibernate). 				--> 
-<!--     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean"> -->
-<!--     	<property name="jndiName" value="java:comp/env/jdbc/ds_squelette_Web_Spring_JPA_Hibernate" /> -->
-<!--     </bean> -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName" value="java:comp/env/jdbc/ds_squelette_Web_Spring_JPA_Hibernate" />
+    </bean>
 	
 </beans>
 

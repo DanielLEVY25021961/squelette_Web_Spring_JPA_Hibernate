@@ -7,8 +7,26 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
 
 /**
  * INTERFACE IUserSimple :<br/>
+ * <p>
+ * Modélise un <b>User</b>, c'est à dire un 
+ * <b>utilisateur de l'application</b> qui doit se connecter 
+ * à l'application via un <b>login</b> <i>et</i> un mot de passe <b>mdp</b>.
+ * </p>
+ * <p>
+ * un <b>UserSimple</b> modélise un User (Internaute) qui se logge 
+ * à l'application et qui n'a pas plusieurs <i>profils</i> 
+ * ou <i>Rôles</i> (ADMINISTRATEUR, UTILISATEUR, ...) 
+ * dans l'application.<br/>
+ * Le UserSimple n'a <b>qu'un seul profil</b> ou rôle 
+ * dans l'application.
+ * </p>
+ * 
  * <ul>
+ * <p>
+ * <span style="text-decoration: underline;">
  * HERITE de :
+ * </span>
+ * </p>
  * <li><b>IExportateurCsv</b> pour l'export d'un Objet 
  * métier en csv.</li>
  * <li><b>IExportateurJTable</b> pour l'affichage dans 
@@ -20,7 +38,11 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
  * </ul>
  * 
  * <ul>
- * Garantit que tout UserSimple sait :<br/>
+ * <p>
+ * <span style="text-decoration: underline;">
+ * Garantit que tout UserSimple sait :
+ * </span>
+ * </p>
  * <li>se <b>comparer</b> à un autre IUserSimple.</li>
  * <li>se <b>cloner</b>.</li>
  * <li>s'exporter sous forme <b>csv</b>.</li>
@@ -28,7 +50,7 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
  * </ul>
  * 
  * <ul>
- * Garantit que tout UserSimple possède :<br/>
+ * <p>Garantit que tout UserSimple possède :</p>
  * <li><b>id</b> pour la mise en base.</li>
  * <li><b>civilite</b> (M., Mme, ...).</li>
  * <li><b>prenom</b>.</li>
@@ -39,20 +61,33 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
  * <li><b>profil</b> (Adminstrateur, Utilisateur, ...).</li>
  * </ul>
  * 
- * <ul>
+ * <br/>
+ * <p>
+ * <span style="text-decoration: underline;">EGALITE METIER</span>
+ * </p>
+ * <li>
  * L'<b>égalité metier</b> d'un UserSimple est vérifiée sur :
+ * <ul>
  * <li><b>login</b></li>
  * <li><b>mdp</b></li>
  * </ul>
+ * </li>
  * 
- * <ul>
+ * <br/>
+ * <p>
+ * <span style="text-decoration: underline;">INTERFACES ET HERITAGE</span>
+ * </p>
+ * <li>l'objet UserSimple implémente l'INTERFACE IUserSimple : </li>
  * <br/>
  * <li>
  * <img src="../../../../../../../../../javadoc/images/implementation_UserSimple.png" 
  * alt="implémentation du UserSimple" border="1" align="center" />
  * </li>
- *</ul>
  *
+ * <br/>
+ * <p>
+ * <span style="text-decoration: underline;">REGLES DE GESTION</span>
+ * </p>
  * <ul>
  * <li>
  * Les <b>Règles de Gestion (RG)</b> applicables aux attributs 
@@ -68,81 +103,112 @@ import levy.daniel.application.model.metier.usersimple.impl.ProfilSimple;
  * <td>"RG_USERSIMPLE_CIVILITE_NOMENCLATURE_01 : la civilite (M., Mme, ...) 
  * du UserSimple doit respecter un ensemble fini de valeurs (nomenclature)"</td>
  * </tr>
+ * 
  * <tr>
- * <td>prenom</td>
- * <td>"RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : le prénom du UserSimple 
- * doit être renseigné (obligatoire)"</td>
+ * <td rowspan="3">
+ * prenom
+ * </td>
+ * <td>
+ * "RG_USERSIMPLE_PRENOM_RENSEIGNE_02 : le prénom du UserSimple 
+ * doit être renseigné (obligatoire)"
+ * </td>
  * </tr>
  * <tr>
- * <td>prenom</td>
- * <td>"RG_USERSIMPLE_PRENOM_LITTERAL_03 : le prénom du UserSimple ne 
+ * <td>
+ * "RG_USERSIMPLE_PRENOM_LITTERAL_03 : le prénom du UserSimple ne 
  * doit contenir que des lettres ou des caractères spéciaux 
- * '-', '_', ... (aucun chiffre)"</td>
+ * '-', '_', ... (aucun chiffre)"
+ * </td>
  * </tr>
  * <tr>
- * <td>prenom</td>
- * <td>"RG_USERSIMPLE_PRENOM_LONGUEUR_04 : le prénom du UserSimple 
- * doit contenir entre [1] et [30] lettres"</td>
+ * <td>
+ * "RG_USERSIMPLE_PRENOM_LONGUEUR_04 : le prénom du UserSimple 
+ * doit contenir entre [1] et [30] lettres"
+ * </td>
  * </tr>
+ * 
  * <tr>
- * <td>nom</td>
+ * <td rowspan="3">nom</td>
  * <td>"RG_USERSIMPLE_NOM_RENSEIGNE_05 : le nom du UserSimple 
  * doit être renseigné (obligatoire)"</td>
  * </tr>
  * <tr>
- * <td>nom</td>
- * <td>"RG_USERSIMPLE_NOM_LITTERAL_06 : le nom du UserSimple 
+ * <td>
+ * "RG_USERSIMPLE_NOM_LITTERAL_06 : le nom du UserSimple 
  * ne doit contenir que des lettres ou des caractères spéciaux 
- * '-', '_', ... (aucun chiffre)"</td>
+ * '-', '_', ... (aucun chiffre)"
+ * </td>
  * </tr>
  * <tr>
- * <td>nom</td>
- * <td>"RG_USERSIMPLE_NOM_LONGUEUR_07 : le nom du UserSimple 
- * doit contenir entre [1] et [50] lettres"</td>
+ * <td>
+ * "RG_USERSIMPLE_NOM_LONGUEUR_07 : le nom du UserSimple 
+ * doit contenir entre [1] et [50] lettres"
+ * </td>
  * </tr>
+ * 
  * <tr>
  * <td>email</td>
  * <td>"RG_USERSIMPLE_EMAIL_MOTIF_08 : l'email du UserSimple 
  * doit respecter un motif (Regex) d'un email 
  * (du type albacor.trust@google.fr)"</td>
  * </tr>
+ * 
  * <tr>
- * <td>login</td>
- * <td>"RG_USERSIMPLE_LOGIN_RENSEIGNE_09 : le login 
- * du UserSimple doit être renseigné (obligatoire)"</td>
+ * <td rowspan="2">
+ * login
+ * </td>
+ * <td>
+ * "RG_USERSIMPLE_LOGIN_RENSEIGNE_09 : le login 
+ * du UserSimple doit être renseigné (obligatoire)"
+ * </td>
  * </tr>
  * <tr>
- * <td>login</td>
- * <td>"RG_USERSIMPLE_LOGIN_LONGUEUR_10 : le login du UserSimple
- *  doit contenir entre [1] et [100] caractères"</td>
+ * <td>
+ * "RG_USERSIMPLE_LOGIN_LONGUEUR_10 : le login du UserSimple
+ *  doit contenir entre [1] et [100] caractères"
+ *  </td>
+ * </tr>
+ * 
+ * <tr>
+ * <td rowspan="3">
+ * mdp
+ * </td>
+ * <td>
+ * "RG_USERSIMPLE_MDP_RENSEIGNE_11 : le mdp du UserSimple
+ *  doit être renseigné (obligatoire)"
+ * </td>
  * </tr>
  * <tr>
- * <td>mdp</td>
- * <td>"RG_USERSIMPLE_MDP_RENSEIGNE_11 : le mdp du UserSimple
- *  doit être renseigné (obligatoire)"</td>
+ * <td>
+ * "RG_USERSIMPLE_MDP_LONGUEUR_12 : le mdp du UserSimple
+ *  doit contenir entre [3] et [20] caractères"
+ * </td>
  * </tr>
  * <tr>
- * <td>mdp</td>
- * <td>"RG_USERSIMPLE_MDP_LONGUEUR_12 : le mdp du UserSimple
- *  doit contenir entre [3] et [20] caractères"</td>
+ * <td>
+ * "RG_USERSIMPLE_MDP_MOTIF_13 : le mdp du UserSimple
+ *  doit respecter un motif (Regex)"
+ * </td>
+ * </tr>
+ * 
+ * <tr>
+ * <td rowspan="2">
+ * profil
+ * </td>
+ * <td>
+ * "RG_USERSIMPLE_PROFIL_RENSEIGNE_14 : le profil du UserSimple
+ *  doit être renseigné (obligatoire)"
+ * </td>
  * </tr>
  * <tr>
- * <td>mdp</td>
- * <td>"RG_USERSIMPLE_MDP_MOTIF_13 : le mdp du UserSimple
- *  doit respecter un motif (Regex)"</td>
- * </tr>
- * <tr>
- * <td>profil</td>
- * <td>"RG_USERSIMPLE_PROFIL_RENSEIGNE_14 : le profil du UserSimple
- *  doit être renseigné (obligatoire)"</td>
- * </tr>
- * <tr>
- * <td>profil</td>
- * <td>"RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 : le profil du UserSimple
- *  doit respecter un ensemble fini de valeurs (nomenclature)"</td>
+ * <td>
+ * "RG_USERSIMPLE_PROFIL_NOMENCLATURE_15 : le profil du UserSimple
+ *  doit respecter un ensemble fini de valeurs (nomenclature)"
+ * </td>
  * </tr>
  * </table>
  * </ul>
+ * <br/>
  * <br/>
  *
  * - Exemple d'utilisation :<br/>
@@ -175,7 +241,7 @@ public interface IUserSimple
 	 * <li>au mot de passe.</li>
 	 * </ol>
 	 *
-	 * @param pUserSimple : pUserSimple
+	 * @param pUserSimple : IUserSimple.<br/>
 	 * 
 	 * @return : int : négatif si la présente instance 
 	 * est "avant" pUserSimple.<br/>
