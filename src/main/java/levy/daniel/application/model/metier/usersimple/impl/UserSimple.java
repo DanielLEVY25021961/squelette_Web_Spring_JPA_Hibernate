@@ -26,7 +26,7 @@ import levy.daniel.application.model.metier.usersimple.IUserSimple;
 /**
  * class UserSimple :<br/>
  * <p>
- * Modélise un <b>User</b>, c'est à dire un 
+ * <b>CLASSE CONCRETE</b> qui modélise un <b>User</b>, c'est à dire un 
  * <b>utilisateur de l'application</b> qui doit se connecter 
  * à l'application via un <b>login</b> <i>et</i> un mot de passe <b>mdp</b>.
  * </p>
