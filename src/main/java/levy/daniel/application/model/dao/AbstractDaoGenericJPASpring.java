@@ -19,7 +19,7 @@ import levy.daniel.application.model.dao.daoexceptions.GestionnaireDaoException;
 
 
 /**
- * class AbstractDaoGenericJPASpring :<br/>
+ * CLASSE ABSTRAITE <b>AbstractDaoGenericJPASpring</b> :<br/>
  * <ul>
  * <li><b>DAO ABSTRAIT GENERIQUE</b> pour SPRING utilisant JPA.</li>
  * <li>
@@ -394,7 +394,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public <S extends T> Iterable<S> save(
+	public final <S extends T> Iterable<S> save(
 			final Iterable<S> pObjects) 
 			throws AbstractDaoException {
 
@@ -563,7 +563,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 	 * {@inheritDoc}
 	 */
 	@Override
-	public final List<T> findAll() throws AbstractDaoException {
+	public List<T> findAll() throws AbstractDaoException {
 		
 		/* Cas où this.entityManager == null. */
 		if (this.entityManager == null) {
@@ -1004,7 +1004,7 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 		}
 		
 		
-		/* Itération uniquement sur la l iste des Objets persistants. */
+		/* Itération uniquement sur la liste des Objets persistants. */
 		final Iterator<? extends T> ite = listePersistants.iterator();
 		
 		try {
@@ -1120,4 +1120,4 @@ public abstract class AbstractDaoGenericJPASpring<T, ID extends Serializable>
 
 
 	
-} // FIN DE LA CLASSE AbstractDaoGeneric.------------------------------------
+} // FIN DE LA CLASSE AbstractDaoGenericJPASpring.---------------------------

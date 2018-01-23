@@ -1,11 +1,14 @@
 package levy.daniel.application.model.dao.metier.usersimple.impl;
 
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
 import levy.daniel.application.model.dao.daoexceptions.AbstractDaoException;
 import levy.daniel.application.model.dao.metier.usersimple.AbstractDaoUserSimple;
+import levy.daniel.application.model.metier.usersimple.IUserSimple;
 import levy.daniel.application.model.metier.usersimple.impl.UserSimple;
 
 
@@ -127,6 +130,61 @@ public class DaoUserSimple extends AbstractDaoUserSimple {
 		return objetTrouve;
 				
 	} // Fin de findById(...)._____________________________________________
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<IUserSimple> findAllSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<IUserSimple> findAllMaxSousClasse(Long pMax) throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void deleteAllSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean deleteAllBooleanSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Long countSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 		

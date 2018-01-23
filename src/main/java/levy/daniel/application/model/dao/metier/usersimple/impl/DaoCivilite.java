@@ -547,6 +547,61 @@ public class DaoCivilite
 		this.setClassObjetMetier(Civilite.class);		
 	} // Fin de renseignerClassObjetMetier().______________________________
 
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Civilite> findAllSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Civilite> findAllMaxSousClasse(Long pMax) throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void deleteAllSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean deleteAllBooleanSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Long countSousClasse() throws AbstractDaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 } // FIN DE LA CLASSE DaoCivilite.-------------------------------------------
